@@ -1,0 +1,6 @@
+# Pipeline Example
+id: 16695
+platform: nodejs_app@4
+scm_url: "git@github.com:screwdriver-cd/data-model.git#master"
+config_url: "git@github.com:screwdriver-cd/external-config.git#master"
+create_time: 2017-04-19 14:55:11 UTC

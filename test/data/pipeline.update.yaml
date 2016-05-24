@@ -1,0 +1,3 @@
+# Pipeline Update Example
+scm_url: "git@github.com:screwdriver-cd/data-model.git#master"
+config_url: "git@github.com:screwdriver-cd/sample-config.git#master"

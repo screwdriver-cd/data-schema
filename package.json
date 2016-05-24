@@ -4,7 +4,7 @@
   "description": "Internal Data Model of Screwdriver",
   "main": "index.js",
   "scripts": {
-    "pretest": "jscs .",
+    "pretest": "eslint .",
     "test": "jenkins-mocha --recursive"
   },
   "repository": {
@@ -20,9 +20,9 @@
   "license": "BSD-3-Clause",
   "author": "St. John Johnson <st.john.johnson@gmail.com>",
   "contributors": [
-    "Dao Lam <d2lam@yahoo-inc.com>",
+    "Dao Lam <daolam112@gmail.com>",
     "Darren Matsumoto <aeneascorrupt@gmail.com>",
-    "Jeremiah Wuenschel <jer@yahoo-inc.com>",
+    "Jeremiah Wuenschel <jeremiah.wuenschel@gmail.com>",
     "Noah Katzman <nkatzman@yahoo-inc.com>",
     "Peter Peterson <jedipetey@gmail.com>",
     "St. John Johnson <st.john.johnson@gmail.com",
@@ -30,8 +30,15 @@
   ],
   "devDependencies": {
     "chai": "^3.5.0",
+    "eslint": "^2.10.2",
+    "eslint-config-screwdriver": "^1.0.1",
+    "eslint-plugin-import": "^1.8.0",
+    "eslint-plugin-jsx-a11y": "^1.2.2",
+    "eslint-plugin-react": "^5.1.1",
     "jenkins-mocha": "^2.6.0",
-    "jscs": "^3.0.3"
+    "js-yaml": "^3.6.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "joi": "^8.1.0"
+  }
 }

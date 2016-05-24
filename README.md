@@ -3,6 +3,21 @@
 
 > Internal Data Model of Screwdriver
 
+## Description
+
+This contains the structure/validation for all the models/resources of Screwdriver.
+
+The model represents a combination of what is required to create the resource and what is possible
+for returning from the resource.
+
+## Methodology
+
+Each model contains four (4) schemas:
+ - `base` - List of all available fields in the model
+ - `get` - Expected return values from a GET request against this resource
+ - `create` - Expected input values when making a CREATE action against this resource
+ - `update` - Expected input values when making an UPDATE action against this resource
+
 ## Usage
 
 ```bash
