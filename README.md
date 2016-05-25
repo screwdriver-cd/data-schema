@@ -42,5 +42,5 @@ Code licensed under the BSD 3-Clause license. See LICENSE file for terms.
 [issues-url]: https://github.com/screwdriver-cd/data-model/issues
 [wercker-image]: https://app.wercker.com/status/f64078e61aa4a03bceba2a35abfdead1
 [wercker-url]: https://app.wercker.com/project/bykey/f64078e61aa4a03bceba2a35abfdead1
-[daviddm-image]: https://david-dm.org/screwdriver-cd/screwdriver-data-model.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/screwdriver-cd/screwdriver-data-model
+[daviddm-image]: https://david-dm.org/screwdriver-cd/data-model.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/screwdriver-cd/data-model
