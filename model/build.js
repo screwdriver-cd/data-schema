@@ -8,12 +8,12 @@ const MODEL = {
         .description('Identifier of this Build')
         .example(52235),
 
-    job_id: Joi
+    jobId: Joi
         .number().positive()
         .description('Identifier of the Job')
         .example(30052),
 
-    run_number: Joi
+    runNumber: Joi
         .number().positive()
         .description('Incrementing number of a Job')
         .example(15),
@@ -34,20 +34,20 @@ const MODEL = {
         .description('SHA1 this project was built on')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
 
-    queued_reason: Joi
+    queuedReason: Joi
         .string()
         .description('Why this build is currently queued')
         .example('Build 14 is already running'),
 
-    create_time: Joi
+    createTime: Joi
         .date()
         .description('When this build was created'),
 
-    start_time: Joi
+    startTime: Joi
         .date()
         .description('When this build started on a build slave'),
 
-    end_time: Joi
+    endTime: Joi
         .date()
         .description('When this build stopped running'),
 
@@ -95,9 +95,9 @@ module.exports = {
      * @return {Joi} Joi Object
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'job_id', 'run_number', 'container', 'cause', 'create_time', 'status'
+        'id', 'jobId', 'runNumber', 'container', 'cause', 'createTime', 'status'
     ], [
-        'sha1', 'queued_reason', 'start_time', 'end_time', 'meta', 'parameters', 'executor'
+        'sha1', 'queuedReason', 'startTime', 'endTime', 'meta', 'parameters', 'executor'
     ])).label('Get Build'),
 
     /**
@@ -117,7 +117,7 @@ module.exports = {
      * @return {Joi} Joi Object
      */
     create: Joi.object(mutate(MODEL, [
-        'job_id', 'container'
+        'jobId', 'container'
     ], [
         'parameters'
     ])).label('Create Build')

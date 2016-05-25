@@ -1,4 +1,4 @@
 # Build Example
-job_id: 30052
-run_number: 15
+jobId: 30052
+runNumber: 15
 container: node:4

@@ -13,17 +13,17 @@ const MODEL = {
         .description('Specified Platform + Version')
         .example('nodejs_app@4'),
 
-    scm_url: Joi
+    scmUrl: Joi
         .string().regex(/^git@([^:]+):([^\/]+)\/(.+?)\.git(#.+)?$/)
         .description('Source Code URL for the application')
         .example('git@github.com:screwdriver-cd/data-model.git#master'),
 
-    config_url: Joi
+    configUrl: Joi
         .string().regex(/^git@([^:]+):([^\/]+)\/(.+?)\.git(#.+)?$/)
         .description('Source Code URL for Screwdriver configuration')
         .example('git@github.com:screwdriver-cd/optional-config.git#master'),
 
-    create_time: Joi
+    createTime: Joi
         .date()
         .description('When this pipeline was created')
 };
@@ -44,9 +44,9 @@ module.exports = {
      * @return {Joi} Joi Object
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'platform', 'scm_url', 'create_time'
+        'id', 'platform', 'scmUrl', 'createTime'
     ], [
-        'config_url'
+        'configUrl'
     ])).label('Get Pipeline'),
 
     /**
@@ -56,9 +56,9 @@ module.exports = {
      * @return {Joi} Joi Object
      */
     update: Joi.object(mutate(MODEL, [
-        'scm_url'
+        'scmUrl'
     ], [
-        'config_url'
+        'configUrl'
     ])).label('Update Pipeline'),
 
     /**
@@ -68,8 +68,8 @@ module.exports = {
      * @return {Joi} Joi Object
      */
     create: Joi.object(mutate(MODEL, [
-        'scm_url'
+        'scmUrl'
     ], [
-        'config_url'
+        'configUrl'
     ])).label('Create Pipeline')
 };
