@@ -1,0 +1,5 @@
+# Pipeline Get Example
+id: 16695
+platform: nodejs_app@4
+scmUrl: "git@github.com:screwdriver-cd/data-model.git#master"
+createTime: 2017-04-11
