@@ -1,7 +1,7 @@
 # Job Get Example
 id: 30052
-name: 'component'
+name: component
 pipelineId: 324
-state: 'ENABLED'
+state: ENABLED
 triggers: ['123456', '155:staging']
 triggeredBy: ['948']
