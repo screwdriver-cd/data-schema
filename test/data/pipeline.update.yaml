@@ -1,3 +1,3 @@
 # Pipeline Update Example
-scmUrl: "git@github.com:screwdriver-cd/data-model.git#master"
-configUrl: "git@github.com:screwdriver-cd/sample-config.git#master"
+scmUrl: git@github.com:screwdriver-cd/data-model.git#master
+configUrl: git@github.com:screwdriver-cd/sample-config.git#master
