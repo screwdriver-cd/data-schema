@@ -4,9 +4,9 @@ const mutate = require('../lib/mutate');
 
 const MODEL = {
     id: Joi
-        .number().positive()
+        .string().hex().length(40)
         .description('Identifier of this Pipeline')
-        .example(16695),
+        .example('2d991790bab1ac8576097ca87f170df73410b55c'),
 
     platform: Joi
         .string()
