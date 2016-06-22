@@ -4,9 +4,9 @@ const mutate = require('../lib/mutate');
 
 const MODEL = {
     id: Joi
-        .number().positive()
+        .string().hex().length(40)
         .description('Identifier of this user')
-        .example(12345),
+        .example('b09833cec69eff1bb667940a45e311262e85a422'),
 
     username: Joi
         .string()
