@@ -16,9 +16,9 @@ const MODEL = {
         .example('component'),
 
     pipelineId: Joi
-        .number().positive()
+        .string().hex().length(40)
         .description('Identifier of the Pipeline')
-        .example(324),
+        .example('2d991790bab1ac8576097ca87f170df73410b55c'),
 
     state: Joi
         .string().valid([

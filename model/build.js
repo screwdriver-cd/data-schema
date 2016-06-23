@@ -9,9 +9,9 @@ const MODEL = {
         .example('4b8d9b530d2e5e297b4f470d5b0a6e1310d29c5e'),
 
     jobId: Joi
-        .number().positive()
+        .string().hex().length(40)
         .description('Identifier of the Job')
-        .example(30052),
+        .example('50dc14f719cdc2c9cb1fb0e49dd2acc4cf6189a0'),
 
     runNumber: Joi
         .number().positive()
