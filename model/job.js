@@ -6,9 +6,9 @@ const jobPattern = new RegExp(/^([0-9]+)(:[\w-]+)?$/);
 
 const MODEL = {
     id: Joi
-        .number().positive()
+        .string().hex().length(40)
         .description('Identifier of this Job')
-        .example(52235),
+        .example('50dc14f719cdc2c9cb1fb0e49dd2acc4cf6189a0'),
 
     name: Joi
         .string()

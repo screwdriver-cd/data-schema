@@ -4,9 +4,9 @@ const mutate = require('../lib/mutate');
 
 const MODEL = {
     id: Joi
-        .number().positive()
+        .string().hex().length(40)
         .description('Identifier of this Build')
-        .example(52235),
+        .example('4b8d9b530d2e5e297b4f470d5b0a6e1310d29c5e'),
 
     jobId: Joi
         .number().positive()
