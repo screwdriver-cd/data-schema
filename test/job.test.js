@@ -19,4 +19,14 @@ describe('job test', () => {
             assert.isNotNull(validate('empty.yaml', model.job.get).error);
         });
     });
+
+    describe('update', () => {
+        it('validates the update', () => {
+            assert.isNull(validate('job.update.yaml', model.job.update).error);
+        });
+
+        it('fails the update', () => {
+            assert.isNotNull(validate('empty.yaml', model.job.update).error);
+        });
+    });
 });
