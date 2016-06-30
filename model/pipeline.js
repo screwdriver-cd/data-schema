@@ -33,7 +33,7 @@ module.exports = {
      * All the available properties of Pipeline
      *
      * @property base
-     * @return {Joi} Joi Object
+     * @type {Joi}
      */
     base: Joi.object(MODEL).label('Pipeline'),
 
@@ -41,7 +41,7 @@ module.exports = {
      * Properties for Pipeline that will come back during a GET request
      *
      * @property get
-     * @return {Joi} Joi Object
+     * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
         'id', 'platform', 'scmUrl', 'createTime'
@@ -53,7 +53,7 @@ module.exports = {
      * Properties for Pipeline that will be passed during an UPDATE request
      *
      * @property update
-     * @return {Joi} Joi Object
+     * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [
         'scmUrl'
@@ -65,11 +65,19 @@ module.exports = {
      * Properties for Pipeline that will be passed during a CREATE request
      *
      * @property create
-     * @return {Joi} Joi Object
+     * @type {Joi}
      */
     create: Joi.object(mutate(MODEL, [
         'scmUrl'
     ], [
         'configUrl'
-    ])).label('Create Pipeline')
+    ])).label('Create Pipeline'),
+
+    /**
+     * List of fields that determine a unique row
+     *
+     * @property keys
+     * @type {Array}
+     */
+    keys: ['scmUrl']
 };

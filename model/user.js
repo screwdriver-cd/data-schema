@@ -19,7 +19,7 @@ module.exports = {
      * All the available properties of User
      *
      * @property base
-     * @return {Joi} Joi Object
+     * @type {Joi}
      */
     base: Joi.object(MODEL).label('User'),
 
@@ -27,9 +27,17 @@ module.exports = {
      * Properties for User that will be passed during a CREATE request
      *
      * @property create
-     * @return {Joi} Joi Object
+     * @type {Joi}
      */
     create: Joi.object(mutate(MODEL, [
         'username'
-    ], [])).label('Create User')
+    ], [])).label('Create User'),
+
+    /**
+     * List of fields that determine a unique row
+     *
+     * @property keys
+     * @type {Array}
+     */
+    keys: ['username']
 };

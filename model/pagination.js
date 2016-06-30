@@ -17,6 +17,6 @@ const MODEL = {
 /**
  * All the available properties of Pagination
  *
- * @return {Joi} Joi Object
+ * @type {Joi}
  */
 module.exports = Joi.object(MODEL).label('Pagination');
