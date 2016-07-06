@@ -1,7 +1,7 @@
-# Screwdriver Data Model
+# Screwdriver Data Schema
 [![Version][npm-image]][npm-url] ![Downloads][downloads-image] [![Build Status][wercker-image]][wercker-url] [![Open Issues][issues-image]][issues-url] [![Dependency Status][daviddm-image]][daviddm-url] ![License][license-image]
 
-> Internal Data Model of Screwdriver
+> Internal data schema of Screwdriver
 
 ## Description
 
