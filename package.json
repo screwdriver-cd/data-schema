@@ -1,7 +1,7 @@
 {
-  "name": "screwdriver-data-model",
+  "name": "screwdriver-data-schema",
   "version": "2.0.0",
-  "description": "Internal Data Model of Screwdriver",
+  "description": "Internal Data Schema of Screwdriver",
   "main": "index.js",
   "scripts": {
     "pretest": "eslint .",
@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:screwdriver-cd/data-model.git"
+    "url": "git@github.com:screwdriver-cd/data-schema.git"
   },
-  "homepage": "https://github.com/screwdriver-cd/data-model",
-  "bugs": "https://github.com/screwdriver-cd/data-model/issues",
+  "homepage": "https://github.com/screwdriver-cd/data-schema",
+  "bugs": "https://github.com/screwdriver-cd/data-schema/issues",
   "keywords": [
     "screwdriver",
     "yahoo"

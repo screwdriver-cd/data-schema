@@ -34,13 +34,13 @@ npm test
 
 Code licensed under the BSD 3-Clause license. See LICENSE file for terms.
 
-[npm-image]: https://img.shields.io/npm/v/screwdriver-data-model.svg
-[npm-url]: https://npmjs.org/package/screwdriver-data-model
-[downloads-image]: https://img.shields.io/npm/dt/screwdriver-data-model.svg
-[license-image]: https://img.shields.io/npm/l/screwdriver-data-model.svg
-[issues-image]: https://img.shields.io/github/issues/screwdriver-cd/data-model.svg
-[issues-url]: https://github.com/screwdriver-cd/data-model/issues
-[wercker-image]: https://app.wercker.com/status/f64078e61aa4a03bceba2a35abfdead1
-[wercker-url]: https://app.wercker.com/project/bykey/f64078e61aa4a03bceba2a35abfdead1
-[daviddm-image]: https://david-dm.org/screwdriver-cd/data-model.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/screwdriver-cd/data-model
+[npm-image]: https://img.shields.io/npm/v/screwdriver-data-schema.svg
+[npm-url]: https://npmjs.org/package/screwdriver-data-schema
+[downloads-image]: https://img.shields.io/npm/dt/screwdriver-data-schema.svg
+[license-image]: https://img.shields.io/npm/l/screwdriver-data-schema.svg
+[issues-image]: https://img.shields.io/github/issues/screwdriver-cd/data-schema.svg
+[issues-url]: https://github.com/screwdriver-cd/data-schema/issues
+[wercker-image]: https://app.wercker.com/status/5af7b45967fcef5a8769b23c0f150040
+[wercker-url]: https://app.wercker.com/project/bykey/5af7b45967fcef5a8769b23c0f150040
+[daviddm-image]: https://david-dm.org/screwdriver-cd/data-schema.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/screwdriver-cd/data-schema
