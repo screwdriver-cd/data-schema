@@ -1,4 +1,3 @@
 # Build Example
 jobId: 50dc14f719cdc2c9cb1fb0e49dd2acc4cf6189a0
 runNumber: 15
-container: node:4

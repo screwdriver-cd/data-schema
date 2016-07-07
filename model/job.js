@@ -56,7 +56,7 @@ module.exports = {
      * All the available properties of Job
      *
      * @property base
-     * @return {Joi} Joi Object
+     * @type {Joi}
      */
     base: Joi.object(MODEL).label('Job'),
 
@@ -64,7 +64,7 @@ module.exports = {
      * Properties for Job that will come back during a GET request
      *
      * @property get
-     * @return {Joi} Joi Object
+     * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
         'id', 'pipelineId', 'name', 'state', 'triggers', 'triggeredBy'
@@ -74,9 +74,17 @@ module.exports = {
      * Properties for Job that will come back during a UPDATE request
      *
      * @property update
-     * @return {Joi} Joi Object
+     * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [
         'state'
-    ], [])).label('Update Job')
+    ], [])).label('Update Job'),
+
+    /**
+     * List of fields that determine a unique row
+     *
+     * @property keys
+     * @type {Array}
+     */
+    keys: ['pipelineId', 'name']
 };

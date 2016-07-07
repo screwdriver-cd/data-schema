@@ -18,11 +18,6 @@ const MODEL = {
         .description('Incrementing number of a Job')
         .example(15),
 
-    container: Joi
-        .string()
-        .description('Container this Build is running in')
-        .example('node:4'),
-
     cause: Joi
         .string()
         .description('Reason why this build started')
@@ -34,26 +29,17 @@ const MODEL = {
         .description('SHA1 this project was built on')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
 
-    queuedReason: Joi
-        .string()
-        .description('Why this build is currently queued')
-        .example('Build 14 is already running'),
-
     createTime: Joi
         .date()
         .description('When this build was created'),
 
     startTime: Joi
         .date()
-        .description('When this build started on a build slave'),
+        .description('When this build started on a build machine'),
 
     endTime: Joi
         .date()
         .description('When this build stopped running'),
-
-    meta: Joi
-        .object()
-        .description('Key=>Value information from the build itself'),
 
     parameters: Joi
         .object()
@@ -64,7 +50,6 @@ const MODEL = {
         .string().valid([
             'SUCCESS',
             'FAILURE',
-            'BUILDING',
             'QUEUED',
             'ABORTED',
             'INPROGRESS'
@@ -75,8 +60,8 @@ const MODEL = {
 
     executor: Joi
         .string()
-        .description('What build slave did it run on')
-        .example('slave-15')
+        .description('What machine did it run on')
+        .example('executor-15')
 };
 
 module.exports = {
@@ -84,7 +69,7 @@ module.exports = {
      * All the available properties of Build
      *
      * @property base
-     * @return {Joi} Joi Object
+     * @type {Joi}
      */
     base: Joi.object(MODEL).label('Build'),
 
@@ -92,19 +77,19 @@ module.exports = {
      * Properties for Build that will come back during a GET request
      *
      * @property get
-     * @return {Joi} Joi Object
+     * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'jobId', 'runNumber', 'container', 'cause', 'createTime', 'status'
+        'id', 'jobId', 'runNumber', 'cause', 'createTime', 'status'
     ], [
-        'sha1', 'queuedReason', 'startTime', 'endTime', 'meta', 'parameters', 'executor'
+        'sha1', 'startTime', 'endTime', 'meta', 'parameters', 'executor'
     ])).label('Get Build'),
 
     /**
      * Properties for Build that will be passed during an UPDATE request
      *
      * @property update
-     * @return {Joi} Joi Object
+     * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [
         'status'
@@ -114,11 +99,17 @@ module.exports = {
      * Properties for Build that will be passed during a CREATE request
      *
      * @property create
-     * @return {Joi} Joi Object
+     * @type {Joi}
      */
     create: Joi.object(mutate(MODEL, [
-        'jobId', 'container'
-    ], [
-        'parameters'
-    ])).label('Create Build')
+        'jobId'
+    ])).label('Create Build'),
+
+    /**
+     * List of fields that determine a unique row
+     *
+     * @property keys
+     * @type {Array}
+     */
+    keys: ['jobId', 'runNumber']
 };
