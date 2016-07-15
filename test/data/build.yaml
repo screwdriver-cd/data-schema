@@ -1,3 +1,16 @@
 # Build Example
+id: 8843d7f92416211de9ebb963ff4ce28125932878
 jobId: 50dc14f719cdc2c9cb1fb0e49dd2acc4cf6189a0
-runNumber: 15
+parentBuildId: d8fd39d0bbdd2dcf322d8b11390a4c5825b11495
+number: 15.1
+container: node:4
+cause: Because I clicked it
+sha1: 46f1a0bd5592a2f9244ca321b129902a06b53e03
+createTime: 2038-01-19 03:14:08
+startTime: 2038-01-19 03:15:08
+endTime: 2038-01-19 03:16:10
+parameters:
+    desired: 123456
+meta:
+    coverage: 99.54
+status: SUCCESS

@@ -5,7 +5,7 @@ const mutate = require('../lib/mutate');
 const MODEL = {
     id: Joi
         .string().hex().length(40)
-        .description('Identifier of this Build')
+        .description('Identifier of this build')
         .example('4b8d9b530d2e5e297b4f470d5b0a6e1310d29c5e'),
 
     jobId: Joi
@@ -13,10 +13,20 @@ const MODEL = {
         .description('Identifier of the Job')
         .example('50dc14f719cdc2c9cb1fb0e49dd2acc4cf6189a0'),
 
-    runNumber: Joi
+    parentBuildId: Joi
+        .string().hex().length(40)
+        .description('Parent build in the case of matrix jobs')
+        .example('50dc14f719cdc2c9cb1fb0e49dd2acc4cf6189a0'),
+
+    number: Joi
         .number().positive()
         .description('Incrementing number of a Job')
         .example(15),
+
+    container: Joi
+        .string()
+        .description('Container this build is running in')
+        .example('node:4'),
 
     cause: Joi
         .string()
@@ -45,23 +55,21 @@ const MODEL = {
         .object()
         .description('Input parameters that defined this build'),
 
-    // @NOTE UNSTABLE is merged into FAILURE
+    meta: Joi
+        .object()
+        .description('Key=>Value information from the build itself'),
+
     status: Joi
         .string().valid([
             'SUCCESS',
             'FAILURE',
             'QUEUED',
             'ABORTED',
-            'INPROGRESS'
+            'RUNNING'
         ])
         .description('Current status of the build')
         .example('SUCCESS')
-        .default('QUEUED'),
-
-    executor: Joi
-        .string()
-        .description('What machine did it run on')
-        .example('executor-15')
+        .default('QUEUED')
 };
 
 module.exports = {
@@ -80,9 +88,9 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'jobId', 'runNumber', 'cause', 'createTime', 'status'
+        'id', 'jobId', 'number', 'cause', 'createTime', 'status'
     ], [
-        'sha1', 'startTime', 'endTime', 'meta', 'parameters', 'executor'
+        'container', 'parentBuildId', 'sha1', 'startTime', 'endTime', 'meta', 'parameters'
     ])).label('Get Build'),
 
     /**
@@ -111,5 +119,5 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['jobId', 'runNumber']
+    keys: ['jobId', 'number']
 };
