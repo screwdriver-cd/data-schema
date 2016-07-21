@@ -22,4 +22,10 @@ describe('commmons tests', () => {
             assert.isArray(models[model].indexes);
         });
     });
+
+    it('selected models have keys defined', () => {
+        modelsToCheck.forEach((model) => {
+            assert.isArray(models[model].keys);
+        });
+    });
 });
