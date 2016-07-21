@@ -39,5 +39,21 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['username']
+    keys: ['username'],
+
+    /**
+     * Tablename to be used in the datastore
+     *
+     * @property tableName
+     * @type {String}
+     */
+    tableName: 'users',
+
+    /**
+     * List of indexes to create in the datastore
+     *
+     * @property indexes
+     * @type {Array}
+     */
+    indexes: ['username']
 };
