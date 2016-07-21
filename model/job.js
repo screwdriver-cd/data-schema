@@ -71,5 +71,21 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['pipelineId', 'name']
+    keys: ['pipelineId', 'name'],
+
+    /**
+     * Tablename to be used in the datastore
+     *
+     * @property tableName
+     * @type {String}
+     */
+    tableName: 'jobs',
+
+    /**
+     * List of indexes to create in the datastore
+     *
+     * @property indexes
+     * @type {Array}
+     */
+    indexes: ['pipelineId']
 };

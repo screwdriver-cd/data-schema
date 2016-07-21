@@ -119,5 +119,21 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['jobId', 'number']
+    keys: ['jobId', 'number'],
+
+    /**
+     * Tablename to be used in the datastore
+     *
+     * @property tableName
+     * @type {String}
+     */
+    tableName: 'builds',
+
+    /**
+     * List of indexes to create in the datastore
+     *
+     * @property indexes
+     * @type {Array}
+     */
+    indexes: ['jobId', 'parentBuildId']
 };

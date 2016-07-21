@@ -94,5 +94,21 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['name', 'version']
+    keys: ['name', 'version'],
+
+    /**
+     * Tablename to be used in the datastore
+     *
+     * @property tableName
+     * @type {String}
+     */
+    tableName: 'platforms',
+
+    /**
+     * List of indexes to create in the datastore
+     *
+     * @property indexes
+     * @type {Array}
+     */
+    indexes: ['scmUrl', 'name']
 };
