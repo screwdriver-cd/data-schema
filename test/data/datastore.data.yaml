@@ -1,0 +1,5 @@
+table: 'jobs'
+params:
+    id: 4b8d9b530d2e5e297b4f470d5b0a6e1310d29c5e
+    data:
+        state: 'ENABLED'
