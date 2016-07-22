@@ -1,0 +1,17 @@
+main:
+    environment:
+        NODE_ENV: production
+    matrix:
+        NODE_VERSION:
+            - 4
+            - 5
+            - 6
+    image: node:{{NODE_VERSION}}
+    steps:
+        init: npm install
+        test: npm test
+
+publish:
+    image: node:4
+    steps:
+        publish: npm publish

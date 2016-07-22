@@ -1,16 +1,16 @@
 'use strict';
 const assert = require('chai').assert;
-const model = require('../index');
-const validate = require('./helper').validate;
+const api = require('../../').api;
+const validate = require('../helper').validate;
 
-describe('pagination test', () => {
+describe('api pagination', () => {
     describe('validates', () => {
         it('page and query', () => {
-            assert.isNull(validate('pagination.yaml', model.pagination).error);
+            assert.isNull(validate('pagination.yaml', api.pagination).error);
         });
 
         it('defaults both', () => {
-            const validatedObject = validate('pagination.defaults.yaml', model.pagination);
+            const validatedObject = validate('pagination.defaults.yaml', api.pagination);
 
             assert.isNull(validatedObject.error);
             assert.equal(validatedObject.value.page, 1);
