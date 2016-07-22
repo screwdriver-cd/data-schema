@@ -12,11 +12,19 @@ for returning from the resource.
 
 ## Methodology
 
-Each model contains four (4) schemas:
+`platform, pipeline, job, build` contains four (4) schemas:
  - `base` - List of all available fields in the model
  - `get` - Expected return values from a GET request against this resource
  - `create` - Expected input values when making a CREATE action against this resource
  - `update` - Expected input values when making an UPDATE action against this resource
+
+ `datastore` contains:
+ - `get` - Expected values to pass in for the get method
+ - `update` - Expected values to pass in for the update method
+ - `save` - Expected values to pass in for the save method
+ - `remove` - Expected values to pass in for the remove method
+ - `scan` - Expected values to pass in for the scan method
+
 
 ## Usage
 
