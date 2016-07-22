@@ -1,0 +1,4 @@
+table: 'jobs'
+paginate:
+    page: 1
+    count: 2
