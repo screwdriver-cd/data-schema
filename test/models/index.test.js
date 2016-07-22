@@ -1,8 +1,8 @@
 'use strict';
 const assert = require('chai').assert;
-const models = require('../index');
+const models = require('../../').models;
 
-describe('commmons tests', () => {
+describe('model commmons', () => {
     const modelsToCheck = [
         'pipeline',
         'build',

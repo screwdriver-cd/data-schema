@@ -1,6 +1,6 @@
 {
   "name": "screwdriver-data-schema",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Internal Data Schema of Screwdriver",
   "main": "index.js",
   "scripts": {
@@ -39,6 +39,6 @@
     "js-yaml": "^3.6.1"
   },
   "dependencies": {
-    "joi": "^8.1.0"
+    "joi": "^9.0.0"
   }
 }

@@ -7,21 +7,30 @@
 
 This contains the structure/validation for all the models/resources of Screwdriver.
 
-The model represents a combination of what is required to create the resource and what is possible
-for returning from the resource.
+It's broken down into three sections:
+ - `api` - API related input/output structure
+ - `config` - Screwdriver.yaml definitions
+ - `models` - Internal data resources
 
-## Methodology
+## Models
 
-Each model contains four (4) schemas:
+The model represents a combination of what is required to create the resource and what is possible for returning from the resource.
+
+### Methodology
+
+Each model contains seven (7) schemas:
  - `base` - List of all available fields in the model
  - `get` - Expected return values from a GET request against this resource
  - `create` - Expected input values when making a CREATE action against this resource
  - `update` - Expected input values when making an UPDATE action against this resource
+ - `keys` - List of keys that combine to represent a unique row
+ - `tableName` - Internal name of the table
+ - `indexes` - Secondary indexes to make search/lookup faster
 
 ## Usage
 
 ```bash
-npm install screwdriver-data-model
+npm install screwdriver-data-schema
 ```
 
 ## Testing
