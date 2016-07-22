@@ -11,6 +11,7 @@ It's broken down into three sections:
  - `api` - API related input/output structure
  - `config` - Screwdriver.yaml definitions
  - `models` - Internal data resources
+ - `plugins` - Plugins (datastore, executor, etc.)
 
 ## Models
 
