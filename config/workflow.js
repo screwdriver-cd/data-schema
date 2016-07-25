@@ -7,8 +7,7 @@ const SCHEMA_WORKFLOW = Joi.array()
     // List of jobs
     .items(Joi.string().regex(Regex.JOB_NAME))
     // You cannot trigger the same job twice
-    .unique()
-    .label('Workflow');
+    .unique();
 
 /**
  * The definition of the Workflow pieces

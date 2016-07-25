@@ -11,7 +11,6 @@ const SCHEMA_MATRIX = Joi.object()
     // All others are marked as invalid
     .unknown(false)
     // Add documentation
-    .label('Job Matrix')
     .options({
         language: {
             object: {
@@ -28,7 +27,6 @@ const SCHEMA_ENVIRONMENT = Joi.object()
     // All others are marked as invalid
     .unknown(false)
     // Add documentation
-    .label('Environment')
     .options({
         language: {
             object: {
@@ -44,7 +42,6 @@ const SCHEMA_STEPS = Joi.object()
     // All others are marked as invalid
     .unknown(false)
     // Add documentation
-    .label('Steps')
     .options({
         language: {
             object: {
@@ -52,8 +49,7 @@ const SCHEMA_STEPS = Joi.object()
             }
         }
     });
-const SCHEMA_IMAGE = Joi.string()
-    .label('Container Image');
+const SCHEMA_IMAGE = Joi.string();
 const SCHEMA_JOB = Joi.object()
     .keys({
         steps: SCHEMA_STEPS,
@@ -61,8 +57,7 @@ const SCHEMA_JOB = Joi.object()
         matrix: SCHEMA_MATRIX,
         image: SCHEMA_IMAGE
     })
-    .default({})
-    .label('Job');
+    .default({});
 
 /**
  * Various components of a Job
