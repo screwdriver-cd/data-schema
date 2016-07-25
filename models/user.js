@@ -11,7 +11,11 @@ const MODEL = {
     username: Joi
         .string()
         .description('Username')
-        .example('batman123')
+        .example('batman123'),
+
+    token: Joi
+        .string()
+        .description('Token')
 };
 
 module.exports = {
@@ -30,8 +34,20 @@ module.exports = {
      * @type {Joi}
      */
     create: Joi.object(mutate(MODEL, [
-        'username'
+        'username',
+        'token'
     ], [])).label('Create User'),
+
+    /**
+     * Properties for User that will be passed during a UPDATE request
+     *
+     * @property update
+     * @type {Joi}
+     */
+    update: Joi.object(mutate(MODEL, [
+        'id',
+        'token'
+    ], [])).label('Update User'),
 
     /**
      * List of fields that determine a unique row
