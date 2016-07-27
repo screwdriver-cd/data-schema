@@ -11,7 +11,11 @@ const MODEL = {
     username: Joi
         .string()
         .description('Username')
-        .example('batman123')
+        .example('batman123'),
+
+    token: Joi
+        .string()
+        .description('Github token')
 };
 
 module.exports = {
