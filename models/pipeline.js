@@ -8,11 +8,6 @@ const MODEL = {
         .description('Identifier of this Pipeline')
         .example('2d991790bab1ac8576097ca87f170df73410b55c'),
 
-    platform: Joi
-        .string()
-        .description('Specified Platform + Version')
-        .example('nodejs_app@4'),
-
     scmUrl: Joi
         .string().regex(/^git@([^:]+):([^\/]+)\/(.+?)\.git(#.+)?$/)
         .description('Source Code URL for the application')
@@ -44,7 +39,7 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'platform', 'scmUrl', 'createTime'
+        'id', 'scmUrl', 'createTime'
     ], [
         'configUrl'
     ])).label('Get Pipeline'),

@@ -1,9 +1,0 @@
-# Platform Example
-id: 334b3152916f7cbc59579f7a18744450d5a5a907
-name: node
-version: '1.0.0'
-config: {}
-author: blah
-docUrl: http://blah.com
-scmUrl: git@github.com:screwdriver-cd/data-model.git#c55494cdc55063ecd854800cc4ccc949659c1519
-experimental: true

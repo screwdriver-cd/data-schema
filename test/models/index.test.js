@@ -7,7 +7,6 @@ describe('model commmons', () => {
         'pipeline',
         'build',
         'job',
-        'platform',
         'user'
     ];
 
