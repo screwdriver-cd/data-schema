@@ -12,5 +12,7 @@ module.exports = {
     // IEEE Std 1003.1-2001
     // Environment names contain uppercase letters, digits, and underscore
     // They cannot start with digits
-    ENV_NAME: /^[A-Z_][A-Z0-9_]*$/
+    ENV_NAME: /^[A-Z_][A-Z0-9_]*$/,
+    // scmUrl. For example: git@github.com:screwdriver-cd/data-schema.git
+    SCM_URL: /^git@([^:]+):([^\/]+)\/(.+?)\.git(#.+)?$/
 };

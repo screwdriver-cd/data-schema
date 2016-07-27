@@ -1,6 +1,7 @@
 'use strict';
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
+const Regex = require('../config/regex');
 
 const MODEL = {
     id: Joi
@@ -9,18 +10,23 @@ const MODEL = {
         .example('2d991790bab1ac8576097ca87f170df73410b55c'),
 
     scmUrl: Joi
-        .string().regex(/^git@([^:]+):([^\/]+)\/(.+?)\.git(#.+)?$/)
+        .string().regex(Regex.SCM_URL)
         .description('Source Code URL for the application')
         .example('git@github.com:screwdriver-cd/data-model.git#master'),
 
     configUrl: Joi
-        .string().regex(/^git@([^:]+):([^\/]+)\/(.+?)\.git(#.+)?$/)
+        .string().regex(Regex.SCM_URL)
         .description('Source Code URL for Screwdriver configuration')
         .example('git@github.com:screwdriver-cd/optional-config.git#master'),
 
     createTime: Joi
         .date()
-        .description('When this pipeline was created')
+        .description('When this pipeline was created'),
+
+    admins: Joi
+        .object()
+        .description('Admins of this Pipeline')
+        .example({ myself: true })
 };
 
 module.exports = {
@@ -39,7 +45,7 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'scmUrl', 'createTime'
+        'id', 'scmUrl', 'createTime', 'admins'
     ], [
         'configUrl'
     ])).label('Get Pipeline'),
