@@ -1,6 +1,4 @@
 buildId: 8843d7f92416211de9ebb963ff4ce28125932878
-jobId: 50dc14f719cdc2c9cb1fb0e49dd2acc4cf6189a0
-jobName: main
-pipelineId: 2d991790bab1ac8576097ca87f170df73410b55c
 container: node:4
-scmUrl: git@github.com:screwdriver-cd/data-model.git#master
+apiUri: http://localhost:8080
+token: eyJhbGciOiJIUziIsInR5cCI6IkpXVCJ9.eyJ1c2Vybam9obmpvaG5zb24iLCJzY29wZSI6WyJ1c2VyIl0sImlhdCI6MTQ3MDI2NjAwMywiZXhwIjoxNDcwMzA5MjAzfQ.CHaHW2-0wALpWaS4UTXQmSAn_ekMBml-ENEnGhw-9SE
