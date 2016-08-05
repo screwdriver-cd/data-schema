@@ -25,6 +25,7 @@ describe('model commmons', () => {
     it('selected models have keys defined', () => {
         modelsToCheck.forEach((model) => {
             assert.isArray(models[model].keys);
+            assert.isArray(models[model].allKeys);
         });
     });
 });

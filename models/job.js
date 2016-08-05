@@ -74,6 +74,13 @@ module.exports = {
     keys: ['pipelineId', 'name'],
 
     /**
+     * List of all fields in the model
+     * @property allKeys
+     * @type {Array}
+     */
+    allKeys: Object.keys(MODEL),
+
+    /**
      * Tablename to be used in the datastore
      *
      * @property tableName
