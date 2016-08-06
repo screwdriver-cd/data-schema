@@ -122,6 +122,13 @@ module.exports = {
     keys: ['jobId', 'number'],
 
     /**
+     * List of all fields in the model
+     * @property allKeys
+     * @type {Array}
+     */
+    allKeys: Object.keys(MODEL),
+
+    /**
      * Tablename to be used in the datastore
      *
      * @property tableName
