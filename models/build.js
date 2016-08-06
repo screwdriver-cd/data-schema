@@ -33,10 +33,10 @@ const MODEL = {
         .description('Reason why this build started')
         .example('Commit ccc493 was pushed to master'),
 
-    sha1: Joi
+    sha: Joi
         .string().hex()
         .length(40)
-        .description('SHA1 this project was built on')
+        .description('SHA this project was built on')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
 
     createTime: Joi
@@ -90,7 +90,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'jobId', 'number', 'cause', 'createTime', 'status'
     ], [
-        'container', 'parentBuildId', 'sha1', 'startTime', 'endTime', 'meta', 'parameters'
+        'container', 'parentBuildId', 'sha', 'startTime', 'endTime', 'meta', 'parameters'
     ])).label('Get Build'),
 
     /**
