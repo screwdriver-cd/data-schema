@@ -7,6 +7,6 @@ matrix:
         - 6
 image: node:{{NODE_VERSION}}
 steps:
-    init: npm install
-    test: npm test
-    publish: npm publish
+    - init: npm install
+    - test: npm test
+    - publish: npm publish
