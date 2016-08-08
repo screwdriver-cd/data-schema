@@ -4,11 +4,11 @@ const models = require('../models');
 const buildId = Joi.reach(models.build.base, 'id').required();
 const SCHEMA_START = Joi.object().keys({
     buildId,
-    jobId: Joi.reach(models.job.base, 'id').required(),
-    jobName: Joi.reach(models.job.base, 'name').required(),
-    pipelineId: Joi.reach(models.pipeline.base, 'id').required(),
     container: Joi.reach(models.build.base, 'container').required(),
-    scmUrl: Joi.reach(models.pipeline.base, 'scmUrl').required()
+    apiUri: Joi.string().uri().required()
+        .label('API URI'),
+    token: Joi.string().required()
+        .label('Build JWT')
 }).required();
 const SCHEMA_STOP = Joi.object().keys({
     buildId
