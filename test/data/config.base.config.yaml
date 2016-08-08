@@ -13,13 +13,13 @@ jobs:
                 - 6
         image: node:{{NODE_VERSION}}
         steps:
-            init: npm install
-            test: npm test
+            - init: npm install
+            - test: npm test
 
     publish:
         image: node:4
         steps:
-            publish: npm publish
+            - publish: npm publish
 
 workflow:
     - publish

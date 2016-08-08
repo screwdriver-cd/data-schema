@@ -1,3 +1,3 @@
-init: npm install
-test: npm test
-publish: npm publish
+- init: npm install
+- test: npm test
+- npm publish

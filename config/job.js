@@ -35,12 +35,15 @@ const SCHEMA_ENVIRONMENT = Joi.object()
             }
         }
     });
-const SCHEMA_STEPS = Joi.object()
+const SCHEMA_STEP_STRING = Joi.string();
+const SCHEMA_STEP_OBJECT = Joi.object()
     // Steps can only be named with A-Z,a-z,0-9,-,_
     // Steps only contain strings (the command to execute)
     .pattern(Regex.STEP_NAME, Joi.string())
     // All others are marked as invalid
     .unknown(false)
+    // And there can be only one command per step
+    .length(1)
     // Add documentation
     .options({
         language: {
@@ -49,6 +52,8 @@ const SCHEMA_STEPS = Joi.object()
             }
         }
     });
+const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJECT);
+const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
 const SCHEMA_IMAGE = Joi.string();
 const SCHEMA_JOB = Joi.object()
     .keys({
@@ -66,6 +71,7 @@ const SCHEMA_JOB = Joi.object()
 module.exports = {
     matrix: SCHEMA_MATRIX,
     steps: SCHEMA_STEPS,
+    step: SCHEMA_STEP,
     environment: SCHEMA_ENVIRONMENT,
     image: SCHEMA_IMAGE,
     job: SCHEMA_JOB
