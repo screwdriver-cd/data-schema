@@ -2,4 +2,4 @@
 id: 2d991790bab1ac8576097ca87f170df73410b55c
 scmUrl: git@github.com:screwdriver-cd/data-model.git#master
 configUrl: git@github.com:screwdriver-cd/external-config.git#master
-createTime: 2017-04-19 14:55:11 UTC
+createTime: "2017-04-19T14:55:11" 
