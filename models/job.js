@@ -14,10 +14,11 @@ const MODEL = {
         .description('Name of the Job')
         .example('main'),
 
-    container: Joi
-        .string()
-        .description('Container this build is running in')
-        .example('node:4'),
+    containers: Joi
+        .array()
+        .items(Joi.string())
+        .description('List of container images')
+        .example(['node:4', 'node:6']),
 
     description: Joi
         .string().max(100)
@@ -57,7 +58,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'pipelineId', 'name', 'state'
     ], [
-        'description', 'container'
+        'description', 'containers'
     ])).label('Get Job'),
 
     /**
@@ -68,7 +69,7 @@ module.exports = {
      */
     update: Joi.object(mutate(MODEL, [], [
         'state',
-        'container'
+        'containers'
     ])).label('Update Job'),
 
     /**
