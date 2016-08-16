@@ -1,2 +1,3 @@
 state: 'ENABLED'
-container: node:6
+containers:
+    - node:6
