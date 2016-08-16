@@ -40,15 +40,18 @@ const MODEL = {
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
 
     createTime: Joi
-        .date()
+				.string()
+				.isoDate()
         .description('When this build was created'),
 
     startTime: Joi
-        .date()
+				.string()
+				.isoDate()
         .description('When this build started on a build machine'),
 
     endTime: Joi
-        .date()
+				.string()
+				.isoDate()
         .description('When this build stopped running'),
 
     parameters: Joi
