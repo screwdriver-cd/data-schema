@@ -14,6 +14,11 @@ const MODEL = {
         .description('Name of the Job')
         .example('main'),
 
+    container: Joi
+        .string()
+        .description('Container this build is running in')
+        .example('node:4'),
+
     description: Joi
         .string().max(100)
         .description('Description of the Job')
@@ -52,7 +57,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'pipelineId', 'name', 'state'
     ], [
-        'description'
+        'description', 'container'
     ])).label('Get Job'),
 
     /**
@@ -61,9 +66,10 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(MODEL, [
-        'state'
-    ], [])).label('Update Job'),
+    update: Joi.object(mutate(MODEL, [], [
+        'state',
+        'container'
+    ])).label('Update Job'),
 
     /**
      * List of fields that determine a unique row
