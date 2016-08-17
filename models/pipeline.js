@@ -20,7 +20,8 @@ const MODEL = {
         .example('git@github.com:screwdriver-cd/optional-config.git#master'),
 
     createTime: Joi
-        .date()
+	.string()
+        .isoDate()
         .description('When this pipeline was created'),
 
     admins: Joi
