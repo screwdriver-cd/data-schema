@@ -33,4 +33,14 @@ describe('scm test', () => {
             assert.isNotNull(validate('empty.yaml', scm.updateCommitStatus).error);
         });
     });
+
+    describe('getFile', () => {
+        it('validates', () => {
+            assert.isNull(validate('scm.getFile.yaml', scm.getFile).error);
+        });
+
+        it('fails', () => {
+            assert.isNotNull(validate('empty.yaml', scm.getFile).error);
+        });
+    });
 });
