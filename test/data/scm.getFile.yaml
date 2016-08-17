@@ -1,0 +1,3 @@
+scmUrl: 'git@github.com:screwdriver-cd/hashr.git#master'
+token: 'thisisatokenthingy'
+path: 'screwdriver.yaml'
