@@ -23,6 +23,12 @@ const UPDATE_COMMIT_STATUS = Joi.object().keys({
     buildStatus
 }).required();
 
+const GET_FILE = Joi.object().keys({
+    scmUrl,
+    token,
+    path: Joi.string().required()
+}).required();
+
 module.exports = {
     /**
      * Properties for Scm Base that will be passed for the getPermissions method
@@ -46,5 +52,13 @@ module.exports = {
      * @property updateCommitStatus
      * @type {Joi}
      */
-    updateCommitStatus: UPDATE_COMMIT_STATUS
+    updateCommitStatus: UPDATE_COMMIT_STATUS,
+
+    /**
+     * Properties for Scm Base that will be passed for the getFile method
+     *
+     * @property getFile
+     * @type {Joi}
+     */
+    getFile: GET_FILE
 };
