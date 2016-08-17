@@ -26,7 +26,8 @@ const UPDATE_COMMIT_STATUS = Joi.object().keys({
 const GET_FILE = Joi.object().keys({
     scmUrl,
     token,
-    path: Joi.string().required()
+    path: Joi.string().required(),
+    ref: Joi.string().optional()
 }).required();
 
 module.exports = {
