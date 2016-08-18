@@ -20,7 +20,8 @@ const UPDATE_COMMIT_STATUS = Joi.object().keys({
     scmUrl,
     token,
     sha,
-    buildStatus
+    buildStatus,
+    url: Joi.string().uri().optional()
 }).required();
 
 const GET_FILE = Joi.object().keys({
