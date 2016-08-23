@@ -6,3 +6,25 @@ state: ENABLED
 containers:
     - node:4
     - node:6
+permutations:
+    - image: node:4
+      commands:
+        - name: install
+          command: npm install
+        - name: test
+          command: npm test
+        - name: build
+          command: npm run build
+      environment:
+        NODE_VERSION: 4
+
+    - image: node:6
+      commands:
+        - name: install
+          command: npm install
+        - name: test
+          command: npm test
+        - name: build
+          command: npm run build
+      environment:
+        NODE_VERSION: 6

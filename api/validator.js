@@ -55,5 +55,6 @@ const SCHEMA_INPUT = Joi.object({
  */
 module.exports = {
     input: SCHEMA_INPUT,
-    output: SCHEMA_OUTPUT
+    output: SCHEMA_OUTPUT,
+    jobPermutations: SCHEMA_JOB_PERMUTATIONS
 };

@@ -1,6 +1,7 @@
 'use strict';
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
+const validator = require('../api/validator');
 
 const MODEL = {
     id: Joi
@@ -19,6 +20,8 @@ const MODEL = {
         .items(Joi.string())
         .description('List of container images')
         .example(['node:4', 'node:6']),
+
+    permutations: validator.jobPermutations,
 
     description: Joi
         .string().max(100)
@@ -58,7 +61,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'pipelineId', 'name', 'state'
     ], [
-        'description', 'containers'
+        'description', 'containers', 'permutations'
     ])).label('Get Job'),
 
     /**
@@ -68,8 +71,7 @@ module.exports = {
      * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [], [
-        'state',
-        'containers'
+        'state'
     ])).label('Update Job'),
 
     /**

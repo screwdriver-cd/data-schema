@@ -13,4 +13,21 @@ parameters:
     desired: 123456
 meta:
     coverage: 99.54
-status: SUCCESS
+status: FAILURE
+steps:
+    -
+        name: sd-setup
+        code: 0
+        time: 15.2
+    -
+        name: install
+        code: 1
+        time: 30
+    -
+        name: test
+    -
+        name: publish
+    -
+        name: sd-cleanup
+        code: 0
+        time: 0.55
