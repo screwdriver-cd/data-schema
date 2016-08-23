@@ -2,6 +2,21 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 
+const STEP_CODE = Joi
+    .number().integer()
+    .description('Exit code');
+const STEP_TIME = Joi
+    .number().positive()
+    .description('Elapsed time in seconds');
+const STEP_NAME = Joi
+    .string()
+    .description('Name of the Step');
+const STEP = Joi
+    .object().keys({
+        name: STEP_NAME.required(),
+        code: STEP_CODE.optional(),
+        time: STEP_TIME.optional()
+    }).description('Step metadata');
 const MODEL = {
     id: Joi
         .string().hex().length(40)
@@ -62,6 +77,10 @@ const MODEL = {
         .object()
         .description('Key=>Value information from the build itself'),
 
+    steps: Joi
+        .array().items(STEP)
+        .description('List of steps'),
+
     status: Joi
         .string().valid([
             'SUCCESS',
@@ -93,7 +112,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'jobId', 'number', 'cause', 'createTime', 'status'
     ], [
-        'container', 'parentBuildId', 'sha', 'startTime', 'endTime', 'meta', 'parameters'
+        'container', 'parentBuildId', 'sha', 'startTime', 'endTime', 'meta', 'parameters', 'steps'
     ])).label('Get Build'),
 
     /**
