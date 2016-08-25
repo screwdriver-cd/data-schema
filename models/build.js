@@ -2,21 +2,22 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 
-const STEP_CODE = Joi
-    .number().integer()
-    .description('Exit code');
-const STEP_TIME = Joi
-    .number().positive()
-    .description('Elapsed time in seconds');
-const STEP_NAME = Joi
-    .string()
-    .description('Name of the Step');
-const STEP = Joi
-    .object().keys({
-        name: STEP_NAME.required(),
-        code: STEP_CODE.optional(),
-        time: STEP_TIME.optional()
-    }).description('Step metadata');
+const STEP = {
+    name: Joi
+        .string()
+        .description('Name of the Step'),
+    code: Joi
+        .number().integer()
+        .description('Exit code'),
+    startTime: Joi
+        .string()
+        .isoDate()
+        .description('When this step started'),
+    endTime: Joi
+        .string()
+        .isoDate()
+        .description('When this step stopped running')
+};
 const MODEL = {
     id: Joi
         .string().hex().length(40)
@@ -78,7 +79,10 @@ const MODEL = {
         .description('Key=>Value information from the build itself'),
 
     steps: Joi
-        .array().items(STEP)
+        .array().items(
+            Joi.object(
+                mutate(STEP, ['name'], ['code', 'startTime', 'endTime'])
+            ).description('Step metadata'))
         .description('List of steps'),
 
     status: Joi
@@ -134,6 +138,32 @@ module.exports = {
     create: Joi.object(mutate(MODEL, [
         'jobId'
     ])).label('Create Build'),
+
+    /**
+     * Properties when getting step data
+     *
+     * @property getStep
+     * @type {Joi}
+     */
+    getStep: Joi.object(mutate(STEP, [
+        'name'
+    ], [
+        'code',
+        'startTime',
+        'endTime'
+    ])).label('Get Step Metadata'),
+
+    /**
+     * Properties when updating step data
+     *
+     * @property updateStep
+     * @type {Joi}
+     */
+    updateStep: Joi.object(mutate(STEP, [], [
+        'code',
+        'startTime',
+        'endTime'
+    ])).label('Update Step Metadata'),
 
     /**
      * List of fields that determine a unique row
