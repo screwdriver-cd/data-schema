@@ -24,7 +24,7 @@ const SCHEMA_LOGLINE = Joi.object().keys({
         .description('Unix timestamp of the log line')
         .example(1472084645.33),
     m: Joi
-        .string()
+        .string().allow('')
         .description('Line Message')
 }).label('Log Line');
 
