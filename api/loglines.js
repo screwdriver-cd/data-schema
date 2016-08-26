@@ -16,7 +16,7 @@ const SCHEMA_QUERY = Joi.object().keys({
 
 const SCHEMA_LOGLINE = Joi.object().keys({
     n: Joi
-        .number().positive().integer()
+        .number().integer()
         .description('Numbered line number since the start of the step')
         .example(15),
     t: Joi
