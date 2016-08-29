@@ -47,13 +47,43 @@ const MODEL = {
     cause: Joi
         .string()
         .description('Reason why this build started')
-        .example('Commit ccc493 was pushed to master'),
+        .example('pull request opened'),
 
     sha: Joi
         .string().hex()
         .length(40)
         .description('SHA this project was built on')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
+
+    startedBy: Joi
+        .string()
+        .description('Identifier of who started this build')
+        .example('stjohnjohnson'),
+
+    startedByUri: Joi
+        .string().uri()
+        .description('Link to more detail about the user')
+        .example('http://github.com/stjohnjohnson'),
+
+    authoredBy: Joi
+        .string()
+        .description('Username of the person who authored this commit')
+        .example('jer'),
+
+    authoredByUri: Joi
+        .string().uri()
+        .description('Link to more detail about the user')
+        .example('http://github.com/jer'),
+
+    commitMessage: Joi
+        .string()
+        .description('Contents of the commit message')
+        .example('Fixing a bug with signing'),
+
+    commitUri: Joi
+        .string().uri()
+        .description('Link to more detail about the commit')
+        .example('https://github.com/screwdriver-cd/screwdriver/commits/271006'),
 
     createTime: Joi
         .string()
@@ -116,7 +146,8 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'jobId', 'number', 'cause', 'createTime', 'status'
     ], [
-        'container', 'parentBuildId', 'sha', 'startTime', 'endTime', 'meta', 'parameters', 'steps'
+        'container', 'parentBuildId', 'sha', 'startTime', 'endTime', 'meta', 'parameters', 'steps',
+        'startedBy', 'startedByUri', 'authoredBy', 'authoredByUri', 'commitMessage', 'commitUri'
     ])).label('Get Build'),
 
     /**
