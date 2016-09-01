@@ -158,7 +158,9 @@ module.exports = {
      */
     update: Joi.object(mutate(MODEL, [
         'status'
-    ], [])).label('Update Build'),
+    ], [
+        'meta'
+    ])).label('Update Build'),
 
     /**
      * Properties for Build that will be passed during a CREATE request
