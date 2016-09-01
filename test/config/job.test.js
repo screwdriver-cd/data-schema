@@ -22,6 +22,12 @@ describe('config job', () => {
         });
     });
 
+    describe('secrets', () => {
+        it('validates secrets', () => {
+            assert.isNull(validate('config.job.secrets.yaml', config.job.secrets).error);
+        });
+    });
+
     describe('environment', () => {
         it('validates environment', () => {
             assert.isNull(validate('config.job.environment.yaml', config.job.environment).error);

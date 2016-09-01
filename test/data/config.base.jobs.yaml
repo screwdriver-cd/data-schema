@@ -15,3 +15,5 @@ publish:
     image: node:4
     steps:
         - publish: npm publish
+    secrets:
+        - NPM_TOKEN
