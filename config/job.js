@@ -19,6 +19,11 @@ const SCHEMA_MATRIX = Joi.object()
             }
         }
     });
+// Secrets must be all uppercase
+const SCHEMA_SECRET = Joi.string().regex(Regex.ENV_NAME).max(25);
+const SCHEMA_SECRETS = Joi.array()
+    .items(SCHEMA_SECRET)
+    .min(0);
 const SCHEMA_ENVIRONMENT = Joi.object()
     // IEEE Std 1003.1-2001
     // Environment names contain uppercase letters, digits, and underscore
@@ -60,7 +65,8 @@ const SCHEMA_JOB = Joi.object()
         steps: SCHEMA_STEPS,
         environment: SCHEMA_ENVIRONMENT,
         matrix: SCHEMA_MATRIX,
-        image: SCHEMA_IMAGE
+        image: SCHEMA_IMAGE,
+        secrets: SCHEMA_SECRETS
     })
     .default({});
 
@@ -70,6 +76,8 @@ const SCHEMA_JOB = Joi.object()
  */
 module.exports = {
     matrix: SCHEMA_MATRIX,
+    secret: SCHEMA_SECRET,
+    secrets: SCHEMA_SECRETS,
     steps: SCHEMA_STEPS,
     step: SCHEMA_STEP,
     environment: SCHEMA_ENVIRONMENT,

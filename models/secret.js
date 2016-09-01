@@ -1,6 +1,7 @@
 'use strict';
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
+const Job = require('../config/job');
 
 const MODEL = {
     id: Joi
@@ -13,13 +14,11 @@ const MODEL = {
         .description('pipeline associated with the secret')
         .example('2d991790bab1ac8576097ca87f170df73410b55c'),
 
-    name: Joi
-        .string().regex(/^[A-Za-z0-9_-]+$/)
-        .max(25)
+    name: Job.secret
         .description('Name of the secret')
         .example('NPM_TOKEN'),
 
-    token: Joi
+    value: Joi
         .string()
         .description('value of the secret')
         .example('2d991790bab1ac8576097ca87f170df73410b55c'),
@@ -45,7 +44,7 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'pipelineId', 'name', 'token', 'allowInPR'
+        'id', 'pipelineId', 'name', 'value', 'allowInPR'
     ], [])).label('Get Secret'),
 
     /**
@@ -55,7 +54,7 @@ module.exports = {
      * @type {Joi}
      */
     create: Joi.object(mutate(MODEL, [
-        'pipelineId', 'name', 'token', 'allowInPR'
+        'pipelineId', 'name', 'value', 'allowInPR'
     ], [])).label('Create Secret'),
 
     /**
@@ -72,7 +71,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['pipleineId', 'name'],
+    keys: ['pipelineId', 'name'],
 
     /**
      * List of all fields in the model
