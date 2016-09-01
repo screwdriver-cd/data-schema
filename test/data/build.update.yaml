@@ -1,2 +1,4 @@
 # Build Update Example
 status: ABORTED
+meta:
+    yes: no
