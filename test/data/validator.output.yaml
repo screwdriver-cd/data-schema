@@ -30,6 +30,8 @@ jobs:
       command: npm run build
     environment:
       NODE_VERSION: 6
+    secrets:
+      - ANOTHER_SECRET
 
   publish:
   - image: node:4
@@ -37,6 +39,8 @@ jobs:
     - name: install
       command: npm publish
     environment: {}
+    secrets:
+      - NPM_TOKEN
 
 workflow:
 - publish

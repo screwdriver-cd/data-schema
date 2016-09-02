@@ -33,6 +33,11 @@ const MODEL = {
         .description('Identifier of the Pipeline')
         .example('2d991790bab1ac8576097ca87f170df73410b55c'),
 
+    isPR: Joi
+        .boolean()
+        .default(false)
+        .description('Is this job a Pull-Request'),
+
     state: Joi
         .string().valid([
             'ENABLED',
@@ -61,7 +66,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'pipelineId', 'name', 'state'
     ], [
-        'description', 'containers', 'permutations'
+        'description', 'containers', 'permutations', 'isPR'
     ])).label('Get Job'),
 
     /**
