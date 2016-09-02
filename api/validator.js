@@ -22,7 +22,8 @@ const SCHEMA_JOB_PERMUTATION = Joi.object()
     .keys({
         image: Job.image,
         commands: SCHEMA_JOB_COMMANDS,
-        environment: Job.environment
+        environment: Job.environment,
+        secrets: Job.secrets
     }).label('Job permutation');
 
 const SCHEMA_JOB_PERMUTATIONS = Joi.array().items(SCHEMA_JOB_PERMUTATION)
