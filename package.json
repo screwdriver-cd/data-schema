@@ -1,6 +1,6 @@
 {
   "name": "screwdriver-data-schema",
-  "version": "10.4.0",
+  "version": "11.0.0",
   "description": "Internal Data Schema of Screwdriver",
   "main": "index.js",
   "scripts": {
