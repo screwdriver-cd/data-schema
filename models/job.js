@@ -15,12 +15,6 @@ const MODEL = {
         .description('Name of the Job')
         .example('main'),
 
-    containers: Joi
-        .array()
-        .items(Joi.string())
-        .description('List of container images')
-        .example(['node:4', 'node:6']),
-
     permutations: validator.jobPermutations,
 
     description: Joi
@@ -61,7 +55,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'pipelineId', 'name', 'state'
     ], [
-        'description', 'containers', 'permutations'
+        'description', 'permutations'
     ])).label('Get Job'),
 
     /**
@@ -103,5 +97,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['pipelineId']
+    indexes: ['pipelineId', 'state']
 };
