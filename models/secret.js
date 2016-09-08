@@ -44,8 +44,8 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'pipelineId', 'name', 'value', 'allowInPR'
-    ], [])).label('Get Secret'),
+        'id', 'pipelineId', 'name', 'allowInPR'
+    ], ['value'])).label('Get Secret'),
 
     /**
      * Properties for secret that will be passed during a CREATE request

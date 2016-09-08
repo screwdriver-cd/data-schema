@@ -10,7 +10,8 @@ const SCHEMA_PARAMS = Joi.object().keys({
 
 const SCHEMA_QUERY = Joi.object().keys({
     from: Joi.number().integer()
-        .min(0).default(0)
+        .min(0)
+        .default(0)
         .description('Starting Line Number')
 }).label('Query Parameters');
 
