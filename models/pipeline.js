@@ -2,6 +2,7 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Regex = require('../config/regex');
+const Workflow = require('../config/workflow');
 
 const MODEL = {
     id: Joi
@@ -27,7 +28,10 @@ const MODEL = {
     admins: Joi
         .object()
         .description('Admins of this Pipeline')
-        .example({ myself: true })
+        .example({ myself: true }),
+
+    workflow: Workflow.workflow
+        .description('Current workflow of the pipeline')
 };
 
 module.exports = {
@@ -48,7 +52,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'scmUrl', 'createTime', 'admins'
     ], [
-        'configUrl'
+        'configUrl', 'workflow'
     ])).label('Get Pipeline'),
 
     /**
