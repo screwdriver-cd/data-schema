@@ -4,3 +4,6 @@ scmUrl: git@github.com:screwdriver-cd/data-model.git#master
 createTime: "2017-04-11"
 admins:
     username: true
+workflow:
+    - main
+    - publish
