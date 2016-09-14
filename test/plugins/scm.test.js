@@ -43,4 +43,14 @@ describe('scm test', () => {
             assert.isNotNull(validate('empty.yaml', scm.getFile).error);
         });
     });
+
+    describe('getRepoId', () => {
+        it('validates', () => {
+            assert.isNull(validate('scm.getRepoId.yaml', scm.getRepoId).error);
+        });
+
+        it('fails', () => {
+            assert.isNotNull(validate('empty.yaml', scm.getRepoId).error);
+        });
+    });
 });
