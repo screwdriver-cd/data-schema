@@ -28,4 +28,10 @@ describe('model commmons', () => {
             assert.isArray(models[model].allKeys);
         });
     });
+
+    it('selected models have rangeKeys defined', () => {
+        const buildModel = models.build;
+
+        assert.strictEqual(buildModel.rangeKey, 'number');
+    });
 });

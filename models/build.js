@@ -207,6 +207,14 @@ module.exports = {
     keys: ['jobId', 'number'],
 
     /**
+     * Primary column to sort queries by.
+     * This defines queries to optionally sort a query result set by build number
+     *
+     * @type {String}
+     */
+    rangeKey: 'number',
+
+    /**
      * List of all fields in the model
      * @property allKeys
      * @type {Array}
