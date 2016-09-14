@@ -31,6 +31,11 @@ const GET_FILE = Joi.object().keys({
     ref: Joi.string().optional()
 }).required();
 
+const GET_REPO_ID = Joi.object().keys({
+    scmUrl,
+    token
+}).required();
+
 module.exports = {
     /**
      * Properties for Scm Base that will be passed for the getPermissions method
@@ -62,5 +67,13 @@ module.exports = {
      * @property getFile
      * @type {Joi}
      */
-    getFile: GET_FILE
+    getFile: GET_FILE,
+
+    /**
+     * Properties for Scm Base that will be passed for the getRepoId  method
+     *
+     * @property getRepoId
+     * @type {Joi}
+     */
+    getRepoId: GET_REPO_ID
 };
