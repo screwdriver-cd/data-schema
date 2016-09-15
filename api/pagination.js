@@ -11,7 +11,13 @@ const MODEL = {
         .number().integer().min(1)
         .max(50)
         .default(50)
-        .description('Count to paginate')
+        .description('Count to paginate'),
+
+    sort: Joi
+        .string().lowercase()
+        .valid(['ascending', 'descending'])
+        .default('descending')
+        .description('Sorting option')
 };
 
 /**

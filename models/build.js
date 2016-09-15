@@ -36,8 +36,8 @@ const MODEL = {
 
     number: Joi
         .number().positive()
-        .description('Incrementing number of a Job')
-        .example(15),
+        .description('Timestamp of create time')
+        .example(1473900790309),
 
     container: Joi
         .string()
