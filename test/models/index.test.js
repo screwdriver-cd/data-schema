@@ -32,6 +32,6 @@ describe('model commmons', () => {
     it('selected models have rangeKeys defined', () => {
         const buildModel = models.build;
 
-        assert.strictEqual(buildModel.rangeKey, 'number');
+        assert.deepEqual(buildModel.rangeKeys, ['number', null]);
     });
 });

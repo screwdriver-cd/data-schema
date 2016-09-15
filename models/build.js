@@ -208,11 +208,13 @@ module.exports = {
 
     /**
      * Primary column to sort queries by.
-     * This defines queries to optionally sort a query result set by build number
+     * This defines queries to optionally sort a query result set by build number.
+     * Each range key matches up with an element in the indexes property
      *
-     * @type {String}
+     * @property rangeKeys
+     * @type {Array}
      */
-    rangeKey: 'number',
+    rangeKeys: ['number', null],
 
     /**
      * List of all fields in the model
