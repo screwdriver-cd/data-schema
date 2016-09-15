@@ -15,13 +15,14 @@ const SCHEMA_DATA = Joi.object().keys({
         data: Joi.object().required()
     }).required()
 });
-const SCHEMA_PAGINATE = Joi.object().keys({
+const SCHEMA_SCAN = Joi.object().keys({
     table,
     params: Joi.object(),
     paginate: Joi.object().keys({
-        count: Joi.number().required(),
-        page: Joi.number().required()
-    }).required()
+        count: Joi.number().integer().positive().required(),
+        page: Joi.number().integer().positive().required()
+    }).required(),
+    sort: Joi.string().lowercase().valid(['ascending', 'descending']).default('descending')
 });
 
 module.exports = {
@@ -63,5 +64,5 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    scan: SCHEMA_PAGINATE
+    scan: SCHEMA_SCAN
 };
