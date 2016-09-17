@@ -34,7 +34,13 @@ const MODEL = {
         ])
         .description('Current state of the Job')
         .example('ENABLED')
-        .default('ENABLED')
+        .default('ENABLED'),
+
+    archived: Joi
+        .boolean()
+        .description('Flag if the job is archived')
+        .example(true)
+        .default(false)
 };
 
 module.exports = {
@@ -55,7 +61,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'pipelineId', 'name', 'state'
     ], [
-        'description', 'permutations'
+        'description', 'permutations', 'archived'
     ])).label('Get Job'),
 
     /**
