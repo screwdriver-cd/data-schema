@@ -5,6 +5,7 @@ const scmUrl = Joi.reach(models.pipeline.base, 'scmUrl').required();
 const token = Joi.reach(models.user.base, 'token').required();
 const sha = Joi.reach(models.build.base, 'sha').required();
 const buildStatus = Joi.reach(models.build.base, 'status').required();
+const jobName = Joi.reach(models.job.base, 'name').optional();
 
 const GET_PERMISSIONS = Joi.object().keys({
     scmUrl,
@@ -21,6 +22,7 @@ const UPDATE_COMMIT_STATUS = Joi.object().keys({
     token,
     sha,
     buildStatus,
+    jobName,
     url: Joi.string().uri().optional()
 }).required();
 
