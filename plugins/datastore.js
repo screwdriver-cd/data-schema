@@ -61,7 +61,7 @@ module.exports = {
     /**
      * Properties for Datastore that will be passed for the SCAN method
      *
-     * @property create
+     * @property scan
      * @type {Joi}
      */
     scan: SCHEMA_SCAN
