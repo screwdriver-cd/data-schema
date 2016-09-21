@@ -77,10 +77,10 @@ module.exports = {
      * @type {Joi}
      */
     create: Joi.object(mutate(MODEL, [
-        'scmUrl',
-        'scmRepo'
+        'scmUrl'
     ], [
-        'configUrl'
+        'configUrl',
+        'scmRepo'
     ])).label('Create Pipeline'),
 
     /**
@@ -89,7 +89,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['scmRepo.id'],
+    keys: ['scmUrl'],
 
     /**
      * List of all fields in the model
