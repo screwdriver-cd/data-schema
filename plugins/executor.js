@@ -13,7 +13,7 @@ const SCHEMA_START = Joi.object().keys({
 const SCHEMA_STOP = Joi.object().keys({
     buildId
 }).required();
-const SCHEMA_STREAM = Joi.object().keys({
+const SCHEMA_STATUS = Joi.object().keys({
     buildId
 }).required();
 
@@ -21,7 +21,7 @@ module.exports = {
     /**
      * Properties for Executor that will be passed for the START method
      *
-     * @property get
+     * @property start
      * @type {Joi}
      */
     start: SCHEMA_START,
@@ -29,16 +29,16 @@ module.exports = {
     /**
      * Properties for Executor that will be passed for the STOP method
      *
-     * @property update
+     * @property stop
      * @type {Joi}
      */
     stop: SCHEMA_STOP,
 
     /**
-     * Properties for Executor that will be passed for the STREAM method
+     * Properties for Executor that will be passed for the STATUS method
      *
-     * @property save
+     * @property status
      * @type {Joi}
      */
-    stream: SCHEMA_STREAM
+    status: SCHEMA_STATUS
 };
