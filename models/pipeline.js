@@ -3,6 +3,7 @@ const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Regex = require('../config/regex');
 const Workflow = require('../config/workflow');
+const Scm = require('../core/scm');
 
 const MODEL = {
     id: Joi
@@ -19,6 +20,8 @@ const MODEL = {
         .string().regex(Regex.SCM_URL)
         .description('Source Code URL for Screwdriver configuration')
         .example('git@github.com:screwdriver-cd/optional-config.git#master'),
+
+    scmRepo: Scm.repo,
 
     createTime: Joi
         .string()
@@ -76,7 +79,8 @@ module.exports = {
     create: Joi.object(mutate(MODEL, [
         'scmUrl'
     ], [
-        'configUrl'
+        'configUrl',
+        'scmRepo'
     ])).label('Create Pipeline'),
 
     /**
