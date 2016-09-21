@@ -1,7 +1,2 @@
 # Pipeline Create Example
 scmUrl: git@github.com:screwdriver-cd/data-model.git#master
-configUrl: git@github.com:screwdriver-cd/sample-config.git#master
-scmRepo:
-    id: github.com:123456:master
-    url: https://github.com/screwdriver-cd/data-model/tree/master
-    name: screwdriver-cd/data-model
