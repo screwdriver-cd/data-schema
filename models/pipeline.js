@@ -16,11 +16,6 @@ const MODEL = {
         .description('Source Code URL for the application')
         .example('git@github.com:screwdriver-cd/data-model.git#master'),
 
-    configUrl: Joi
-        .string().regex(Regex.SCM_URL)
-        .description('Source Code URL for Screwdriver configuration')
-        .example('git@github.com:screwdriver-cd/optional-config.git#master'),
-
     scmRepo: Scm.repo,
 
     createTime: Joi
@@ -55,7 +50,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'scmUrl', 'createTime', 'admins'
     ], [
-        'configUrl', 'workflow'
+        'workflow', 'scmRepo'
     ])).label('Get Pipeline'),
 
     /**
@@ -66,9 +61,7 @@ module.exports = {
      */
     update: Joi.object(mutate(MODEL, [
         'scmUrl'
-    ], [
-        'configUrl'
-    ])).label('Update Pipeline'),
+    ], [])).label('Update Pipeline'),
 
     /**
      * Properties for Pipeline that will be passed during a CREATE request
@@ -78,10 +71,7 @@ module.exports = {
      */
     create: Joi.object(mutate(MODEL, [
         'scmUrl'
-    ], [
-        'configUrl',
-        'scmRepo'
-    ])).label('Create Pipeline'),
+    ], [])).label('Create Pipeline'),
 
     /**
      * List of fields that determine a unique row
