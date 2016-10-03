@@ -30,13 +30,13 @@ describe('model secret', () => {
         });
     });
 
-    describe('remove', () => {
-        it('validates the remove', () => {
-            assert.isNull(validate('secret.remove.yaml', models.secret.remove).error);
+    describe('update', () => {
+        it('validates the update', () => {
+            assert.isNull(validate('secret.update.yaml', models.secret.update).error);
         });
 
-        it('fails the remove', () => {
-            assert.isNotNull(validate('empty.yaml', models.secret.remove).error);
+        it('fails the update', () => {
+            assert.isNotNull(validate('empty.yaml', models.secret.update).error);
         });
     });
 });

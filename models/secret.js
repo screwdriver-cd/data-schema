@@ -58,12 +58,12 @@ module.exports = {
     ], [])).label('Create Secret'),
 
     /**
-     * Properties for secret that will be passed during a DELETE request
+     * Properties for secret that will be passed during a UPDATE request
      *
-     * @property remove
+     * @property update
      * @type {Joi}
      */
-    remove: Joi.object(mutate(MODEL, ['id'], [])).label('Remove Secret'),
+    update: Joi.object(mutate(MODEL, [], ['value', 'allowInPR'])).label('Update Secret'),
 
     /**
      * List of fields that determine a unique row
