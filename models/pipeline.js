@@ -79,7 +79,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['scmRepo.id'],
+    keys: ['scmUrl'],
 
     /**
      * List of all fields in the model
