@@ -1,5 +1,5 @@
 # Screwdriver Data Schema
-[![Version][npm-image]][npm-url] ![Downloads][downloads-image] [![Build Status][wercker-image]][wercker-url] [![Open Issues][issues-image]][issues-url] [![Dependency Status][daviddm-image]][daviddm-url] ![License][license-image]
+[![Version][npm-image]][npm-url] ![Downloads][downloads-image] [![Build Status][status-image]][status-url] [![Open Issues][issues-image]][issues-url] [![Dependency Status][daviddm-image]][daviddm-url] ![License][license-image]
 
 > Internal data schema of Screwdriver
 
@@ -50,7 +50,7 @@ Code licensed under the BSD 3-Clause license. See LICENSE file for terms.
 [license-image]: https://img.shields.io/npm/l/screwdriver-data-schema.svg
 [issues-image]: https://img.shields.io/github/issues/screwdriver-cd/data-schema.svg
 [issues-url]: https://github.com/screwdriver-cd/data-schema/issues
-[wercker-image]: https://app.wercker.com/status/5af7b45967fcef5a8769b23c0f150040
-[wercker-url]: https://app.wercker.com/project/bykey/5af7b45967fcef5a8769b23c0f150040
+[status-image]: https://cd.screwdriver.cd/pipelines/f61758c59fad9faa4e84ff0c8e4136ae9b87e518/badge
+[status-url]: https://cd.screwdriver.cd/pipelines/f61758c59fad9faa4e84ff0c8e4136ae9b87e518
 [daviddm-image]: https://david-dm.org/screwdriver-cd/data-schema.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/screwdriver-cd/data-schema
