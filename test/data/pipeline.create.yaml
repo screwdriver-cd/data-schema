@@ -1,2 +1,2 @@
 # Pipeline Create Example
-scmUrl: git@github.com:screwdriver-cd/data-model.git#master
+checkoutUrl: git@github.com:screwdriver-cd/data-model.git#master

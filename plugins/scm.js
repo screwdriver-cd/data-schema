@@ -1,24 +1,26 @@
 'use strict';
 const Joi = require('joi');
 const models = require('../models');
-const scmUrl = Joi.reach(models.pipeline.base, 'scmUrl').required();
+const scmUri = Joi.reach(models.pipeline.base, 'scmUri').required();
 const token = Joi.reach(models.user.base, 'token').required();
 const sha = Joi.reach(models.build.base, 'sha').required();
 const buildStatus = Joi.reach(models.build.base, 'status').required();
 const jobName = Joi.reach(models.job.base, 'name').optional();
+const username = Joi.reach(models.user.base, 'username').required();
+const checkoutUrl = Joi.reach(models.pipeline.base, 'checkoutUrl').required();
 
 const GET_PERMISSIONS = Joi.object().keys({
-    scmUrl,
+    scmUri,
     token
 }).required();
 
 const GET_COMMIT_SHA = Joi.object().keys({
-    scmUrl,
+    scmUri,
     token
 }).required();
 
 const UPDATE_COMMIT_STATUS = Joi.object().keys({
-    scmUrl,
+    scmUri,
     token,
     sha,
     buildStatus,
@@ -27,14 +29,31 @@ const UPDATE_COMMIT_STATUS = Joi.object().keys({
 }).required();
 
 const GET_FILE = Joi.object().keys({
-    scmUrl,
+    scmUri,
     token,
     path: Joi.string().required(),
     ref: Joi.string().optional()
 }).required();
 
-const GET_REPO_ID = Joi.object().keys({
-    scmUrl,
+const DECORATE_URL = Joi.object().keys({
+    scmUri,
+    token
+}).required();
+
+const DECORATE_COMMIT = Joi.object().keys({
+    scmUri,
+    sha,
+    token
+}).required();
+
+const DECORATE_AUTHOR = Joi.object().keys({
+    scmUri,
+    username,
+    token
+}).required();
+
+const PARSE_URL = Joi.object().keys({
+    checkoutUrl,
     token
 }).required();
 
@@ -72,10 +91,34 @@ module.exports = {
     getFile: GET_FILE,
 
     /**
-     * Properties for Scm Base that will be passed for the getRepoId  method
+     * Properties for Scm Base that will be passed for the decorateUrl method
      *
-     * @property getRepoId
+     * @property decorateUrl
      * @type {Joi}
      */
-    getRepoId: GET_REPO_ID
+    decorateUrl: DECORATE_URL,
+
+    /**
+     * Properties for Scm Base that will be passed for the decorateCommit method
+     *
+     * @property decorateCommit
+     * @type {Joi}
+     */
+    decorateCommit: DECORATE_COMMIT,
+
+    /**
+     * Properties for Scm Base that will be passed for the decorateAuthor method
+     *
+     * @property decorateAuthor
+     * @type {Joi}
+     */
+    decorateAuthor: DECORATE_AUTHOR,
+
+    /**
+     * Properties for Scm Base that will be passed for the parseUrl method
+     *
+     * @property parseUrl
+     * @type {Joi}
+     */
+    parseUrl: PARSE_URL
 };

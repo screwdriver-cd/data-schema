@@ -33,4 +33,14 @@ describe('scm core', () => {
             assert.isNotNull(validate('empty.yaml', core.scm.user).error);
         });
     });
+
+    describe('hook', () => {
+        it('validates the hook', () => {
+            assert.isNull(validate('scm.hook.yaml', core.scm.hook).error);
+        });
+
+        it('fails the commit', () => {
+            assert.isNotNull(validate('empty.yaml', core.scm.hook).error);
+        });
+    });
 });

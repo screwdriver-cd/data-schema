@@ -12,6 +12,7 @@ It's broken down into three sections:
  - `config` - Screwdriver.yaml definitions
  - `models` - Internal data resources
  - `plugins` - Plugins (datastore, executor, etc.)
+ - `core` - SCM plugin related output structure
 
 ## Models
 

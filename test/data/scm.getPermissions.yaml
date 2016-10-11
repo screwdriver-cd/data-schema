@@ -1,2 +1,2 @@
-scmUrl: 'git@github.com:screwdriver-cd/hashr.git#master'
+scmUri: github.com:12345678:master
 token: 'thisisatokenthingy'
