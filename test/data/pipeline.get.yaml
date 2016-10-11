@@ -1,6 +1,6 @@
 # Pipeline Get Example
 id: 2d991790bab1ac8576097ca87f170df73410b55c
-scmUrl: git@github.com:screwdriver-cd/data-model.git#master
+scmUri: github.com:12345678:master
 createTime: "2017-04-11"
 admins:
     username: true
@@ -8,6 +8,6 @@ workflow:
     - main
     - publish
 scmRepo:
-    id: github.com:123456:master
-    url: https://github.com/screwdriver-cd/data-model/tree/master
-    name: screwdriver-cd/data-model
+    name: screwdriver-cd/screwdriver
+    branch: master
+    url: https://github.com/screwdriver-cd/screwdriver/tree/master

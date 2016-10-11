@@ -11,10 +11,16 @@ const MODEL = {
         .description('Identifier of this Pipeline')
         .example('2d991790bab1ac8576097ca87f170df73410b55c'),
 
-    scmUrl: Joi
-        .string().regex(Regex.SCM_URL)
-        .description('Source Code URL for the application')
-        .example('git@github.com:screwdriver-cd/data-model.git#master'),
+    checkoutUrl: Joi
+        .string().regex(Regex.CHECKOUT_URL)
+        .description('Checkout url for the application')
+        .example('git@github.com:screwdriver-cd/data-schema.git#master')
+        .example('https://github.com/screwdriver-cd/data-schema.git#master'),
+
+    scmUri: Joi
+        .string().regex(Regex.SCM_URI)
+        .description('Unique identifier for the application')
+        .example('github.com:123456:master'),
 
     scmRepo: Scm.repo,
 
@@ -48,7 +54,7 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'scmUrl', 'createTime', 'admins'
+        'id', 'scmUri', 'createTime', 'admins'
     ], [
         'workflow', 'scmRepo'
     ])).label('Get Pipeline'),
@@ -60,7 +66,7 @@ module.exports = {
      * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [
-        'scmUrl'
+        'checkoutUrl'
     ], [])).label('Update Pipeline'),
 
     /**
@@ -70,7 +76,7 @@ module.exports = {
      * @type {Joi}
      */
     create: Joi.object(mutate(MODEL, [
-        'scmUrl'
+        'checkoutUrl'
     ], [])).label('Create Pipeline'),
 
     /**
@@ -79,7 +85,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['scmUrl'],
+    keys: ['scmUri'],
 
     /**
      * List of all fields in the model
@@ -102,5 +108,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['scmUrl']
+    indexes: ['scmUri']
 };

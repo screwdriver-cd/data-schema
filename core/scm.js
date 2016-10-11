@@ -1,12 +1,8 @@
 'use strict';
 const Joi = require('joi');
+const Regex = require('../config/regex');
 
 const SCHEMA_USER = Joi.object().keys({
-    id: Joi.string()
-        .required()
-        .label('Unique Identifier')
-        .example('github.com:622065'),
-
     url: Joi.string()
         .uri()
         .required()
@@ -16,7 +12,12 @@ const SCHEMA_USER = Joi.object().keys({
     name: Joi.string()
         .required()
         .label('Display Name')
-        .example('stjohnjohnson'),
+        .example('Dao Lam'),
+
+    username: Joi.string()
+        .required()
+        .label('Username')
+        .example('d2lam'),
 
     avatar: Joi.string()
         .uri()
@@ -26,15 +27,15 @@ const SCHEMA_USER = Joi.object().keys({
 }).label('SCM User');
 
 const SCHEMA_REPO = Joi.object().keys({
-    id: Joi.string()
-        .required()
-        .label('Unique Identifier')
-        .example('github.com:123456:master'),
-
     name: Joi.string()
         .required()
-        .label('Display name')
+        .label('Organization and repository name')
         .example('screwdriver-cd/screwdriver'),
+
+    branch: Joi.string()
+        .required()
+        .label('Branch of the repository')
+        .example('master'),
 
     url: Joi.string()
         .uri()
@@ -44,13 +45,6 @@ const SCHEMA_REPO = Joi.object().keys({
 }).label('SCM Repository');
 
 const SCHEMA_COMMIT = Joi.object().keys({
-    sha: Joi.string()
-        .hex()
-        .length(40)
-        .required()
-        .label('SHA1 identifier for the commit')
-        .example('8843d7f92416211de9ebb963ff4ce28125932878'),
-
     message: Joi.string()
         .max(100)
         .required()
@@ -68,8 +62,53 @@ const SCHEMA_COMMIT = Joi.object().keys({
         .example('https://github.com/scredriver-cd/screwdriver/commit/8843d7f92416211de')
 }).label('SCM Commit');
 
+const SCHEMA_HOOK = Joi.object().keys({
+    type: Joi.string()
+        .valid(['pr', 'repo'])
+        .required()
+        .label('Type of the event'),
+
+    action: Joi.alternatives()
+        .when('type', { is: 'pr', then: Joi.valid(['opened', 'closed', 'synchronized']) })
+        .when('type', { is: 'repo', then: Joi.valid('push') })
+        .required()
+        .label('Action of the event'),
+
+    prNum: Joi.number()
+        .integer()
+        .positive()
+        .optional()
+        .label('PR number'),
+
+    checkoutUrl: Joi
+        .string().regex(Regex.CHECKOUT_URL)
+        .required()
+        .label('Checkout URL for the application')
+        .example('git@github.com:screwdriver-cd/data-schema.git#master')
+        .example('https://github.com/screwdriver-cd/data-schema.git#master'),
+
+    branch: Joi.string()
+        .required()
+        .label('Branch of the repository'),
+
+    prRef: Joi.string()
+        .optional()
+        .label('PR reference of the repository'),
+
+    sha: Joi.string().hex()
+        .required()
+        .label('Commit SHA')
+        .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
+
+    username: Joi.string()
+        .required()
+        .label('Username')
+        .example('d2lam')
+}).label('SCM Hook');
+
 module.exports = {
     commit: SCHEMA_COMMIT,
     repo: SCHEMA_REPO,
-    user: SCHEMA_USER
+    user: SCHEMA_USER,
+    hook: SCHEMA_HOOK
 };

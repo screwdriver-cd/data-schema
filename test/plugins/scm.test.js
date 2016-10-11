@@ -44,13 +44,43 @@ describe('scm test', () => {
         });
     });
 
-    describe('getRepoId', () => {
+    describe('decorateUrl', () => {
         it('validates', () => {
-            assert.isNull(validate('scm.getRepoId.yaml', scm.getRepoId).error);
+            assert.isNull(validate('scm.decorateUrl.yaml', scm.decorateUrl).error);
         });
 
         it('fails', () => {
-            assert.isNotNull(validate('empty.yaml', scm.getRepoId).error);
+            assert.isNotNull(validate('empty.yaml', scm.decorateUrl).error);
+        });
+    });
+
+    describe('decorateCommit', () => {
+        it('validates', () => {
+            assert.isNull(validate('scm.decorateCommit.yaml', scm.decorateCommit).error);
+        });
+
+        it('fails', () => {
+            assert.isNotNull(validate('empty.yaml', scm.decorateCommit).error);
+        });
+    });
+
+    describe('decorateAuthor', () => {
+        it('validates', () => {
+            assert.isNull(validate('scm.decorateAuthor.yaml', scm.decorateAuthor).error);
+        });
+
+        it('fails', () => {
+            assert.isNotNull(validate('empty.yaml', scm.decorateAuthor).error);
+        });
+    });
+
+    describe('parseUrl', () => {
+        it('validates', () => {
+            assert.isNull(validate('scm.parseUrl.yaml', scm.parseUrl).error);
+        });
+
+        it('fails', () => {
+            assert.isNotNull(validate('empty.yaml', scm.parseUrl).error);
         });
     });
 });
