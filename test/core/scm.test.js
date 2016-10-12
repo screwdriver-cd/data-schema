@@ -1,4 +1,5 @@
 'use strict';
+
 const assert = require('chai').assert;
 const core = require('../../').core;
 const validate = require('../helper').validate;

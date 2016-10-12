@@ -1,4 +1,5 @@
 'use strict';
+
 const Joi = require('joi');
 const models = require('../models');
 const scmUri = Joi.reach(models.pipeline.base, 'scmUri').required();
@@ -47,7 +48,6 @@ const DECORATE_COMMIT = Joi.object().keys({
 }).required();
 
 const DECORATE_AUTHOR = Joi.object().keys({
-    scmUri,
     username,
     token
 }).required();

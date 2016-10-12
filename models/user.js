@@ -1,4 +1,5 @@
 'use strict';
+
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 
