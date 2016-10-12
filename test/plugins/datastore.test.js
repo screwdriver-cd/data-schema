@@ -1,4 +1,5 @@
 'use strict';
+
 const assert = require('chai').assert;
 const datastore = require('../../plugins/datastore');
 const validate = require('../helper').validate;

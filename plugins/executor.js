@@ -1,4 +1,5 @@
 'use strict';
+
 const Joi = require('joi');
 const models = require('../models');
 const buildId = Joi.reach(models.build.base, 'id').required();

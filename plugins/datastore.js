@@ -1,4 +1,5 @@
 'use strict';
+
 const Joi = require('joi');
 const table = Joi.string().required();
 const id = Joi.string().hex().required();

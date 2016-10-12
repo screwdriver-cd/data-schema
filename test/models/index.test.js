@@ -1,4 +1,5 @@
 'use strict';
+
 const assert = require('chai').assert;
 const models = require('../../').models;
 

@@ -1,4 +1,5 @@
 'use strict';
+
 const assert = require('chai').assert;
 const executor = require('../../plugins/executor');
 const validate = require('../helper').validate;
