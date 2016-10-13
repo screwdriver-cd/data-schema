@@ -36,13 +36,98 @@ describe('config regex', () => {
     });
 
     describe('checkoutUrl', () => {
-        it('checks good checkout Url', () => {
-            assert.isTrue(
-                config.regex.CHECKOUT_URL.test('https://github.com/screwdriver-cd/data-schema.git'
-            ));
-            assert.isTrue(
-                config.regex.CHECKOUT_URL.test('git@github.com:screwdriver-cd/data-schema.git'
-            ));
+        describe('checks good checkout Url', () => {
+            const tests = [
+                {
+                    url: 'https://github.com/screwdriver-cd/data-schema.git',
+                    match: [
+                        'https://github.com/screwdriver-cd/data-schema.git',
+                        'github.com',
+                        'screwdriver-cd',
+                        'data-schema',
+                        null
+                    ]
+                },
+                {
+                    url: 'https://github.com/screwdriver-cd/data-schema.git#foobar',
+                    match: [
+                        'https://github.com/screwdriver-cd/data-schema.git#foobar',
+                        'github.com',
+                        'screwdriver-cd',
+                        'data-schema',
+                        '#foobar'
+                    ]
+                },
+                {
+                    url: 'git@github.com:screwdriver-cd/data-schema.git',
+                    match: [
+                        'git@github.com:screwdriver-cd/data-schema.git',
+                        'github.com',
+                        'screwdriver-cd',
+                        'data-schema',
+                        null
+                    ]
+                },
+                {
+                    url: 'git@github.com:screwdriver-cd/data-schema.git#foobar',
+                    match: [
+                        'git@github.com:screwdriver-cd/data-schema.git#foobar',
+                        'github.com',
+                        'screwdriver-cd',
+                        'data-schema',
+                        '#foobar'
+                    ]
+                },
+                {
+                    url: 'https://screwdriver-cd@bitbucket.org/screwdriver-cd/data-schema',
+                    match: [
+                        'https://screwdriver-cd@bitbucket.org/screwdriver-cd/data-schema',
+                        'bitbucket.org',
+                        'screwdriver-cd',
+                        'data-schema',
+                        null
+                    ]
+                },
+                {
+                    url: 'https://screwdriver-cd@bitbucket.org/screwdriver-cd/data-schema#banana',
+                    match: [
+                        'https://screwdriver-cd@bitbucket.org/screwdriver-cd/data-schema#banana',
+                        'bitbucket.org',
+                        'screwdriver-cd',
+                        'data-schema',
+                        '#banana'
+                    ]
+                },
+                {
+                    url: 'git@bitbucket.org:screwdriver-cd/data-schema',
+                    match: [
+                        'git@bitbucket.org:screwdriver-cd/data-schema',
+                        'bitbucket.org',
+                        'screwdriver-cd',
+                        'data-schema',
+                        null
+                    ]
+                },
+                {
+                    url: 'git@bitbucket.org:screwdriver-cd/data-schema#banana',
+                    match: [
+                        'git@bitbucket.org:screwdriver-cd/data-schema#banana',
+                        'bitbucket.org',
+                        'screwdriver-cd',
+                        'data-schema',
+                        '#banana'
+                    ]
+                }
+            ];
+
+            tests.forEach((test) => {
+                it(`correctly validates ${test.url}`, () => {
+                    assert.deepEqual(
+                        JSON.stringify(test.match, null, 4),
+                        JSON.stringify(config.regex.CHECKOUT_URL.exec(test.url), null, 4)
+                    );
+                });
+            });
         });
 
         it('fails on bad checkout Url', () => {
