@@ -1,2 +1,0 @@
-# Pipeline Update Example
-checkoutUrl: git@github.com:screwdriver-cd/data-model.git#master

@@ -6,17 +6,20 @@ const Regex = require('../config/regex');
 const Workflow = require('../config/workflow');
 const Scm = require('../core/scm');
 
+const CHECKOUT_URL = {
+    checkoutUrl: Joi
+        .string().regex(Regex.CHECKOUT_URL)
+        .description('Checkout url for the application')
+        .example('git@github.com:screwdriver-cd/data-schema.git#master')
+        .example('https://github.com/screwdriver-cd/data-schema.git#master')
+        .required()
+};
+
 const MODEL = {
     id: Joi
         .string().hex().length(40)
         .description('Identifier of this Pipeline')
         .example('2d991790bab1ac8576097ca87f170df73410b55c'),
-
-    checkoutUrl: Joi
-        .string().regex(Regex.CHECKOUT_URL)
-        .description('Checkout url for the application')
-        .example('git@github.com:screwdriver-cd/data-schema.git#master')
-        .example('https://github.com/screwdriver-cd/data-schema.git#master'),
 
     scmUri: Joi
         .string().regex(Regex.SCM_URI)
@@ -61,24 +64,12 @@ module.exports = {
     ])).label('Get Pipeline'),
 
     /**
-     * Properties for Pipeline that will be passed during an UPDATE request
-     *
-     * @property update
-     * @type {Joi}
-     */
-    update: Joi.object(mutate(MODEL, [
-        'checkoutUrl'
-    ], [])).label('Update Pipeline'),
-
-    /**
      * Properties for Pipeline that will be passed during a CREATE request
      *
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(mutate(MODEL, [
-        'checkoutUrl'
-    ], [])).label('Create Pipeline'),
+    create: Joi.object(CHECKOUT_URL).label('Create Pipeline'),
 
     /**
      * List of fields that determine a unique row
