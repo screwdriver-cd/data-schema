@@ -13,8 +13,9 @@ module.exports = {
     // Environment names contain uppercase letters, digits, and underscore
     // They cannot start with digits
     ENV_NAME: /^[A-Z_][A-Z0-9_]*$/,
-    // Repo checkout url. For example: https://github.com/screwdriver-cd/data-schema.git or git@github.com:screwdriver-cd/data-schema.git
-    CHECKOUT_URL: /^(https:\/\/([^\/]+)\/|git@([^:]+):)([^\/]+)\/(.+?)\.git(#.+)?$/,
+    // Repo checkout url. For example: https://github.com/screwdriver-cd/data-schema.git#branchName or git@github.com:screwdriver-cd/data-schema.git
+    // eslint-disable-next-line max-len
+    CHECKOUT_URL: /^(?:(?:https?|git):\/\/)?(?:[^@]+@)?([^\/:]+)(?:\/|:)([^\/]+)\/([^.#]+)(?:\.git)?(#.+)?$/,
     // scmUri. For example: github.com:abc-123:master or bitbucket.org:{123}:master
     SCM_URI: /^([^:]+):(\{?)([\w-]+)(\}?):(.+)$/
 };

@@ -47,7 +47,7 @@ describe('config regex', () => {
 
         it('fails on bad checkout Url', () => {
             assert.isFalse(
-                config.regex.CHECKOUT_URL.test('https://github.com/screwdriver-cd/data-schema'));
+                config.regex.CHECKOUT_URL.test('https://github.com/screwdriver-cd/.git'));
             assert.isFalse(
                 config.regex.CHECKOUT_URL.test('git@screwdriver-cd/data-schema.git'));
         });
