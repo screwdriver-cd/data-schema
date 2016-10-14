@@ -144,12 +144,13 @@ describe('config regex', () => {
                 config.regex.SCM_URI.test('github.com:abc-123:master'
             ));
             assert.isTrue(
-                config.regex.SCM_URI.test('bitbucket.org:{123}:master'
+                config.regex.SCM_URI.test('bitbucket.org:d2lam/{123}:master'
             ));
         });
 
         it('fails on bad scmUri', () => {
             assert.isFalse(config.regex.SCM_URI.test('github.com:master'));
+            assert.isFalse(config.regex.SCM_URI.test('github.com:master:a:b'));
             assert.isFalse(config.regex.SCM_URI.test('bitbucket.org:{123}'));
         });
     });
