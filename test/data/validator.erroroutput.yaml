@@ -1,0 +1,12 @@
+jobs:
+  main:
+  - image: alpine
+    commands:
+      - name: config-parse-error
+        command: echo "something went wrong"; exit 1
+
+workflow:
+- main
+
+errors:
+- something went wrong

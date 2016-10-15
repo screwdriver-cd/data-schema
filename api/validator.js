@@ -42,7 +42,8 @@ const SCHEMA_JOBS = Joi.object()
 const SCHEMA_OUTPUT = Joi.object()
     .keys({
         jobs: SCHEMA_JOBS,
-        workflow: Workflow.workflow
+        workflow: Workflow.workflow,
+        errors: Joi.array().items(Joi.string()).optional()
     })
     .label('Execution information');
 
