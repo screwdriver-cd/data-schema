@@ -47,7 +47,6 @@ const SCHEMA_REPO = Joi.object().keys({
 
 const SCHEMA_COMMIT = Joi.object().keys({
     message: Joi.string()
-        .max(100)
         .required()
         .label('Commit message')
         .example('Fixing a bug with signing'),
