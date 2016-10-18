@@ -15,5 +15,9 @@ describe('api validator', () => {
         it('validates basic output', () => {
             assert.isNull(validate('validator.output.yaml', api.validator.output).error);
         });
+
+        it('validates basic output with errors', () => {
+            assert.isNull(validate('validator.erroroutput.yaml', api.validator.output).error);
+        });
     });
 });
