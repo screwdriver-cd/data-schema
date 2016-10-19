@@ -26,7 +26,7 @@ const UPDATE_COMMIT_STATUS = Joi.object().keys({
     sha,
     buildStatus,
     jobName,
-    url: Joi.string().uri().optional()
+    url: Joi.string().uri().required()
 }).required();
 
 const GET_FILE = Joi.object().keys({
