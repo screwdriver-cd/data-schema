@@ -36,12 +36,6 @@ const GET_FILE = Joi.object().keys({
     ref: Joi.string().optional()
 }).required();
 
-const GET_FILE_REF = Joi.object().keys({
-    token,
-    path: Joi.string().required(),
-    ref: Joi.string().required()
-}).required();
-
 const DECORATE_URL = Joi.object().keys({
     scmUri,
     token
@@ -95,14 +89,6 @@ module.exports = {
      * @type {Joi}
      */
     getFile: GET_FILE,
-
-    /**
-     * Properties for Scm Base that will be passed for the getFile method when there is no scmUri
-     *
-     * @property getFileRef
-     * @type {Joi}
-     */
-    getFileRef: GET_FILE_REF,
 
     /**
      * Properties for Scm Base that will be passed for the decorateUrl method
