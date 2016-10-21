@@ -45,16 +45,6 @@ describe('scm test', () => {
         });
     });
 
-    describe('getFileRef', () => {
-        it('validates', () => {
-            assert.isNull(validate('scm.getFileRef.yaml', scm.getFileRef).error);
-        });
-
-        it('fails', () => {
-            assert.isNotNull(validate('empty.yaml', scm.getFileRef).error);
-        });
-    });
-
     describe('decorateUrl', () => {
         it('validates', () => {
             assert.isNull(validate('scm.decorateUrl.yaml', scm.decorateUrl).error);

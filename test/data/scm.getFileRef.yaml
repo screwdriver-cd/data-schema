@@ -1,3 +1,0 @@
-token: thisisatokenthingy
-path: screwdriver.yaml
-ref: git@github.com:screwdriver-cd-test/functional-git.git#pull/453/merge
