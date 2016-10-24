@@ -68,6 +68,10 @@ const SCHEMA_HOOK = Joi.object().keys({
         .required()
         .label('Type of the event'),
 
+    hookId: Joi.string()
+        .required()
+        .label('Uuid of the event'),
+
     action: Joi.alternatives()
         .when('type', { is: 'pr', then: Joi.valid(['opened', 'closed', 'synchronized']) })
         .when('type', { is: 'repo', then: Joi.valid('push') })

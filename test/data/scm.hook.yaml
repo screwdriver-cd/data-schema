@@ -1,5 +1,6 @@
 # SCM Hook example
 type: pr
+hookId: 81e6bd80-9a2c-11e6-939d-beaa5d9adaf3
 action: opened
 prNum: 123
 checkoutUrl: git@github.com:screwdriver-cd/data-model.git#master
