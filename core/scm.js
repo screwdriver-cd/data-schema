@@ -64,7 +64,7 @@ const SCHEMA_COMMIT = Joi.object().keys({
 
 const SCHEMA_HOOK = Joi.object().keys({
     type: Joi.string()
-        .valid(['pr', 'repo'])
+        .valid(['pr', 'repo', 'ping'])
         .required()
         .label('Type of the event'),
 
@@ -72,10 +72,11 @@ const SCHEMA_HOOK = Joi.object().keys({
         .required()
         .label('Uuid of the event'),
 
-    action: Joi.alternatives()
-        .when('type', { is: 'pr', then: Joi.valid(['opened', 'closed', 'synchronized']) })
+    action: Joi.string()
+        .when('type', { is: 'pr',
+            then: Joi.valid(['opened', 'reopened', 'closed', 'synchronized']) })
         .when('type', { is: 'repo', then: Joi.valid('push') })
-        .required()
+        .when('type', { is: 'ping', then: Joi.optional(), otherwise: Joi.required() })
         .label('Action of the event'),
 
     prNum: Joi.number()
@@ -92,7 +93,7 @@ const SCHEMA_HOOK = Joi.object().keys({
         .example('https://github.com/screwdriver-cd/data-schema.git#master'),
 
     branch: Joi.string()
-        .required()
+        .when('type', { is: 'ping', then: Joi.optional(), otherwise: Joi.required() })
         .label('Branch of the repository'),
 
     prRef: Joi.string()
@@ -100,7 +101,7 @@ const SCHEMA_HOOK = Joi.object().keys({
         .label('PR reference of the repository'),
 
     sha: Joi.string().hex()
-        .required()
+        .when('type', { is: 'ping', then: Joi.optional(), otherwise: Joi.required() })
         .label('Commit SHA')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
 
