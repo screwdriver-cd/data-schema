@@ -5,6 +5,7 @@ const models = require('../../').models;
 
 describe('model commmons', () => {
     const modelsToCheck = [
+        'event',
         'pipeline',
         'build',
         'job',
