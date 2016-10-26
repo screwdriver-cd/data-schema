@@ -1,0 +1,5 @@
+# SCM Hook example
+type: ping
+hookId: 81e6bd80-9a2c-11e6-939d-beaa5d9adaf3
+checkoutUrl: git@github.com:screwdriver-cd/data-model.git#master
+username: stjohnjohnson

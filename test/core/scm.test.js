@@ -36,8 +36,16 @@ describe('scm core', () => {
     });
 
     describe('hook', () => {
-        it('validates the hook', () => {
-            assert.isNull(validate('scm.hook.yaml', core.scm.hook).error);
+        it('validates the pull request hook', () => {
+            assert.isNull(validate('scm.hook.pr.yaml', core.scm.hook).error);
+        });
+
+        it('validates the push hook', () => {
+            assert.isNull(validate('scm.hook.push.yaml', core.scm.hook).error);
+        });
+
+        it('validates the ping hook', () => {
+            assert.isNull(validate('scm.hook.ping.yaml', core.scm.hook).error);
         });
 
         it('fails the commit', () => {
