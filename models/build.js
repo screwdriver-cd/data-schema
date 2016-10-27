@@ -26,9 +26,14 @@ const MODEL = {
         .description('Identifier of this build')
         .example('4b8d9b530d2e5e297b4f470d5b0a6e1310d29c5e'),
 
+    eventId: Joi
+        .string().hex().length(40)
+        .description('Identifier of the event')
+        .example('50dc14f719cdc2c9cb1fb0e49dd2acc4cf6189a0'),
+
     jobId: Joi
         .string().hex().length(40)
-        .description('Identifier of the Job')
+        .description('Identifier of the job')
         .example('50dc14f719cdc2c9cb1fb0e49dd2acc4cf6189a0'),
 
     parentBuildId: Joi
@@ -117,7 +122,7 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'jobId', 'number', 'cause', 'createTime', 'status'
+        'id', 'eventId', 'jobId', 'number', 'cause', 'createTime', 'status'
     ], [
         'container', 'parentBuildId', 'sha', 'startTime', 'endTime', 'meta', 'parameters', 'steps',
         'commit'
