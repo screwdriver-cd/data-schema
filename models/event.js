@@ -41,6 +41,13 @@ const MODEL = {
         .description('Current status of the event')
         .example('SUCCESS')
         .default('RUNNING'),
+    type: Joi
+        .string().valid([
+            'pr',
+            'pipeline'
+        ])
+        .description('Type of the event')
+        .example('pr'),
     workflow: Workflow.workflow
         .description('Workflow of the associated pipeline')
         .example(['main', 'publish', 'deploy'])
@@ -69,7 +76,7 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'status', 'workflow'
+        'id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'status', 'type', 'workflow'
     ], [
         'causeMessage'
     ])).label('Get Event'),
@@ -80,7 +87,7 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['pipelineId'],
+    indexes: ['pipelineId', 'type'],
 
     /**
      * List of fields that determine a unique row
@@ -89,6 +96,16 @@ module.exports = {
      * @type {Array}
      */
     keys: ['sha', 'createTime'],
+
+    /**
+     * Primary column to sort queries by.
+     * This defines queries to optionally sort a query result set by createTime.
+     * Each range key matches up with an element in the indexes property
+     *
+     * @property rangeKeys
+     * @type {Array}
+     */
+    rangeKeys: ['createTime', null],
 
     /**
      * Tablename to be used in the datastore

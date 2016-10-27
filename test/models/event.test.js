@@ -61,12 +61,27 @@ describe('model event', () => {
     describe('indexes', () => {
         it('defines the correct indexes', () => {
             const expected = [
-                'pipelineId'
+                'pipelineId',
+                'type'
             ];
             const indexes = models.event.indexes;
 
             expected.forEach((indexName) => {
                 assert.include(indexes, indexName, `Index name ${indexName} not included`);
+            });
+        });
+    });
+
+    describe('rangeKeys', () => {
+        it('defines the correct rangeKeys', () => {
+            const expected = [
+                'createTime',
+                null
+            ];
+            const rangeKeys = models.event.rangeKeys;
+
+            expected.forEach((keyName) => {
+                assert.include(rangeKeys, keyName, `RangeKey name ${keyName} not included`);
             });
         });
     });
