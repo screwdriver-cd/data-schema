@@ -31,16 +31,6 @@ const MODEL = {
         .string().hex()
         .description('SHA this project was built on')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
-    status: Joi
-        .string().valid([
-            'SUCCESS',
-            'FAILURE',
-            'ABORTED',
-            'RUNNING'
-        ])
-        .description('Current status of the event')
-        .example('SUCCESS')
-        .default('RUNNING'),
     type: Joi
         .string().valid([
             'pr',
@@ -76,7 +66,7 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'status', 'type', 'workflow'
+        'id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'type', 'workflow'
     ], [
         'causeMessage'
     ])).label('Get Event'),
