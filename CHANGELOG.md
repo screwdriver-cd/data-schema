@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 15.0.0
+## 15.0.1
 
-Breaking changes:
-  * `eventId` should be returned when a GET request is made on a build.
+Features:
+  * `eventId` can be returned when a GET request is made on a build.

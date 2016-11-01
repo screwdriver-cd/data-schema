@@ -122,10 +122,10 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'eventId', 'jobId', 'number', 'cause', 'createTime', 'status'
+        'id', 'jobId', 'number', 'cause', 'createTime', 'status'
     ], [
         'container', 'parentBuildId', 'sha', 'startTime', 'endTime', 'meta', 'parameters', 'steps',
-        'commit'
+        'commit', 'eventId'
     ])).label('Get Build'),
 
     /**
