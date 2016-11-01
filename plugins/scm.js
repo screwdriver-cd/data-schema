@@ -4,6 +4,7 @@ const Joi = require('joi');
 const models = require('../models');
 const scmUri = Joi.reach(models.pipeline.base, 'scmUri').required();
 const token = Joi.reach(models.user.base, 'token').required();
+const tokenOptional = Joi.reach(models.user.base, 'token').optional();
 const sha = Joi.reach(models.build.base, 'sha').required();
 const buildStatus = Joi.reach(models.build.base, 'status').required();
 const jobName = Joi.reach(models.job.base, 'name').optional();
@@ -17,7 +18,7 @@ const GET_PERMISSIONS = Joi.object().keys({
 
 const GET_COMMIT_SHA = Joi.object().keys({
     scmUri,
-    token
+    token: tokenOptional
 }).required();
 
 const UPDATE_COMMIT_STATUS = Joi.object().keys({
@@ -54,7 +55,7 @@ const DECORATE_AUTHOR = Joi.object().keys({
 
 const PARSE_URL = Joi.object().keys({
     checkoutUrl,
-    token
+    token: tokenOptional
 }).required();
 
 module.exports = {
