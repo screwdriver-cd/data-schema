@@ -5,6 +5,8 @@ parentBuildId: d8fd39d0bbdd2dcf322d8b11390a4c5825b11495
 number: 1473900790309.1
 container: node:4
 cause: Because I clicked it
+environment:
+    DOCKER_REPO: screwdrivercd/screwdriver
 sha: 46f1a0bd5592a2f9244ca321b129902a06b53e03
 commit:
     message: Fixing a bug with signing
@@ -25,20 +27,25 @@ status: FAILURE
 steps:
     -
         name: sd-setup
+        command: "git clone https://gist.github.com/3d2388b2a7ba658cdcdaffa8cd874e50.git ci"
         code: 0
         startTime: "2038-01-19T03:15:08.131Z"
         endTime: "2038-01-19T03:15:08.532Z"
     -
         name: install
+        command: "npm install"
         code: 1
         startTime: "2038-01-19T03:15:08.532Z"
         endTime: "2038-01-19T03:15:09.114Z"
     -
         name: test
+        command: "npm test"
     -
         name: publish
+        command: "./ci/publish.sh"
     -
         name: sd-cleanup
+        command: "./ci/cleanup.sh"
         code: 0
         startTime: "2038-01-19T03:15:09.115Z"
         endTime: "2038-01-19T03:15:10.130Z"
