@@ -3,11 +3,15 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Scm = require('../core/scm');
+const Job = require('../config/job');
 
 const STEP = {
     name: Joi
         .string()
         .description('Name of the Step'),
+    command: Joi
+        .string()
+        .description('Command of the Step to execute'),
     code: Joi
         .number().integer()
         .description('Exit code'),
@@ -25,6 +29,8 @@ const MODEL = {
         .string().hex().length(40)
         .description('Identifier of this build')
         .example('4b8d9b530d2e5e297b4f470d5b0a6e1310d29c5e'),
+
+    environment: Job.environment,
 
     eventId: Joi
         .string().hex().length(40)
@@ -89,7 +95,7 @@ const MODEL = {
     steps: Joi
         .array().items(
             Joi.object(
-                mutate(STEP, ['name'], ['code', 'startTime', 'endTime'])
+                mutate(STEP, ['name'], ['code', 'startTime', 'endTime', 'command'])
             ).description('Step metadata'))
         .description('List of steps'),
 
@@ -125,7 +131,7 @@ module.exports = {
         'id', 'jobId', 'number', 'cause', 'createTime', 'status'
     ], [
         'container', 'parentBuildId', 'sha', 'startTime', 'endTime', 'meta', 'parameters', 'steps',
-        'commit', 'eventId'
+        'commit', 'eventId', 'environment'
     ])).label('Get Build'),
 
     /**
@@ -161,7 +167,8 @@ module.exports = {
     ], [
         'code',
         'startTime',
-        'endTime'
+        'endTime',
+        'command'
     ])).label('Get Step Metadata'),
 
     /**
