@@ -84,4 +84,14 @@ describe('scm test', () => {
             assert.isNotNull(validate('empty.yaml', scm.parseUrl).error);
         });
     });
+
+    describe('getCheckoutCommand', () => {
+        it('validates', () => {
+            assert.isNull(validate('scm.getCheckoutCommand.yaml', scm.getCheckoutCommand).error);
+        });
+
+        it('fails', () => {
+            assert.isNotNull(validate('empty.yaml', scm.getCheckoutCommand).error);
+        });
+    });
 });
