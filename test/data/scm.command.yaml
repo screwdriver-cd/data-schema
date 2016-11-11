@@ -1,0 +1,3 @@
+# SCM Command Example
+name: sd-checkout-code
+command: "echo Cloning https://github.com/screwdriver-cd/guide, on branch branchName && git clone --quiet --progress --branch branchName https://github.com/screwdriver-cd/guide && cd guide && git reset --hard 12345 && echo Reset to 12345 && echo Setting user name and user email && git config user.name sd-buildbot && git config user.email dev-null@screwdriver.cd"
