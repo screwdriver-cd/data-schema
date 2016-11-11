@@ -5,6 +5,16 @@ const core = require('../../').core;
 const validate = require('../helper').validate;
 
 describe('scm core', () => {
+    describe('command', () => {
+        it('validates the command', () => {
+            assert.isNull(validate('scm.command.yaml', core.scm.command).error);
+        });
+
+        it('fails the command', () => {
+            assert.isNotNull(validate('empty.yaml', core.scm.command).error);
+        });
+    });
+
     describe('commit', () => {
         it('validates the commit', () => {
             assert.isNull(validate('scm.commit.yaml', core.scm.commit).error);

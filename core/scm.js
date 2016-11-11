@@ -45,6 +45,17 @@ const SCHEMA_REPO = Joi.object().keys({
         .example('https://github.com/screwdriver-cd/screwdriver/tree/master')
 }).label('SCM Repository');
 
+const SCHEMA_COMMAND = Joi.object().keys({
+    name: Joi.equal('sd-checkout-code')
+        .required()
+        .label('Command name')
+        .example('sd-checkout-code'),
+
+    command: Joi.string()
+        .required()
+        .label('Checkout command to run')
+}).label('SCM Command');
+
 const SCHEMA_COMMIT = Joi.object().keys({
     message: Joi.string()
         .required()
@@ -112,6 +123,7 @@ const SCHEMA_HOOK = Joi.object().keys({
 }).label('SCM Hook');
 
 module.exports = {
+    command: SCHEMA_COMMAND,
     commit: SCHEMA_COMMIT,
     repo: SCHEMA_REPO,
     user: SCHEMA_USER,

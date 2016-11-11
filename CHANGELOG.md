@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 15.4.0
+
+Features:
+  * Add schema to validate output for `getCheckoutCommand` method in [scm-base](https://github.com/screwdriver-cd/scm-base)
+
 ## 15.3.0
 
 Features:
