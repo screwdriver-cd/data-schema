@@ -10,6 +10,17 @@ const jobName = Joi.reach(models.job.base, 'name').optional();
 const username = Joi.reach(models.user.base, 'username').required();
 const checkoutUrl = Joi.reach(models.pipeline.create, 'checkoutUrl').required();
 
+const ADD_WEBHOOK = Joi.object().keys({
+    scmUri,
+    token,
+    url: Joi.string().uri({
+        scheme: [
+            'http',
+            'https'
+        ]
+    })
+}).required();
+
 const GET_CHECKOUT_COMMAND = Joi.object().keys({
     branch: Joi.string().required(),
     host: Joi.string().required(),
@@ -67,6 +78,14 @@ const PARSE_URL = Joi.object().keys({
 }).required();
 
 module.exports = {
+    /**
+     * Properties for Scm Base that will be passed for the addWebhook method
+     *
+     * @property addWebhook
+     * @type {Joi}
+     */
+    addWebhook: ADD_WEBHOOK,
+
     /**
      * Properties for Scm Base that will be passed for the getPermissions method
      *
