@@ -94,4 +94,14 @@ describe('scm test', () => {
             assert.isNotNull(validate('empty.yaml', scm.getCheckoutCommand).error);
         });
     });
+
+    describe('addWebhook', () => {
+        it('validates', () => {
+            assert.isNull(validate('scm.addWebhook.yaml', scm.addWebhook).error);
+        });
+
+        it('fails', () => {
+            assert.isNotNull(validate('empty.yaml', scm.addWebhook).error);
+        });
+    });
 });
