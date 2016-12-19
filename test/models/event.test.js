@@ -76,7 +76,7 @@ describe('model event', () => {
         it('defines the correct rangeKeys', () => {
             const expected = [
                 'createTime',
-                null
+                'createTime'
             ];
             const rangeKeys = models.event.rangeKeys;
 
