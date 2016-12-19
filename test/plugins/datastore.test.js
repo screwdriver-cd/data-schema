@@ -17,7 +17,7 @@ describe('datastore test', () => {
 
     describe('update', () => {
         it('validates the update', () => {
-            assert.isNull(validate('datastore.data.yaml', datastore.update).error);
+            assert.isNull(validate('datastore.update.yaml', datastore.update).error);
         });
 
         it('fails the update', () => {
@@ -27,7 +27,7 @@ describe('datastore test', () => {
 
     describe('save', () => {
         it('validates the save', () => {
-            assert.isNull(validate('datastore.data.yaml', datastore.save).error);
+            assert.isNull(validate('datastore.save.yaml', datastore.save).error);
         });
 
         it('fails the save', () => {

@@ -1,0 +1,4 @@
+table: 'jobs'
+params:
+    id: 12341234
+    state: 'ENABLED'

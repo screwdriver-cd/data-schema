@@ -2,15 +2,14 @@
 
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
-const Pipeline = require('./pipeline');
 const Scm = require('../core/scm');
 const Workflow = require('../config/workflow');
 
 const MODEL = {
     id: Joi
-        .string().hex().length(40)
-        .description('Identifier of this build')
-        .example('4b8d9b530d2e5e297b4f470d5b0a6e1310d29c5e'),
+        .number().integer().positive()
+        .description('Identifier of this event')
+        .example(123345),
     causeMessage: Joi
         .string().max(512).truncate()
         .description('Message that describes why the event was created')
@@ -24,9 +23,10 @@ const MODEL = {
         .example('2038-01-19T03:14:08.131Z'),
     creator: Scm.user
         .description('Creator of the event'),
-    pipelineId: Joi.reach(Pipeline.base, 'id')
-        .description('The pipeline that the event belongs to')
-        .example('2d991790bab1ac8576097ca87f170df73410b55c'),
+    pipelineId: Joi
+        .number().integer().positive()
+        .description('Identifier of this pipeline')
+        .example(123345),
     sha: Joi
         .string().hex()
         .description('SHA this project was built on')
