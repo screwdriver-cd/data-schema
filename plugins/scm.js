@@ -13,7 +13,7 @@ const checkoutUrl = Joi.reach(models.pipeline.create, 'checkoutUrl').required();
 const ADD_WEBHOOK = Joi.object().keys({
     scmUri,
     token,
-    url: Joi.string().uri({
+    webhookUrl: Joi.string().uri({
         scheme: [
             'http',
             'https'

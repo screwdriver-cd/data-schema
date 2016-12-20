@@ -1,4 +1,4 @@
 ---
 scmUri: github.com:126987453:master
 token: thisisashinytoken
-url: https://screwdriver.cd/v4/some-endpoint
+webhookUrl: https://screwdriver.cd/v4/some-endpoint
