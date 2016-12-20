@@ -2,12 +2,9 @@
 
 const Joi = require('joi');
 const table = Joi.string().required();
-const id = Joi.number().integer().positive().required();
 const SCHEMA_ID = Joi.object().keys({
     table,
-    params: Joi.object().keys({
-        id
-    }).required()
+    params: Joi.object().min(1).required()
 });
 const SCHEMA_UPDATE = Joi.object().keys({
     table,
