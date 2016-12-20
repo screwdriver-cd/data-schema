@@ -6,9 +6,9 @@ const validator = require('../api/validator');
 
 const MODEL = {
     id: Joi
-        .string().hex().length(40)
+        .number().integer().positive()
         .description('Identifier of this Job')
-        .example('50dc14f719cdc2c9cb1fb0e49dd2acc4cf6189a0'),
+        .example(123345),
 
     name: Joi
         .string().regex(/^[A-Za-z0-9_-]+$/)
@@ -24,9 +24,9 @@ const MODEL = {
         .example('builds and tests the code'),
 
     pipelineId: Joi
-        .string().hex().length(40)
-        .description('Identifier of the Pipeline')
-        .example('2d991790bab1ac8576097ca87f170df73410b55c'),
+        .number().integer().positive()
+        .description('Identifier of this Pipeline')
+        .example(123345),
 
     state: Joi
         .string().valid([

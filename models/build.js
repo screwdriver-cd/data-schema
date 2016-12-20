@@ -26,26 +26,26 @@ const STEP = {
 };
 const MODEL = {
     id: Joi
-        .string().hex().length(40)
+        .number().integer().positive()
         .description('Identifier of this build')
-        .example('4b8d9b530d2e5e297b4f470d5b0a6e1310d29c5e'),
+        .example(123345),
 
     environment: Job.environment,
 
     eventId: Joi
-        .string().hex().length(40)
-        .description('Identifier of the event')
-        .example('50dc14f719cdc2c9cb1fb0e49dd2acc4cf6189a0'),
+        .number().integer().positive()
+        .description('Identifier of the parent event')
+        .example(123345),
 
     jobId: Joi
-        .string().hex().length(40)
-        .description('Identifier of the job')
-        .example('50dc14f719cdc2c9cb1fb0e49dd2acc4cf6189a0'),
+        .number().integer().positive()
+        .description('Identifier of the parent job')
+        .example(123345),
 
     parentBuildId: Joi
-        .string().hex().length(40)
-        .description('Parent build in the case of matrix jobs')
-        .example('50dc14f719cdc2c9cb1fb0e49dd2acc4cf6189a0'),
+        .number().integer().positive()
+        .description('Identifier of this parent build')
+        .example(123345),
 
     number: Joi
         .number().positive()

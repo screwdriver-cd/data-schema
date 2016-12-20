@@ -2,19 +2,23 @@
 
 const Joi = require('joi');
 const table = Joi.string().required();
-const id = Joi.string().hex().required();
+const id = Joi.number().integer().positive().required();
 const SCHEMA_ID = Joi.object().keys({
     table,
     params: Joi.object().keys({
         id
     }).required()
 });
-const SCHEMA_DATA = Joi.object().keys({
+const SCHEMA_UPDATE = Joi.object().keys({
     table,
     params: Joi.object().keys({
-        id,
-        data: Joi.object().required()
-    }).required()
+        id: Joi.number().integer().positive().required()
+    }).unknown(true).min(2)
+    .required()
+});
+const SCHEMA_SAVE = Joi.object().keys({
+    table,
+    params: Joi.object().unknown(true).min(1).required()
 });
 const SCHEMA_SCAN = Joi.object().keys({
     table,
@@ -41,7 +45,7 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: SCHEMA_DATA,
+    update: SCHEMA_UPDATE,
 
     /**
      * Properties for Datastore that will be passed for the SAVE method
@@ -49,7 +53,7 @@ module.exports = {
      * @property save
      * @type {Joi}
      */
-    save: SCHEMA_DATA,
+    save: SCHEMA_SAVE,
 
     /**
      * Properties for Datastore that will be passed for the REMOVE method

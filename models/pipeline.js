@@ -17,9 +17,9 @@ const CHECKOUT_URL = {
 
 const MODEL = {
     id: Joi
-        .string().hex().length(40)
-        .description('Identifier of this Pipeline')
-        .example('2d991790bab1ac8576097ca87f170df73410b55c'),
+        .number().integer().positive()
+        .description('Identifier of this pipeline')
+        .example(123345),
 
     scmUri: Joi
         .string().regex(Regex.SCM_URI)

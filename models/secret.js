@@ -6,14 +6,14 @@ const Job = require('../config/job');
 
 const MODEL = {
     id: Joi
-        .string().hex().length(40)
+        .number().integer().positive()
         .description('Identifier of this secret')
-        .example('7babc233de26ab19ead1b9c278128d5c434910ee'),
+        .example(123345),
 
     pipelineId: Joi
-        .string().hex().length(40)
+        .number().integer().positive()
         .description('pipeline associated with the secret')
-        .example('2d991790bab1ac8576097ca87f170df73410b55c'),
+        .example(123345),
 
     name: Job.secret
         .description('Name of the secret')

@@ -1,7 +1,7 @@
 # Job Example
-id: 50dc14f719cdc2c9cb1fb0e49dd2acc4cf6189a0
+id: 9787687866
 name: component
-pipelineId: 2d991790bab1ac8576097ca87f170df73410b55c
+pipelineId: 9785708
 state: ENABLED
 permutations:
     - image: node:4
