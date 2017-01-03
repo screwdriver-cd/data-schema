@@ -19,6 +19,7 @@ const MODEL = {
     createTime: Joi
         .string()
         .isoDate()
+        .max(32)
         .description('When this event was created')
         .example('2038-01-19T03:14:08.131Z'),
     creator: Scm.user
@@ -28,7 +29,7 @@ const MODEL = {
         .description('Identifier of this pipeline')
         .example(123345),
     sha: Joi
-        .string().hex()
+        .string().hex().length(40)
         .description('SHA this project was built on')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
     type: Joi

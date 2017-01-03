@@ -11,6 +11,7 @@ const MODEL = {
 
     username: Joi
         .string()
+        .max(128)
         .description('Username')
         .example('batman123'),
 

@@ -22,7 +22,7 @@ const MODEL = {
         .example(123345),
 
     scmUri: Joi
-        .string().regex(Regex.SCM_URI)
+        .string().regex(Regex.SCM_URI).max(128)
         .description('Unique identifier for the application')
         .example('github.com:123456:master'),
 
