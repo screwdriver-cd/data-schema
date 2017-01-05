@@ -49,9 +49,9 @@ Code licensed under the BSD 3-Clause license. See LICENSE file for terms.
 [npm-url]: https://npmjs.org/package/screwdriver-data-schema
 [downloads-image]: https://img.shields.io/npm/dt/screwdriver-data-schema.svg
 [license-image]: https://img.shields.io/npm/l/screwdriver-data-schema.svg
-[issues-image]: https://img.shields.io/github/issues/screwdriver-cd/data-schema.svg
-[issues-url]: https://github.com/screwdriver-cd/data-schema/issues
-[status-image]: https://cd.screwdriver.cd/pipelines/5b66dcaede1aee1f720dcf6b68fa9dadaf888f00/badge
-[status-url]: https://cd.screwdriver.cd/pipelines/5b66dcaede1aee1f720dcf6b68fa9dadaf888f00
+[issues-image]: https://img.shields.io/github/issues/screwdriver-cd/screwdriver.svg
+[issues-url]: https://github.com/screwdriver-cd/screwdriver/issues
+[status-image]: https://cd.screwdriver.cd/pipelines/12/badge
+[status-url]: https://cd.screwdriver.cd/pipelines/12
 [daviddm-image]: https://david-dm.org/screwdriver-cd/data-schema.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/screwdriver-cd/data-schema
