@@ -23,6 +23,11 @@ const MODEL = {
         .description('Description of the Job')
         .example('builds and tests the code'),
 
+    disableReason: Joi
+        .string().max(100)
+        .description('Reason why job was disabled')
+        .example('Pipeline broken, need to debug'),
+
     pipelineId: Joi
         .number().integer().positive()
         .description('Identifier of this Pipeline')
@@ -62,7 +67,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'pipelineId', 'name', 'state'
     ], [
-        'description', 'permutations', 'archived'
+        'description', 'permutations', 'archived', 'disableReason'
     ])).label('Get Job'),
 
     /**
@@ -72,7 +77,7 @@ module.exports = {
      * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [], [
-        'state'
+        'state', 'disableReason'
     ])).label('Update Job'),
 
     /**
