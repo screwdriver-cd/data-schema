@@ -8,21 +8,26 @@ const Job = require('../config/job');
 const STEP = {
     name: Joi
         .string()
-        .description('Name of the Step'),
+        .description('Name of the Step')
+        .example('install'),
     command: Joi
         .string()
-        .description('Command of the Step to execute'),
+        .description('Command of the Step to execute')
+        .example('npm install'),
     code: Joi
         .number().integer()
-        .description('Exit code'),
+        .description('Exit code')
+        .example(1),
     startTime: Joi
         .string()
         .isoDate()
-        .description('When this step started'),
+        .description('When this step started')
+        .example('2017-01-06T01:49:50.384359267Z'),
     endTime: Joi
         .string()
         .isoDate()
         .description('When this step stopped running')
+        .example('2017-01-06T01:49:51.676057192Z')
 };
 const MODEL = {
     id: Joi
