@@ -60,13 +60,15 @@ const SCHEMA_STEP_OBJECT = Joi.object()
 const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJECT);
 const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
 const SCHEMA_IMAGE = Joi.string();
+const SCHEMA_SETTINGS = Joi.object().optional();
 const SCHEMA_JOB = Joi.object()
     .keys({
         steps: SCHEMA_STEPS,
         environment: SCHEMA_ENVIRONMENT,
         matrix: SCHEMA_MATRIX,
         image: SCHEMA_IMAGE,
-        secrets: SCHEMA_SECRETS
+        secrets: SCHEMA_SECRETS,
+        settings: SCHEMA_SETTINGS
     })
     .default({});
 
@@ -82,5 +84,6 @@ module.exports = {
     step: SCHEMA_STEP,
     environment: SCHEMA_ENVIRONMENT,
     image: SCHEMA_IMAGE,
-    job: SCHEMA_JOB
+    job: SCHEMA_JOB,
+    settings: SCHEMA_SETTINGS
 };

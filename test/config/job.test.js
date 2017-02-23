@@ -40,4 +40,10 @@ describe('config job', () => {
             assert.isNull(validate('config.job.image.yaml', config.job.image).error);
         });
     });
+
+    describe('settings', () => {
+        it('validates settings', () => {
+            assert.isNull(validate('config.job.settings.yaml', config.job.settings).error);
+        });
+    });
 });
