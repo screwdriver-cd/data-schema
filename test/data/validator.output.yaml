@@ -10,6 +10,8 @@ jobs:
         command: npm run build
     environment:
       NODE_VERSION: 4
+    settings:
+      email: foo@bar.com
   - image: node:5
     commands:
     - name: install
@@ -20,6 +22,8 @@ jobs:
       command: npm run build
     environment:
       NODE_VERSION: 5
+    settings:
+      email: foo@bar.com
   - image: node:6
     commands:
     - name: install
@@ -30,6 +34,8 @@ jobs:
       command: npm run build
     environment:
       NODE_VERSION: 6
+    settings:
+      email: foo@bar.com
     secrets:
       - ANOTHER_SECRET
 

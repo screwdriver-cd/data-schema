@@ -8,6 +8,8 @@ yaml: |
               install: npm install
               test: npm test
               build: npm run build
+          settings:
+              email: foo@bar.com
 
       publish:
           image: node:4
