@@ -5,6 +5,10 @@
  * @type {Object}
  */
 module.exports = {
+    // Templates can only be named with A-Z,a-z,0-9,-,_,/
+    TEMPLATE_NAME: /^[\w/-]+$/,
+    // Version can only have up to 2 decimals, like 1.2.3
+    VERSION: /^(\d+\.)?(\d+\.)?(\d+)$/,
     // Steps can only be named with A-Z,a-z,0-9,-,_
     STEP_NAME: /^[\w-]+$/,
     // Jobs can only be named with A-Z,a-z,0-9,-,_

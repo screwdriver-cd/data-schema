@@ -4,6 +4,26 @@ const assert = require('chai').assert;
 const config = require('../../').config;
 
 describe('config regex', () => {
+    describe('templates', () => {
+        it('checks good template names', () => {
+            assert.isTrue(config.regex.TEMPLATE_NAME.test('node/npm-install'));
+        });
+
+        it('fails on bad template names', () => {
+            assert.isFalse(config.regex.TEMPLATE_NAME.test('run all the things'));
+        });
+    });
+
+    describe('versions', () => {
+        it('checks good versions', () => {
+            assert.isTrue(config.regex.VERSION.test('12.1.2'));
+        });
+
+        it('fails on bad versions', () => {
+            assert.isFalse(config.regex.VERSION.test('1.0.1.0.1'));
+        });
+    });
+
     describe('steps', () => {
         it('checks good step names', () => {
             assert.isTrue(config.regex.STEP_NAME.test('foo-BAR_15'));
