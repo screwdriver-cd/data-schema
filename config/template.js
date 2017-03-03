@@ -42,5 +42,10 @@ const SCHEMA_TEMPLATE = Joi.object()
  * @type {Object}
  */
 module.exports = {
-    template: SCHEMA_TEMPLATE
+    template: SCHEMA_TEMPLATE,
+    name: TEMPLATE_NAME,
+    version: TEMPLATE_VERSION,
+    description: TEMPLATE_DESCRIPTION,
+    maintainer: TEMPLATE_MAINTAINER,
+    config: Job.job
 };
