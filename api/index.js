@@ -1,8 +1,9 @@
 'use strict';
 
-const pagination = require('./pagination');
-const validator = require('./validator');
-const loglines = require('./loglines');
 const auth = require('./auth');
+const loglines = require('./loglines');
+const pagination = require('./pagination');
+const templateValidator = require('./templateValidator');
+const validator = require('./validator');
 
-module.exports = { pagination, validator, loglines, auth };
+module.exports = { auth, loglines, pagination, templateValidator, validator };
