@@ -46,4 +46,14 @@ describe('config job', () => {
             assert.isNull(validate('config.job.settings.yaml', config.job.settings).error);
         });
     });
+
+    describe('template', () => {
+        it('validates good template', () => {
+            assert.isNull(validate('config.job.template.good.yaml', config.job.job).error);
+        });
+
+        it('returns error for bad template', () => {
+            assert.isNotNull(validate('config.job.template.bad.yaml', config.job.job).error);
+        });
+    });
 });
