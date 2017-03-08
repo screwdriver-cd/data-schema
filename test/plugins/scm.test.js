@@ -20,6 +20,10 @@ describe('scm test', () => {
             assert.isNull(validate('scm.getCommitSha.yaml', scm.getCommitSha).error);
         });
 
+        it('validates with no token', () => {
+            assert.isNull(validate('scm.getCommitShaNoToken.yaml', scm.getCommitSha).error);
+        });
+
         it('fails', () => {
             assert.isNotNull(validate('empty.yaml', scm.getCommitSha).error);
         });
@@ -78,6 +82,10 @@ describe('scm test', () => {
     describe('parseUrl', () => {
         it('validates', () => {
             assert.isNull(validate('scm.parseUrl.yaml', scm.parseUrl).error);
+        });
+
+        it('validates with no token', () => {
+            assert.isNull(validate('scm.parseUrlNoToken.yaml', scm.parseUrl).error);
         });
 
         it('fails', () => {
