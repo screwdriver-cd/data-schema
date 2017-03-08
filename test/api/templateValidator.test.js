@@ -12,6 +12,10 @@ describe('api validator', () => {
         it('accepts basic input', () => {
             assert.isNull(validate('template-validator.input.yaml', inputSchema).error);
         });
+
+        it('fails', () => {
+            assert.isOk(validate('template-validator.invalid-input.yaml', inputSchema).error);
+        });
     });
 
     describe('output', () => {

@@ -13,18 +13,25 @@ const TEMPLATE_ERROR = Joi.object()
             .label('Dot-notation path to the field that caused the validation error'),
         type: Joi.string()
             .label('The the Joi-type that categorizes the error')
-    });
+    })
+    .requiredKeys('message', 'path', 'type');
 
 const SCHEMA_OUTPUT = Joi.object()
     .keys({
-        errors: Joi.array().items(TEMPLATE_ERROR),
+        errors: Joi.array()
+            .items(TEMPLATE_ERROR)
+            .label('Array of errors encountered while validating the given template'),
         // since a template could be parseable but invalid, the contents are unpredicatble
         template: Joi.object()
+            .label('The end-result of parsing the given template')
     })
+    .requiredKeys('errors', 'template')
     .label('Template validation output');
 
 const SCHEMA_INPUT = Joi.object({
-    yaml: Joi.string().label('sd-template.yaml contents')
+    yaml: Joi.string()
+        .required()
+        .label('sd-template.yaml contents')
 }).label('Certify input to template validator');
 
 /**
