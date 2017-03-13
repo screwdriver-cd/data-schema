@@ -50,6 +50,8 @@ describe('config job', () => {
     describe('template', () => {
         it('validates good template', () => {
             assert.isNull(validate('config.job.template.good.yaml', config.job.job).error);
+            assert.isNull(validate('config.job.template-with-label.good.yaml',
+                config.job.job).error);
         });
 
         it('returns error for bad template', () => {
