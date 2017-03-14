@@ -9,8 +9,8 @@ module.exports = {
     TEMPLATE_NAME: /^[\w/-]+$/,
     // Version can only have up to 2 decimals, like 1.2.3
     VERSION: /^(\d+)?(\.\d+)?(\.\d+)?$/,
-    // Full name of template and version. Example: chef/publish@1.2.3
-    FULL_TEMPLATE_NAME: /^([\w/-]+)(@)?((\d+)?(\.\d+)?(\.\d+)?)$/,
+    // Full name of template and version. Example: chef/publish@1.2.3 or chef/publish@1-stable
+    FULL_TEMPLATE_NAME: /^([\w/-]+)(@)?((\d+)?(\.\d+)?(\.\d+)?)(-[\w]+)?$/,
     // Steps can only be named with A-Z,a-z,0-9,-,_
     STEP_NAME: /^[\w-]+$/,
     // Jobs can only be named with A-Z,a-z,0-9,-,_
