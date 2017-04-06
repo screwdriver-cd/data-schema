@@ -3,7 +3,7 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Template = require('../config/template');
-const scmUri = Joi.reach(require('./pipeline').base, 'scmUri');
+const pipelineId = Joi.reach(require('./pipeline').base, 'id');
 
 const MODEL = {
     id: Joi
@@ -22,7 +22,7 @@ const MODEL = {
     version: Template.version,
     description: Template.description,
     maintainer: Template.maintainer,
-    scmUri
+    pipelineId
 };
 
 module.exports = {
@@ -41,7 +41,7 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'labels', 'config', 'name', 'version', 'description', 'maintainer', 'scmUri'
+        'id', 'labels', 'config', 'name', 'version', 'description', 'maintainer', 'pipelineId'
     ], [])).label('Get Template'),
 
     /**
