@@ -10,7 +10,7 @@ This contains the structure/validation for all the models/resources of Screwdriv
 It's broken down into three sections:
  - `api` - API related input/output structure
  - `config` - Screwdriver.yaml definitions
- - `models` - Internal data resources
+ - `models` - Internal data resources (pipeline, job, build, etc.)
  - `plugins` - Plugins (datastore, executor, etc.)
  - `core` - SCM plugin related output structure
 
