@@ -39,7 +39,8 @@ const SCHEMA_TEMPLATE = Joi.object()
         maintainer: TEMPLATE_MAINTAINER,
         config: Job.job
     })
-    .requiredKeys('name', 'version', 'description', 'maintainer', 'config.steps');
+    .requiredKeys('name', 'version', 'description', 'maintainer',
+        'config', 'config.image', 'config.steps');
 
 /**
  * The definition of the Template pieces
