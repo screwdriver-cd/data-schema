@@ -1,3 +1,6 @@
 - init: npm install
 - test: npm test
 - npm publish
+- name: fullstep
+  command: echo hello
+  alwaysRun: true
