@@ -14,6 +14,10 @@ const STEP = {
         .string()
         .description('Command of the Step to execute')
         .example('npm install'),
+    alwaysRun: Joi
+        .boolean()
+        .description('Flag to run a step regardless of past statuses')
+        .example(true),
     code: Joi
         .number().integer()
         .description('Exit code')
@@ -100,7 +104,7 @@ const MODEL = {
     steps: Joi
         .array().items(
             Joi.object(
-                mutate(STEP, ['name'], ['code', 'startTime', 'endTime', 'command'])
+                mutate(STEP, ['name'], ['code', 'startTime', 'endTime', 'command', 'alwaysRun'])
             ).description('Step metadata'))
         .description('List of steps'),
 
@@ -173,7 +177,8 @@ module.exports = {
         'code',
         'startTime',
         'endTime',
-        'command'
+        'command',
+        'alwaysRun'
     ])).label('Get Step Metadata'),
 
     /**
