@@ -4,10 +4,13 @@ jobs:
     commands:
       - name: install
         command: npm install
+        alwaysRun: false
       - name: test
         command: npm test
+        alwaysRun: false
       - name: build
         command: npm run build
+        alwaysRun: false
     environment:
       NODE_VERSION: 4
     settings:
@@ -16,10 +19,13 @@ jobs:
     commands:
     - name: install
       command: npm install
+      alwaysRun: false
     - name: test
       command: npm test
+      alwaysRun: false
     - name: build
       command: npm run build
+      alwaysRun: false
     environment:
       NODE_VERSION: 5
     settings:
@@ -28,10 +34,13 @@ jobs:
     commands:
     - name: install
       command: npm install
+      alwaysRun: false
     - name: test
       command: npm test
+      alwaysRun: false
     - name: build
       command: npm run build
+      alwaysRun: false
     environment:
       NODE_VERSION: 6
     settings:
@@ -44,6 +53,7 @@ jobs:
     commands:
     - name: install
       command: npm publish
+      alwaysRun: false
     environment: {}
     secrets:
       - NPM_TOKEN
