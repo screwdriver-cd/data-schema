@@ -100,6 +100,5 @@ module.exports = {
     image: SCHEMA_IMAGE,
     job: SCHEMA_JOB,
     settings: SCHEMA_SETTINGS,
-    template: SCHEMA_TEMPLATE,
-    fullstep: SCHEMA_FULL_STEP_OBJECT
+    template: SCHEMA_TEMPLATE
 };
