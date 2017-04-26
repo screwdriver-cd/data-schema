@@ -57,19 +57,8 @@ const SCHEMA_STEP_OBJECT = Joi.object()
             }
         }
     });
-const SCHEMA_FULL_STEP_OBJECT = Joi.object()
-    .keys({
-        name: Joi.string().regex(Regex.STEP_NAME),
-        command: SCHEMA_STEP_STRING,
-        alwaysRun: Joi.boolean()
-    })
-    .requiredKeys('name', 'command');
 
-const SCHEMA_STEP = Joi.alternatives().try(
-    SCHEMA_STEP_STRING,
-    SCHEMA_STEP_OBJECT,
-    SCHEMA_FULL_STEP_OBJECT
-);
+const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJECT);
 const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
 const SCHEMA_IMAGE = Joi.string();
 const SCHEMA_SETTINGS = Joi.object().optional();
@@ -100,6 +89,5 @@ module.exports = {
     image: SCHEMA_IMAGE,
     job: SCHEMA_JOB,
     settings: SCHEMA_SETTINGS,
-    template: SCHEMA_TEMPLATE,
-    fullstep: SCHEMA_FULL_STEP_OBJECT
+    template: SCHEMA_TEMPLATE
 };
