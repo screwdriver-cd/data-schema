@@ -8,7 +8,8 @@ const Workflow = require('../config/workflow');
 const SCHEMA_JOB_COMMAND = Joi.object()
     .keys({
         name: Joi.string(),
-        command: Joi.string()
+        command: Joi.string(),
+        alwaysRun: Joi.boolean()
     })
     .unknown(false)
     .label('Named command to execute');
