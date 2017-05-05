@@ -1,0 +1,5 @@
+# Token GET Example
+    - id: 999
+      name: 'Auth token'
+      description: 'A token for authentication'
+      lastUsed: '2038-01-19T03:14:08.131Z'
