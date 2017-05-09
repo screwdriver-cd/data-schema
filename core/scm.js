@@ -11,7 +11,8 @@ const SCHEMA_USER = Joi.object().keys({
         .example('https://github.com/stjohnjohnson'),
 
     name: Joi.string()
-        .required()
+        .optional()
+        .allow(null)
         .label('Display Name')
         .example('Dao Lam'),
 
