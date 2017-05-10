@@ -20,8 +20,9 @@ The model represents a combination of what is required to create the resource an
 
 ### Methodology
 
-Each model contains seven (7) schemas:
+Each model contains seven (8) schemas:
  - `base` - List of all available fields in the model
+ - `allKeys` - List of all fields in the model
  - `get` - Expected return values from a GET request against this resource
  - `create` - Expected input values when making a CREATE action against this resource
  - `update` - Expected input values when making an UPDATE action against this resource
