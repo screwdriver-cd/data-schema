@@ -35,11 +35,16 @@ const MODEL = {
 
     admins: Joi
         .object()
-        .description('Admins of this Pipeline')
+        .description('Admins of this pipeline')
         .example({ myself: true }),
 
     workflow: Workflow.workflow
-        .description('Current workflow of the pipeline')
+        .description('Current workflow of the pipeline'),
+
+    notificationEmail: Joi
+        .string().email()
+        .description('Email to send notifications to')
+        .example('screwdriver-cd@github.com')
 };
 
 module.exports = {
@@ -60,7 +65,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'scmUri', 'createTime', 'admins'
     ], [
-        'workflow', 'scmRepo'
+        'workflow', 'scmRepo', 'notificationEmail'
     ])).label('Get Pipeline'),
 
     /**
