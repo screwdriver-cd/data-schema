@@ -4,7 +4,7 @@ const Joi = require('joi');
 const mutate = require('../lib/mutate');
 
 const MODEL = {
-    token: Joi
+    value: Joi
         .string()
         .token(),
 
