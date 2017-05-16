@@ -1,6 +1,6 @@
 # Base Token Example
 userId: 1234
-value: 'hashed_token_value_goes_here'
+uuid: '110ec58a-a0f2-4ac4-8393-c866d813b8d1'
 id: 1111
 name: 'Auth token'
 description: 'A token for authentication'
