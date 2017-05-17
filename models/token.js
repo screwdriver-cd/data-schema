@@ -4,14 +4,17 @@ const Joi = require('joi');
 const mutate = require('../lib/mutate');
 
 const MODEL = {
-    value: Joi
-        .string()
-        .token(),
-
     id: Joi
         .number()
         .integer()
         .positive(),
+
+    uuid: Joi
+        .string()
+        .guid({
+            version: ['uuidv4']
+        })
+        .description('Identifies tokens so they can be revoked'),
 
     userId: Joi
         .number()
