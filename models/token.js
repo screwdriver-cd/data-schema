@@ -57,14 +57,13 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi
-        .array()
-        .items(Joi.object(mutate(MODEL, [
+        .object(mutate(MODEL, [
             'id',
             'name',
             'lastUsed'
         ], [
             'description'
-        ]))).label('Get tokens'),
+        ])).label('Get tokens'),
 
     /**
      * Properties for Token that will be passed during a CREATE request
@@ -73,7 +72,6 @@ module.exports = {
      * @type {Joi}
      */
     create: Joi.object(mutate(MODEL, [
-        'userId',
         'name'
     ], [
         'description'
@@ -85,7 +83,9 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(MODEL, [], [
+    update: Joi.object(mutate(MODEL, [
+        'id'
+    ], [
         'name',
         'description'
     ])).label('Update token metadata'),
