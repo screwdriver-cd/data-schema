@@ -1,9 +1,0 @@
-# Token GET Example
-    - id: 999
-      name: 'Auth token'
-      description: 'A token for authentication'
-      lastUsed: '2038-01-19T03:14:08.131Z'
-    - id: 1000
-      name: 'A more different token'
-      description: 'This user has several tokens'
-      lastUsed: '2020-01-01T03:14:15.926Z'

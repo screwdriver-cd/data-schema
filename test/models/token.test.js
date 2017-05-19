@@ -16,14 +16,6 @@ describe('token template', () => {
             assert.isNull(validate('token.get.yaml', models.token.get).error);
         });
 
-        it('validates a get with no tokens returned', () => {
-            assert.isNull(validate('emptyArray.yaml', models.token.get).error);
-        });
-
-        it('validates a get with several tokens returned', () => {
-            assert.isNull(validate('tokenArray.get.yaml', models.token.get).error);
-        });
-
         it('fails the get', () => {
             assert.isNotNull(validate('empty.yaml', models.token.get).error);
         });
