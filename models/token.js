@@ -2,6 +2,12 @@
 
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
+// Token length, measured in bits
+const TOKEN_LENGTH = 256;
+// Calculate the character length of the base64 string representing TOKEN_LENGTH bits
+// Each base64 character represents 6 bits of data, and strings are padded to be a
+// multiple of 4
+const HASH_LENGTH = Math.ceil(TOKEN_LENGTH / 6 / 4) * 4;
 
 const MODEL = {
     id: Joi
@@ -9,9 +15,11 @@ const MODEL = {
         .integer()
         .positive(),
 
-    value: Joi
+    hash: Joi
         .string()
-        .description('Token value'),
+        .base64()
+        .length(HASH_LENGTH)
+        .description('Hashed token value'),
 
     userId: Joi
         .number()
@@ -114,5 +122,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['userId']
+    indexes: ['hash', 'userId']
 };
