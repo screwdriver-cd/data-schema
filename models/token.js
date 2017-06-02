@@ -42,7 +42,7 @@ const MODEL = {
     lastUsed: Joi
         .string()
         .isoDate()
-        .allow(null)
+        .allow('')
         .description('Last used')
 };
 
