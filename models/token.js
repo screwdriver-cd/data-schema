@@ -5,9 +5,8 @@ const mutate = require('../lib/mutate');
 // Token length, measured in bits
 const TOKEN_LENGTH = 256;
 // Calculate the character length of the base64 string representing TOKEN_LENGTH bits
-// Each base64 character represents 6 bits of data, and strings are padded to be a
-// multiple of 4
-const HASH_LENGTH = Math.ceil(TOKEN_LENGTH / 6 / 4) * 4;
+// Each base64 character represents 6 bits of data
+const HASH_LENGTH = Math.ceil(TOKEN_LENGTH / 6);
 
 const MODEL = {
     id: Joi
@@ -17,7 +16,8 @@ const MODEL = {
 
     hash: Joi
         .string()
-        .regex(/[a-zA-Z0-9_-]+~/)
+        // Using https://www.npmjs.com/package/base64url
+        .regex(/[a-zA-Z0-9_-]+/)
         .length(HASH_LENGTH)
         .description('Hashed token value'),
 

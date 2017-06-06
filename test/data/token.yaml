@@ -1,6 +1,6 @@
 # Base Token Example
 userId: 1234
-hash: 'aHashedTokenValueMustBe44CharactersLong_-_-~'
+hash: 'aHashedTokenValueMustBe43CharactersLong_-_-'
 id: 1111
 name: 'Auth token'
 description: 'A token for authentication'
