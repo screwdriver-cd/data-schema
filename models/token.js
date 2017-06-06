@@ -17,7 +17,7 @@ const MODEL = {
 
     hash: Joi
         .string()
-        .base64()
+        .regex(/[a-zA-Z0-9_-]+~/)
         .length(HASH_LENGTH)
         .description('Hashed token value'),
 
