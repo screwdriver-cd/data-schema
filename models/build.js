@@ -89,6 +89,11 @@ const MODEL = {
         .isoDate()
         .description('When this build stopped running'),
 
+    timeoutTime: Joi
+        .string()
+        .isoDate()
+        .description('When this build should stop due to timeout'),
+
     parameters: Joi
         .object()
         .description('Input parameters that defined this build'),
@@ -136,7 +141,7 @@ module.exports = {
         'id', 'jobId', 'number', 'cause', 'createTime', 'status'
     ], [
         'container', 'parentBuildId', 'sha', 'startTime', 'endTime', 'meta', 'parameters', 'steps',
-        'commit', 'eventId', 'environment'
+        'commit', 'eventId', 'environment', 'timeoutTime'
     ])).label('Get Build'),
 
     /**
@@ -148,7 +153,8 @@ module.exports = {
     update: Joi.object(mutate(MODEL, [
         'status'
     ], [
-        'meta'
+        'meta',
+        'timeoutTime'
     ])).label('Update Build'),
 
     /**
