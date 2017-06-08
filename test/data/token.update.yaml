@@ -1,3 +1,4 @@
 # Token UPDATE Example
 name: 'A new token name'
 description: 'A new token description'
+id: 1234

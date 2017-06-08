@@ -88,7 +88,9 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(MODEL, [], [
+    update: Joi.object(mutate(MODEL, [
+        'id'
+    ], [
         'name',
         'description'
     ])).label('Update token metadata'),
