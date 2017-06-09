@@ -11,6 +11,7 @@ const jobName = Joi.reach(models.job.base, 'name').optional();
 const username = Joi.reach(models.user.base, 'username').required();
 const checkoutUrl = Joi.reach(models.pipeline.create, 'checkoutUrl').required();
 const prNum = Joi.reach(core.scm.hook, 'prNum').allow(null).optional();
+const pipelineId = Joi.reach(models.pipeline.base, 'id').optional();
 
 const ADD_WEBHOOK = Joi.object().keys({
     scmUri,
@@ -49,7 +50,8 @@ const UPDATE_COMMIT_STATUS = Joi.object().keys({
     sha,
     buildStatus,
     jobName,
-    url: Joi.string().uri().required()
+    url: Joi.string().uri().required(),
+    pipelineId
 }).required();
 
 const GET_FILE = Joi.object().keys({
