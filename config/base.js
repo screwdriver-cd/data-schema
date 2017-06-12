@@ -1,8 +1,9 @@
 'use strict';
 
+const Annotations = require('./annotations');
+const Job = require('./job');
 const Joi = require('joi');
 const Regex = require('./regex');
-const Job = require('./job');
 const Workflow = require('./workflow');
 
 const SCHEMA_JOBS = Joi.object()
@@ -16,9 +17,10 @@ const SCHEMA_JOBS = Joi.object()
 const SCHEMA_SHARED = Job.job;
 const SCHEMA_CONFIG = Joi.object()
     .keys({
+        annotations: Annotations.annotations,
         jobs: SCHEMA_JOBS,
-        workflow: Workflow.workflow,
-        shared: SCHEMA_SHARED
+        shared: SCHEMA_SHARED,
+        workflow: Workflow.workflow
     })
     .requiredKeys('jobs')
     .unknown(false);

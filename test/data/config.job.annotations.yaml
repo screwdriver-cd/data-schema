@@ -1,0 +1,3 @@
+screwdriver.cd/executor.resource:
+  - XCODE8
+  - OSX-SIERRA

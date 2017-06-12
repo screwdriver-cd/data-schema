@@ -58,4 +58,11 @@ describe('config job', () => {
             assert.isNotNull(validate('config.job.template.bad.yaml', config.job.job).error);
         });
     });
+
+    describe('annotations', () => {
+        it('validates job annotations', () => {
+            assert.isNull(validate('config.job.annotations.yaml', config.annotations.annotations)
+            .error);
+        });
+    });
 });

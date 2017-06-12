@@ -1,8 +1,9 @@
 'use strict';
 
+const Annotations = require('../config/annotations');
+const Job = require('../config/job');
 const Joi = require('joi');
 const Regex = require('../config/regex');
-const Job = require('../config/job');
 const Workflow = require('../config/workflow');
 
 const SCHEMA_JOB_COMMAND = Joi.object()
@@ -20,9 +21,10 @@ const SCHEMA_JOB_COMMANDS = Joi.array()
 
 const SCHEMA_JOB_PERMUTATION = Joi.object()
     .keys({
-        image: Job.image,
+        annotations: Annotations.annotations,
         commands: SCHEMA_JOB_COMMANDS,
         environment: Job.environment,
+        image: Job.image,
         secrets: Job.secrets,
         settings: Job.settings
     }).label('Job permutation');
@@ -42,9 +44,10 @@ const SCHEMA_JOBS = Joi.object()
 
 const SCHEMA_OUTPUT = Joi.object()
     .keys({
+        annotations: Annotations.annotations,
+        errors: Joi.array().items(Joi.string()).optional(),
         jobs: SCHEMA_JOBS,
-        workflow: Workflow.workflow,
-        errors: Joi.array().items(Joi.string()).optional()
+        workflow: Workflow.workflow
     })
     .label('Execution information');
 

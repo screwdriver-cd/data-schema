@@ -1,5 +1,6 @@
 'use strict';
 
+const Annotations = require('./annotations');
 const Joi = require('joi');
 const Regex = require('./regex');
 
@@ -65,12 +66,13 @@ const SCHEMA_SETTINGS = Joi.object().optional();
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
 const SCHEMA_JOB = Joi.object()
     .keys({
-        steps: SCHEMA_STEPS,
+        annotations: Annotations.annotations,
         environment: SCHEMA_ENVIRONMENT,
-        matrix: SCHEMA_MATRIX,
         image: SCHEMA_IMAGE,
+        matrix: SCHEMA_MATRIX,
         secrets: SCHEMA_SECRETS,
         settings: SCHEMA_SETTINGS,
+        steps: SCHEMA_STEPS,
         template: SCHEMA_TEMPLATE
     })
     .default({});
@@ -80,14 +82,15 @@ const SCHEMA_JOB = Joi.object()
  * @type {Object}
  */
 module.exports = {
-    matrix: SCHEMA_MATRIX,
-    secret: SCHEMA_SECRET,
-    secrets: SCHEMA_SECRETS,
-    steps: SCHEMA_STEPS,
-    step: SCHEMA_STEP,
+    annotations: Annotations.annotations,
     environment: SCHEMA_ENVIRONMENT,
     image: SCHEMA_IMAGE,
     job: SCHEMA_JOB,
+    matrix: SCHEMA_MATRIX,
+    secret: SCHEMA_SECRET,
+    secrets: SCHEMA_SECRETS,
     settings: SCHEMA_SETTINGS,
+    step: SCHEMA_STEP,
+    steps: SCHEMA_STEPS,
     template: SCHEMA_TEMPLATE
 };
