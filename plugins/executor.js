@@ -1,9 +1,11 @@
 'use strict';
 
+const Annotations = require('../config/annotations');
 const Joi = require('joi');
 const models = require('../models');
 const buildId = Joi.reach(models.build.base, 'id').required();
 const SCHEMA_START = Joi.object().keys({
+    annotations: Annotations.annotations,
     buildId,
     container: Joi.reach(models.build.base, 'container').required(),
     apiUri: Joi.string().uri().required()
