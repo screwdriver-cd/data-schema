@@ -10,6 +10,10 @@ describe('executor test', () => {
             assert.isNull(validate('executor.start.yaml', executor.start).error);
         });
 
+        it('validates the start with no annotations', () => {
+            assert.isNull(validate('executor.startNoAnnotations.yaml', executor.start).error);
+        });
+
         it('fails the start for empty yaml', () => {
             assert.isNotNull(validate('empty.yaml', executor.start).error);
         });
