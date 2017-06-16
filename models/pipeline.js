@@ -1,10 +1,11 @@
 'use strict';
 
+const Annotations = require('../config/annotations');
 const Joi = require('joi');
-const mutate = require('../lib/mutate');
 const Regex = require('../config/regex');
-const Workflow = require('../config/workflow');
 const Scm = require('../core/scm');
+const Workflow = require('../config/workflow');
+const mutate = require('../lib/mutate');
 
 const CHECKOUT_URL = {
     checkoutUrl: Joi
@@ -39,7 +40,10 @@ const MODEL = {
         .example({ myself: true }),
 
     workflow: Workflow.workflow
-        .description('Current workflow of the pipeline')
+        .description('Current workflow of the pipeline'),
+
+    annotations: Annotations.annotations
+        .description('Pipeline-level annotations')
 };
 
 module.exports = {
@@ -60,7 +64,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'scmUri', 'createTime', 'admins'
     ], [
-        'workflow', 'scmRepo'
+        'workflow', 'scmRepo', 'annotations'
     ])).label('Get Pipeline'),
 
     /**

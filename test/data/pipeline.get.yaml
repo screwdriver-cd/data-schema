@@ -11,3 +11,9 @@ scmRepo:
     name: screwdriver-cd/screwdriver
     branch: master
     url: https://github.com/screwdriver-cd/screwdriver/tree/master
+annotations:
+    screwdriver.cd/executor.resource:
+        - XCODE8
+        - OSX-SIERRA
+    screwdriver.cd/notify.email: foo@example.com
+    beta.screwdriver.cd/auto_pr_builds: fork-only
