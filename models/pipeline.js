@@ -76,6 +76,14 @@ module.exports = {
     create: Joi.object(CHECKOUT_URL).label('Create Pipeline'),
 
     /**
+     * Properties for Pipeline that will be passed during an UPDATE request
+     *
+     * @property update
+     * @type {Joi}
+     */
+    update: Joi.object(CHECKOUT_URL).label('Update Pipeline'),
+
+    /**
      * List of fields that determine a unique row
      *
      * @property keys

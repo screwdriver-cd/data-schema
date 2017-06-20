@@ -30,4 +30,14 @@ describe('model pipeline', () => {
             assert.isNotNull(validate('empty.yaml', models.pipeline.get).error);
         });
     });
+
+    describe('update', () => {
+        it('validates the update', () => {
+            assert.isNull(validate('pipeline.update.yaml', models.pipeline.update).error);
+        });
+
+        it('fails the update', () => {
+            assert.isNotNull(validate('empty.yaml', models.pipeline.update).error);
+        });
+    });
 });

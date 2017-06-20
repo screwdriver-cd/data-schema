@@ -1,0 +1,2 @@
+# Pipeline Create Example
+checkoutUrl: git@github.com:screwdriver-cd/data-schema.git#branch
