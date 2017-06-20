@@ -9,6 +9,10 @@ describe('config job', () => {
         it('validates a job', () => {
             assert.isNull(validate('config.job.job.yaml', config.job.job).error);
         });
+
+        it('validates a description', () => {
+            assert.isNull(validate('config.job.description.yaml', config.job.job).error);
+        });
     });
 
     describe('matrix', () => {
