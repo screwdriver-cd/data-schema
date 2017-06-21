@@ -59,14 +59,17 @@ const SCHEMA_STEP_OBJECT = Joi.object()
         }
     });
 
-const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJECT);
-const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
+const SCHEMA_DESCRIPTION = Joi.string().max(100).optional();
 const SCHEMA_IMAGE = Joi.string();
 const SCHEMA_SETTINGS = Joi.object().optional();
+const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJECT);
+const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
+
 const SCHEMA_JOB = Joi.object()
     .keys({
         annotations: Annotations.annotations,
+        description: SCHEMA_DESCRIPTION,
         environment: SCHEMA_ENVIRONMENT,
         image: SCHEMA_IMAGE,
         matrix: SCHEMA_MATRIX,
