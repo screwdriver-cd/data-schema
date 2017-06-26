@@ -14,6 +14,7 @@ const SCHEMA_START = Joi.object().keys({
         .label('Build JWT')
 }).required();
 const SCHEMA_STOP = Joi.object().keys({
+    annotations: Annotations.annotations,
     buildId
 }).required();
 const SCHEMA_STATUS = Joi.object().keys({

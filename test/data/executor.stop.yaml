@@ -1,1 +1,3 @@
+annotations:
+    beta.screwdriver.cd/executor: k8s
 buildId: 453264
