@@ -86,6 +86,7 @@ const SCHEMA_JOB = Joi.object()
  */
 module.exports = {
     annotations: Annotations.annotations,
+    description: SCHEMA_DESCRIPTION,
     environment: SCHEMA_ENVIRONMENT,
     image: SCHEMA_IMAGE,
     job: SCHEMA_JOB,

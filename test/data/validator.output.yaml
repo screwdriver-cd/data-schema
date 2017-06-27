@@ -8,6 +8,9 @@ jobs:
         command: npm test
       - name: build
         command: npm run build
+    annotations:
+      beta.screwdriver.cd/auto_pr_builds: fork-only
+    description: "This is a description"
     environment:
       NODE_VERSION: 4
     settings:
@@ -20,6 +23,9 @@ jobs:
       command: npm test
     - name: build
       command: npm run build
+    annotations:
+      beta.screwdriver.cd/auto_pr_builds: fork-only
+    description: "This is a description"
     environment:
       NODE_VERSION: 5
     settings:
@@ -32,6 +38,9 @@ jobs:
       command: npm test
     - name: build
       command: npm run build
+    annotations:
+      beta.screwdriver.cd/auto_pr_builds: fork-only
+    description: "This is a description"
     environment:
       NODE_VERSION: 6
     settings:
