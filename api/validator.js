@@ -23,6 +23,7 @@ const SCHEMA_JOB_PERMUTATION = Joi.object()
     .keys({
         annotations: Annotations.annotations,
         commands: SCHEMA_JOB_COMMANDS,
+        description: Job.description,
         environment: Job.environment,
         image: Job.image,
         secrets: Job.secrets,

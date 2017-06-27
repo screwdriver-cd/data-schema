@@ -1,6 +1,9 @@
 yaml: |
   jobs:
       main:
+          annotations:
+              beta.screwdriver.cd/auto_pr_builds: fork-only
+          description: "This is a description"
           image: node:{{NODE_VERSION}}
           matrix:
               NODE_VERSION: [4,5,6]
