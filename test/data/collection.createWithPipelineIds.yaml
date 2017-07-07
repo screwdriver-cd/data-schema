@@ -1,0 +1,7 @@
+# Collection Create with PipelineIds
+name: 'Personal'
+pipelineIds:
+    - 23
+    - 45
+    - 67
+    - 89
