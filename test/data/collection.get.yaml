@@ -1,0 +1,9 @@
+# Collection GET Example
+id: 123
+name: 'Screwdriver'
+description: 'Collection of screwdriver related pipelines'
+pipelineIds:
+    - 912
+    - 345
+    - 567
+    - 765

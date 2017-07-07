@@ -8,5 +8,6 @@ const user = require('./user');
 const secret = require('./secret');
 const template = require('./template');
 const token = require('./token');
+const collection = require('./collection');
 
-module.exports = { build, event, job, pipeline, user, secret, template, token };
+module.exports = { build, event, job, pipeline, user, secret, template, token, collection };

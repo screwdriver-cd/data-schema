@@ -1,0 +1,8 @@
+# Collection Update Example
+name: 'New Collection'
+description: 'Changed description'
+pipelineIds:
+    - 15
+    - 25
+    - 35
+    - 45
