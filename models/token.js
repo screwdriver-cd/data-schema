@@ -36,6 +36,7 @@ const MODEL = {
     description: Joi
         .string()
         .max(256)
+        .allow('')
         .description('Token description')
         .example('Used to authenticate the mobile app'),
 
