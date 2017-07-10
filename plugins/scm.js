@@ -1,17 +1,18 @@
 'use strict';
 
+const core = require('../core');
 const Joi = require('joi');
 const models = require('../models');
-const core = require('../core');
-const scmUri = Joi.reach(models.pipeline.base, 'scmUri').required();
-const token = Joi.reach(models.user.base, 'token').required();
-const sha = Joi.reach(models.build.base, 'sha').required();
+
 const buildStatus = Joi.reach(models.build.base, 'status').required();
-const jobName = Joi.reach(models.job.base, 'name').optional();
-const username = Joi.reach(models.user.base, 'username').required();
 const checkoutUrl = Joi.reach(models.pipeline.create, 'checkoutUrl').required();
-const prNum = Joi.reach(core.scm.hook, 'prNum').allow(null).optional();
+const jobName = Joi.reach(models.job.base, 'name').optional();
 const pipelineId = Joi.reach(models.pipeline.base, 'id').optional();
+const prNum = Joi.reach(core.scm.hook, 'prNum').allow(null).optional();
+const scmUri = Joi.reach(models.pipeline.base, 'scmUri').required();
+const sha = Joi.reach(models.build.base, 'sha').required();
+const token = Joi.reach(models.user.base, 'token').required();
+const username = Joi.reach(models.user.base, 'username').required();
 
 const ADD_WEBHOOK = Joi.object().keys({
     scmUri,
@@ -80,6 +81,10 @@ const DECORATE_AUTHOR = Joi.object().keys({
 const PARSE_URL = Joi.object().keys({
     checkoutUrl,
     token
+}).required();
+
+const CAN_HANDLE_URL = Joi.object().keys({
+    scmUri
 }).required();
 
 module.exports = {
@@ -161,5 +166,13 @@ module.exports = {
      * @property getCheckoutCommand
      * @type {Joi}
      */
-    getCheckoutCommand: GET_CHECKOUT_COMMAND
+    getCheckoutCommand: GET_CHECKOUT_COMMAND,
+
+    /**
+     * Properties for Scm Base that will be passed for the canHandleUrl method
+     *
+     * @property canHandleUrl
+     * @type {Joi}
+     */
+    canHandleUrl: CAN_HANDLE_URL
 };
