@@ -9,7 +9,9 @@ const checkoutUrl = Joi.reach(models.pipeline.create, 'checkoutUrl').required();
 const jobName = Joi.reach(models.job.base, 'name').optional();
 const pipelineId = Joi.reach(models.pipeline.base, 'id').optional();
 const prNum = Joi.reach(core.scm.hook, 'prNum').allow(null).optional();
+const scmContext = Joi.reach(models.pipeline.base, 'scmContext').required();
 const scmUri = Joi.reach(models.pipeline.base, 'scmUri').required();
+const scmUrl = Joi.reach(core.scm.repo, 'url').required();
 const sha = Joi.reach(models.build.base, 'sha').required();
 const token = Joi.reach(models.user.base, 'token').required();
 const username = Joi.reach(models.user.base, 'username').required();
@@ -83,8 +85,16 @@ const PARSE_URL = Joi.object().keys({
     token
 }).required();
 
+const GET_SCM_CONTEXT = Joi.object().keys({
+    scmUri
+}).required();
+
 const CAN_HANDLE_URL = Joi.object().keys({
     scmUri
+}).required();
+
+const GET_DISPLAY_NAME = Joi.object().keys({
+    scmContext
 }).required();
 
 module.exports = {
@@ -169,10 +179,26 @@ module.exports = {
     getCheckoutCommand: GET_CHECKOUT_COMMAND,
 
     /**
+     * Properties for Scm Base that will be passed for the getScmContext method
+     *
+     * @property canHandleUrl
+     * @type {Joi}
+     */
+    getScmContext: GET_SCM_CONTEXT,
+
+    /**
      * Properties for Scm Base that will be passed for the canHandleUrl method
      *
      * @property canHandleUrl
      * @type {Joi}
      */
-    canHandleUrl: CAN_HANDLE_URL
+    canHandleUrl: CAN_HANDLE_URL,
+
+    /**
+     * Properties for Scm Base that will be passed for the getDisplayName method
+     *
+     * @property canHandleUrl
+     * @type {Joi}
+     */
+    getDisplayName: GET_DISPLAY_NAME
 };
