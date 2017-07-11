@@ -86,7 +86,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['id'],
+    keys: ['userId', 'name'],
 
     /**
      * List of all fields in the model
