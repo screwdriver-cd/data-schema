@@ -104,34 +104,4 @@ describe('scm test', () => {
             assert.isNotNull(validate('empty.yaml', scm.addWebhook).error);
         });
     });
-
-    describe('getScmContext', () => {
-        it('validates', () => {
-            assert.isNull(validate('scm.getScmContext.yaml', scm.canHandleUrl).error);
-        });
-
-        it('fails', () => {
-            assert.isNotNull(validate('empty.yaml', scm.canHandleUrl).error);
-        });
-    });
-
-    describe('canHandleUrl', () => {
-        it('validates', () => {
-            assert.isNull(validate('scm.canHandleUrl.yaml', scm.canHandleUrl).error);
-        });
-
-        it('fails', () => {
-            assert.isNotNull(validate('empty.yaml', scm.canHandleUrl).error);
-        });
-    });
-
-    describe('getDisplayName', () => {
-        it('validates', () => {
-            assert.isNull(validate('scm.getDisplayName.yaml', scm.canHandleUrl).error);
-        });
-
-        it('fails', () => {
-            assert.isNotNull(validate('empty.yaml', scm.canHandleUrl).error);
-        });
-    });
 });

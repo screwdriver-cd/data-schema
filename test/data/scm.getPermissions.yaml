@@ -1,2 +1,3 @@
 scmUri: github.com:12345678:master
 token: 'thisisatokenthingy'
+scmContext: github.com

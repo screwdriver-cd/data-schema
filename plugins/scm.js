@@ -11,7 +11,6 @@ const pipelineId = Joi.reach(models.pipeline.base, 'id').optional();
 const prNum = Joi.reach(core.scm.hook, 'prNum').allow(null).optional();
 const scmContext = Joi.reach(models.pipeline.base, 'scmContext').required();
 const scmUri = Joi.reach(models.pipeline.base, 'scmUri').required();
-const scmUrl = Joi.reach(core.scm.repo, 'url').required();
 const sha = Joi.reach(models.build.base, 'sha').required();
 const token = Joi.reach(models.user.base, 'token').required();
 const username = Joi.reach(models.user.base, 'username').required();
@@ -24,7 +23,8 @@ const ADD_WEBHOOK = Joi.object().keys({
             'http',
             'https'
         ]
-    })
+    }),
+    scmContext
 }).required();
 
 const GET_CHECKOUT_COMMAND = Joi.object().keys({
@@ -33,18 +33,21 @@ const GET_CHECKOUT_COMMAND = Joi.object().keys({
     org: Joi.string().required(),
     repo: Joi.string().required(),
     sha: Joi.string().required(),
-    prRef: Joi.string().optional()
+    prRef: Joi.string().optional(),
+    scmContext
 }).required();
 
 const GET_PERMISSIONS = Joi.object().keys({
     scmUri,
-    token
+    token,
+    scmContext
 }).required();
 
 const GET_COMMIT_SHA = Joi.object().keys({
     scmUri,
     token,
-    prNum
+    prNum,
+    scmContext
 }).required();
 
 const UPDATE_COMMIT_STATUS = Joi.object().keys({
@@ -54,46 +57,40 @@ const UPDATE_COMMIT_STATUS = Joi.object().keys({
     buildStatus,
     jobName,
     url: Joi.string().uri().required(),
-    pipelineId
+    pipelineId,
+    scmContext
 }).required();
 
 const GET_FILE = Joi.object().keys({
     scmUri,
     token,
     path: Joi.string().required(),
-    ref: Joi.string().optional()
+    ref: Joi.string().optional(),
+    scmContext
 }).required();
 
 const DECORATE_URL = Joi.object().keys({
     scmUri,
-    token
+    token,
+    scmContext
 }).required();
 
 const DECORATE_COMMIT = Joi.object().keys({
     scmUri,
     sha,
-    token
+    token,
+    scmContext
 }).required();
 
 const DECORATE_AUTHOR = Joi.object().keys({
     username,
-    token
+    token,
+    scmContext
 }).required();
 
 const PARSE_URL = Joi.object().keys({
     checkoutUrl,
-    token
-}).required();
-
-const GET_SCM_CONTEXT = Joi.object().keys({
-    scmUri
-}).required();
-
-const CAN_HANDLE_URL = Joi.object().keys({
-    scmUri
-}).required();
-
-const GET_DISPLAY_NAME = Joi.object().keys({
+    token,
     scmContext
 }).required();
 
@@ -176,29 +173,5 @@ module.exports = {
      * @property getCheckoutCommand
      * @type {Joi}
      */
-    getCheckoutCommand: GET_CHECKOUT_COMMAND,
-
-    /**
-     * Properties for Scm Base that will be passed for the getScmContext method
-     *
-     * @property canHandleUrl
-     * @type {Joi}
-     */
-    getScmContext: GET_SCM_CONTEXT,
-
-    /**
-     * Properties for Scm Base that will be passed for the canHandleUrl method
-     *
-     * @property canHandleUrl
-     * @type {Joi}
-     */
-    canHandleUrl: CAN_HANDLE_URL,
-
-    /**
-     * Properties for Scm Base that will be passed for the getDisplayName method
-     *
-     * @property canHandleUrl
-     * @type {Joi}
-     */
-    getDisplayName: GET_DISPLAY_NAME
+    getCheckoutCommand: GET_CHECKOUT_COMMAND
 };
