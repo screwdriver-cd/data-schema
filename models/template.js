@@ -55,7 +55,7 @@ module.exports = {
     ], ['labels'])).label('Create Template'),
 
     /**
-     * Properties for template that will be passed during a UPDATE requeste
+     * Properties for template that will be passed during a UPDATE request
      *
      * @property update
      * @type {Joi}
