@@ -37,6 +37,15 @@ module.exports = {
         .label('Create Template Tag'),
 
     /**
+     * Properties for template tag that will be passed during a DELETE request
+     *
+     * @property remove
+     * @type {Joi}
+     */
+    remove: Joi.object(mutate(MODEL, ['name', 'tag'], []))
+        .label('Remove Template Tag'),
+
+    /**
      * List of fields that determine a unique row
      *
      * @property keys
