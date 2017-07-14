@@ -3,6 +3,8 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 
+const PIPELINE_MODEL = require('./pipeline').get;
+const PIPELINES_MODEL = Joi.array().items(PIPELINE_MODEL);
 const MODEL = {
     id: Joi
         .number()
@@ -31,6 +33,7 @@ const MODEL = {
         .array()
         .items(Joi.number().integer().positive())
 };
+const GET_MODEL = Object.assign({}, MODEL, { pipelines: PIPELINES_MODEL });
 
 module.exports = {
     /**
@@ -47,10 +50,10 @@ module.exports = {
      * @property get
      * @type {Joi}
      */
-    get: Joi.object(mutate(MODEL, [
+    get: Joi.object(mutate(GET_MODEL, [
         'id',
         'name',
-        'pipelineIds'
+        'pipelines'
     ], [
         'description'
     ])).label('Get collection'),
