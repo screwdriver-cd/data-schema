@@ -20,4 +20,14 @@ describe('model template tag', () => {
             assert.isNotNull(validate('empty.yaml', models.templateTag.create).error);
         });
     });
+
+    describe('remove', () => {
+        it('validates the remove', () => {
+            assert.isNull(validate('templatetag.remove.yaml', models.templateTag.remove).error);
+        });
+
+        it('fails the remove', () => {
+            assert.isNotNull(validate('empty.yaml', models.templateTag.remove).error);
+        });
+    });
 });
