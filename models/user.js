@@ -17,13 +17,7 @@ const MODEL = {
 
     token: Joi
         .string()
-        .description('Github token'),
-
-    scmContext: Joi
-        .string()
-        .max(128)
-        .description('The SCM to which the user belongs')
-        .example('github.com')
+        .description('Github token')
 };
 
 module.exports = {
@@ -42,7 +36,7 @@ module.exports = {
      * @type {Joi}
      */
     create: Joi.object(mutate(MODEL, [
-        'username', 'scmContext'
+        'username'
     ], [])).label('Create User'),
 
     /**
@@ -51,7 +45,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['username', 'scmContext'],
+    keys: ['username'],
 
     /**
      * List of all fields in the model
@@ -74,5 +68,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['username', 'scmContext']
+    indexes: ['username']
 };
