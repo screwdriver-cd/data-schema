@@ -2,8 +2,40 @@
 id: 123
 name: 'Screwdriver'
 description: 'Collection of screwdriver related pipelines'
-pipelineIds:
-    - 912
-    - 345
-    - 567
-    - 765
+pipelines:
+    - id: 12742
+      scmUri: github.com:12345678:master
+      createTime: "2017-07-14"
+      admins:
+        username: true
+      workflow:
+        - main
+        - publish
+      scmRepo:
+        name: screwdriver-cd/screwdriver
+        branch: master
+        url: https://github.com/screwdriver-cd/screwdriver/tree/master
+      annotations:
+        screwdriver.cd/executor.resource:
+          - XCODE8
+          - OSX-SIERRA
+        screwdriver.cd/notify.email: foo@example.com
+        beta.screwdriver.cd/auto_pr_builds: fork-only
+    - id: 12576
+      scmUri: github.com:87654321:master
+      createTime: "2017-07-14"
+      admins:
+        username: true
+      workflow:
+        - main
+        - publish
+      scmRepo:
+        name: screwdriver-cd/config-parser
+        branch: master
+        url: https://github.com/screwdriver-cd/config-parser/tree/master
+      annotations:
+        screwdriver.cd/executor.resource:
+          - XCODE8
+          - OSX-SIERRA
+        screwdriver.cd/notify.email: foo@example.com
+        beta.screwdriver.cd/auto_pr_builds: fork-only
