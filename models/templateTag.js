@@ -9,11 +9,7 @@ const MODEL = {
         .description('Identifier of this template tag')
         .example(123345),
     name: Template.name,
-    tag: Joi
-        .string()
-        .alphanum()
-        .max(30)
-        .required(),
+    tag: Template.templateTag,
     version: Template.version
 };
 
