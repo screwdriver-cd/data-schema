@@ -1,7 +1,6 @@
 'use strict';
 
 const Joi = require('joi');
-const mutate = require('../lib/mutate');
 const Template = require('../config/template');
 
 const MODEL = {
@@ -26,24 +25,6 @@ module.exports = {
      * @type {Joi}
      */
     base: Joi.object(MODEL).label('TemplateTag'),
-
-    /**
-     * Properties for template tag that will be passed during a CREATE request
-     *
-     * @property create
-     * @type {Joi}
-     */
-    create: Joi.object(mutate(MODEL, ['name', 'tag', 'version'], []))
-        .label('Create Template Tag'),
-
-    /**
-     * Properties for template tag that will be passed during a DELETE request
-     *
-     * @property remove
-     * @type {Joi}
-     */
-    remove: Joi.object(mutate(MODEL, ['name', 'tag'], []))
-        .label('Remove Template Tag'),
 
     /**
      * List of fields that determine a unique row
