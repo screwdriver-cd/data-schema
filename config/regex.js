@@ -7,6 +7,8 @@
 module.exports = {
     // Templates can only be named with A-Z,a-z,0-9,-,_,/
     TEMPLATE_NAME: /^[\w/-]+$/,
+    // Template tags must start with an alpha character (A-Z,a-z) and can only contain A-Z,a-z,0-9,-,_
+    TEMPLATE_TAG_NAME: /^[a-zA-Z][\w-]+$/,
     // Version can only have up to 2 decimals, like 1.2.3
     VERSION: /^(\d+)?(\.\d+)?(\.\d+)?$/,
     // Full name of template and version. Example: chef/publish@1.2.3 or chef/publish@1-stable

@@ -1,5 +1,5 @@
 # Base Template Tag Example
 id: 123234135
 name: test/template
-tag: 'stable'
+tag: stable
 version: '1.2.0'

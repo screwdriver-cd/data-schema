@@ -11,6 +11,13 @@ const TEMPLATE_NAME = Joi
             .description('Name of the Template')
             .example('node/npm-install');
 
+const TEMPLATE_TAG_NAME = Joi
+            .string()
+            .regex(Regex.TEMPLATE_TAG_NAME)
+            .max(30)
+            .description('Name of the Template Tag')
+            .example('latest');
+
 const TEMPLATE_VERSION = Joi
             .string()
             .regex(Regex.VERSION)
@@ -49,6 +56,7 @@ const SCHEMA_TEMPLATE = Joi.object()
 module.exports = {
     template: SCHEMA_TEMPLATE,
     name: TEMPLATE_NAME,
+    templateTag: TEMPLATE_TAG_NAME,
     version: TEMPLATE_VERSION,
     description: TEMPLATE_DESCRIPTION,
     maintainer: TEMPLATE_MAINTAINER,
