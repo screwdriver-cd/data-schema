@@ -59,6 +59,19 @@ module.exports = {
     ])).label('Get collection'),
 
     /**
+     * Properties for collections that will come back during a LIST request.
+     * The LIST request will list all of the requesting user's collections.
+     */
+    list: Joi.array().items(Joi.object(mutate(MODEL, [
+        'id',
+        'name',
+        'pipelineIds',
+        'userId'
+    ], [
+        'description'
+    ]))).label('List collections for requesting user'),
+
+    /**
      * Properties for Collection that will be passed during a CREATE request
      *
      * @property create

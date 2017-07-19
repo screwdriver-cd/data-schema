@@ -21,6 +21,16 @@ describe('collection template', () => {
         });
     });
 
+    describe('list', () => {
+        it('validates the list', () => {
+            assert.isNull(validate('collection.list.yaml', models.collection.list).error);
+        });
+
+        it('fails the list', () => {
+            assert.isNotNull(validate('empty.yaml', models.collection.list).error);
+        });
+    });
+
     describe('create', () => {
         it('validates the create', () => {
             assert.isNull(validate('collection.create.yaml', models.collection.create).error);

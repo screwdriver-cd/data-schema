@@ -1,0 +1,15 @@
+- id: 12
+  name: 'collection1'
+  description: 'pipelines for collection 1'
+  pipelineIds: [11, 12, 13]
+  userId: 123
+- id: 13
+  name: 'collection2'
+  description: 'pipelines for collection 2'
+  pipelineIds: [14, 15, 16]
+  userId: 123
+- id: 14
+  name: 'collection3'
+  description: 'pipelines for collection 3'
+  pipelineIds: [17, 18, 19]
+  userId: 123
