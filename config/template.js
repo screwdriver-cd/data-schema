@@ -23,6 +23,13 @@ const TEMPLATE_VERSION = Joi
             .regex(Regex.VERSION)
             .max(16)
             .description('Version of the Template')
+            .example('1.2');
+
+const TEMPLATE_EXACT_VERSION = Joi
+            .string()
+            .regex(Regex.EXACT_VERSION)
+            .max(16)
+            .description('Exact version of the Template')
             .example('1.2.3');
 
 const TEMPLATE_DESCRIPTION = Joi
@@ -58,6 +65,7 @@ module.exports = {
     name: TEMPLATE_NAME,
     templateTag: TEMPLATE_TAG_NAME,
     version: TEMPLATE_VERSION,
+    exactVersion: TEMPLATE_EXACT_VERSION,
     description: TEMPLATE_DESCRIPTION,
     maintainer: TEMPLATE_MAINTAINER,
     config: Job.job

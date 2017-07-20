@@ -10,7 +10,7 @@ const MODEL = {
         .example(123345),
     name: Template.name,
     tag: Template.templateTag,
-    version: Template.version
+    version: Template.exactVersion
 };
 
 module.exports = {
