@@ -10,9 +10,14 @@ module.exports = {
     // Template tags must start with an alpha character (A-Z,a-z) and can only contain A-Z,a-z,0-9,-,_
     TEMPLATE_TAG_NAME: /^[a-zA-Z][\w-]+$/,
     // Version can only have up to 2 decimals, like 1.2.3
-    VERSION: /^(\d+)?(\.\d+)?(\.\d+)?$/,
-    // Full name of template and version. Example: chef/publish@1.2.3 or chef/publish@1-stable
-    FULL_TEMPLATE_NAME: /^([\w/-]+)(@)?((\d+)?(\.\d+)?(\.\d+)?)(-[\w]+)?$/,
+    // It can also be just major or major and minor versions, like 1 or 1.2
+    VERSION: /^(\d+)+(\.\d+)?(\.\d+)?$/,
+    // Exact version should contain the major, minor, and patch versions, e.g. 1.2.3
+    EXACT_VERSION: /^(\d+)+(\.\d+)+(\.\d+)+$/,
+    // Full name of template and version. Can be <TEMPLATE_NAME>@<VERSION> or <TEMPLATE_NAME>@<TEMPLATE_TAG_NAME>
+    // Example: chef/publish@1.2.3 or chef/publish@stable
+    // Only <TEMPLATE_NAME> or <TEMPLATE_NAME>@ is also acceptable
+    FULL_TEMPLATE_NAME: /^([\w/-]+)(@(((\d+)+(\.\d+)?(\.\d+)?)|([a-zA-Z][\w-]+))?)?$/,
     // Steps can only be named with A-Z,a-z,0-9,-,_
     STEP_NAME: /^[\w-]+$/,
     // Jobs can only be named with A-Z,a-z,0-9,-,_
