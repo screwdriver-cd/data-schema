@@ -5,6 +5,7 @@ description: 'Collection of screwdriver related pipelines'
 pipelines:
     - id: 12742
       scmUri: github.com:12345678:master
+      scmContext: github:github.com
       createTime: "2017-07-14"
       admins:
         username: true
@@ -23,6 +24,7 @@ pipelines:
         beta.screwdriver.cd/auto_pr_builds: fork-only
     - id: 12576
       scmUri: github.com:87654321:master
+      scmContext: github:github.com
       createTime: "2017-07-14"
       admins:
         username: true
