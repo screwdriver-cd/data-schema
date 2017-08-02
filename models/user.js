@@ -23,7 +23,7 @@ const MODEL = {
         .string()
         .max(128)
         .description('The SCM to which the user belongs')
-        .example('github.com')
+        .example('github:github.com')
 };
 
 module.exports = {

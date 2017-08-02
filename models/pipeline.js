@@ -30,7 +30,7 @@ const MODEL = {
     scmContext: Joi
         .string().max(128)
         .description('The SCM in which the repository exists')
-        .example('github.com'),
+        .example('github:github.com'),
 
     scmRepo: Scm.repo,
 
