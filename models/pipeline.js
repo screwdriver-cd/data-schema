@@ -27,6 +27,11 @@ const MODEL = {
         .description('Unique identifier for the application')
         .example('github.com:123456:master'),
 
+    scmContext: Joi
+        .string().max(128)
+        .description('The SCM in which the repository exists')
+        .example('github:github.com'),
+
     scmRepo: Scm.repo,
 
     createTime: Joi
@@ -62,7 +67,7 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'scmUri', 'createTime', 'admins'
+        'id', 'scmUri', 'scmContext', 'createTime', 'admins'
     ], [
         'workflow', 'scmRepo', 'annotations'
     ])).label('Get Pipeline'),
