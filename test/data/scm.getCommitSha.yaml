@@ -1,3 +1,4 @@
 scmUri: github.com:12345678:master
 token: 'thisisatokenthingy'
 prNum: null
+scmContext: github:github.com

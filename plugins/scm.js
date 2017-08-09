@@ -1,17 +1,19 @@
 'use strict';
 
+const core = require('../core');
 const Joi = require('joi');
 const models = require('../models');
-const core = require('../core');
-const scmUri = Joi.reach(models.pipeline.base, 'scmUri').required();
-const token = Joi.reach(models.user.base, 'token').required();
-const sha = Joi.reach(models.build.base, 'sha').required();
+
 const buildStatus = Joi.reach(models.build.base, 'status').required();
-const jobName = Joi.reach(models.job.base, 'name').optional();
-const username = Joi.reach(models.user.base, 'username').required();
 const checkoutUrl = Joi.reach(models.pipeline.create, 'checkoutUrl').required();
-const prNum = Joi.reach(core.scm.hook, 'prNum').allow(null).optional();
+const jobName = Joi.reach(models.job.base, 'name').optional();
 const pipelineId = Joi.reach(models.pipeline.base, 'id').optional();
+const prNum = Joi.reach(core.scm.hook, 'prNum').allow(null).optional();
+const scmContext = Joi.reach(models.pipeline.base, 'scmContext').optional();
+const scmUri = Joi.reach(models.pipeline.base, 'scmUri').required();
+const sha = Joi.reach(models.build.base, 'sha').required();
+const token = Joi.reach(models.user.base, 'token').required();
+const username = Joi.reach(models.user.base, 'username').required();
 
 const ADD_WEBHOOK = Joi.object().keys({
     scmUri,
@@ -21,7 +23,8 @@ const ADD_WEBHOOK = Joi.object().keys({
             'http',
             'https'
         ]
-    })
+    }),
+    scmContext
 }).required();
 
 const GET_CHECKOUT_COMMAND = Joi.object().keys({
@@ -30,18 +33,21 @@ const GET_CHECKOUT_COMMAND = Joi.object().keys({
     org: Joi.string().required(),
     repo: Joi.string().required(),
     sha: Joi.string().required(),
-    prRef: Joi.string().optional()
+    prRef: Joi.string().optional(),
+    scmContext
 }).required();
 
 const GET_PERMISSIONS = Joi.object().keys({
     scmUri,
-    token
+    token,
+    scmContext
 }).required();
 
 const GET_COMMIT_SHA = Joi.object().keys({
     scmUri,
     token,
-    prNum
+    prNum,
+    scmContext
 }).required();
 
 const UPDATE_COMMIT_STATUS = Joi.object().keys({
@@ -51,35 +57,41 @@ const UPDATE_COMMIT_STATUS = Joi.object().keys({
     buildStatus,
     jobName,
     url: Joi.string().uri().required(),
-    pipelineId
+    pipelineId,
+    scmContext
 }).required();
 
 const GET_FILE = Joi.object().keys({
     scmUri,
     token,
     path: Joi.string().required(),
-    ref: Joi.string().optional()
+    ref: Joi.string().optional(),
+    scmContext
 }).required();
 
 const DECORATE_URL = Joi.object().keys({
     scmUri,
-    token
+    token,
+    scmContext
 }).required();
 
 const DECORATE_COMMIT = Joi.object().keys({
     scmUri,
     sha,
-    token
+    token,
+    scmContext
 }).required();
 
 const DECORATE_AUTHOR = Joi.object().keys({
     username,
-    token
+    token,
+    scmContext
 }).required();
 
 const PARSE_URL = Joi.object().keys({
     checkoutUrl,
-    token
+    token,
+    scmContext
 }).required();
 
 module.exports = {

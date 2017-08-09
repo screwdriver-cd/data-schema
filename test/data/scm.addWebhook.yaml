@@ -2,3 +2,4 @@
 scmUri: github.com:126987453:master
 token: thisisashinytoken
 webhookUrl: https://screwdriver.cd/v4/some-endpoint
+scmContext: github:github.com

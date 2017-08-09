@@ -5,3 +5,4 @@ buildStatus: SUCCESS
 jobName: main
 url: https://foo.bar
 pipelineId: 123
+scmContext: github:github.com
