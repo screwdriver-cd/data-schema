@@ -17,6 +17,7 @@ const SCHEMA_JOBS = Joi.object()
 const SCHEMA_SHARED = Job.job;
 const SCHEMA_CONFIG = Joi.object()
     .keys({
+        version: Joi.number().integer().min(1).max(50),
         annotations: Annotations.annotations,
         jobs: SCHEMA_JOBS,
         shared: SCHEMA_SHARED,
