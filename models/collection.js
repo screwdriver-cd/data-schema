@@ -3,8 +3,12 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 
+const BUILD_MODEL = require('./build').get;
 const PIPELINE_MODEL = require('./pipeline').get;
-const PIPELINES_MODEL = Joi.array().items(PIPELINE_MODEL);
+const PIPELINE_OBJECT = PIPELINE_MODEL.keys({
+    lastBuild: BUILD_MODEL.optional()
+});
+const PIPELINES_MODEL = Joi.array().items(PIPELINE_OBJECT);
 const MODEL = {
     id: Joi
         .number()
@@ -53,6 +57,7 @@ module.exports = {
     get: Joi.object(mutate(GET_MODEL, [
         'id',
         'name',
+        'pipelineIds',
         'pipelines'
     ], [
         'description'
