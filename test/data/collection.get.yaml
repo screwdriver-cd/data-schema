@@ -2,6 +2,7 @@
 id: 123
 name: 'Screwdriver'
 description: 'Collection of screwdriver related pipelines'
+pipelineIds: [12742, 12576]
 pipelines:
     - id: 12742
       scmUri: github.com:12345678:master
@@ -22,6 +23,14 @@ pipelines:
           - OSX-SIERRA
         screwdriver.cd/notify.email: foo@example.com
         beta.screwdriver.cd/auto_pr_builds: fork-only
+      lastBuild:
+        id: 123345
+        eventId: 12351523
+        jobId: 123415
+        number: 1473900790309
+        cause: Commit ccc493 was pushed to master
+        status: SUCCESS
+        createTime: "2017-08-21"
     - id: 12576
       scmUri: github.com:87654321:master
       scmContext: github:github.com
