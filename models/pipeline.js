@@ -48,11 +48,7 @@ const MODEL = {
         .description('Current workflow of the pipeline'),
 
     annotations: Annotations.annotations
-        .description('Pipeline-level annotations'),
-
-    lastEventId: Joi.number().integer().positive()
-        .description('Identifier of last event')
-        .example(123345)
+        .description('Pipeline-level annotations')
 };
 
 module.exports = {
@@ -73,7 +69,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'scmUri', 'scmContext', 'createTime', 'admins'
     ], [
-        'workflow', 'scmRepo', 'annotations', 'lastEventId'
+        'workflow', 'scmRepo', 'annotations'
     ])).label('Get Pipeline'),
 
     /**
