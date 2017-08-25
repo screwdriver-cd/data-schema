@@ -30,6 +30,7 @@ const MODEL = {
     description: Joi
         .string()
         .max(256)
+        .allow('')
         .description('Collection description')
         .example('List of my favorite pipelines'),
 
