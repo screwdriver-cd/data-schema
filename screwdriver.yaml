@@ -12,7 +12,7 @@ jobs:
 
     publish:
         steps:
-            - install: npm install semantic-release
+            - install: npm install --no-save semantic-release@^7
             - publish: npm run semantic-release
         secrets:
             # Publishing to NPM
