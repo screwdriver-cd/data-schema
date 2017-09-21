@@ -88,13 +88,13 @@ module.exports = {
 
     /**
      * Primary column to sort queries by.
-     * This defines queries to optionally sort a query result set by version.
+     * This defines queries to optionally sort a query result set by id.
      * Each range key matches up with an element in the indexes property
      *
      * @property rangeKeys
      * @type {Array}
      */
-    rangeKeys: ['version'],
+    rangeKeys: ['id'],
 
     /**
      * Tablename to be used in the datastore
