@@ -22,6 +22,8 @@ module.exports = {
     STEP_NAME: /^[\w-]+$/,
     // Jobs can only be named with A-Z,a-z,0-9,-,_
     JOB_NAME: /^[\w-]+$/,
+    // Can be ~pr, ~commit, or ~commit:branchName
+    TRIGGER: /^~(pr|commit(:.+)?)$/,
     // IEEE Std 1003.1-2001
     // Environment names contain uppercase letters, digits, and underscore
     // They cannot start with digits

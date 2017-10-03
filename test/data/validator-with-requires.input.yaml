@@ -1,0 +1,23 @@
+yaml: |
+  jobs:
+      main:
+          annotations:
+              beta.screwdriver.cd/auto_pr_builds: fork-only
+          description: "This is a description"
+          image: node:{{NODE_VERSION}}
+          matrix:
+              NODE_VERSION: [4,5,6]
+          steps:
+              install: npm install
+              test: npm test
+              build: npm run build
+          settings:
+              email: foo@bar.com
+          requires: ~commit
+
+      publish:
+          image: node:4
+          steps:
+              install: npm publish
+          requires:
+              - main

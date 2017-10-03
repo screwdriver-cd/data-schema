@@ -10,6 +10,14 @@ describe('config job', () => {
             assert.isNull(validate('config.job.job.yaml', config.job.job).error);
         });
 
+        it('validates a job with requires', () => {
+            assert.isNull(validate('config.job.jobv2.yaml', config.job.job).error);
+        });
+
+        it('returns error for bad requires format', () => {
+            assert.isNotNull(validate('config.job.jobv2.bad.yaml', config.job.job).error);
+        });
+
         it('validates a description', () => {
             assert.isNull(validate('config.job.description.yaml', config.job.job).error);
         });
