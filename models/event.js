@@ -4,6 +4,7 @@ const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Scm = require('../core/scm');
 const Workflow = require('../config/workflow');
+const { requiresValue } = require('../config/job');
 
 const MODEL = {
     id: Joi
@@ -32,6 +33,9 @@ const MODEL = {
         .string().hex().length(40)
         .description('SHA this project was built on')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
+    startFrom: requiresValue
+        .description('Event start point - a job name or trigger name (~commit/~pr)')
+        .example('main'),
     type: Joi
         .string().valid([
             'pr',
@@ -68,6 +72,18 @@ module.exports = {
      */
     get: Joi.object(mutate(MODEL, [
         'id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'type', 'workflow'
+    ], [
+        'causeMessage', 'startFrom'
+    ])).label('Get Event'),
+
+    /**
+     * Properties for Event that will be passed in a CREATE request
+     *
+     * @property create
+     * @type {Joi}
+     */
+    create: Joi.object(mutate(MODEL, [
+        'pipelineId', 'startFrom'
     ], [
         'causeMessage'
     ])).label('Get Event'),

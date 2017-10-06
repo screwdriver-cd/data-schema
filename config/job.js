@@ -104,5 +104,8 @@ module.exports = {
     settings: SCHEMA_SETTINGS,
     step: SCHEMA_STEP,
     steps: SCHEMA_STEPS,
-    template: SCHEMA_TEMPLATE
+    template: SCHEMA_TEMPLATE,
+    requiresValue: SCHEMA_REQUIRES_VALUE,
+    jobname: SCHEMA_JOBNAME,
+    trigger: SCHEMA_TRIGGER
 };

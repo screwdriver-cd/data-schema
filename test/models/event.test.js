@@ -11,6 +11,20 @@ describe('model event', () => {
         });
     });
 
+    describe('create', () => {
+        it('validates the create', () => {
+            assert.isNull(validate('event.create.yaml', models.event.create).error);
+        });
+
+        it('validates the create with optional fields', () => {
+            assert.isNull(validate('event.create.full.yaml', models.event.create).error);
+        });
+
+        it('fails the create', () => {
+            assert.isNotNull(validate('empty.yaml', models.event.create).error);
+        });
+    });
+
     describe('get', () => {
         it('validates the get', () => {
             assert.isNull(validate('event.get.yaml', models.event.get).error);
