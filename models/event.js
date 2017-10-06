@@ -33,7 +33,8 @@ const MODEL = {
         .string().hex().length(40)
         .description('SHA this project was built on')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
-    startFrom: requiresValue
+    startFrom: Joi
+        .string()
         .description('Event start point - a job name or trigger name (~commit/~pr)')
         .example('main'),
     type: Joi
@@ -47,6 +48,8 @@ const MODEL = {
         .description('Workflow of the associated pipeline')
         .example(['main', 'publish', 'deploy'])
 };
+
+const CREATE_MODEL = Object.assign({}, MODEL, { startFrom: requiresValue });
 
 module.exports = {
     /**
@@ -82,11 +85,11 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(mutate(MODEL, [
+    create: Joi.object(mutate(CREATE_MODEL, [
         'pipelineId', 'startFrom'
     ], [
         'causeMessage'
-    ])).label('Get Event'),
+    ])).label('Create Event'),
 
     /**
      * List of indexes to create in the datastore
