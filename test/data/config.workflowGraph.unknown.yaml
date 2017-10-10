@@ -1,0 +1,12 @@
+nodes:
+    - name: ~commit
+      jobId: 1
+    - name: main
+      jobId: 2
+    - name: publish
+      jobId: 3
+edges:
+    - src: ~commit
+      dest: main
+    - src: main
+      dest: publish

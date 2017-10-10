@@ -1,0 +1,9 @@
+nodes:
+    - name: ~commit
+    - name: main
+    - name: publish
+edges:
+    - src: ~commit
+      dest: main
+    - src: main
+      dest: publish

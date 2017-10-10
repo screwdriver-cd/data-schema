@@ -58,5 +58,10 @@ jobs:
     secrets:
       - NPM_TOKEN
 
-workflow:
-    - publish
+workflowGraph:
+    nodes:
+        - name: main
+        - name: publish
+    edges:
+        - src: main
+          dest: publish
