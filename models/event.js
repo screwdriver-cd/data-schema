@@ -4,6 +4,7 @@ const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Scm = require('../core/scm');
 const Workflow = require('../config/workflow');
+const WorkflowGraph = require('../config/workflowGraph');
 const { requiresValue } = require('../config/job');
 
 const MODEL = {
@@ -46,7 +47,13 @@ const MODEL = {
         .example('pr'),
     workflow: Workflow.workflow
         .description('Workflow of the associated pipeline')
-        .example(['main', 'publish', 'deploy'])
+        .example(['main', 'publish', 'deploy']),
+    workflowGraph: WorkflowGraph.workflowGraph
+        .description('Graph representation of the workflow')
+        .example({
+            nodes: [{ name: '~commit' }, { name: 'main' }, { name: 'publish' }],
+            edges: [{ src: '~commit', dest: 'main' }, { src: 'main', dest: 'publish' }]
+        })
 };
 
 const CREATE_MODEL = Object.assign({}, MODEL, { startFrom: requiresValue });
@@ -74,9 +81,9 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'type', 'workflow'
+        'id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'type'
     ], [
-        'causeMessage', 'startFrom'
+        'causeMessage', 'startFrom', 'workflow', 'workflowGraph'
     ])).label('Get Event'),
 
     /**

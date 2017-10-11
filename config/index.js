@@ -6,5 +6,6 @@ const job = require('./job');
 const regex = require('./regex');
 const template = require('./template');
 const workflow = require('./workflow');
+const workflowGraph = require('./workflowGraph');
 
-module.exports = { annotations, base, job, regex, template, workflow };
+module.exports = { annotations, base, job, regex, template, workflow, workflowGraph };

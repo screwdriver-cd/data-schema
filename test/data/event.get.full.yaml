@@ -20,6 +20,15 @@ sha: 46f1a0bd5592a2f9244ca321b129902a06b53e03
 startFrom: 'main'
 type: pipeline
 workflow:
-    - down
-    - right
-    - fierce_punch
+    - main
+    - publish
+workflowGraph:
+    nodes:
+        - name: ~commit
+        - name: main
+        - name: publish
+    edges:
+        - src: ~commit
+          dest: main
+        - src: main
+          dest: publish
