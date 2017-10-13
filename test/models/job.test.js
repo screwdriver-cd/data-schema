@@ -16,6 +16,10 @@ describe('model job', () => {
             assert.isNull(validate('job.get.yaml', models.job.get).error);
         });
 
+        it('validates the get with PR job', () => {
+            assert.isNull(validate('job.pr.get.yaml', models.job.get).error);
+        });
+
         it('fails the get for empty yaml', () => {
             assert.isNotNull(validate('empty.yaml', models.job.get).error);
         });
