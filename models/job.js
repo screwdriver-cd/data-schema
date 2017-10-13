@@ -11,7 +11,7 @@ const MODEL = {
         .example(123345),
 
     name: Joi
-        .string().regex(/^[A-Za-z0-9_-]+$/)
+        .string().regex(/^(PR-[0-9]+:)?[\w-]+$/)
         .max(25)
         .description('Name of the Job')
         .example('main'),

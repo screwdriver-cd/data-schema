@@ -42,6 +42,19 @@ describe('config regex', () => {
         it('fails on bad job names', () => {
             assert.isFalse(config.regex.JOB_NAME.test('run all the things'));
         });
+
+        it('checks good PR job names', () => {
+            assert.isTrue(config.regex.PR_JOB_NAME.test('PR-1'));
+            assert.isTrue(config.regex.PR_JOB_NAME.test('PR-1:main'));
+            assert.isTrue(config.regex.PR_JOB_NAME.test('PR-1:main-job'));
+            assert.deepEqual('PR-1:main-job'.match(config.regex.PR_JOB_NAME)[1], 'PR-1');
+            assert.deepEqual('PR-1:main-job'.match(config.regex.PR_JOB_NAME)[2], 'main-job');
+        });
+
+        it('checks bad PR job names', () => {
+            assert.isFalse(config.regex.PR_JOB_NAME.test('PR-1-main'));
+            assert.isFalse(config.regex.PR_JOB_NAME.test('PR-1:main:job'));
+        });
     });
 
     describe('environment', () => {
