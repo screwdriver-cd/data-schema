@@ -16,6 +16,10 @@ describe('model event', () => {
             assert.isNull(validate('event.create.yaml', models.event.create).error);
         });
 
+        it('validates the create with startFrom PR job name', () => {
+            assert.isNull(validate('event.create.pr.yaml', models.event.create).error);
+        });
+
         it('validates the create with optional fields', () => {
             assert.isNull(validate('event.create.full.yaml', models.event.create).error);
         });

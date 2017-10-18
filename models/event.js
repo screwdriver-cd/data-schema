@@ -5,7 +5,8 @@ const mutate = require('../lib/mutate');
 const Scm = require('../core/scm');
 const Workflow = require('../config/workflow');
 const WorkflowGraph = require('../config/workflowGraph');
-const { requiresValue } = require('../config/job');
+const { trigger } = require('../config/job');
+const jobName = Joi.reach(require('./job').base, 'name');
 
 const MODEL = {
     id: Joi
@@ -56,7 +57,9 @@ const MODEL = {
         })
 };
 
-const CREATE_MODEL = Object.assign({}, MODEL, { startFrom: requiresValue });
+const CREATE_MODEL = Object.assign({}, MODEL, {
+    startFrom: Joi.alternatives().try(trigger, jobName)
+});
 
 module.exports = {
     /**
