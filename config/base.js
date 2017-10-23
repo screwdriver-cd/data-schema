@@ -7,9 +7,6 @@ const Regex = require('./regex');
 const Workflow = require('./workflow');
 
 const SCHEMA_JOBS = Joi.object()
-    .keys({
-        main: Job.job.required()
-    })
     // Jobs can only be named with A-Z,a-z,0-9,-,_
     .pattern(Regex.JOB_NAME, Job.job)
     // All others are marked as invalid
