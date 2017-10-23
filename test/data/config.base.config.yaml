@@ -5,7 +5,7 @@ shared:
         NODE_TAG: latest
 
 jobs:
-    main:
+    first:
         environment:
             NODE_ENV: production
         matrix:
