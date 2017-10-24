@@ -4,6 +4,26 @@ const assert = require('chai').assert;
 const config = require('../../').config;
 
 describe('config regex', () => {
+    describe('external trigger', () => {
+        it('checks good external trigger', () => {
+            assert.isTrue(config.regex.EXTERNAL_TRIGGER.test('~sd@123:main'));
+        });
+
+        it('fails on bad external trigger', () => {
+            assert.isFalse(config.regex.EXTERNAL_TRIGGER.test('~sd:123'));
+        });
+    });
+
+    describe('trigger', () => {
+        it('checks good trigger', () => {
+            assert.isTrue(config.regex.TRIGGER.test('~commit'));
+        });
+
+        it('fails on bad trigger', () => {
+            assert.isFalse(config.regex.TRIGGER.test('~'));
+        });
+    });
+
     describe('templates', () => {
         it('checks good template names', () => {
             assert.isTrue(config.regex.TEMPLATE_NAME.test('node/npm-install'));
