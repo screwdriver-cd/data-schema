@@ -31,7 +31,7 @@ const MODEL = {
 
 module.exports = {
     /**
-     * All the available properties of Pipeline
+     * All the available properties of Secret
      *
      * @property base
      * @type {Joi}

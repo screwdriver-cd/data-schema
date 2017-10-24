@@ -1,0 +1,4 @@
+# Base Trigger Example
+id: 123234135
+src: ~sd@1234:component
+dest: ~sd@5678:main
