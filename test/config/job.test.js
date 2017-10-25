@@ -14,6 +14,10 @@ describe('config job', () => {
             assert.isNull(validate('config.job.jobv2.yaml', config.job.job).error);
         });
 
+        it('validates a job with requires from an external pipeline', () => {
+            assert.isNull(validate('config.job.jobv2.externalrequires.yaml', config.job.job).error);
+        });
+
         it('returns error for bad requires format', () => {
             assert.isNotNull(validate('config.job.jobv2.bad.yaml', config.job.job).error);
         });

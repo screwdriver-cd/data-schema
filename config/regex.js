@@ -24,8 +24,10 @@ module.exports = {
     JOB_NAME: /^[\w-]+$/,
     // PR JOB Name can only be PR-1 or PR-1:main, group1: PR-prNum, group2: jobName
     PR_JOB_NAME: /^(PR-\d+)(?::([\w-]+))?$/,
-    // Can be ~pr, ~commit, or ~commit:branchName
-    TRIGGER: /^~(pr|commit(:.+)?)$/,
+    // External trigger like ~sd@123:component
+    EXTERNAL_TRIGGER: /^~sd@(\d+):([\w-]+)$/,
+    // Can be ~pr, ~commit, or ~commit:branchName, or ~sd@123:component
+    TRIGGER: /^~(sd@\d+:[\w-]+|pr|commit(:.+)?)$/,
     // IEEE Std 1003.1-2001
     // Environment names contain uppercase letters, digits, and underscore
     // They cannot start with digits
