@@ -9,8 +9,9 @@ const secret = require('./secret');
 const template = require('./template');
 const templateTag = require('./templateTag');
 const token = require('./token');
+const trigger = require('./trigger');
 const collection = require('./collection');
 
 module.exports = {
-    build, event, job, pipeline, user, secret, template, templateTag, token, collection
+    build, event, job, pipeline, user, secret, template, templateTag, token, trigger, collection
 };
