@@ -170,6 +170,16 @@ describe('config regex', () => {
                         'data-schema',
                         '#banana'
                     ]
+                },
+                {
+                    url: 'git@bitbucket.org:screwdriver-cd/data.schema#banana',
+                    match: [
+                        'git@bitbucket.org:screwdriver-cd/data.schema#banana',
+                        'bitbucket.org',
+                        'screwdriver-cd',
+                        'data.schema',
+                        '#banana'
+                    ]
                 }
             ];
 
@@ -185,7 +195,7 @@ describe('config regex', () => {
 
         it('fails on bad checkout Url', () => {
             assert.isFalse(
-                config.regex.CHECKOUT_URL.test('https://github.com/screwdriver-cd/.git'));
+                config.regex.CHECKOUT_URL.test('https://github.com/screwdriver-cd/'));
             assert.isFalse(
                 config.regex.CHECKOUT_URL.test('git@screwdriver-cd/data-schema.git'));
         });
