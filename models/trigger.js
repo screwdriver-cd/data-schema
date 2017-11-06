@@ -13,7 +13,7 @@ const MODEL = {
         .example('~sd@1234:component'),
 
     dest: Joi
-        .string().regex(Regex.EXTERNAL_TRIGGER)
+        .string().regex(Regex.EXTERNAL_TRIGGER).max(64)
         .example('~sd@5678:test')
 
 };
