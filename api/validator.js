@@ -36,9 +36,6 @@ const SCHEMA_JOB_PERMUTATIONS = Joi.array().items(SCHEMA_JOB_PERMUTATION)
     .label('List of job permutations');
 
 const SCHEMA_JOBS = Joi.object()
-    .keys({
-        main: SCHEMA_JOB_PERMUTATIONS.required()
-    })
     // Jobs can only be named with A-Z,a-z,0-9,-,_
     .pattern(Regex.JOB_NAME, SCHEMA_JOB_PERMUTATIONS)
     // All others are marked as invalid
