@@ -1,5 +1,5 @@
 jobs:
-  main:
+  first:
   - image: node:4
     commands:
       - name: install
@@ -50,7 +50,7 @@ jobs:
 
   publish:
   - image: node:4
-    requires: main
+    requires: first
     commands:
     - name: install
       command: npm publish
@@ -60,8 +60,8 @@ jobs:
 
 workflowGraph:
     nodes:
-        - name: main
+        - name: first
         - name: publish
     edges:
-        - src: main
+        - src: first
           dest: publish
