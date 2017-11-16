@@ -114,7 +114,12 @@ const MODEL = {
         ])
         .description('Current status of the build')
         .example('SUCCESS')
-        .default('QUEUED')
+        .default('QUEUED'),
+
+    statusMessage: Joi
+        .string()
+        .description('Status message to describe status of the build')
+        .example('Build failed due to infrastructure error')
 };
 
 module.exports = {
@@ -136,7 +141,7 @@ module.exports = {
         'id', 'jobId', 'number', 'cause', 'createTime', 'status'
     ], [
         'container', 'parentBuildId', 'sha', 'startTime', 'endTime', 'meta', 'parameters', 'steps',
-        'commit', 'eventId', 'environment'
+        'commit', 'eventId', 'environment', 'statusMessage'
     ])).label('Get Build'),
 
     /**
@@ -148,7 +153,7 @@ module.exports = {
     update: Joi.object(mutate(MODEL, [
         'status'
     ], [
-        'meta'
+        'meta', 'statusMessage'
     ])).label('Update Build'),
 
     /**
