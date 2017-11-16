@@ -1,4 +1,5 @@
 # Build Update Example
-status: ABORTED
+status: FAILURE
+statusMessage: 'Build failed to start due to infrastructure error'
 meta:
     yes: no
