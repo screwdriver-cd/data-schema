@@ -24,6 +24,24 @@ describe('config regex', () => {
         });
     });
 
+    describe('commands', () => {
+        it('checks good command namespaces', () => {
+            assert.isTrue(config.regex.COMMAND_NAMESPACE.test('chefdk'));
+        });
+
+        it('fails on bad command namespaces', () => {
+            assert.isFalse(config.regex.COMMAND_NAMESPACE.test('bad/namespace'));
+        });
+
+        it('checks good command names', () => {
+            assert.isTrue(config.regex.COMMAND_NAME.test('knife'));
+        });
+
+        it('fails on bad command names', () => {
+            assert.isFalse(config.regex.COMMAND_NAME.test('bad/name'));
+        });
+    });
+
     describe('templates', () => {
         it('checks good template names', () => {
             assert.isTrue(config.regex.TEMPLATE_NAME.test('node/npm-install'));
