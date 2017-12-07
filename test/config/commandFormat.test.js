@@ -23,7 +23,7 @@ describe('config commandFormat', () => {
                 config.commandFormat.docker).error);
         });
 
-        it('returns error when no image in docker format', () => {
+        it('returns error when invalid key in docker format', () => {
             assert.isNotNull(validate('config.commandFormat.docker.bad.yaml',
                 config.commandFormat.docker).error);
         });
