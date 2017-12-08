@@ -40,6 +40,18 @@ describe('config regex', () => {
         it('fails on bad command names', () => {
             assert.isFalse(config.regex.COMMAND_NAME.test('bad/name'));
         });
+
+        it('checks good command full names', () => {
+            assert.isTrue(config.regex.FULL_COMMAND_NAME.test('chefdk/knife@1.2.3'));
+        });
+
+        it('checks good command full names without version', () => {
+            assert.isTrue(config.regex.FULL_COMMAND_NAME.test('chefdk/knife'));
+        });
+
+        it('fails on bad command full names', () => {
+            assert.isFalse(config.regex.FULL_COMMAND_NAME.test('bad name'));
+        });
     });
 
     describe('templates', () => {
