@@ -52,6 +52,10 @@ describe('config regex', () => {
         it('fails on bad command full names', () => {
             assert.isFalse(config.regex.FULL_COMMAND_NAME.test('bad name'));
         });
+
+        it('fails on bad formatted command full names', () => {
+            assert.isFalse(config.regex.FULL_COMMAND_NAME.test('namespace::command@1.2.3'));
+        });
     });
 
     describe('templates', () => {
