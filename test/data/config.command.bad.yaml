@@ -5,11 +5,11 @@ description: |
   Lorem ipsum dolor sit amet.
 maintainer: foo@bar.com
 format: docker
+# invalid config
 habitat:
     mode: remote
     package: core/git/2.14.1
     binary: git
+# valid config
 #docker:
 #    image: node:1.2.3
-#binary:
-#    file: ./foobar.sh
