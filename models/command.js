@@ -10,12 +10,6 @@ const MODEL = {
         .description('Identifier of this command')
         .example(123345),
 
-    labels: Joi
-        .array()
-        .items(Joi.string())
-        .description('Labels for command')
-        .example(['stable', 'latest', 'beta']),
-
     namespace: Command.namespace,
     command: Command.command,
     version: Command.version,
@@ -44,7 +38,6 @@ module.exports = {
      */
     get: Joi.object(mutate(MODEL, [
         'id',
-        'labels',
         'namespace',
         'command',
         'version',
@@ -73,18 +66,8 @@ module.exports = {
     ], [
         'habitat',
         'docker',
-        'binary',
-        'labels'
+        'binary'
     ])).label('Create Command'),
-
-    /**
-     * Properties for command that will be passed during a UPDATE request
-     *
-     * @property update
-     * @type {Joi}
-     */
-    update: Joi.object(mutate(MODEL, [], ['labels']))
-        .label('Update Command'),
 
     /**
      * List of fields that determine a unique row

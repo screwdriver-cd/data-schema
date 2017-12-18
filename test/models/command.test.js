@@ -30,14 +30,4 @@ describe('model command', () => {
             assert.isNotNull(validate('empty.yaml', models.command.get).error);
         });
     });
-
-    describe('update', () => {
-        it('validates the update', () => {
-            assert.isNull(validate('command.update.yaml', models.command.update).error);
-        });
-
-        it('fails the update', () => {
-            assert.isNotNull(validate('empty.yaml', models.command.update).error);
-        });
-    });
 });

@@ -1,9 +1,5 @@
 # Base Command Example
 id: 123234135
-labels:
-    - stable
-    - test
-    - beta
 namespace: foo
 command: bar
 version: '1.0'
