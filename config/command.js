@@ -58,6 +58,7 @@ const COMMAND_FORMAT = Joi
         'docker',
         'binary'
     ])
+    .max(16)
     .description('Format of the Command')
     .example('habitat');
 
