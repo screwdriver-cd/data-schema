@@ -9,7 +9,8 @@ format: docker
 habitat:
     mode: remote
     package: core/git/2.14.1
-    binary: git
+    command: git
 # valid config
 #docker:
-#    image: node:1.2.3
+#    image: chefdk:1.2.3
+#    command: knife

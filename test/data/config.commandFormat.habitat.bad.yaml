@@ -3,4 +3,4 @@ package: core/git/2.14.1
 # If local
 # mode: local
 # package: ./foobar.hart
-binary: git
+command: git

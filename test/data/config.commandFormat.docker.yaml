@@ -1,1 +1,2 @@
-image: node:1.2.3
+image: chefdk:1.2.3
+command: knife

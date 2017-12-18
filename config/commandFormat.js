@@ -15,27 +15,34 @@ const HABITAT_PACKAGE = Joi
     .description('Package of the Habitat command')
     .example('core/git/2.14.1');
 
-const HABITAT_BINARY = Joi
+const HABITAT_COMMAND = Joi
     .string()
-    .description('Binary of the Habitat command')
+    .description('Executable of the Habitat command')
     .example('git');
 
 const SCHEMA_HABITAT = Joi.object()
     .keys({
         mode: HABITAT_MODE,
         package: HABITAT_PACKAGE,
-        binary: HABITAT_BINARY
+        command: HABITAT_COMMAND
     })
-    .requiredKeys('mode', 'package', 'binary');
+    .requiredKeys('mode', 'package', 'command');
 
 const DOCKER_IMAGE = Joi
     .string()
     .description('Image of the Docker command')
-    .example('node:1.2.3');
+    .example('chefdk:1.2.3');
+
+const DOCKER_COMMAND = Joi
+    .string()
+    .description('Executable of the Docker command')
+    .default('')
+    .example('knife');
 
 const SCHEMA_DOCKER = Joi.object()
     .keys({
-        image: DOCKER_IMAGE
+        image: DOCKER_IMAGE,
+        command: DOCKER_COMMAND
     })
     .requiredKeys('image');
 
@@ -58,9 +65,10 @@ module.exports = {
     habitat: SCHEMA_HABITAT,
     habitatMode: HABITAT_MODE,
     habitatPackage: HABITAT_PACKAGE,
-    habitatBinary: HABITAT_BINARY,
+    habitatCommand: HABITAT_COMMAND,
     docker: SCHEMA_DOCKER,
     dockerImage: DOCKER_IMAGE,
+    dockerCommand: DOCKER_COMMAND,
     binary: SCHEMA_BINARY,
     binaryFile: BINARY_FILE
 };
