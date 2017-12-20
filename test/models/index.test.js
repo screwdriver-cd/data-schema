@@ -9,7 +9,9 @@ describe('model commmons', () => {
         'pipeline',
         'build',
         'job',
-        'user'
+        'user',
+        'command',
+        'commandTag'
     ];
 
     it('selected models have tableName defined', () => {

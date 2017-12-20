@@ -1,0 +1,17 @@
+# Command CREATE Example
+namespace: foo
+command: bar
+version: '1.0'
+description: |
+  Lorem ipsum dolor sit amet.
+maintainer: foo@bar.com
+format: habitat
+habitat:
+    mode: remote
+    package: core/git/2.14.1
+    command: git
+#docker:
+#    image: chefdk:1.2.3
+#    command: knife
+#binary:
+#    file: ./foobar.sh

@@ -24,6 +24,40 @@ describe('config regex', () => {
         });
     });
 
+    describe('commands', () => {
+        it('checks good command namespaces', () => {
+            assert.isTrue(config.regex.COMMAND_NAMESPACE.test('chefdk'));
+        });
+
+        it('fails on bad command namespaces', () => {
+            assert.isFalse(config.regex.COMMAND_NAMESPACE.test('bad/namespace'));
+        });
+
+        it('checks good command names', () => {
+            assert.isTrue(config.regex.COMMAND_NAME.test('knife'));
+        });
+
+        it('fails on bad command names', () => {
+            assert.isFalse(config.regex.COMMAND_NAME.test('bad/name'));
+        });
+
+        it('checks good command full names', () => {
+            assert.isTrue(config.regex.FULL_COMMAND_NAME.test('chefdk/knife@1.2.3'));
+        });
+
+        it('checks good command full names without version', () => {
+            assert.isTrue(config.regex.FULL_COMMAND_NAME.test('chefdk/knife'));
+        });
+
+        it('fails on bad command full names', () => {
+            assert.isFalse(config.regex.FULL_COMMAND_NAME.test('bad name'));
+        });
+
+        it('fails on bad formatted command full names', () => {
+            assert.isFalse(config.regex.FULL_COMMAND_NAME.test('namespace::command@1.2.3'));
+        });
+    });
+
     describe('templates', () => {
         it('checks good template names', () => {
             assert.isTrue(config.regex.TEMPLATE_NAME.test('node/npm-install'));

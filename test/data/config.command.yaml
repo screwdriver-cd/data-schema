@@ -1,0 +1,18 @@
+namespace: foo
+command: bar
+version: '1.0'
+description: |
+  Lorem ipsum dolor sit amet.
+maintainer: foo@bar.com
+format: habitat
+habitat:
+    mode: remote
+    package: core/git/2.14.1
+    command: git
+#format: docker
+#docker:
+#    image: chefdk:1.2.3
+#    command: knife
+#format: binary
+#binary:
+#    file: ./foobar.sh
