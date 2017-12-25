@@ -11,9 +11,9 @@ module.exports = {
     COMMAND_NAME: /^[\w-]+$/,
     // Command tags must start with an alpha character (A-Z,a-z) and can only contain A-Z,a-z,0-9,-,_
     COMMAND_TAG_NAME: /^[a-zA-Z][\w-]+$/,
-    // Full name of command and version. Can be <TEMPLATE_NAMESPACE>/<TEMPLATE_NAME>@<VERSION> or <TEMPLATE_NAMESPACE>/<TEMPLATE_NAME>@<TEMPLATE_TAG_NAME>
+    // Full name of command and version. Can be <COMMAND_NAMESPACE>/<COMMAND_NAME>@<VERSION> or <COMMAND_NAMESPACE>/<COMMAND_NAME>@<COMMAND_TAG_NAME>
     // Example: chefdk/knife@1.2.3 or chefdk/knife@stable
-    // Only <TEMPLATE_NAMESPACE>/<TEMPLATE_NAME> or <TEMPLATE_NAMESPACE>/<TEMPLATE_NAME> is also acceptable
+    // Only <COMMAND_NAMESPACE>/<COMMAND_NAME> or <COMMAND_NAMESPACE>/<COMMAND_NAME> is also acceptable
     FULL_COMMAND_NAME:
         /^([\w-]+)\/([\w-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-]+)))?$/,
     // Templates can only be named with A-Z,a-z,0-9,-,_,/
