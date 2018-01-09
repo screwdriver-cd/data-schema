@@ -11,7 +11,7 @@ const MODEL = {
         .example(123345),
 
     namespace: Command.namespace,
-    command: Command.command,
+    name: Command.name,
     version: Command.version,
     description: Command.description,
     maintainer: Command.maintainer,
@@ -39,7 +39,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id',
         'namespace',
-        'command',
+        'name',
         'version',
         'description',
         'maintainer',
@@ -58,7 +58,7 @@ module.exports = {
      */
     create: Joi.object(mutate(MODEL, [
         'namespace',
-        'command',
+        'name',
         'version',
         'description',
         'maintainer',
@@ -75,7 +75,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['namespace', 'command', 'version'],
+    keys: ['namespace', 'name', 'version'],
 
     /**
      * List of all fields in the model
@@ -90,7 +90,7 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['namespace', 'command'],
+    indexes: ['namespace', 'name'],
 
     /**
      * Primary column to sort queries by.

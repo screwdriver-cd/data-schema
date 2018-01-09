@@ -9,7 +9,7 @@ const MODEL = {
         .description('Identifier of this command tag')
         .example(123345),
     namespace: Command.namespace,
-    command: Command.command,
+    name: Command.name,
     tag: Command.commandTag,
     version: Command.exactVersion
 };
@@ -29,7 +29,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['namespace', 'command', 'tag'],
+    keys: ['namespace', 'name', 'tag'],
 
     /**
      * List of all fields in the model
@@ -44,7 +44,7 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['namespace', 'command', 'tag'],
+    indexes: ['namespace', 'name', 'tag'],
 
     /**
      * Tablename to be used in the datastore

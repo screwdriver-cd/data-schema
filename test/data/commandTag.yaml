@@ -1,6 +1,6 @@
 # Base Command Tag Example
 id: 123234135
 namespace: chefdk
-command: knife
+name: knife
 tag: stable
 version: '1.2.0'

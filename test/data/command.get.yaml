@@ -1,7 +1,7 @@
 # Command Get Example
 id: 123234135
 namespace: foo
-command: bar
+name: bar
 version: '1.0'
 description: |
   Lorem ipsum dolor sit amet.
