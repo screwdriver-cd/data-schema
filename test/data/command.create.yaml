@@ -1,6 +1,6 @@
 # Command CREATE Example
 namespace: foo
-command: bar
+name: bar
 version: '1.0'
 description: |
   Lorem ipsum dolor sit amet.

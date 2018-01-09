@@ -65,7 +65,7 @@ const COMMAND_FORMAT = Joi
 const SCHEMA_COMMAND = Joi.object()
     .keys({
         namespace: COMMAND_NAMESPACE,
-        command: COMMAND_NAME,
+        name: COMMAND_NAME,
         version: COMMAND_VERSION,
         description: COMMAND_DESCRIPTION,
         maintainer: COMMAND_MAINTAINER,
@@ -77,7 +77,7 @@ const SCHEMA_COMMAND = Joi.object()
         binary: CommandFormat.binary
             .when('format', { is: 'binary', then: Joi.required() })
     })
-    .requiredKeys('namespace', 'command', 'version', 'description', 'maintainer',
+    .requiredKeys('namespace', 'name', 'version', 'description', 'maintainer',
         'format')
     // any one of them
     .or('habitat', 'docker', 'binary')
@@ -90,7 +90,7 @@ const SCHEMA_COMMAND = Joi.object()
 module.exports = {
     schemaCommand: SCHEMA_COMMAND,
     namespace: COMMAND_NAMESPACE,
-    command: COMMAND_NAME,
+    name: COMMAND_NAME,
     commandTag: COMMAND_TAG_NAME,
     version: COMMAND_VERSION,
     exactVersion: COMMAND_EXACT_VERSION,
