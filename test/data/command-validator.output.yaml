@@ -1,0 +1,14 @@
+---
+errors: []
+command:
+    namespace: foo
+    command: bar
+    version: 1.1.2
+    description: |
+        Command for habitat git
+    maintainer: me@nowhere.com
+    format: docker
+    habitat:
+        mode: remote
+        package: core/git/2.14.1
+        command: git

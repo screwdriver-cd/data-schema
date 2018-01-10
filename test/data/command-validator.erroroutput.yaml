@@ -1,0 +1,20 @@
+---
+errors:
+    - context:
+        key: version
+      message: '"version" is required'
+      path: version
+      type: any.required
+command:
+    namespace: foo
+    command: bar
+    # Version is purposely omitted to assert unit test case
+    # version: 1.1.2
+    description: |
+        Command for habitat git
+    maintainer: me@nowhere.com
+    format: habitat
+    habitat:
+        mode: remote
+        package: core/git/2.14.1
+        command: git
