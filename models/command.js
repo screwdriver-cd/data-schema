@@ -3,6 +3,7 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Command = require('../config/command');
+const pipelineId = Joi.reach(require('./pipeline').base, 'id');
 
 const MODEL = {
     id: Joi
@@ -18,7 +19,8 @@ const MODEL = {
     format: Command.format,
     habitat: Command.habitat,
     docker: Command.docker,
-    binary: Command.binary
+    binary: Command.binary,
+    pipelineId
 };
 
 module.exports = {
@@ -43,7 +45,8 @@ module.exports = {
         'version',
         'description',
         'maintainer',
-        'format'
+        'format',
+        'pipelineId'
     ], [
         'habitat',
         'docker',
