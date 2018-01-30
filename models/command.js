@@ -103,7 +103,7 @@ module.exports = {
      * @property rangeKeys
      * @type {Array}
      */
-    rangeKeys: ['id'],
+    rangeKeys: ['id', 'id'],
 
     /**
      * Tablename to be used in the datastore
