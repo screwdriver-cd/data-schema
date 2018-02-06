@@ -5,13 +5,19 @@ const models = require('../../').models;
 
 describe('model commmons', () => {
     const modelsToCheck = [
-        'event',
-        'pipeline',
         'build',
-        'job',
-        'user',
+        'collection',
         'command',
-        'commandTag'
+        'commandTag',
+        'event',
+        'job',
+        'pipeline',
+        'secret',
+        'template',
+        'templateTag',
+        'token',
+        'trigger',
+        'user'
     ];
 
     it('selected models have tableName defined', () => {
@@ -30,6 +36,19 @@ describe('model commmons', () => {
         modelsToCheck.forEach((model) => {
             assert.isArray(models[model].keys);
             assert.isArray(models[model].allKeys);
+        });
+    });
+
+    // See https://github.com/screwdriver-cd/datastore-sequelize/blob/master/index.js#L311
+    it('selected models have same length of indexes and rangeKeys.', () => {
+        modelsToCheck.forEach((model) => {
+            if (Object.prototype.hasOwnProperty.call(models[model], 'rangeKeys')) {
+                assert.strictEqual(
+                    models[model].indexes.length,
+                    models[model].rangeKeys.length,
+                    `${model} model: Each range key must matches up with ` +
+                    'an element in the indexes property.');
+            }
         });
     });
 
