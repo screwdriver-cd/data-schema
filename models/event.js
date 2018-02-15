@@ -7,6 +7,7 @@ const Workflow = require('../config/workflow');
 const WorkflowGraph = require('../config/workflowGraph');
 const { trigger } = require('../config/job');
 const jobName = Joi.reach(require('./job').base, 'name');
+const parentBuildId = Joi.reach(require('./build').base, 'parentBuildId');
 
 const MODEL = {
     id: Joi
@@ -58,7 +59,8 @@ const MODEL = {
 };
 
 const CREATE_MODEL = Object.assign({}, MODEL, {
-    startFrom: Joi.alternatives().try(trigger, jobName)
+    startFrom: Joi.alternatives().try(trigger, jobName),
+    parentBuildId
 });
 
 module.exports = {
@@ -98,7 +100,7 @@ module.exports = {
     create: Joi.object(mutate(CREATE_MODEL, [
         'pipelineId', 'startFrom'
     ], [
-        'causeMessage'
+        'causeMessage', 'parentBuildId'
     ])).label('Create Event'),
 
     /**
