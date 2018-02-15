@@ -9,7 +9,8 @@ const COMMAND_ERROR = Joi.object()
             .label('Functional context regarding the error'),
         message: Joi.string()
             .label('Description of a particular validation error'),
-        path: Joi.string()
+        path: Joi.array()
+            .items(Joi.string())
             .label('Dot-notation path to the field that caused the validation error'),
         type: Joi.string()
             .label('The the Joi-type that categorizes the error')

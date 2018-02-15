@@ -3,7 +3,8 @@ errors:
     - context:
         key: version
       message: '"version" is required'
-      path: version
+      path:
+          - version
       type: any.required
 template:
     name: template_namespace/nodejs_main
