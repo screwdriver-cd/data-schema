@@ -1,4 +1,5 @@
 # Event Create Example
 startFrom: main
+parentBuildId: 123
 pipelineId: 1235123
 causeMessage: 'Restarted since publish job failed'
