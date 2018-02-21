@@ -1,0 +1,5 @@
+# Build Update Example
+status: CREATING_CONTAINER
+statusMessage: 'Creating build container'
+meta:
+    yes: no

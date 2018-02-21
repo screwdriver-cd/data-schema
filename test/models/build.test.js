@@ -26,6 +26,11 @@ describe('model build', () => {
             assert.isNull(validate('build.update.yaml', models.build.update).error);
         });
 
+        it('validates updating status to creating container', () => {
+            assert.isNull(validate('build.update-creating-container.yaml',
+                    models.build.update).error);
+        });
+
         it('fails the update', () => {
             assert.isNotNull(validate('empty.yaml', models.build.update).error);
         });

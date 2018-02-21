@@ -106,6 +106,7 @@ const MODEL = {
 
     status: Joi
         .string().valid([
+            'CREATING_CONTAINER',
             'SUCCESS',
             'FAILURE',
             'QUEUED',
