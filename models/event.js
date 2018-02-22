@@ -14,6 +14,10 @@ const MODEL = {
         .number().integer().positive()
         .description('Identifier of this event')
         .example(123345),
+    parentEventId: Joi
+        .number().integer().positive()
+        .description('Identifier of the parent event')
+        .example(123344),
     causeMessage: Joi
         .string().max(512).truncate()
         .description('Message that describes why the event was created')
@@ -88,7 +92,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'type'
     ], [
-        'causeMessage', 'startFrom', 'workflow', 'workflowGraph'
+        'causeMessage', 'startFrom', 'workflow', 'workflowGraph', 'parentEventId'
     ])).label('Get Event'),
 
     /**
@@ -100,7 +104,7 @@ module.exports = {
     create: Joi.object(mutate(CREATE_MODEL, [
         'pipelineId', 'startFrom'
     ], [
-        'causeMessage', 'parentBuildId'
+        'causeMessage', 'parentBuildId', 'parentEventId'
     ])).label('Create Event'),
 
     /**

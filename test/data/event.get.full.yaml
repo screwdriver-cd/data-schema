@@ -15,6 +15,7 @@ creator:
     username: stjohnjohnson
     url: https://github.com/stjohnjohnson
     avatar: https://avatars.githubusercontent.com/u/622065?v=3
+parentEventId: 123456
 pipelineId: 1234
 sha: 46f1a0bd5592a2f9244ca321b129902a06b53e03
 startFrom: 'main'
