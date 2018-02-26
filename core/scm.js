@@ -107,6 +107,14 @@ const SCHEMA_HOOK = Joi.object().keys({
         .when('type', { is: 'ping', then: Joi.optional(), otherwise: Joi.required() })
         .label('Branch of the repository'),
 
+    prSource: Joi.string()
+        .when('type', {
+            is: 'pr',
+            then: Joi.valid(['fork', 'branch'])
+        })
+        .optional()
+        .label('PR original source'),
+
     prRef: Joi.string()
         .optional()
         .label('PR reference of the repository'),
