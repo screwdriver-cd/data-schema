@@ -32,6 +32,9 @@ const MODEL = {
         .example('2038-01-19T03:14:08.131Z'),
     creator: Scm.user
         .description('Creator of the event'),
+    meta: Joi
+        .object()
+        .description('Key=>Value information from the event itself'),
     pipelineId: Joi
         .number().integer().positive()
         .description('Identifier of this pipeline')
@@ -92,7 +95,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'type'
     ], [
-        'causeMessage', 'startFrom', 'workflow', 'workflowGraph', 'parentEventId'
+        'causeMessage', 'meta', 'parentEventId', 'startFrom', 'workflow', 'workflowGraph'
     ])).label('Get Event'),
 
     /**
