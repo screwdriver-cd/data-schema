@@ -4,6 +4,7 @@ const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Scm = require('../core/scm');
 const Job = require('../config/job');
+const PARENT_BUILD_ID = Joi.number().integer().positive();
 
 const STEP = {
     name: Joi
@@ -48,9 +49,12 @@ const MODEL = {
         .example(123345),
 
     parentBuildId: Joi
-        .number().integer().positive()
-        .description('Identifier of this parent build')
-        .example(123345),
+        .alternatives().try(
+            Joi.array().items(PARENT_BUILD_ID),
+            PARENT_BUILD_ID
+        )
+        .description('Identifier(s) of this parent build')
+        .example([123, 234]),
 
     number: Joi
         .number().positive()

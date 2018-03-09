@@ -1,7 +1,7 @@
 # Build Example
 id: 123234135
 jobId: 790878907896
-parentBuildId: 123234134
+parentBuildId: [123, 234, 456]
 number: 1473900790309.1
 container: node:4
 cause: Because I clicked it
