@@ -48,11 +48,11 @@ const MODEL = {
         .description('Identifier of the parent job')
         .example(123345),
 
-    parentBuildId: PARENT_BUILD_ID
-        .description('Identifier(s) of this parent build')
-        .example([123, 234]),
-
-    parentBuildIds: Joi.array().items(PARENT_BUILD_ID)
+    parentBuildId: Joi
+        .alternatives().try(
+            Joi.array().items(PARENT_BUILD_ID),
+            PARENT_BUILD_ID
+        )
         .description('Identifier(s) of this parent build')
         .example([123, 234]),
 
@@ -144,7 +144,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'jobId', 'number', 'cause', 'createTime', 'status'
     ], [
-        'container', 'parentBuildId', 'parentBuildIds', 'sha', 'startTime', 'endTime',
+        'container', 'parentBuildId', 'sha', 'startTime', 'endTime',
         'meta', 'parameters', 'steps', 'commit', 'eventId', 'environment', 'statusMessage'
     ])).label('Get Build'),
 
