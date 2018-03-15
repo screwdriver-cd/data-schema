@@ -110,11 +110,12 @@ const MODEL = {
 
     status: Joi
         .string().valid([
-            'SUCCESS',
-            'FAILURE',
-            'QUEUED',
             'ABORTED',
-            'RUNNING'
+            'CREATED', // when the build is created but not started
+            'FAILURE',
+            'QUEUED', // when the build is created and put into the queue
+            'RUNNING', // after the build is created, went through the queue, and has started
+            'SUCCESS'
         ])
         .description('Current status of the build')
         .example('SUCCESS')
