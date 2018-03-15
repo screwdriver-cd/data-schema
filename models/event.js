@@ -7,7 +7,7 @@ const Workflow = require('../config/workflow');
 const WorkflowGraph = require('../config/workflowGraph');
 const { trigger } = require('../config/job');
 const jobName = Joi.reach(require('./job').base, 'name');
-const parentBuildId = Joi.reach(require('./build').base, 'parentBuildId');
+const parentBuildId = Joi.reach(require('./build').get, 'parentBuildId');
 
 const MODEL = {
     id: Joi
