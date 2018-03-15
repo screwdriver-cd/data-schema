@@ -49,11 +49,8 @@ const MODEL = {
         .example(123345),
 
     parentBuildId: Joi
-        .alternatives().try(
-            Joi.array().items(PARENT_BUILD_ID),
-            PARENT_BUILD_ID
-        )
-        .description('Identifier(s) of this parent build')
+        .array().items(PARENT_BUILD_ID)
+        .description('Identifier(s) of this parent build(s)')
         .example([123, 234]),
 
     number: Joi
@@ -127,6 +124,16 @@ const MODEL = {
         .example('Build failed due to infrastructure error')
 };
 
+const parentBuildIdSchema = Joi
+    .alternatives().try(
+        Joi.array().items(PARENT_BUILD_ID),
+        PARENT_BUILD_ID
+    )
+    .description('Identifier(s) of this parent build')
+    .example([123, 234]);
+
+const GET_MODEL = Object.assign({}, MODEL, { parentBuildId: parentBuildIdSchema });
+
 module.exports = {
     /**
      * All the available properties of Build
@@ -142,7 +149,7 @@ module.exports = {
      * @property get
      * @type {Joi}
      */
-    get: Joi.object(mutate(MODEL, [
+    get: Joi.object(mutate(GET_MODEL, [
         'id', 'jobId', 'number', 'cause', 'createTime', 'status'
     ], [
         'container', 'parentBuildId', 'sha', 'startTime', 'endTime',
