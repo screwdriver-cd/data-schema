@@ -4,6 +4,7 @@ const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Scm = require('../core/scm');
 const Job = require('../config/job');
+const PARENT_BUILD_ID = Joi.number().integer().positive();
 
 const STEP = {
     name: Joi
@@ -48,9 +49,12 @@ const MODEL = {
         .example(123345),
 
     parentBuildId: Joi
-        .number().integer().positive()
-        .description('Identifier of this parent build')
-        .example(123345),
+        .alternatives().try(
+            Joi.array().items(PARENT_BUILD_ID),
+            PARENT_BUILD_ID
+        )
+        .description('Identifier(s) of this parent build')
+        .example([123, 234]),
 
     number: Joi
         .number().positive()
@@ -106,11 +110,12 @@ const MODEL = {
 
     status: Joi
         .string().valid([
-            'SUCCESS',
-            'FAILURE',
-            'QUEUED',
             'ABORTED',
-            'RUNNING'
+            'CREATED', // when the build is created but not started
+            'FAILURE',
+            'QUEUED', // when the build is created and put into the queue
+            'RUNNING', // after the build is created, went through the queue, and has started
+            'SUCCESS'
         ])
         .description('Current status of the build')
         .example('SUCCESS')
@@ -140,8 +145,8 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'jobId', 'number', 'cause', 'createTime', 'status'
     ], [
-        'container', 'parentBuildId', 'sha', 'startTime', 'endTime', 'meta', 'parameters', 'steps',
-        'commit', 'eventId', 'environment', 'statusMessage'
+        'container', 'parentBuildId', 'sha', 'startTime', 'endTime',
+        'meta', 'parameters', 'steps', 'commit', 'eventId', 'environment', 'statusMessage'
     ])).label('Get Build'),
 
     /**
