@@ -24,6 +24,10 @@ describe('model event', () => {
             assert.isNull(validate('event.create.full.yaml', models.event.create).error);
         });
 
+        it('validates the create with only buildId field', () => {
+            assert.isNull(validate('event.create.restart.yaml', models.event.create).error);
+        });
+
         it('fails the create', () => {
             assert.isNotNull(validate('empty.yaml', models.event.create).error);
         });
