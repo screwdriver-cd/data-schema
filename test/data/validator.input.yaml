@@ -7,12 +7,14 @@ yaml: |
           image: node:{{NODE_VERSION}}
           matrix:
               NODE_VERSION: [4,5,6]
+          settings:
+              email: foo@bar.com
+          sourcePaths: [src/A, src/AConfig]
           steps:
               install: npm install
               test: npm test
               build: npm run build
-          settings:
-              email: foo@bar.com
+
 
       publish:
           image: node:4

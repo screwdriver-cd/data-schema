@@ -72,16 +72,22 @@ const SCHEMA_REQUIRES = Joi.alternatives().try(
     Joi.array().items(SCHEMA_REQUIRES_VALUE),
     SCHEMA_REQUIRES_VALUE
 );
+const SCHEMA_SOURCEPATH = Joi.string().max(100).optional();
+const SCHEMA_SOURCEPATHS = Joi.alternatives().try(
+    Joi.array().items(SCHEMA_SOURCEPATH),
+    SCHEMA_SOURCEPATH
+);
 const SCHEMA_JOB = Joi.object()
     .keys({
-        requires: SCHEMA_REQUIRES,
         annotations: Annotations.annotations,
         description: SCHEMA_DESCRIPTION,
         environment: SCHEMA_ENVIRONMENT,
         image: SCHEMA_IMAGE,
         matrix: SCHEMA_MATRIX,
+        requires: SCHEMA_REQUIRES,
         secrets: SCHEMA_SECRETS,
         settings: SCHEMA_SETTINGS,
+        sourcePaths: SCHEMA_SOURCEPATHS,
         steps: SCHEMA_STEPS,
         template: SCHEMA_TEMPLATE
     })
@@ -102,6 +108,8 @@ module.exports = {
     secret: SCHEMA_SECRET,
     secrets: SCHEMA_SECRETS,
     settings: SCHEMA_SETTINGS,
+    sourcePath: SCHEMA_SOURCEPATH,
+    sourcePaths: SCHEMA_SOURCEPATHS,
     step: SCHEMA_STEP,
     steps: SCHEMA_STEPS,
     template: SCHEMA_TEMPLATE,

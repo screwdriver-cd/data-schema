@@ -45,6 +45,12 @@ describe('config job', () => {
         });
     });
 
+    describe('sourcePaths', () => {
+        it('validates sourcePaths', () => {
+            assert.isNull(validate('config.job.sourcePaths.yaml', config.job.sourcePaths).error);
+        });
+    });
+
     describe('environment', () => {
         it('validates environment', () => {
             assert.isNull(validate('config.job.environment.yaml', config.job.environment).error);
