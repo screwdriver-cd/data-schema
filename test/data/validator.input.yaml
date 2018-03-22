@@ -17,6 +17,7 @@ yaml: |
 
 
       publish:
+          sourcePaths: src/A
           image: node:4
           steps:
               install: npm publish
