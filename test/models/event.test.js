@@ -36,6 +36,7 @@ describe('model event', () => {
     describe('get', () => {
         it('validates the get', () => {
             assert.isNull(validate('event.get.yaml', models.event.get).error);
+            assert.include(validate('event.get.yaml', models.event.get).value.meta, {});
         });
 
         it('validates the get with optional fields', () => {
