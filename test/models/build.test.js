@@ -34,6 +34,7 @@ describe('model build', () => {
     describe('get', () => {
         it('validates the get', () => {
             assert.isNull(validate('build.get.yaml', models.build.get).error);
+            assert.include(validate('build.get.yaml', models.build.get).value.meta, {});
         });
 
         it('fails the get', () => {
