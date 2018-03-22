@@ -96,6 +96,7 @@ const MODEL = {
 
     meta: Joi
         .object()
+        .default({})
         .description('Key=>Value information from the build itself'),
 
     steps: Joi
