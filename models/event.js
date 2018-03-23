@@ -35,6 +35,7 @@ const MODEL = {
         .description('Creator of the event'),
     meta: Joi
         .object()
+        .default({})
         .description('Key=>Value information from the event itself'),
     pipelineId: Joi
         .number().integer().positive()
