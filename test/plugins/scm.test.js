@@ -45,6 +45,26 @@ describe('scm test', () => {
         });
     });
 
+    describe('getChangedFiles', () => {
+        it('validates input', () => {
+            assert.isNull(validate('scm.getChangedFilesInput.yaml',
+                scm.getChangedFilesInput).error);
+        });
+
+        it('fails empty input', () => {
+            assert.isNotNull(validate('empty.yaml', scm.getChangedFilesInput).error);
+        });
+
+        it('validates output', () => {
+            assert.isNull(validate('scm.getChangedFilesOutput.yaml',
+                scm.getChangedFilesOutput).error);
+        });
+
+        it('fails empty output', () => {
+            assert.isNotNull(validate('empty.yaml', scm.getChangedFilesOutput).error);
+        });
+    });
+
     describe('decorateUrl', () => {
         it('validates', () => {
             assert.isNull(validate('scm.decorateUrl.yaml', scm.decorateUrl).error);
