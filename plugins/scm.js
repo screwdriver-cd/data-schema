@@ -6,6 +6,7 @@ const models = require('../models');
 
 const buildStatus = Joi.reach(models.build.base, 'status').required();
 const checkoutUrl = Joi.reach(models.pipeline.create, 'checkoutUrl').required();
+const hook = Joi.reach(core.scm.hook, '').required();
 const jobName = Joi.reach(models.job.base, 'name').optional();
 const pipelineId = Joi.reach(models.pipeline.base, 'id').optional();
 const prNum = Joi.reach(core.scm.hook, 'prNum').allow(null).optional();
@@ -13,6 +14,7 @@ const scmContext = Joi.reach(models.pipeline.base, 'scmContext').optional();
 const scmUri = Joi.reach(models.pipeline.base, 'scmUri').required();
 const sha = Joi.reach(models.build.base, 'sha').required();
 const token = Joi.reach(models.user.base, 'token').required();
+const type = Joi.reach(core.scm.hook, 'type').required();
 const username = Joi.reach(models.user.base, 'username').required();
 
 const ADD_WEBHOOK = Joi.object().keys({
@@ -68,6 +70,14 @@ const GET_FILE = Joi.object().keys({
     ref: Joi.string().optional(),
     scmContext
 }).required();
+
+const GET_CHANGED_FILES_INPUT = Joi.object().keys({
+    type,
+    payload: Joi.object().required(),
+    token
+}).required();
+
+const GET_CHANGED_FILES_OUTPUT = Joi.array().items(Joi.string()).required();
 
 const DECORATE_URL = Joi.object().keys({
     scmUri,
@@ -126,6 +136,30 @@ module.exports = {
      * @type {Joi}
      */
     updateCommitStatus: UPDATE_COMMIT_STATUS,
+
+    /**
+     * Properties for Scm Base that will be passed out of the parseHook method
+     *
+     * @property parseHookOutput
+     * @type {Joi}
+     */
+    parseHookOutput: hook,
+
+    /**
+     * Properties for Scm Base that will be passed into the getChangedFiles method
+     *
+     * @property getChangedFilesInput
+     * @type {Joi}
+     */
+    getChangedFilesInput: GET_CHANGED_FILES_INPUT,
+
+    /**
+     * Properties for Scm Base that will be passed out of the getChangedFiles method
+     *
+     * @property getChangedFilesOutput
+     * @type {Joi}
+     */
+    getChangedFilesOutput: GET_CHANGED_FILES_OUTPUT,
 
     /**
      * Properties for Scm Base that will be passed for the getFile method

@@ -74,15 +74,6 @@ const SCHEMA_COMMIT = Joi.object().keys({
 }).label('SCM Commit');
 
 const SCHEMA_HOOK = Joi.object().keys({
-    type: Joi.string()
-        .valid(['pr', 'repo', 'ping'])
-        .required()
-        .label('Type of the event'),
-
-    hookId: Joi.string()
-        .required()
-        .label('Uuid of the event'),
-
     action: Joi.string()
         .when('type', { is: 'pr',
             then: Joi.valid(['opened', 'reopened', 'closed', 'synchronized']) })
@@ -90,11 +81,9 @@ const SCHEMA_HOOK = Joi.object().keys({
         .when('type', { is: 'ping', then: Joi.optional(), otherwise: Joi.required() })
         .label('Action of the event'),
 
-    prNum: Joi.number()
-        .integer()
-        .positive()
-        .optional()
-        .label('PR number'),
+    branch: Joi.string()
+        .when('type', { is: 'ping', then: Joi.optional(), otherwise: Joi.required() })
+        .label('Branch of the repository'),
 
     checkoutUrl: Joi
         .string().regex(Regex.CHECKOUT_URL)
@@ -103,9 +92,23 @@ const SCHEMA_HOOK = Joi.object().keys({
         .example('git@github.com:screwdriver-cd/data-schema.git#master')
         .example('https://github.com/screwdriver-cd/data-schema.git#master'),
 
-    branch: Joi.string()
-        .when('type', { is: 'ping', then: Joi.optional(), otherwise: Joi.required() })
-        .label('Branch of the repository'),
+    hookId: Joi.string()
+        .required()
+        .label('Uuid of the event'),
+
+    lastCommitMessage: Joi.string()
+        .optional()
+        .label('Last commit message'),
+
+    prNum: Joi.number()
+        .integer()
+        .positive()
+        .optional()
+        .label('PR number'),
+
+    prRef: Joi.string()
+        .optional()
+        .label('PR reference of the repository'),
 
     prSource: Joi.string()
         .when('type', {
@@ -115,14 +118,21 @@ const SCHEMA_HOOK = Joi.object().keys({
         .optional()
         .label('PR original source'),
 
-    prRef: Joi.string()
-        .optional()
-        .label('PR reference of the repository'),
+    scmContext: Joi
+        .string().max(128)
+        .required()
+        .description('The SCM in which the repository exists')
+        .example('github:github.com'),
 
     sha: Joi.string().hex()
         .when('type', { is: 'ping', then: Joi.optional(), otherwise: Joi.required() })
         .label('Commit SHA')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
+
+    type: Joi.string()
+        .valid(['pr', 'repo', 'ping'])
+        .required()
+        .label('Type of the event'),
 
     username: Joi.string()
         .required()
