@@ -115,6 +115,16 @@ describe('scm test', () => {
         });
     });
 
+    describe('parseHook', () => {
+        it('validates full output', () => {
+            assert.isNull(validate('scm.parseHook.yaml', scm.parseHookOutput).error);
+        });
+
+        it('validates null output', () => {
+            assert.isNull(validate('empty.yaml', scm.parseHookOutput).error);
+        });
+    });
+
     describe('addWebhook', () => {
         it('validates', () => {
             assert.isNull(validate('scm.addWebhook.yaml', scm.addWebhook).error);
