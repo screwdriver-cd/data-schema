@@ -79,6 +79,11 @@ const GET_CHANGED_FILES_INPUT = Joi.object().keys({
 
 const GET_CHANGED_FILES_OUTPUT = Joi.array().items(Joi.string()).required();
 
+const PARSE_HOOK = Joi.alternatives().try(
+    hook,
+    null
+);
+
 const DECORATE_URL = Joi.object().keys({
     scmUri,
     token,
@@ -143,7 +148,7 @@ module.exports = {
      * @property parseHookOutput
      * @type {Joi}
      */
-    parseHookOutput: hook,
+    parseHookOutput: PARSE_HOOK,
 
     /**
      * Properties for Scm Base that will be passed into the getChangedFiles method

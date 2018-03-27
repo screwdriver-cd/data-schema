@@ -2,6 +2,7 @@
 
 const assert = require('chai').assert;
 const scm = require('../../plugins/scm');
+const Joi = require('joi');
 const validate = require('../helper').validate;
 
 describe('scm test', () => {
@@ -60,6 +61,11 @@ describe('scm test', () => {
                 scm.getChangedFilesOutput).error);
         });
 
+        it('validates empty array output', () => {
+            assert.isNull(validate('scm.getChangedFilesEmptyArrayOutput.yaml',
+                scm.getChangedFilesOutput).error);
+        });
+
         it('fails empty output', () => {
             assert.isNotNull(validate('empty.yaml', scm.getChangedFilesOutput).error);
         });
@@ -112,6 +118,16 @@ describe('scm test', () => {
 
         it('fails', () => {
             assert.isNotNull(validate('empty.yaml', scm.getCheckoutCommand).error);
+        });
+    });
+
+    describe('parseHook', () => {
+        it('validates full output', () => {
+            assert.isNull(validate('scm.parseHook.yaml', scm.parseHookOutput).error);
+        });
+
+        it('validates null output', () => {
+            assert.isNull(Joi.validate(null, scm.parseHookOutput).error);
         });
     });
 
