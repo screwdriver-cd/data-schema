@@ -78,11 +78,11 @@ const SCHEMA_HOOK = Joi.object().keys({
         .when('type', { is: 'pr',
             then: Joi.valid(['opened', 'reopened', 'closed', 'synchronized']) })
         .when('type', { is: 'repo', then: Joi.valid('push') })
-        .when('type', { is: 'ping', then: Joi.optional(), otherwise: Joi.required() })
+        .when('type', { is: 'ping', then: Joi.allow('').optional(), otherwise: Joi.required() })
         .label('Action of the event'),
 
     branch: Joi.string()
-        .when('type', { is: 'ping', then: Joi.optional(), otherwise: Joi.required() })
+        .when('type', { is: 'ping', then: Joi.allow('').optional(), otherwise: Joi.required() })
         .label('Branch of the repository'),
 
     checkoutUrl: Joi
@@ -97,6 +97,7 @@ const SCHEMA_HOOK = Joi.object().keys({
         .label('Uuid of the event'),
 
     lastCommitMessage: Joi.string()
+        .allow('')
         .optional()
         .label('Last commit message'),
 
@@ -107,10 +108,12 @@ const SCHEMA_HOOK = Joi.object().keys({
         .label('PR number'),
 
     prRef: Joi.string()
+        .allow('')
         .optional()
         .label('PR reference of the repository'),
 
     prSource: Joi.string()
+        .allow('')
         .when('type', {
             is: 'pr',
             then: Joi.valid(['fork', 'branch'])
@@ -125,7 +128,7 @@ const SCHEMA_HOOK = Joi.object().keys({
         .example('github:github.com'),
 
     sha: Joi.string().hex()
-        .when('type', { is: 'ping', then: Joi.optional(), otherwise: Joi.required() })
+        .when('type', { is: 'ping', then: Joi.allow('').optional(), otherwise: Joi.required() })
         .label('Commit SHA')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
 
