@@ -74,7 +74,8 @@ const GET_FILE = Joi.object().keys({
 const GET_CHANGED_FILES_INPUT = Joi.object().keys({
     type,
     payload: Joi.object().required(),
-    token
+    token,
+    scmContext
 }).required();
 
 const GET_CHANGED_FILES_OUTPUT = Joi.array().items(Joi.string()).required();
