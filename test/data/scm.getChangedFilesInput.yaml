@@ -4,3 +4,4 @@ payload:
     after: '0d1a26e67d8f5eaf1f6ba5c57fc3c7d91ac0fd1c'
 type: pr
 token: 'thisisatoken'
+scmContext: github:github.com
