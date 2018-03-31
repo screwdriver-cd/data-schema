@@ -78,7 +78,10 @@ const GET_CHANGED_FILES_INPUT = Joi.object().keys({
     scmContext
 }).required();
 
-const GET_CHANGED_FILES_OUTPUT = Joi.array().items(Joi.string()).required();
+const GET_CHANGED_FILES_OUTPUT = Joi.alternatives().try(
+    Joi.array().items(Joi.string()).required(),
+    null
+);
 
 const PARSE_HOOK = Joi.alternatives().try(
     hook,

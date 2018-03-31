@@ -66,8 +66,8 @@ describe('scm test', () => {
                 scm.getChangedFilesOutput).error);
         });
 
-        it('fails empty output', () => {
-            assert.isNotNull(validate('empty.yaml', scm.getChangedFilesOutput).error);
+        it('validates empty output', () => {
+            assert.isNull(validate('empty.yaml', scm.getChangedFilesOutput).error);
         });
     });
 
