@@ -93,7 +93,8 @@ const SCHEMA_HOOK = Joi.object().keys({
         .example('https://github.com/screwdriver-cd/data-schema.git#master'),
 
     hookId: Joi.string()
-        .required()
+        .allow('')
+        .optional()
         .label('Uuid of the event'),
 
     lastCommitMessage: Joi.string()
