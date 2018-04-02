@@ -2,7 +2,6 @@
 action: push
 branch: master
 checkoutUrl: git@github.com:screwdriver-cd/data-model.git#master
-hookId: 81e6bd80-9a2c-11e6-939d-beaa5d9adaf3
 scmContext: github:github.com
 sha: ccc49349d3cffbd12ea9e3d41521480b4aa5de5f
 type: repo
