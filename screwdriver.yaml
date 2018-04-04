@@ -1,16 +1,14 @@
-workflow:
-    - publish
-
 shared:
-    image: node:6
+    image: node:8
 
 jobs:
     main:
+        requires: [~pr, ~commit]
         steps:
             - install: npm install
             - test: npm test
-
     publish:
+        requires: main
         steps:
             - install: npm install --no-save semantic-release@^7
             - publish: npm run semantic-release

@@ -11,7 +11,7 @@ const SCHEMA_UPDATE = Joi.object().keys({
     params: Joi.object().keys({
         id: Joi.number().integer().positive().required()
     }).unknown(true).min(2)
-    .required()
+        .required()
 });
 const SCHEMA_SAVE = Joi.object().keys({
     table,

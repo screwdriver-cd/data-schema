@@ -84,7 +84,7 @@ describe('config job', () => {
     describe('annotations', () => {
         it('validates job annotations', () => {
             assert.isNull(validate('config.job.annotations.yaml', config.annotations.annotations)
-            .error);
+                .error);
         });
     });
 });
