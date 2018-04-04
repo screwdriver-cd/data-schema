@@ -9,9 +9,7 @@ jobs:
             - test: npm test
     publish:
         requires: main
-        steps:
-            - install: npm install --no-save semantic-release@^7
-            - publish: npm run semantic-release
+        template: screwdriver-cd/semantic-release-node8@1.0.0
         secrets:
             # Publishing to NPM
             - NPM_TOKEN
