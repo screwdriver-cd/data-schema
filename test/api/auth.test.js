@@ -16,4 +16,8 @@ describe('api auth', () => {
     it('key', () => {
         assert.isNull(validate('auth.key.yaml', api.auth.key).error);
     });
+
+    it('contexts', () => {
+        assert.isNull(validate('auth.contexts.yaml', api.auth.contexts).error);
+    });
 });

@@ -1,0 +1,8 @@
+# Versions example
+versions:
+   - package@1.0
+licenses:
+  -
+    name: package
+    repository: https://github.com/test/package
+    licenses: MIT
