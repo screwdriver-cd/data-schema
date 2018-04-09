@@ -14,8 +14,16 @@ const SCHEMA_CRUMB = Joi.object().keys({
     crumb: Joi.string().label('Crumb to prevent CSRF')
 }).label('Crumb to prevent CSRF Object');
 
+const SCHEMA_CONTEXTS = Joi.array().items(
+    Joi.object().keys({
+        context: Joi.string().label('Context name'),
+        displayName: Joi.string().label('Display name')
+    }).label('Context Object')
+).label('Array of Contexts');
+
 module.exports = {
     key: SCHEMA_KEY,
     token: SCHEMA_TOKEN,
-    crumb: SCHEMA_CRUMB
+    crumb: SCHEMA_CRUMB,
+    contexts: SCHEMA_CONTEXTS
 };

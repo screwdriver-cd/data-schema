@@ -1,0 +1,22 @@
+# Stats example
+executor:
+  requests:
+    total: 0
+    timeouts: 0
+    success: 0
+    failure: 0
+    concurrent: 0
+    averageTime: 0.0
+  breaker:
+    isClosed: false
+scm:
+  github:github.com:
+      requests:
+        total: 0
+        timeouts: 0
+        success: 0
+        failure: 0
+        concurrent: 0
+        averageTime: 0.0
+      breaker:
+        isClosed: false
