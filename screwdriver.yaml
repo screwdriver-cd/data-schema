@@ -1,6 +1,3 @@
-workflow:
-    - publish
-
 shared:
     image: node:6
 
@@ -9,6 +6,9 @@ jobs:
         steps:
             - install: npm install
             - test: npm test
+        requires:
+            - ~pr
+            - ~commit
 
     publish:
         steps:
@@ -19,3 +19,5 @@ jobs:
             - NPM_TOKEN
             # Github token to push tags to Git
             - GH_TOKEN
+        requires:
+            - main
