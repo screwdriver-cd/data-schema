@@ -4,7 +4,6 @@ const Annotations = require('../config/annotations');
 const Job = require('../config/job');
 const Joi = require('joi');
 const Regex = require('../config/regex');
-const Workflow = require('../config/workflow');
 const WorkflowGraph = require('../config/workflowGraph');
 
 const SCHEMA_JOB_COMMAND = Joi.object()
@@ -48,7 +47,6 @@ const SCHEMA_OUTPUT = Joi.object()
         annotations: Annotations.annotations,
         errors: Joi.array().items(Joi.string()).optional(),
         jobs: SCHEMA_JOBS,
-        workflow: Workflow.workflow,
         workflowGraph: WorkflowGraph.workflowGraph
     })
     .label('Execution information');
