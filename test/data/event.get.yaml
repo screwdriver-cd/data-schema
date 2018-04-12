@@ -17,7 +17,3 @@ creator:
 pipelineId: 354675231876
 sha: 46f1a0bd5592a2f9244ca321b129902a06b53e03
 type: pipeline
-workflow:
-    - down
-    - right
-    - fierce_punch
