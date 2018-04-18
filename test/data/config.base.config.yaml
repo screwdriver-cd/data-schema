@@ -17,6 +17,9 @@ jobs:
         steps:
             - init: npm install
             - test: npm test
+        requires:
+            - ~pr
+            - ~commit
 
     publish:
         image: node:4
@@ -24,6 +27,5 @@ jobs:
             - publish: npm publish
         secrets:
             - NPM_TOKEN
-
-workflow:
-    - publish
+        requires:
+            - first
