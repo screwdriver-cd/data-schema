@@ -10,9 +10,6 @@ pipelines:
       createTime: "2017-07-14"
       admins:
         username: true
-      workflow:
-        - main
-        - publish
       scmRepo:
         name: screwdriver-cd/screwdriver
         branch: master
@@ -44,9 +41,6 @@ pipelines:
       createTime: "2017-07-14"
       admins:
         username: true
-      workflow:
-        - main
-        - publish
       scmRepo:
         name: screwdriver-cd/config-parser
         branch: master

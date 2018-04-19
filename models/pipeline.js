@@ -4,7 +4,6 @@ const Annotations = require('../config/annotations');
 const Joi = require('joi');
 const Regex = require('../config/regex');
 const Scm = require('../core/scm');
-const Workflow = require('../config/workflow');
 const WorkflowGraph = require('../config/workflowGraph');
 const mutate = require('../lib/mutate');
 
@@ -45,9 +44,6 @@ const MODEL = {
         .description('Admins of this Pipeline')
         .example({ myself: true }),
 
-    workflow: Workflow.workflow
-        .description('Current workflow of the pipeline'),
-
     workflowGraph: WorkflowGraph.workflowGraph
         .description('Graph representation of the workflow'),
 
@@ -77,7 +73,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'scmUri', 'scmContext', 'createTime', 'admins'
     ], [
-        'workflow', 'workflowGraph', 'scmRepo', 'annotations', 'lastEventId'
+        'workflowGraph', 'scmRepo', 'annotations', 'lastEventId'
     ])).label('Get Pipeline'),
 
     /**
