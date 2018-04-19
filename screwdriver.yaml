@@ -16,5 +16,3 @@ jobs:
             - NPM_TOKEN
             # Github token to push tags to Git
             - GH_TOKEN
-        requires:
-            - main
