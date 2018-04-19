@@ -6,7 +6,7 @@ const models = require('../models');
 
 const buildStatus = Joi.reach(models.build.base, 'status').required();
 const checkoutUrl = Joi.reach(models.pipeline.create, 'checkoutUrl').required();
-const hook = Joi.reach(core.scm.hook, '').required();
+const hook = core.scm.hook.required();
 const jobName = Joi.reach(models.job.base, 'name').optional();
 const pipelineId = Joi.reach(models.pipeline.base, 'id').optional();
 const prNum = Joi.reach(core.scm.hook, 'prNum').allow(null).optional();

@@ -4,7 +4,6 @@ const Annotations = require('./annotations');
 const Job = require('./job');
 const Joi = require('joi');
 const Regex = require('./regex');
-const Workflow = require('./workflow');
 
 const SCHEMA_JOBS = Joi.object()
     // Jobs can only be named with A-Z,a-z,0-9,-,_
@@ -17,8 +16,7 @@ const SCHEMA_CONFIG = Joi.object()
         version: Joi.number().integer().min(1).max(50),
         annotations: Annotations.annotations,
         jobs: SCHEMA_JOBS,
-        shared: SCHEMA_SHARED,
-        workflow: Workflow.workflow
+        shared: SCHEMA_SHARED
     })
     .requiredKeys('jobs')
     .unknown(false);

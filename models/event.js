@@ -3,7 +3,6 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Scm = require('../core/scm');
-const Workflow = require('../config/workflow');
 const WorkflowGraph = require('../config/workflowGraph');
 const { trigger } = require('../config/job');
 const jobName = Joi.reach(require('./job').base, 'name');
@@ -56,9 +55,6 @@ const MODEL = {
         ])
         .description('Type of the event')
         .example('pr'),
-    workflow: Workflow.workflow
-        .description('Workflow of the associated pipeline')
-        .example(['main', 'publish', 'deploy']),
     workflowGraph: WorkflowGraph.workflowGraph
         .description('Graph representation of the workflow')
         .example({
@@ -98,7 +94,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'type'
     ], [
-        'causeMessage', 'meta', 'parentEventId', 'startFrom', 'workflow', 'workflowGraph'
+        'causeMessage', 'meta', 'parentEventId', 'startFrom', 'workflowGraph'
     ])).label('Get Event'),
 
     /**

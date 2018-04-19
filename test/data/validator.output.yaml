@@ -65,6 +65,3 @@ jobs:
     environment: {}
     secrets:
       - NPM_TOKEN
-
-workflow:
-- publish

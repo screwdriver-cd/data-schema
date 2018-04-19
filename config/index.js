@@ -7,9 +7,8 @@ const commandFormat = require('./commandFormat');
 const job = require('./job');
 const regex = require('./regex');
 const template = require('./template');
-const workflow = require('./workflow');
 const workflowGraph = require('./workflowGraph');
 
 module.exports = {
-    annotations, base, command, commandFormat, job, regex, template, workflow, workflowGraph
+    annotations, base, command, commandFormat, job, regex, template, workflowGraph
 };
