@@ -239,10 +239,10 @@ describe('config regex', () => {
         it('checks good scmUri', () => {
             assert.isTrue(
                 config.regex.SCM_URI.test('github.com:abc-123:master'
-            ));
+                ));
             assert.isTrue(
                 config.regex.SCM_URI.test('bitbucket.org:d2lam/{123}:master'
-            ));
+                ));
         });
 
         it('fails on bad scmUri', () => {

@@ -66,7 +66,7 @@ const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJEC
 const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
 const SCHEMA_JOBNAME = Joi.string().regex(Regex.JOB_NAME);
-const SCHEMA_TRIGGER = Joi.string().regex(Regex.TRIGGER);  // ~commit, ~pr, etc.
+const SCHEMA_TRIGGER = Joi.string().regex(Regex.TRIGGER); // ~commit, ~pr, etc.
 const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(SCHEMA_JOBNAME, SCHEMA_TRIGGER);
 const SCHEMA_REQUIRES = Joi.alternatives().try(
     Joi.array().items(SCHEMA_REQUIRES_VALUE),

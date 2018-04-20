@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^3.2.2",
+    "eslint": "^4.19.1",
     "eslint-config-screwdriver": "^2.0.0",
     "jenkins-mocha": "^3.0.0",
     "js-yaml": "^3.11.0"
