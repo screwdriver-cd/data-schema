@@ -44,7 +44,7 @@ const MODEL = {
 
 module.exports = {
     /**
-     * All the available properties of Banner
+     * All the available properties of Banners
      *
      * @property base
      * @type {Joi}
@@ -52,24 +52,50 @@ module.exports = {
     base: Joi.object(MODEL).label('Banner'),
 
     /**
-     * Properties for Event that will come back during a GET request
+     * Properties for Banner that will come back during a GET request
      *
      * @property get
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'message', 'isActive', 'dateCreated', 'createdBy', 'type'
-    ], [])).label('Get Event'),
+        'id'
+    ], [])).label('Get Banner'),
 
     /**
-     * Properties for User that will be passed during a CREATE request
+     * Properties for Banners that will be passed during a CREATE request
      *
      * @property create
      * @type {Joi}
      */
     create: Joi.object(mutate(MODEL, [
         'message'
-    ], ['type'])).label('Create Banner'),
+    ], [
+        'type'
+    ])).label('Create Banner'),
+
+    /**
+     * Properties for Banners that will be passed during a UPDATE request
+     *
+     * @property update
+     * @type {Joi}
+     */
+    update: Joi.object(mutate(MODEL, [], [
+        'id',
+        'message',
+        'type',
+        'isActive'
+    ])).label('Update Banner'),
+
+    /**
+     * Properties for Banners that will come back during a LIST request.
+     * The LIST request will list all banners
+     */
+    list: Joi.array().items(Joi.object(mutate(MODEL, [
+    ], [
+        'isActive',
+        'createdBy',
+        'type'
+    ]))).label('List Banners'),
 
     /**
      * List of fields that determine a unique row
