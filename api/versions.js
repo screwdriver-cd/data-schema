@@ -3,7 +3,7 @@
 const Joi = require('joi');
 
 const SCHEMA_PACKAGE_VERSIONS = Joi.array().items(
-   Joi.string().description('Package and its version')
+    Joi.string().description('Package and its version')
 ).label('List of package versions');
 
 const SCHEMA_LICENSES = Joi.array().items(
