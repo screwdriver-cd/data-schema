@@ -3,6 +3,23 @@
 const assert = require('chai').assert;
 const executor = require('../../plugins/executor');
 const validate = require('../helper').validate;
+const joi = require('joi');
+const pipelineMock = {
+    id: 123,
+    scmUri: 'github.com:12345:branchName',
+    scmContext: 'github:github.com',
+    createTime: '2038-01-19T03:14:08.131Z',
+    admins: {
+        foobar: true
+    }
+};
+const jobMock = {
+    id: 1234,
+    pipelineId: 123,
+    name: 'deploy',
+    state: 'ENABLED'
+};
+const tokenGen = () => true;
 
 describe('executor test', () => {
     describe('start', () => {
@@ -26,6 +43,31 @@ describe('executor test', () => {
 
         it('fails the stop', () => {
             assert.isNotNull(validate('empty.yaml', executor.stop).error);
+        });
+    });
+
+    describe('startPeriodic', () => {
+        it('validates the startPeriodic', () => {
+            assert.isNull(joi.validate({
+                pipeline: pipelineMock,
+                job: jobMock,
+                tokenGen,
+                update: false
+            }, executor.startPeriodic).error);
+        });
+
+        it('fails the start for empty object', () => {
+            assert.isNotNull(joi.validate({}, executor.startPeriodic).error);
+        });
+    });
+
+    describe('stopPeriodic', () => {
+        it('validates the stopPeriodic', () => {
+            assert.isNull(joi.validate({ jobId: 1 }, executor.stopPeriodic).error);
+        });
+
+        it('fails the stopPeriodic', () => {
+            assert.isNotNull(joi.validate({}, executor.stopPeriodic).error);
         });
     });
 
