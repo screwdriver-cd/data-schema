@@ -27,6 +27,7 @@
     "Min Zhang <minzhangcmu@gmail.com>",
     "Noah Katzman <nkatzman@yahoo-inc.com>",
     "Peter Peterson <jedipetey@gmail.com>",
+    "Philip Scott <pscott@zeptohost.com>",
     "St. John Johnson <st.john.johnson@gmail.com",
     "Tiffany Kyi <tiffanykyi@gmail.com>"
   ],
@@ -39,7 +40,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^4.19.1",
-    "eslint-config-screwdriver": "^2.0.0",
+    "eslint-config-screwdriver": "^3.0.0",
     "jenkins-mocha": "^3.0.0",
     "js-yaml": "^3.11.0"
   },

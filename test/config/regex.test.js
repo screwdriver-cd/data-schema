@@ -228,21 +228,15 @@ describe('config regex', () => {
         });
 
         it('fails on bad checkout Url', () => {
-            assert.isFalse(
-                config.regex.CHECKOUT_URL.test('https://github.com/screwdriver-cd/'));
-            assert.isFalse(
-                config.regex.CHECKOUT_URL.test('git@screwdriver-cd/data-schema.git'));
+            assert.isFalse(config.regex.CHECKOUT_URL.test('https://github.com/screwdriver-cd/'));
+            assert.isFalse(config.regex.CHECKOUT_URL.test('git@screwdriver-cd/data-schema.git'));
         });
     });
 
     describe('scmUri', () => {
         it('checks good scmUri', () => {
-            assert.isTrue(
-                config.regex.SCM_URI.test('github.com:abc-123:master'
-                ));
-            assert.isTrue(
-                config.regex.SCM_URI.test('bitbucket.org:d2lam/{123}:master'
-                ));
+            assert.isTrue(config.regex.SCM_URI.test('github.com:abc-123:master'));
+            assert.isTrue(config.regex.SCM_URI.test('bitbucket.org:d2lam/{123}:master'));
         });
 
         it('fails on bad scmUri', () => {
