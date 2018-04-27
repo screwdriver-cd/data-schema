@@ -17,6 +17,15 @@ const SCHEMA_STOP = Joi.object().keys({
     annotations: Annotations.annotations,
     buildId
 }).required();
+const SCHEMA_START_PERIODIC = Joi.object().keys({
+    pipeline: Joi.object().required(),
+    job: Joi.object().required(),
+    tokenGen: Joi.func().required(),
+    update: Joi.boolean().required()
+}).required();
+const SCHEMA_STOP_PERIODIC = Joi.object().keys({
+    jobId: Joi.reach(models.job.base, 'id').required()
+}).required();
 const SCHEMA_STATUS = Joi.object().keys({
     buildId
 }).required();
@@ -37,6 +46,22 @@ module.exports = {
      * @type {Joi}
      */
     stop: SCHEMA_STOP,
+
+    /**
+     * Properties for Executor that will be passed for the STARTPERIODIC method
+     *
+     * @property startPeriodic
+     * @type {Joi}
+     */
+    startPeriodic: SCHEMA_START_PERIODIC,
+
+    /**
+     * Properties for Executor that will be passed for the STOPPERIODIC method
+     *
+     * @property stopPeriodic
+     * @type {Joi}
+     */
+    stopPeriodic: SCHEMA_STOP_PERIODIC,
 
     /**
      * Properties for Executor that will be passed for the STATUS method
