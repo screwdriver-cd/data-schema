@@ -94,8 +94,8 @@ module.exports = {
      * The LIST request will list all banners
      */
     list: Joi.array().items(Joi.object(mutate(MODEL, [
-        'id'  
-    ], [ ]))).label('List Banners'),
+        'id'
+    ], []))).label('List Banners'),
 
     /**
      * List of fields that determine a unique row
