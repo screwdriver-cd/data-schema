@@ -21,8 +21,9 @@ const MODEL = {
         .example(true)
         .default(false),
 
-    dateCreated: Joi
+    createTime: Joi
         .string()
+        .max(32)
         .isoDate()
         .description('When this banner was created')
         .example('2017-01-06T01:49:50.384359267Z'),
@@ -40,6 +41,7 @@ const MODEL = {
         ])
         .description('Type/Severity of the banner message')
         .example('info')
+        .default('info')
 };
 
 module.exports = {
@@ -70,7 +72,8 @@ module.exports = {
     create: Joi.object(mutate(MODEL, [
         'message'
     ], [
-        'type'
+        'type',
+        'isActive'
     ])).label('Create Banner'),
 
     /**
@@ -91,11 +94,8 @@ module.exports = {
      * The LIST request will list all banners
      */
     list: Joi.array().items(Joi.object(mutate(MODEL, [
-    ], [
-        'isActive',
-        'createdBy',
-        'type'
-    ]))).label('List Banners'),
+        'id'  
+    ], [ ]))).label('List Banners'),
 
     /**
      * List of fields that determine a unique row
@@ -103,7 +103,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['message', 'type', 'dateCreated'],
+    keys: ['message', 'type', 'createTime'],
 
     /**
      * List of all fields in the model
