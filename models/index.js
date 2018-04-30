@@ -1,5 +1,6 @@
 'use strict';
 
+const banner = require('./banner');
 const build = require('./build');
 const event = require('./event');
 const job = require('./job');
@@ -15,6 +16,7 @@ const command = require('./command');
 const commandTag = require('./commandTag');
 
 module.exports = {
+    banner,
     build,
     event,
     job,
