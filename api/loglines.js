@@ -12,7 +12,11 @@ const SCHEMA_QUERY = Joi.object().keys({
     from: Joi.number().integer()
         .min(0)
         .default(0)
-        .description('Starting Line Number')
+        .description('Starting Line Number'),
+    pages: Joi.number().integer()
+        .min(1)
+        .default(10)
+        .description('Max pages sent per request')
 }).label('Query Parameters');
 
 const SCHEMA_LOGLINE = Joi.object().keys({

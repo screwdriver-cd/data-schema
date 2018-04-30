@@ -10,8 +10,12 @@ describe('api log lines', () => {
             assert.isNull(validate('loglines.params.yaml', api.loglines.params).error);
         });
 
-        it('accepts query', () => {
+        it('accepts queries', () => {
             assert.isNull(validate('loglines.query.yaml', api.loglines.query).error);
+        });
+
+        it('fails on pages=0', () => {
+            assert.isOk(validate('loglines.query.bad.yaml', api.loglines.query).error);
         });
     });
 
