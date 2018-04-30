@@ -29,10 +29,10 @@ const MODEL = {
         .example('2017-01-06T01:49:50.384359267Z'),
 
     createdBy: Joi
-        .number()
-        .integer()
-        .positive()
-        .description('ID of user creating the banner'),
+        .string()
+        .max(128)
+        .description('Username of user creating the banner')
+        .example('batman123'),
 
     type: Joi
         .string().valid([
@@ -60,7 +60,12 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id'
+        'id',
+        'message',
+        'type',
+        'isActive',
+        'createdBy',
+        'createTime'
     ], [])).label('Get Banner'),
 
     /**
@@ -83,7 +88,6 @@ module.exports = {
      * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [], [
-        'id',
         'message',
         'type',
         'isActive'
@@ -94,7 +98,12 @@ module.exports = {
      * The LIST request will list all banners
      */
     list: Joi.array().items(Joi.object(mutate(MODEL, [
-        'id'
+        'id',
+        'message',
+        'type',
+        'isActive',
+        'createdBy',
+        'createTime'
     ], []))).label('List Banners'),
 
     /**
