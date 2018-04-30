@@ -1,0 +1,4 @@
+# Banner UPDATE Example
+message: 'Test banner example with update'
+type: 'warn'
+isActive: true
