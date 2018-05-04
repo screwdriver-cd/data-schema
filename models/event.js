@@ -60,7 +60,11 @@ const MODEL = {
         .example({
             nodes: [{ name: '~commit' }, { name: 'main' }, { name: 'publish' }],
             edges: [{ src: '~commit', dest: 'main' }, { src: 'main', dest: 'publish' }]
-        })
+        }),
+    pr: Joi
+        .string()
+        .description('Pull request url which shows the SHA history')
+        .example('https://git.ouroath.com/MAILSERVICES/gdpr-event-processor/pull/1')
 };
 
 const CREATE_MODEL = Object.assign({}, MODEL, {
