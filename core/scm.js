@@ -73,6 +73,14 @@ const SCHEMA_COMMIT = Joi.object().keys({
         .example('https://github.com/scredriver-cd/screwdriver/commit/8843d7f92416211de')
 }).label('SCM Commit');
 
+const SCHEMA_PR = Joi.object().keys({
+    url: Joi.string()
+        .uri()
+        .required()
+        .label('Link to PR')
+        .example('https://git.ouroath.com/MAILSERVICES/gdpr-event-processor/pull/1')
+}).label('SCM Pull Request');
+
 const SCHEMA_HOOK = Joi.object().keys({
     action: Joi.string()
         .when('type', { is: 'pr',
@@ -149,5 +157,6 @@ module.exports = {
     commit: SCHEMA_COMMIT,
     repo: SCHEMA_REPO,
     user: SCHEMA_USER,
-    hook: SCHEMA_HOOK
+    hook: SCHEMA_HOOK,
+    pr: SCHEMA_PR
 };
