@@ -63,7 +63,11 @@ const MODEL = {
         }),
     pr: Joi
         .object().keys({
-            url: Joi.string().description('url for PR link').example('https://git.ouroath.com/MAILSERVICES/gdpr-event-processor/pull/1')
+            url: Joi
+                .string()
+                .uri()
+                .description('url for PR link')
+                .example('https://git.ouroath.com/MAILSERVICES/gdpr-event-processor/pull/1')
         })
         .description('Pull request object that holds information about the pull request')
 };
