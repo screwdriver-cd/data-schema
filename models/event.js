@@ -62,9 +62,10 @@ const MODEL = {
             edges: [{ src: '~commit', dest: 'main' }, { src: 'main', dest: 'publish' }]
         }),
     pr: Joi
-        .string()
-        .description('Pull request url which shows the SHA history')
-        .example('https://git.ouroath.com/MAILSERVICES/gdpr-event-processor/pull/1')
+        .object().keys({
+            url: Joi.string().description('url for PR link').example('https://git.ouroath.com/MAILSERVICES/gdpr-event-processor/pull/1')
+        })
+        .description('Pull request object that holds information about the pull request')
 };
 
 const CREATE_MODEL = Object.assign({}, MODEL, {
@@ -98,7 +99,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'type'
     ], [
-        'causeMessage', 'meta', 'parentEventId', 'startFrom', 'workflowGraph'
+        'causeMessage', 'meta', 'parentEventId', 'startFrom', 'workflowGraph', 'pr'
     ])).label('Get Event'),
 
     /**
