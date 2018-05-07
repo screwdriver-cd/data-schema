@@ -61,14 +61,7 @@ const MODEL = {
             nodes: [{ name: '~commit' }, { name: 'main' }, { name: 'publish' }],
             edges: [{ src: '~commit', dest: 'main' }, { src: 'main', dest: 'publish' }]
         }),
-    pr: Joi
-        .object().keys({
-            url: Joi
-                .string()
-                .uri()
-                .description('url for PR link')
-                .example('https://git.ouroath.com/MAILSERVICES/gdpr-event-processor/pull/1')
-        })
+    pr: Scm.pr
         .description('Pull request object that holds information about the pull request')
 };
 

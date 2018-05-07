@@ -16,7 +16,6 @@ const sha = Joi.reach(models.build.base, 'sha').required();
 const token = Joi.reach(models.user.base, 'token').required();
 const type = Joi.reach(core.scm.hook, 'type').required();
 const username = Joi.reach(models.user.base, 'username').required();
-const prURL = Joi.reach(models.event.base, 'pr').required();
 
 const ADD_WEBHOOK = Joi.object().keys({
     scmUri,
@@ -109,7 +108,10 @@ const DECORATE_AUTHOR = Joi.object().keys({
 }).required();
 
 const DECORATE_PR = Joi.object().keys({
-    prURL
+    scmUri,
+    token,
+    scmContext,
+    prNum
 }).required();
 
 const PARSE_URL = Joi.object().keys({
