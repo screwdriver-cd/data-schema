@@ -77,6 +77,12 @@ const SCHEMA_SOURCEPATHS = Joi.alternatives().try(
     Joi.array().items(SCHEMA_SOURCEPATH),
     SCHEMA_SOURCEPATH
 );
+const SCHEMA_REPO = Joi.string().regex(Regex.CHECKOUT_URL);
+const SCHEMA_SCM = Joi.object()
+    .keys({
+        repo: SCHEMA_REPO
+    });
+
 const SCHEMA_JOB = Joi.object()
     .keys({
         annotations: Annotations.annotations,
@@ -85,6 +91,7 @@ const SCHEMA_JOB = Joi.object()
         image: SCHEMA_IMAGE,
         matrix: SCHEMA_MATRIX,
         requires: SCHEMA_REQUIRES,
+        scm: SCHEMA_SCM,
         secrets: SCHEMA_SECRETS,
         settings: SCHEMA_SETTINGS,
         sourcePaths: SCHEMA_SOURCEPATHS,
@@ -105,6 +112,7 @@ module.exports = {
     job: SCHEMA_JOB,
     matrix: SCHEMA_MATRIX,
     requires: SCHEMA_REQUIRES,
+    scm: SCHEMA_SCM,
     secret: SCHEMA_SECRET,
     secrets: SCHEMA_SECRETS,
     settings: SCHEMA_SETTINGS,

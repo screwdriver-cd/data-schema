@@ -1,0 +1,2 @@
+scm:
+  repo: git@github.com:screwdriver-cd/data-schema.git/RepoManifest.xml#branch
