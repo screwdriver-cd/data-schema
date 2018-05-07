@@ -27,6 +27,7 @@ const SCHEMA_JOB_PERMUTATION = Joi.object()
         environment: Job.environment,
         image: Job.image,
         requires: Job.requires,
+        scm: Job.scm,
         secrets: Job.secrets,
         settings: Job.settings,
         sourcePaths: Job.sourcePaths
