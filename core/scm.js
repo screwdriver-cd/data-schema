@@ -76,7 +76,6 @@ const SCHEMA_COMMIT = Joi.object().keys({
 const SCHEMA_PR = Joi.object().keys({
     url: Joi.string()
         .uri()
-        .required()
         .label('Link to PR')
         .example('https://git.ouroath.com/MAILSERVICES/gdpr-event-processor/pull/1')
 }).label('SCM Pull Request');
