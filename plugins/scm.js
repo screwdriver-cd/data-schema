@@ -107,13 +107,6 @@ const DECORATE_AUTHOR = Joi.object().keys({
     scmContext
 }).required();
 
-const DECORATE_PR = Joi.object().keys({
-    scmUri,
-    token,
-    scmContext,
-    prNum
-}).required();
-
 const PARSE_URL = Joi.object().keys({
     checkoutUrl,
     token,
@@ -200,14 +193,6 @@ module.exports = {
      * @type {Joi}
      */
     decorateCommit: DECORATE_COMMIT,
-
-    /**
-     * Properties for Scm Base that will be passed for the decoratePR method
-     *
-     * @property decorateAuthor
-     * @type {Joi}
-     */
-    decoratePR: DECORATE_PR,
 
     /**
      * Properties for Scm Base that will be passed for the decorateAuthor method
