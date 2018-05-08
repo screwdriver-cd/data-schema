@@ -25,10 +25,6 @@ describe('config job', () => {
         it('validates a description', () => {
             assert.isNull(validate('config.job.description.yaml', config.job.job).error);
         });
-
-        it('validates a job with a scm object', () => {
-            assert.isNull(validate('config.job.scm.yaml', config.job.job).error);
-        });
     });
 
     describe('matrix', () => {
