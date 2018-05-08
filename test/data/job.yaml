@@ -14,8 +14,6 @@ permutations:
           command: npm run build
       environment:
         NODE_VERSION: 4
-      scm:
-        repo: git@github.com:screwdriver-cd/data-schema.git/RepoManifest.xml#branch
 
     - image: node:6
       commands:
