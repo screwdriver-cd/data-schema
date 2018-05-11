@@ -1,5 +1,8 @@
 annotations:
     beta.screwdriver.cd/executor: k8s
+blockedBy:
+    - 1111
+    - 2222
 buildId: 8609
 container: node:4
 apiUri: http://localhost:8080

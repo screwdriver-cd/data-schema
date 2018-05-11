@@ -4,8 +4,10 @@ const Annotations = require('../config/annotations');
 const Joi = require('joi');
 const models = require('../models');
 const buildId = Joi.reach(models.build.base, 'id').required();
+const jobId = Joi.reach(models.job.base, 'id');
 const SCHEMA_START = Joi.object().keys({
     annotations: Annotations.annotations,
+    blockedBy: Joi.array().items(jobId),
     buildId,
     container: Joi.reach(models.build.base, 'container').required(),
     apiUri: Joi.string().uri().required()
