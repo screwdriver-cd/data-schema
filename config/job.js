@@ -67,12 +67,17 @@ const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
 const SCHEMA_JOBNAME = Joi.string().regex(Regex.JOB_NAME);
 const SCHEMA_TRIGGER = Joi.string().regex(Regex.TRIGGER); // ~commit, ~pr, etc.
+const SCHEMA_EXTERNAL_TRIGGER = Joi.string().regex(Regex.EXTERNAL_TRIGGER);
 const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(SCHEMA_JOBNAME, SCHEMA_TRIGGER);
 const SCHEMA_REQUIRES = Joi.alternatives().try(
     Joi.array().items(SCHEMA_REQUIRES_VALUE),
     SCHEMA_REQUIRES_VALUE
 );
-const SCHEMA_BLOCKEDBY = Joi.array().items(SCHEMA_JOBNAME);
+const SCHEMA_BLOCKEDBY_VALUE = Joi.alternatives().try(SCHEMA_JOBNAME, SCHEMA_EXTERNAL_TRIGGER);
+const SCHEMA_BLOCKEDBY = Joi.alternatives().try(
+    Joi.array().items(SCHEMA_BLOCKEDBY_VALUE),
+    SCHEMA_BLOCKEDBY_VALUE
+);
 const SCHEMA_SOURCEPATH = Joi.string().max(100).optional();
 const SCHEMA_SOURCEPATHS = Joi.alternatives().try(
     Joi.array().items(SCHEMA_SOURCEPATH),

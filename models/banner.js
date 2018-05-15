@@ -39,6 +39,7 @@ const MODEL = {
             'info',
             'warn'
         ])
+        .max(32)
         .description('Type/Severity of the banner message')
         .example('info')
         .default('info')

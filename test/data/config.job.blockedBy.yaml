@@ -5,3 +5,4 @@ requires: ~commit
 blockedBy:
     - main
     - test
+    - ~sd@123:publish
