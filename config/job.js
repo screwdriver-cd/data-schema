@@ -67,11 +67,12 @@ const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
 const SCHEMA_JOBNAME = Joi.string().regex(Regex.JOB_NAME);
 const SCHEMA_TRIGGER = Joi.string().regex(Regex.TRIGGER); // ~commit, ~pr, etc.
-const SCHEMA_REQUIRES_OR_BLOCKEDBY_VALUE = Joi.alternatives().try(SCHEMA_JOBNAME, SCHEMA_TRIGGER);
-const SCHEMA_REQUIRES_OR_BLOCKEDBY = Joi.alternatives().try(
-    Joi.array().items(SCHEMA_REQUIRES_OR_BLOCKEDBY_VALUE),
-    SCHEMA_REQUIRES_OR_BLOCKEDBY_VALUE
+const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(SCHEMA_JOBNAME, SCHEMA_TRIGGER);
+const SCHEMA_REQUIRES = Joi.alternatives().try(
+    Joi.array().items(SCHEMA_REQUIRES_VALUE),
+    SCHEMA_REQUIRES_VALUE
 );
+const SCHEMA_BLOCKEDBY = Joi.array().items(SCHEMA_JOBNAME);
 const SCHEMA_SOURCEPATH = Joi.string().max(100).optional();
 const SCHEMA_SOURCEPATHS = Joi.alternatives().try(
     Joi.array().items(SCHEMA_SOURCEPATH),
@@ -84,8 +85,8 @@ const SCHEMA_JOB = Joi.object()
         environment: SCHEMA_ENVIRONMENT,
         image: SCHEMA_IMAGE,
         matrix: SCHEMA_MATRIX,
-        requires: SCHEMA_REQUIRES_OR_BLOCKEDBY,
-        blockedBy: SCHEMA_REQUIRES_OR_BLOCKEDBY,
+        requires: SCHEMA_REQUIRES,
+        blockedBy: SCHEMA_BLOCKEDBY,
         secrets: SCHEMA_SECRETS,
         settings: SCHEMA_SETTINGS,
         sourcePaths: SCHEMA_SOURCEPATHS,
@@ -105,8 +106,8 @@ module.exports = {
     image: SCHEMA_IMAGE,
     job: SCHEMA_JOB,
     matrix: SCHEMA_MATRIX,
-    requires: SCHEMA_REQUIRES_OR_BLOCKEDBY,
-    blockedBy: SCHEMA_REQUIRES_OR_BLOCKEDBY,
+    requires: SCHEMA_REQUIRES,
+    blockedBy: SCHEMA_BLOCKEDBY,
     secret: SCHEMA_SECRET,
     secrets: SCHEMA_SECRETS,
     settings: SCHEMA_SETTINGS,
@@ -115,7 +116,7 @@ module.exports = {
     step: SCHEMA_STEP,
     steps: SCHEMA_STEPS,
     template: SCHEMA_TEMPLATE,
-    requiresValue: SCHEMA_REQUIRES_OR_BLOCKEDBY,
+    requiresValue: SCHEMA_REQUIRES_VALUE,
     jobname: SCHEMA_JOBNAME,
     trigger: SCHEMA_TRIGGER
 };
