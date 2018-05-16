@@ -4,3 +4,4 @@ org: screwdriver-cd
 repo: data-schema
 sha: ccc49349d3cffbd12ea9e3d41521480b4aa5de5f
 scmContext: github:github.com
+manifest: git@github.com:org/repo.git/default.xml
