@@ -6,6 +6,7 @@ const models = require('../models');
 const buildId = Joi.reach(models.build.base, 'id').required();
 const jobId = Joi.reach(models.job.base, 'id');
 const SCHEMA_START = Joi.object().keys({
+    jobId,
     annotations: Annotations.annotations,
     blockedBy: Joi.array().items(jobId),
     buildId,
@@ -17,7 +18,9 @@ const SCHEMA_START = Joi.object().keys({
 }).required();
 const SCHEMA_STOP = Joi.object().keys({
     annotations: Annotations.annotations,
-    buildId
+    blockedBy: Joi.array().items(jobId),
+    buildId,
+    jobId
 }).required();
 const SCHEMA_STATUS = Joi.object().keys({
     buildId

@@ -1,3 +1,4 @@
+jobId: 1234
 annotations:
     beta.screwdriver.cd/executor: k8s
 blockedBy:
