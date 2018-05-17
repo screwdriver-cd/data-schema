@@ -14,8 +14,8 @@ describe('api validator', () => {
         });
 
         it('accepts input with namespace', () => {
-            // eslint-disable-next-line max-len
-            assert.isNull(validate('template-validator.inputWithNamespace.yaml', inputSchema).error);
+            assert.isNull(validate('template-validator.inputWithNamespace.yaml',
+                inputSchema).error);
         });
 
         it('fails', () => {
