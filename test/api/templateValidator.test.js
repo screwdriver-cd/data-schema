@@ -13,6 +13,11 @@ describe('api validator', () => {
             assert.isNull(validate('template-validator.input.yaml', inputSchema).error);
         });
 
+        it('accepts input with namespace', () => {
+            // eslint-disable-next-line max-len
+            assert.isNull(validate('template-validator.inputWithNamespace.yaml', inputSchema).error);
+        });
+
         it('fails', () => {
             assert.isOk(validate('template-validator.invalid-input.yaml', inputSchema).error);
         });

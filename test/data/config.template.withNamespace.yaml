@@ -1,0 +1,15 @@
+namespace: test
+name: template
+version: "1.3"
+description: Template for testing
+maintainer: foo@bar.com
+config:
+  image: node:6
+  steps:
+    - install: npm install
+    - test: npm test
+    - echo: echo $FOO
+  environment:
+    FOO: bar
+  secrets:
+     - NPM_TOKEN

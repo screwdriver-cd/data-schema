@@ -16,6 +16,8 @@ module.exports = {
     // Only <COMMAND_NAMESPACE>/<COMMAND_NAME> or <COMMAND_NAMESPACE>/<COMMAND_NAME> is also acceptable
     FULL_COMMAND_NAME:
         /^([\w-]+)\/([\w-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-]+)))?$/,
+    // Template namespaces can only be named with A-Z,a-z,0-9,-,_
+    TEMPLATE_NAMESPACE: /^[\w-]+$/,
     // Templates can only be named with A-Z,a-z,0-9,-,_,/
     TEMPLATE_NAME: /^[\w/-]+$/,
     // Template tags must start with an alpha character (A-Z,a-z) and can only contain A-Z,a-z,0-9,-,_

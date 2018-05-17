@@ -8,6 +8,7 @@ const MODEL = {
         .number().integer().positive()
         .description('Identifier of this template tag')
         .example(123345),
+    namespace: Template.namespace,
     name: Template.name,
     tag: Template.templateTag,
     version: Template.exactVersion
@@ -28,7 +29,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['name', 'tag'],
+    keys: ['namespace', 'name', 'tag'],
 
     /**
      * List of all fields in the model
@@ -43,7 +44,7 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['name', 'tag'],
+    indexes: ['namespace', 'name', 'tag'],
 
     /**
      * Tablename to be used in the datastore
