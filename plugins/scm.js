@@ -36,6 +36,7 @@ const GET_CHECKOUT_COMMAND = Joi.object().keys({
     repo: Joi.string().required(),
     sha: Joi.string().required(),
     prRef: Joi.string().optional(),
+    manifest: Joi.string().optional(),
     scmContext
 }).required();
 
