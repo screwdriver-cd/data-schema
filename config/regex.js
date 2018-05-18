@@ -31,6 +31,9 @@ module.exports = {
     // Example: chef/publish@1.2.3 or chef/publish@stable
     // Only <TEMPLATE_NAME> or <TEMPLATE_NAME>@ is also acceptable
     FULL_TEMPLATE_NAME: /^([\w/-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-]+)))?$/,
+    // Full name of template and version with grouping for the namespace
+    // eslint-disable-next-line max-len
+    FULL_TEMPLATE_NAME_WITH_NAMESPACE: /^([\w-]+)\/([\w/-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-]+)))?$/,
     // Steps can only be named with A-Z,a-z,0-9,-,_
     STEP_NAME: /^[\w-]+$/,
     // Jobs can only be named with A-Z,a-z,0-9,-,_

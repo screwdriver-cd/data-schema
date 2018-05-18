@@ -42,17 +42,8 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id',
-        'labels',
-        'config',
-        'name',
-        'version',
-        'description',
-        'maintainer',
-        'pipelineId'
-    ], [
-        'namespace'
-    ])).label('Get Template'),
+        'id', 'labels', 'config', 'name', 'version', 'description', 'maintainer', 'pipelineId'
+    ], ['namespace'])).label('Get Template'),
 
     /**
      * Properties for template that will be passed during a CREATE request
