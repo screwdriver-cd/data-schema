@@ -60,7 +60,19 @@ const SCHEMA_STEP_OBJECT = Joi.object()
     });
 
 const SCHEMA_DESCRIPTION = Joi.string().max(100).optional();
+
 const SCHEMA_IMAGE = Joi.string();
+const SCHEMA_IMAGES = Joi.object()
+    .pattern(Regex.IMAGE_ALIAS, SCHEMA_IMAGE)
+    .min(1)
+    .options({
+        language: {
+            object: {
+                allowUnknown: 'only supports the following characters A-Z,a-z,0-9,-,_'
+            }
+        }
+    });
+
 const SCHEMA_SETTINGS = Joi.object().optional();
 const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJECT);
 const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
@@ -83,6 +95,7 @@ const SCHEMA_JOB = Joi.object()
         description: SCHEMA_DESCRIPTION,
         environment: SCHEMA_ENVIRONMENT,
         image: SCHEMA_IMAGE,
+        images: SCHEMA_IMAGES,
         matrix: SCHEMA_MATRIX,
         requires: SCHEMA_REQUIRES,
         secrets: SCHEMA_SECRETS,
@@ -102,6 +115,7 @@ module.exports = {
     description: SCHEMA_DESCRIPTION,
     environment: SCHEMA_ENVIRONMENT,
     image: SCHEMA_IMAGE,
+    images: SCHEMA_IMAGES,
     job: SCHEMA_JOB,
     matrix: SCHEMA_MATRIX,
     requires: SCHEMA_REQUIRES,
