@@ -1,0 +1,6 @@
+# Base Template Tag Example
+id: 123234135
+namespace: test
+name: template
+tag: stable
+version: '1.2.0'

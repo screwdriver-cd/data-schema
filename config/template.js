@@ -4,6 +4,13 @@ const Joi = require('joi');
 const Job = require('./job');
 const Regex = require('./regex');
 
+const TEMPLATE_NAMESPACE = Joi
+    .string()
+    .regex(Regex.TEMPLATE_NAMESPACE)
+    .max(64)
+    .description('Namespace of the Template')
+    .example('node');
+
 const TEMPLATE_NAME = Joi
     .string()
     .regex(Regex.TEMPLATE_NAME)
@@ -47,6 +54,7 @@ const TEMPLATE_MAINTAINER = Joi
 
 const SCHEMA_TEMPLATE = Joi.object()
     .keys({
+        namespace: TEMPLATE_NAMESPACE,
         name: TEMPLATE_NAME,
         version: TEMPLATE_VERSION,
         description: TEMPLATE_DESCRIPTION,
@@ -62,6 +70,7 @@ const SCHEMA_TEMPLATE = Joi.object()
  */
 module.exports = {
     template: SCHEMA_TEMPLATE,
+    namespace: TEMPLATE_NAMESPACE,
     name: TEMPLATE_NAME,
     templateTag: TEMPLATE_TAG_NAME,
     version: TEMPLATE_VERSION,

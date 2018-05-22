@@ -18,6 +18,7 @@ const MODEL = {
         .example(['stable', 'latest', 'beta']),
 
     config: Template.config,
+    namespace: Template.namespace,
     name: Template.name,
     version: Template.version,
     description: Template.description,
@@ -42,7 +43,7 @@ module.exports = {
      */
     get: Joi.object(mutate(MODEL, [
         'id', 'labels', 'config', 'name', 'version', 'description', 'maintainer', 'pipelineId'
-    ], [])).label('Get Template'),
+    ], ['namespace'])).label('Get Template'),
 
     /**
      * Properties for template that will be passed during a CREATE request
@@ -52,7 +53,7 @@ module.exports = {
      */
     create: Joi.object(mutate(MODEL, [
         'config', 'name', 'version', 'description', 'maintainer'
-    ], ['labels'])).label('Create Template'),
+    ], ['labels', 'namespace'])).label('Create Template'),
 
     /**
      * Properties for template that will be passed during a UPDATE request
@@ -69,7 +70,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['name', 'version'],
+    keys: ['namespace', 'name', 'version'],
 
     /**
      * List of all fields in the model
@@ -84,7 +85,7 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['name'],
+    indexes: ['namespace', 'name'],
 
     /**
      * Primary column to sort queries by.
@@ -94,7 +95,7 @@ module.exports = {
      * @property rangeKeys
      * @type {Array}
      */
-    rangeKeys: ['id'],
+    rangeKeys: ['id', 'id'],
 
     /**
      * Tablename to be used in the datastore
