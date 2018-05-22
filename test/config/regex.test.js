@@ -59,8 +59,40 @@ describe('config regex', () => {
     });
 
     describe('templates', () => {
+        it('checks good template namespaces', () => {
+            assert.isTrue(config.regex.TEMPLATE_NAMESPACE.test('chefdk'));
+        });
+
+        it('fails on bad template namespaces', () => {
+            assert.isFalse(config.regex.TEMPLATE_NAMESPACE.test('bad/namespace'));
+        });
+
         it('checks good template names', () => {
             assert.isTrue(config.regex.TEMPLATE_NAME.test('node/npm-install'));
+        });
+
+        it('fails on bad template names', () => {
+            assert.isFalse(config.regex.TEMPLATE_NAME.test('bad@/name'));
+        });
+
+        it('checks good template full names', () => {
+            assert.isTrue(config.regex.FULL_TEMPLATE_NAME.test('chefdk/knife@1.2.3'));
+        });
+
+        it('checks good template full names with namespace', () => {
+            assert.isTrue(config.regex.FULL_TEMPLATE_NAME_WITH_NAMESPACE.test('chefdk/knife'));
+        });
+
+        it('checks good template full names without version', () => {
+            assert.isTrue(config.regex.FULL_TEMPLATE_NAME.test('chefdk/knife'));
+        });
+
+        it('fails on bad template full names', () => {
+            assert.isFalse(config.regex.FULL_TEMPLATE_NAME.test('bad name'));
+        });
+
+        it('fails on bad formatted template full names', () => {
+            assert.isFalse(config.regex.FULL_TEMPLATE_NAME.test('namespace::command@1.2.3'));
         });
 
         it('fails on bad template names', () => {
