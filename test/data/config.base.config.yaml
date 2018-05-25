@@ -1,5 +1,9 @@
 version: 4
 
+scmUrls:
+  - git@github.com:org/repo.git
+  - https://git@github.com:org/repo2.git
+
 shared:
     environment:
         NODE_TAG: latest
