@@ -52,7 +52,15 @@ const MODEL = {
 
     lastEventId: Joi.number().integer().positive()
         .description('Identifier of last event')
-        .example(123345)
+        .example(123345),
+
+    configPipelineId: Joi.number().integer().positive()
+        .description('Identifier of pipeline containing external configuration')
+        .example(123),
+
+    isConfigPipeline: Joi.boolean()
+        .description('Is this pipeline an external configuration one?')
+        .example(true)
 };
 
 module.exports = {
@@ -73,7 +81,8 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'scmUri', 'scmContext', 'createTime', 'admins'
     ], [
-        'workflowGraph', 'scmRepo', 'annotations', 'lastEventId'
+        'workflowGraph', 'scmRepo', 'annotations', 'lastEventId',
+        'configPipelineId', 'isConfigPipeline'
     ])).label('Get Pipeline'),
 
     /**

@@ -16,3 +16,5 @@ annotations:
     screwdriver.cd/notify.email: foo@example.com
     beta.screwdriver.cd/auto_pr_builds: fork-only
 lastEventId: 31135214
+configPipelineId: 123
+isConfigPipeline: false
