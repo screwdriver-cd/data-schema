@@ -11,10 +11,12 @@ const TEMPLATE_NAMESPACE = Joi
     .description('Namespace of the Template')
     .example('node');
 
-const TEMPLATE_NAME = Joi
-    .string()
-    .regex(Regex.TEMPLATE_NAME)
-    .max(64)
+// Don't allow slashes in the template name when namespace exists
+// Allow one slash in the template name when namespace does not exist
+const TEMPLATE_NAME = Joi.alternatives()
+    .when('namespace', { is: Joi.exist(),
+        then: Joi.string().regex(Regex.TEMPLATE_NAME_NO_SLASH).max(64),
+        otherwise: Joi.string().regex(Regex.TEMPLATE_NAME_ALLOW_SLASH).max(64) })
     .description('Name of the Template')
     .example('node/npm-install');
 
