@@ -17,4 +17,6 @@ annotations:
     beta.screwdriver.cd/auto_pr_builds: fork-only
 lastEventId: 31135214
 configPipelineId: 123
-isConfigPipeline: false
+scmUrls:
+    - git@github.com:org/repo.git
+    - https://github.com:org/repo2.git
