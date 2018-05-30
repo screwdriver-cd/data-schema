@@ -4,6 +4,16 @@ const assert = require('chai').assert;
 const config = require('../../').config;
 
 describe('config regex', () => {
+    describe('internal trigger', () => {
+        it('checks good internal trigger', () => {
+            assert.isTrue(config.regex.INTERNAL_TRIGGER.test('~main'));
+        });
+
+        it('fails on bad internal trigger', () => {
+            assert.isFalse(config.regex.INTERNAL_TRIGGER.test('main'));
+        });
+    });
+
     describe('external trigger', () => {
         it('checks good external trigger', () => {
             assert.isTrue(config.regex.EXTERNAL_TRIGGER.test('~sd@123:main'));
