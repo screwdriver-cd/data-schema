@@ -4,6 +4,16 @@ const assert = require('chai').assert;
 const config = require('../../').config;
 
 describe('config regex', () => {
+    describe('internal trigger', () => {
+        it('checks good internal trigger', () => {
+            assert.isTrue(config.regex.INTERNAL_TRIGGER.test('~main'));
+        });
+
+        it('fails on bad internal trigger', () => {
+            assert.isFalse(config.regex.INTERNAL_TRIGGER.test('main'));
+        });
+    });
+
     describe('external trigger', () => {
         it('checks good external trigger', () => {
             assert.isTrue(config.regex.EXTERNAL_TRIGGER.test('~sd@123:main'));
@@ -68,11 +78,11 @@ describe('config regex', () => {
         });
 
         it('checks good template names', () => {
-            assert.isTrue(config.regex.TEMPLATE_NAME.test('node/npm-install'));
+            assert.isTrue(config.regex.TEMPLATE_NAME_ALLOW_SLASH.test('node/npm-install'));
         });
 
         it('fails on bad template names', () => {
-            assert.isFalse(config.regex.TEMPLATE_NAME.test('bad@/name'));
+            assert.isFalse(config.regex.TEMPLATE_NAME_ALLOW_SLASH.test('bad@/name'));
         });
 
         it('checks good template full names', () => {
@@ -96,7 +106,7 @@ describe('config regex', () => {
         });
 
         it('fails on bad template names', () => {
-            assert.isFalse(config.regex.TEMPLATE_NAME.test('run all the things'));
+            assert.isFalse(config.regex.TEMPLATE_NAME_NO_SLASH.test('run all the things'));
         });
     });
 

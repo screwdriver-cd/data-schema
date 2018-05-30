@@ -1,17 +1,7 @@
-# Base Template Example
-id: 123234135
-name: test/template
+name: test/template/extraslash
 version: "1.3"
 description: Template for testing
 maintainer: foo@bar.com
-pipelineId: 8765
-labels:
-    - stable
-    - test
-    - beta
-images:
-  latest: node:6
-  stable: node:5
 config:
   image: node:6
   steps:

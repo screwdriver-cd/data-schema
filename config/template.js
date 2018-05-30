@@ -11,10 +11,12 @@ const TEMPLATE_NAMESPACE = Joi
     .description('Namespace of the Template')
     .example('node');
 
-const TEMPLATE_NAME = Joi
-    .string()
-    .regex(Regex.TEMPLATE_NAME)
-    .max(64)
+// Don't allow slashes in the template name when namespace exists
+// Allow one slash in the template name when namespace does not exist
+const TEMPLATE_NAME = Joi.alternatives()
+    .when('namespace', { is: Joi.exist(),
+        then: Joi.string().regex(Regex.TEMPLATE_NAME_NO_SLASH).max(64),
+        otherwise: Joi.string().regex(Regex.TEMPLATE_NAME_ALLOW_SLASH).max(64) })
     .description('Name of the Template')
     .example('node/npm-install');
 
@@ -52,6 +54,17 @@ const TEMPLATE_MAINTAINER = Joi
     .description('Maintainer of the Template')
     .example('foo@bar.com');
 
+const TEMPLATE_IMAGES = Joi.object()
+    .pattern(Regex.IMAGE_ALIAS, Job.image)
+    .min(1)
+    .options({
+        language: {
+            object: {
+                allowUnknown: 'only supports the following characters A-Z,a-z,0-9,-,_'
+            }
+        }
+    });
+
 const SCHEMA_TEMPLATE = Joi.object()
     .keys({
         namespace: TEMPLATE_NAMESPACE,
@@ -59,7 +72,8 @@ const SCHEMA_TEMPLATE = Joi.object()
         version: TEMPLATE_VERSION,
         description: TEMPLATE_DESCRIPTION,
         maintainer: TEMPLATE_MAINTAINER,
-        config: Job.job
+        config: Job.job,
+        images: TEMPLATE_IMAGES
     })
     .requiredKeys('name', 'version', 'description', 'maintainer',
         'config', 'config.image', 'config.steps');
@@ -77,5 +91,6 @@ module.exports = {
     exactVersion: TEMPLATE_EXACT_VERSION,
     description: TEMPLATE_DESCRIPTION,
     maintainer: TEMPLATE_MAINTAINER,
-    config: Job.job
+    config: Job.job,
+    images: TEMPLATE_IMAGES
 };

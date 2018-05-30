@@ -23,6 +23,7 @@ const MODEL = {
     version: Template.version,
     description: Template.description,
     maintainer: Template.maintainer,
+    images: Template.images,
     pipelineId
 };
 
