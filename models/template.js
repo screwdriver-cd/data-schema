@@ -19,7 +19,11 @@ const MODEL = {
 
     config: Template.config,
     namespace: Template.namespace,
-    name: Template.name,
+    name: Joi
+        .string()
+        .max(64)
+        .description('Template name')
+        .example('nodejs/lib'),
     version: Template.version,
     description: Template.description,
     maintainer: Template.maintainer,
