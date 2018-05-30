@@ -3,6 +3,6 @@ steps:
     - publish: npm publish
 requires: ~commit
 blockedBy:
-    - main
-    - test
+    - ~main
+    - ~test
     - ~sd@123:publish
