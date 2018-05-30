@@ -9,10 +9,10 @@ labels:
     - stable
     - test
     - beta
+images:
+  latest: node:6
+  stable: node:5
 config:
-  images:
-    latest: node:6
-    stable: node:5
   image: node:6
   steps:
     - install: npm install
