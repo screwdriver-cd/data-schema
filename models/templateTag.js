@@ -9,7 +9,11 @@ const MODEL = {
         .description('Identifier of this template tag')
         .example(123345),
     namespace: Template.namespace,
-    name: Template.name,
+    name: Joi
+        .string()
+        .max(64)
+        .description('Template name')
+        .example('nodejs/lib'),
     tag: Template.templateTag,
     version: Template.exactVersion
 };
