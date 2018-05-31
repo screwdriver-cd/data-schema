@@ -54,6 +54,17 @@ const TEMPLATE_MAINTAINER = Joi
     .description('Maintainer of the Template')
     .example('foo@bar.com');
 
+const TEMPLATE_IMAGES = Joi.object()
+    .pattern(Regex.IMAGE_ALIAS, Job.image)
+    .min(1)
+    .options({
+        language: {
+            object: {
+                allowUnknown: 'only supports the following characters A-Z,a-z,0-9,-,_'
+            }
+        }
+    });
+
 const SCHEMA_TEMPLATE = Joi.object()
     .keys({
         namespace: TEMPLATE_NAMESPACE,
@@ -61,7 +72,8 @@ const SCHEMA_TEMPLATE = Joi.object()
         version: TEMPLATE_VERSION,
         description: TEMPLATE_DESCRIPTION,
         maintainer: TEMPLATE_MAINTAINER,
-        config: Job.job
+        config: Job.job,
+        images: TEMPLATE_IMAGES
     })
     .requiredKeys('name', 'version', 'description', 'maintainer',
         'config', 'config.image', 'config.steps');
@@ -79,5 +91,6 @@ module.exports = {
     exactVersion: TEMPLATE_EXACT_VERSION,
     description: TEMPLATE_DESCRIPTION,
     maintainer: TEMPLATE_MAINTAINER,
-    config: Job.job
+    config: Job.job,
+    images: TEMPLATE_IMAGES
 };

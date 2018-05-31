@@ -22,4 +22,10 @@ describe('config base', () => {
             assert.isNull(validate('config.base.shared.yaml', config.base.shared).error);
         });
     });
+
+    describe('scmUrls', () => {
+        it('validates a list of scmUrls', () => {
+            assert.isNull(validate('config.base.scmUrls.yaml', config.base.scmUrls).error);
+        });
+    });
 });

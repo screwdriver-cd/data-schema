@@ -62,16 +62,6 @@ const SCHEMA_STEP_OBJECT = Joi.object()
 const SCHEMA_DESCRIPTION = Joi.string().max(100).optional();
 
 const SCHEMA_IMAGE = Joi.string();
-const SCHEMA_IMAGES = Joi.object()
-    .pattern(Regex.IMAGE_ALIAS, SCHEMA_IMAGE)
-    .min(1)
-    .options({
-        language: {
-            object: {
-                allowUnknown: 'only supports the following characters A-Z,a-z,0-9,-,_'
-            }
-        }
-    });
 
 const SCHEMA_SETTINGS = Joi.object().optional();
 const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJECT);
@@ -79,13 +69,17 @@ const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
 const SCHEMA_JOBNAME = Joi.string().regex(Regex.JOB_NAME);
 const SCHEMA_TRIGGER = Joi.string().regex(Regex.TRIGGER); // ~commit, ~pr, etc.
-const SCHEMA_EXTERNAL_TRIGGER = Joi.string().regex(Regex.EXTERNAL_TRIGGER);
+const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne
+const SCHEMA_EXTERNAL_TRIGGER = Joi.string().regex(Regex.EXTERNAL_TRIGGER); // ~sd@123:main
 const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(SCHEMA_JOBNAME, SCHEMA_TRIGGER);
 const SCHEMA_REQUIRES = Joi.alternatives().try(
     Joi.array().items(SCHEMA_REQUIRES_VALUE),
     SCHEMA_REQUIRES_VALUE
 );
-const SCHEMA_BLOCKEDBY_VALUE = Joi.alternatives().try(SCHEMA_JOBNAME, SCHEMA_EXTERNAL_TRIGGER);
+const SCHEMA_BLOCKEDBY_VALUE = Joi.alternatives().try(
+    SCHEMA_INTERNAL_TRIGGER,
+    SCHEMA_EXTERNAL_TRIGGER
+);
 const SCHEMA_BLOCKEDBY = Joi.alternatives().try(
     Joi.array().items(SCHEMA_BLOCKEDBY_VALUE),
     SCHEMA_BLOCKEDBY_VALUE
@@ -101,7 +95,6 @@ const SCHEMA_JOB = Joi.object()
         description: SCHEMA_DESCRIPTION,
         environment: SCHEMA_ENVIRONMENT,
         image: SCHEMA_IMAGE,
-        images: SCHEMA_IMAGES,
         matrix: SCHEMA_MATRIX,
         requires: SCHEMA_REQUIRES,
         blockedBy: SCHEMA_BLOCKEDBY,
@@ -122,7 +115,6 @@ module.exports = {
     description: SCHEMA_DESCRIPTION,
     environment: SCHEMA_ENVIRONMENT,
     image: SCHEMA_IMAGE,
-    images: SCHEMA_IMAGES,
     job: SCHEMA_JOB,
     matrix: SCHEMA_MATRIX,
     requires: SCHEMA_REQUIRES,

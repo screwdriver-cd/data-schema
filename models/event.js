@@ -44,6 +44,10 @@ const MODEL = {
         .string().hex().length(40)
         .description('SHA this project was built on')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
+    configPipelineSha: Joi
+        .string().hex().length(40)
+        .description('SHA of the configuration pipeline this project depends on')
+        .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
     startFrom: Joi
         .string()
         .description('Event start point - a job name or trigger name (~commit/~pr)')
@@ -96,7 +100,8 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'type'
     ], [
-        'causeMessage', 'meta', 'parentEventId', 'startFrom', 'workflowGraph', 'pr'
+        'causeMessage', 'meta', 'parentEventId', 'startFrom', 'workflowGraph', 'pr',
+        'configPipelineSha'
     ])).label('Get Event'),
 
     /**
@@ -106,7 +111,8 @@ module.exports = {
      * @type {Joi}
      */
     create: Joi.object(mutate(CREATE_MODEL, [], [
-        'pipelineId', 'startFrom', 'buildId', 'causeMessage', 'parentBuildId', 'parentEventId'
+        'pipelineId', 'startFrom', 'buildId', 'causeMessage', 'parentBuildId', 'parentEventId',
+        'configPipelineSha'
     ])).label('Create Event'),
 
     /**
