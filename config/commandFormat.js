@@ -13,7 +13,7 @@ const HABITAT_MODE = Joi
 const HABITAT_FILE = Joi
     .string()
     .description('File path of the Habitat artifact')
-    .example('./foobar.hart')
+    .example('./foobar.hart');
 
 const HABITAT_PACKAGE = Joi
     .string()
