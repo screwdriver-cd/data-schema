@@ -114,6 +114,11 @@ const PARSE_URL = Joi.object().keys({
     scmContext
 }).required();
 
+const GET_BRANCH_LIST = Joi.object().keys({
+    scmUri,
+    token
+}).required();
+
 module.exports = {
     /**
      * Properties for Scm Base that will be passed for the addWebhook method
@@ -217,5 +222,13 @@ module.exports = {
      * @property getCheckoutCommand
      * @type {Joi}
      */
-    getCheckoutCommand: GET_CHECKOUT_COMMAND
+    getCheckoutCommand: GET_CHECKOUT_COMMAND,
+
+    /**
+     * Properties for Scm Base that will be passed for the getBranchList method
+     *
+     * @property getBranchList
+     * @type {Joi}
+     */
+    getBranchList: GET_BRANCH_LIST
 };
