@@ -24,5 +24,15 @@ describe('config template', () => {
             assert.isNotNull(validate('config.template.badWithNamespace.yaml',
                 config.template.template).error);
         });
+
+        it('returns error when template name has more than one slash', () => {
+            assert.isNotNull(validate('config.template.badName.yaml',
+                config.template.template).error);
+        });
+
+        it('returns error when template namespace exists and name has a slash', () => {
+            assert.isNotNull(validate('config.template.badNameWithSlash.yaml',
+                config.template.template).error);
+        });
     });
 });

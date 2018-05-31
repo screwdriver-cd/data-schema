@@ -1,6 +1,7 @@
 'use strict';
 
 const Annotations = require('../config/annotations');
+const Base = require('../config/base');
 const Joi = require('joi');
 const Regex = require('../config/regex');
 const Scm = require('../core/scm');
@@ -52,7 +53,14 @@ const MODEL = {
 
     lastEventId: Joi.number().integer().positive()
         .description('Identifier of last event')
-        .example(123345)
+        .example(123345),
+
+    configPipelineId: Joi.number().integer().positive()
+        .description('Identifier of pipeline containing external configuration')
+        .example(123),
+
+    scmUrls: Base.scmUrls
+        .description('List of SCM URLs that use this pipeline as an external configuration')
 };
 
 module.exports = {
@@ -73,7 +81,8 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'scmUri', 'scmContext', 'createTime', 'admins'
     ], [
-        'workflowGraph', 'scmRepo', 'annotations', 'lastEventId'
+        'workflowGraph', 'scmRepo', 'annotations', 'lastEventId',
+        'configPipelineId', 'scmUrls'
     ])).label('Get Pipeline'),
 
     /**

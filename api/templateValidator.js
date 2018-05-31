@@ -22,7 +22,7 @@ const SCHEMA_OUTPUT = Joi.object()
         errors: Joi.array()
             .items(TEMPLATE_ERROR)
             .label('Array of errors encountered while validating the given template'),
-        // since a template could be parseable but invalid, the contents are unpredicatble
+        // since a template could be parseable but invalid, the contents are unpredictable
         template: Joi.object()
             .label('The end-result of parsing the given template')
     })

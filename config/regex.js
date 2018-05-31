@@ -18,8 +18,10 @@ module.exports = {
         /^([\w-]+)\/([\w-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-]+)))?$/,
     // Template namespaces can only be named with A-Z,a-z,0-9,-,_
     TEMPLATE_NAMESPACE: /^[\w-]+$/,
-    // Templates can only be named with A-Z,a-z,0-9,-,_,/
-    TEMPLATE_NAME: /^[\w/-]+$/,
+    // Templates can only be named with A-Z,a-z,0-9,-,_,/; can only contain one /
+    TEMPLATE_NAME_ALLOW_SLASH: /^(?:([\w-]+)\/)?([\w-]+)$/,
+    // Templates can only be named with A-Z,a-z,0-9,-,_ if namespace exists
+    TEMPLATE_NAME_NO_SLASH: /^[\w-]+$/,
     // Template tags must start with an alpha character (A-Z,a-z) and can only contain A-Z,a-z,0-9,-,_
     TEMPLATE_TAG_NAME: /^[a-zA-Z][\w-]+$/,
     // Version can only have up to 2 decimals, like 1.2.3
@@ -40,6 +42,8 @@ module.exports = {
     JOB_NAME: /^[\w-]+$/,
     // PR JOB Name can only be PR-1 or PR-1:main, group1: PR-prNum, group2: jobName
     PR_JOB_NAME: /^(PR-\d+)(?::([\w-]+))?$/,
+    // Internal trigger like ~component or ~main
+    INTERNAL_TRIGGER: /^~([\w-]+)$/,
     // External trigger like ~sd@123:component
     EXTERNAL_TRIGGER: /^~sd@(\d+):([\w-]+)$/,
     // Can be ~pr, ~commit, or ~commit:branchName, or ~sd@123:component

@@ -19,10 +19,15 @@ const MODEL = {
 
     config: Template.config,
     namespace: Template.namespace,
-    name: Template.name,
+    name: Joi
+        .string()
+        .max(64)
+        .description('Template name')
+        .example('nodejs/lib'),
     version: Template.version,
     description: Template.description,
     maintainer: Template.maintainer,
+    images: Template.images,
     pipelineId
 };
 
@@ -43,7 +48,7 @@ module.exports = {
      */
     get: Joi.object(mutate(MODEL, [
         'id', 'labels', 'config', 'name', 'version', 'description', 'maintainer', 'pipelineId'
-    ], ['namespace'])).label('Get Template'),
+    ], ['namespace', 'images'])).label('Get Template'),
 
     /**
      * Properties for template that will be passed during a CREATE request
@@ -53,7 +58,7 @@ module.exports = {
      */
     create: Joi.object(mutate(MODEL, [
         'config', 'name', 'version', 'description', 'maintainer'
-    ], ['labels', 'namespace'])).label('Create Template'),
+    ], ['labels', 'namespace', 'images'])).label('Create Template'),
 
     /**
      * Properties for template that will be passed during a UPDATE request
