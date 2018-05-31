@@ -1,0 +1,4 @@
+mode: local
+file: ./foobar.hart
+package: core/git/2.14.1
+command: git
