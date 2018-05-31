@@ -10,6 +10,11 @@ const HABITAT_MODE = Joi
     .description('Mode of the Habitat command')
     .example('remote');
 
+const HABITAT_FILE = Joi
+    .string()
+    .description('File path of the Habitat artifact')
+    .example('./foobar.hart')
+
 const HABITAT_PACKAGE = Joi
     .string()
     .description('Package of the Habitat command')
@@ -23,6 +28,8 @@ const HABITAT_COMMAND = Joi
 const SCHEMA_HABITAT = Joi.object()
     .keys({
         mode: HABITAT_MODE,
+        file: HABITAT_FILE
+            .when('mode', { is: 'local', then: Joi.required() }),
         package: HABITAT_PACKAGE,
         command: HABITAT_COMMAND
     })
@@ -64,6 +71,7 @@ const SCHEMA_BINARY = Joi.object()
 module.exports = {
     habitat: SCHEMA_HABITAT,
     habitatMode: HABITAT_MODE,
+    habitatFile: HABITAT_FILE,
     habitatPackage: HABITAT_PACKAGE,
     habitatCommand: HABITAT_COMMAND,
     docker: SCHEMA_DOCKER,
