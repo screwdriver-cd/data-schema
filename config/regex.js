@@ -47,7 +47,8 @@ module.exports = {
     // External trigger like ~sd@123:component
     EXTERNAL_TRIGGER: /^~sd@(\d+):([\w-]+)$/,
     // Can be ~pr, ~commit, or ~commit:branchName, or ~sd@123:component
-    TRIGGER: /^~(sd@\d+:[\w-]+|pr|commit(:.+)?)$/,
+    // Note: if you modify this regex, you must modify `sdJoi` definition in the `config/job.js`
+    TRIGGER: /^~(sd@\d+:[\w-]+|pr|commit(:(.+))?)$/,
     // IEEE Std 1003.1-2001
     // Environment names contain uppercase letters, digits, and underscore
     // They cannot start with digits

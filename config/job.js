@@ -4,6 +4,41 @@ const Annotations = require('./annotations');
 const Joi = require('joi');
 const Regex = require('./regex');
 
+// ref. https://github.com/hapijs/joi/blob/v13.3.0/API.md#extendextension
+const sdJoi = Joi.extend(joi => ({
+    base: joi.string(),
+    name: 'string',
+    language: {
+        commitBranch: 'needs to be a commit branch string/regex'
+    },
+    rules: [
+        {
+            name: 'commitBranch',
+            validate(params, value, state, options) {
+                const matched = Regex.TRIGGER.exec(value);
+                const brFilter = matched[3];
+
+                // branch regex filter
+                if (typeof brFilter !== 'undefined' && /^\/.+\/$/.test(brFilter)) {
+                    try {
+                        const filterRegex = brFilter.substr(1, brFilter.length - 2);
+                        /* eslint-disable no-unused-vars */
+                        // compile for syntax validation
+                        const re = new RegExp(filterRegex);
+                        /* eslint-enable */
+                    } catch (e) {
+                        return this.createError(
+                            'string.commitBranch', { v: value, err: e.message }, state, options);
+                    }
+                }
+
+                // no filter or exact match string
+                return value;
+            }
+        }
+    ]
+}));
+
 const SCHEMA_MATRIX = Joi.object()
     // IEEE Std 1003.1-2001
     // Environment names contain uppercase letters, digits, and underscore
@@ -68,7 +103,8 @@ const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJEC
 const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
 const SCHEMA_JOBNAME = Joi.string().regex(Regex.JOB_NAME);
-const SCHEMA_TRIGGER = Joi.string().regex(Regex.TRIGGER); // ~commit, ~pr, etc.
+// ~commit, ~commit:staging, ~commit:/^user-.*$/, ~pr, etc.
+const SCHEMA_TRIGGER = sdJoi.string().regex(Regex.TRIGGER).commitBranch();
 const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne
 const SCHEMA_EXTERNAL_TRIGGER = Joi.string().regex(Regex.EXTERNAL_TRIGGER); // ~sd@123:main
 const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(SCHEMA_JOBNAME, SCHEMA_TRIGGER);
