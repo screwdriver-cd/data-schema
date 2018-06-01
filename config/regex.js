@@ -48,6 +48,8 @@ module.exports = {
     EXTERNAL_TRIGGER: /^~sd@(\d+):([\w-]+)$/,
     // Can be ~pr, ~commit, or ~commit:branchName, or ~sd@123:component
     TRIGGER: /^~(sd@\d+:[\w-]+|pr|commit(:.+)?)$/,
+    // Can be ~commit or ~commit:master
+    COMMIT_TRIGGER: /^~commit(:.+)?$/,
     // IEEE Std 1003.1-2001
     // Environment names contain uppercase letters, digits, and underscore
     // They cannot start with digits
