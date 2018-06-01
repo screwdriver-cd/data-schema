@@ -140,4 +140,14 @@ describe('scm test', () => {
             assert.isNotNull(validate('empty.yaml', scm.addWebhook).error);
         });
     });
+
+    describe('getBranchList', () => {
+        it('validates', () => {
+            assert.isNull(validate('scm.getBranchList.yaml', scm.getBranchList).error);
+        });
+
+        it('fails', () => {
+            assert.isNotNull(validate('empty.yaml', scm.getBranchList).error);
+        });
+    });
 });
