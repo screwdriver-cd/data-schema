@@ -6,8 +6,13 @@ const validate = require('../helper').validate;
 
 describe('config commandFormat', () => {
     describe('habitat', () => {
-        it('validates safely', () => {
-            assert.isNull(validate('config.commandFormat.habitat.yaml',
+        it('remote mode validates safely', () => {
+            assert.isNull(validate('config.commandFormat.habitat.remote.yaml',
+                config.commandFormat.habitat).error);
+        });
+
+        it('local mode validates safely', () => {
+            assert.isNull(validate('config.commandFormat.habitat.local.yaml',
                 config.commandFormat.habitat).error);
         });
 
