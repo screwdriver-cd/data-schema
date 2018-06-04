@@ -1,6 +1,7 @@
 'use strict';
 
 const Annotations = require('../config/annotations');
+const Base = require('../config/base');
 const Job = require('../config/job');
 const Joi = require('joi');
 const Regex = require('../config/regex');
@@ -48,6 +49,7 @@ const SCHEMA_OUTPUT = Joi.object()
         annotations: Annotations.annotations,
         errors: Joi.array().items(Joi.string()).optional(),
         jobs: SCHEMA_JOBS,
+        scmUrls: Base.scmUrls,
         workflowGraph: WorkflowGraph.workflowGraph
     })
     .label('Execution information');

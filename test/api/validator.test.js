@@ -29,5 +29,10 @@ describe('api validator', () => {
         it('validates basic output with errors', () => {
             assert.isNull(validate('validator.erroroutput.yaml', api.validator.output).error);
         });
+
+        it('validates output with scmUrls', () => {
+            assert.isNull(
+                validate('validator-with-scmUrls.output.yaml', api.validator.output).error);
+        });
     });
 });
