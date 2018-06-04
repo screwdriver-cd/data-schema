@@ -49,7 +49,7 @@ module.exports = {
     // Can be ~pr, ~commit, or ~commit:branchName, or ~sd@123:component
     // Note: if you modify this regex, you must modify `sdJoi` definition in the `config/job.js`
     TRIGGER: /^~(sd@\d+:[\w-]+|pr|commit(:(.+))?)$/,
-    // Can be ~commit or ~commit:master
+    // Can be ~commit or ~commit:branchName
     COMMIT_TRIGGER: /^~commit(:.+)?$/,
     // IEEE Std 1003.1-2001
     // Environment names contain uppercase letters, digits, and underscore
