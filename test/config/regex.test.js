@@ -34,6 +34,18 @@ describe('config regex', () => {
         });
     });
 
+    describe('commit trigger', () => {
+        it('checks good trigger', () => {
+            assert.isTrue(config.regex.TRIGGER.test('~commit'));
+            assert.isTrue(config.regex.TRIGGER.test('~commit:master'));
+        });
+
+        it('fails on bad trigger', () => {
+            assert.isFalse(config.regex.TRIGGER.test('~'));
+            assert.isFalse(config.regex.TRIGGER.test('~commit:'));
+        });
+    });
+
     describe('commands', () => {
         it('checks good command namespaces', () => {
             assert.isTrue(config.regex.COMMAND_NAMESPACE.test('chefdk'));
