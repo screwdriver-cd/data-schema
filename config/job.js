@@ -15,13 +15,15 @@ const sdJoi = Joi.extend(joi => ({
         {
             name: 'commitBranch',
             validate(params, value, state, options) {
-                const regexPos = 3;
+                const specificBranchPos = 3;
                 const matched = Regex.TRIGGER.exec(value);
-                const brFilter = matched[regexPos];
+                // e.g. value = ~commit:/^user-.*$/ => brFilter = /^user-.*$/
+                const brFilter = matched[specificBranchPos];
 
                 // branch regex filter
                 if (typeof brFilter !== 'undefined' && /^\/.+\/$/.test(brFilter)) {
                     try {
+                        // e.g. /^user-.*$/ => ^user-.*$
                         const filterRegex = brFilter.substr(1, brFilter.length - 2);
                         /* eslint-disable no-unused-vars */
                         // compile for syntax validation
