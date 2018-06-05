@@ -15,8 +15,9 @@ const sdJoi = Joi.extend(joi => ({
         {
             name: 'commitBranch',
             validate(params, value, state, options) {
+                const regexPos = 3;
                 const matched = Regex.TRIGGER.exec(value);
-                const brFilter = matched[3];
+                const brFilter = matched[regexPos];
 
                 // branch regex filter
                 if (typeof brFilter !== 'undefined' && /^\/.+\/$/.test(brFilter)) {
