@@ -59,8 +59,8 @@ const MODEL = {
         .description('Identifier of pipeline containing external configuration')
         .example(123),
 
-    scmUrls: Base.scmUrls
-        .description('List of SCM URLs that use this pipeline as an external configuration')
+    childPipelines: Base.childPipelines
+        .description('Configuration of child pipelines')
 };
 
 module.exports = {
@@ -82,7 +82,7 @@ module.exports = {
         'id', 'scmUri', 'scmContext', 'createTime', 'admins'
     ], [
         'workflowGraph', 'scmRepo', 'annotations', 'lastEventId',
-        'configPipelineId', 'scmUrls'
+        'configPipelineId', 'childPipelines'
     ])).label('Get Pipeline'),
 
     /**

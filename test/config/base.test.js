@@ -23,9 +23,10 @@ describe('config base', () => {
         });
     });
 
-    describe('scmUrls', () => {
-        it('validates a list of scmUrls', () => {
-            assert.isNull(validate('config.base.scmUrls.yaml', config.base.scmUrls).error);
+    describe('childPipelines', () => {
+        it('validates the childPipelines object', () => {
+            assert.isNull(validate('config.base.childPipelines.yaml',
+                config.base.childPipelines).error);
         });
     });
 });
