@@ -30,9 +30,9 @@ describe('api validator', () => {
             assert.isNull(validate('validator.erroroutput.yaml', api.validator.output).error);
         });
 
-        it('validates output with scmUrls', () => {
+        it('validates output with childPipelines', () => {
             assert.isNull(
-                validate('validator-with-scmUrls.output.yaml', api.validator.output).error);
+                validate('validator-with-childPipelines.output.yaml', api.validator.output).error);
         });
     });
 });

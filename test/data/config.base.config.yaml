@@ -1,8 +1,10 @@
 version: 4
 
-scmUrls:
-  - git@github.com:org/repo.git
-  - https://git@github.com:org/repo2.git
+childPipelines:
+    scmUrls:
+      - git@github.com:org/repo.git
+      - https://git@github.com:org/repo2.git
+    startAll: true
 
 shared:
     environment:
