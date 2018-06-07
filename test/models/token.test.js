@@ -5,21 +5,9 @@ const models = require('../../').models;
 const validate = require('../helper').validate;
 
 describe('token template', () => {
-    describe('user token', () => {
-        it('validates the user token', () => {
+    describe('base', () => {
+        it('validates the base', () => {
             assert.isNull(validate('token.yaml', models.token.base).error);
-        });
-    });
-
-    describe('pipeline token', () => {
-        it('validates the pipeline token', () => {
-            assert.isNull(validate('token.pipeline.yaml', models.token.base).error);
-        });
-    });
-
-    describe('invalid token', () => {
-        it('validates the token which have both userId and pipelineId', () => {
-            assert.isNotNull(validate('token.invalid.yaml', models.token.base).error);
         });
     });
 
