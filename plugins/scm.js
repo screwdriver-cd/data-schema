@@ -116,7 +116,8 @@ const PARSE_URL = Joi.object().keys({
 
 const GET_BRANCH_LIST = Joi.object().keys({
     scmUri,
-    token
+    token,
+    scmContext
 }).required();
 
 module.exports = {
