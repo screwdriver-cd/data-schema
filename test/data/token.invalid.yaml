@@ -1,8 +1,0 @@
-# Invalid Token Example
-userId: 1234
-pipelineId: 1234
-hash: 'aHashedTokenValueMustBe86CharactersLong_______________________________________________'
-id: 1111
-name: 'Auth token'
-description: 'A token for authentication'
-lastUsed: '2038-01-19T03:14:08.131Z'

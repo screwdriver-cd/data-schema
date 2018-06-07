@@ -27,13 +27,6 @@ const MODEL = {
         .positive()
         .description('User ID'),
 
-    pipelineId: Joi
-        .number()
-        .integer()
-        .positive()
-        .description('Pipeline ID')
-        .example(123345),
-
     name: Joi
         .string()
         .max(128)
@@ -61,7 +54,7 @@ module.exports = {
      * @property base
      * @type {Joi}
      */
-    base: Joi.object(MODEL).without('userId', 'pipelineId').label('Token'),
+    base: Joi.object(MODEL).label('Token'),
 
     /**
      * Properties for token that will come back during a GET request
