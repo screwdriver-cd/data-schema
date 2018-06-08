@@ -1,5 +1,7 @@
-scmUrls:
-    - git@github.com:org/repo.git
+childPipelines:
+    scmUrls:
+        - git@github.com:org/repo.git
+    startAll: true
 
 jobs:
   main:

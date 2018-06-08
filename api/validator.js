@@ -49,7 +49,7 @@ const SCHEMA_OUTPUT = Joi.object()
         annotations: Annotations.annotations,
         errors: Joi.array().items(Joi.string()).optional(),
         jobs: SCHEMA_JOBS,
-        scmUrls: Base.scmUrls,
+        childPipelines: Base.childPipelines,
         workflowGraph: WorkflowGraph.workflowGraph
     })
     .label('Execution information');
