@@ -4,6 +4,8 @@ const Annotations = require('./annotations');
 const Joi = require('joi');
 const Regex = require('./regex');
 
+const SPECIFIC_BRANCH_POS = 3;
+
 // ref. https://github.com/hapijs/joi/blob/v13.3.0/API.md#extendextension
 const sdJoi = Joi.extend(joi => ({
     base: joi.string(),
@@ -15,10 +17,9 @@ const sdJoi = Joi.extend(joi => ({
         {
             name: 'commitBranch',
             validate(params, value, state, options) {
-                const specificBranchPos = 3;
                 const matched = Regex.TRIGGER.exec(value);
                 // e.g. value = ~commit:/^user-.*$/ => brFilter = /^user-.*$/
-                const brFilter = matched[specificBranchPos];
+                const brFilter = matched[SPECIFIC_BRANCH_POS];
 
                 // branch regex filter
                 if (typeof brFilter !== 'undefined' && /^\/.+\/$/.test(brFilter)) {
