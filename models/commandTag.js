@@ -8,6 +8,12 @@ const MODEL = {
         .number().integer().positive()
         .description('Identifier of this command tag')
         .example(123345),
+    createTime: Joi
+        .string()
+        .isoDate()
+        .max(32)
+        .description('When this command tag was created')
+        .example('2038-01-19T03:14:08.131Z'),
     namespace: Command.namespace,
     name: Command.name,
     tag: Command.commandTag,

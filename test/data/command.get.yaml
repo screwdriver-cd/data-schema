@@ -1,5 +1,6 @@
 # Command Get Example
 id: 123234135
+createTime: '2017-01-06T01:49:50.384359267Z'
 namespace: foo
 name: bar
 version: '1.0'
