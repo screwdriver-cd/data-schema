@@ -11,6 +11,13 @@ const MODEL = {
         .description('Identifier of this template')
         .example(123345),
 
+    createTime: Joi
+        .string()
+        .isoDate()
+        .max(32)
+        .description('When this template was created')
+        .example('2038-01-19T03:14:08.131Z'),
+
     labels: Joi
         .array()
         .items(Joi.string())
@@ -48,7 +55,7 @@ module.exports = {
      */
     get: Joi.object(mutate(MODEL, [
         'id', 'labels', 'config', 'name', 'version', 'description', 'maintainer', 'pipelineId'
-    ], ['namespace', 'images'])).label('Get Template'),
+    ], ['namespace', 'images', 'createTime'])).label('Get Template'),
 
     /**
      * Properties for template that will be passed during a CREATE request
