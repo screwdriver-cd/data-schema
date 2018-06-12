@@ -130,5 +130,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['hash', 'userId']
+    indexes: ['hash', 'userId', 'pipelineId']
 };
