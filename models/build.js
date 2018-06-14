@@ -113,7 +113,9 @@ const MODEL = {
             'FAILURE',
             'QUEUED', // when the build is created and put into the queue
             'RUNNING', // after the build is created, went through the queue, and has started
-            'SUCCESS'
+            'SUCCESS',
+            'BLOCKED',
+            'UNSTABLE'
         ])
         .description('Current status of the build')
         .example('SUCCESS')
