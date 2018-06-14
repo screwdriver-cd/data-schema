@@ -11,6 +11,13 @@ const MODEL = {
         .description('Identifier of this command')
         .example(123345),
 
+    createTime: Joi
+        .string()
+        .isoDate()
+        .max(32)
+        .description('When this command was created')
+        .example('2038-01-19T03:14:08.131Z'),
+
     namespace: Command.namespace,
     name: Command.name,
     version: Command.version,
@@ -50,7 +57,8 @@ module.exports = {
     ], [
         'habitat',
         'docker',
-        'binary'
+        'binary',
+        'createTime'
     ])).label('Get Command'),
 
     /**
