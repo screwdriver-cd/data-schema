@@ -16,6 +16,10 @@ describe('model build', () => {
             assert.isNull(validate('build.create.yaml', models.build.create).error);
         });
 
+        it('validates the create with optional fields', () => {
+            assert.isNull(validate('build.create.full.yaml', models.build.create).error);
+        });
+
         it('fails the create', () => {
             assert.isNotNull(validate('empty.yaml', models.build.create).error);
         });
