@@ -179,6 +179,8 @@ module.exports = {
      */
     create: Joi.object(mutate(MODEL, [
         'jobId'
+    ], [
+        'meta'
     ])).label('Create Build'),
 
     /**
