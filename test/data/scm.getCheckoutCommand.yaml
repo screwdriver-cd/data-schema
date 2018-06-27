@@ -10,3 +10,4 @@ parentConfig:
   host: github
   org: screwdriver-cd
   repo: parentRepo
+  sha: ccc49349d3cffbd12ea9e3d41521480b4aa5de5f
