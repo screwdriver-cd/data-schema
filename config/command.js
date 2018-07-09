@@ -45,6 +45,13 @@ const COMMAND_DESCRIPTION = Joi
     .description('Description of the Command')
     .example('Installs npm modules');
 
+const COMMAND_ARGUMENTS = Joi
+    .string()
+    .max(256)
+    .allow('')
+    .description('Arguments of the Command')
+    .example('-h <host> -d <domain>');
+
 const COMMAND_MAINTAINER = Joi
     .string()
     .email()
@@ -68,6 +75,7 @@ const SCHEMA_COMMAND = Joi.object()
         name: COMMAND_NAME,
         version: COMMAND_VERSION,
         description: COMMAND_DESCRIPTION,
+        arguments: COMMAND_ARGUMENTS,
         maintainer: COMMAND_MAINTAINER,
         format: COMMAND_FORMAT,
         habitat: CommandFormat.habitat
@@ -95,6 +103,7 @@ module.exports = {
     version: COMMAND_VERSION,
     exactVersion: COMMAND_EXACT_VERSION,
     description: COMMAND_DESCRIPTION,
+    arguments: COMMAND_ARGUMENTS,
     maintainer: COMMAND_MAINTAINER,
     format: COMMAND_FORMAT,
     habitat: CommandFormat.habitat,
