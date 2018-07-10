@@ -10,4 +10,4 @@ steps:
     - init: npm install
     - test: npm test
     - publish: npm publish
-requires: [ ~commit, ~commit:staging, ~commit:/^user-.*$/ ]
+requires: [ ~commit, ~commit:staging, ~commit:/^user-.*$/, ~main ]
