@@ -47,7 +47,7 @@ const COMMAND_DESCRIPTION = Joi
 
 const COMMAND_ARGUMENTS = Joi
     .string()
-    .max(256)
+    .max(1024)
     .allow('')
     .description('Arguments of the Command')
     .example('-h <host> -d <domain>');
