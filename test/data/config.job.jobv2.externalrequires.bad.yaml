@@ -1,0 +1,4 @@
+image: node:6
+steps:
+    - init: npm install
+requires: ~sd@123

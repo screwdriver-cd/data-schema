@@ -18,6 +18,15 @@ describe('config job', () => {
             assert.isNull(validate('config.job.jobv2.externalrequires.yaml', config.job.job).error);
         });
 
+        it('validates a job with bad requires from an external pipeline', () => {
+            const result = validate('config.job.jobv2.externalrequires.bad.yaml', config.job.job);
+
+            assert.isNotNull(result.error);
+            assert.match(result.error,
+                // eslint-disable-next-line no-useless-escape
+                /^.*\"requires" with value "~sd@123" fails to match the required pattern.*$/);
+        });
+
         it('returns error for requires with bad commit branch regex', () => {
             assert.isNotNull(
                 validate('config.job.jobv2.badCommitBrRegex.yaml', config.job.job).error);
