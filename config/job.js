@@ -11,13 +11,18 @@ const sdJoi = Joi.extend(joi => ({
     base: joi.string(),
     name: 'string',
     language: {
-        commitBranch: 'needs to be a commit branch string/regex'
+        commitBranch: 'invalid trigger format'
     },
     rules: [
         {
             name: 'commitBranch',
             validate(params, value, state, options) {
                 const matched = Regex.TRIGGER.exec(value);
+
+                if (!matched) {
+                    return this.createError('string.commitBranch', { v: value }, state, options);
+                }
+
                 // e.g. value = ~commit:/^user-.*$/ => brFilter = /^user-.*$/
                 const brFilter = matched[SPECIFIC_BRANCH_POS];
 
