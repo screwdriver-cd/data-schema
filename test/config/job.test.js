@@ -18,10 +18,6 @@ describe('config job', () => {
             assert.isNull(validate('config.job.jobv2.externalrequires.yaml', config.job.job).error);
         });
 
-        it('returns error for bad requires format', () => {
-            assert.isNotNull(validate('config.job.jobv2.bad.yaml', config.job.job).error);
-        });
-
         it('returns error for requires with bad commit branch regex', () => {
             assert.isNotNull(
                 validate('config.job.jobv2.badCommitBrRegex.yaml', config.job.job).error);
