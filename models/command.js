@@ -22,7 +22,7 @@ const MODEL = {
     name: Command.name,
     version: Command.version,
     description: Command.description,
-    arguments: Command.arguments,
+    usage: Command.usage,
     maintainer: Command.maintainer,
     format: Command.format,
     habitat: Command.habitat,
@@ -60,7 +60,7 @@ module.exports = {
         'docker',
         'binary',
         'createTime',
-        'arguments'
+        'usage'
     ])).label('Get Command'),
 
     /**
@@ -80,7 +80,7 @@ module.exports = {
         'habitat',
         'docker',
         'binary',
-        'arguments'
+        'usage'
     ])).label('Create Command'),
 
     /**

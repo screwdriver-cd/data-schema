@@ -45,12 +45,12 @@ const COMMAND_DESCRIPTION = Joi
     .description('Description of the Command')
     .example('Installs npm modules');
 
-const COMMAND_ARGUMENTS = Joi
+const COMMAND_USAGE = Joi
     .string()
     .max(1024)
     .allow('')
-    .description('Arguments of the Command')
-    .example('-h <host> -d <domain>');
+    .description('Usage and arguments of the command')
+    .example('sd_cmd exec foo/bar@1 -h <host> -d <domain>');
 
 const COMMAND_MAINTAINER = Joi
     .string()
@@ -75,7 +75,7 @@ const SCHEMA_COMMAND = Joi.object()
         name: COMMAND_NAME,
         version: COMMAND_VERSION,
         description: COMMAND_DESCRIPTION,
-        arguments: COMMAND_ARGUMENTS,
+        usage: COMMAND_USAGE,
         maintainer: COMMAND_MAINTAINER,
         format: COMMAND_FORMAT,
         habitat: CommandFormat.habitat
@@ -103,7 +103,7 @@ module.exports = {
     version: COMMAND_VERSION,
     exactVersion: COMMAND_EXACT_VERSION,
     description: COMMAND_DESCRIPTION,
-    arguments: COMMAND_ARGUMENTS,
+    usage: COMMAND_USAGE,
     maintainer: COMMAND_MAINTAINER,
     format: COMMAND_FORMAT,
     habitat: CommandFormat.habitat,
