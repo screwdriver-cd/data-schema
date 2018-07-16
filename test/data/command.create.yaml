@@ -4,6 +4,13 @@ name: bar
 version: '1.0'
 description: |
   Lorem ipsum dolor sit amet.
+usage: 'sd_cmd exec foo/bar@1 <OPTION> <TARGET>
+Options:
+        --config              some config file
+        --debug               debug mode (default "false")
+        --host                super host
+        --log-level           set the logging level ("debug"|"info"|"warn"|"error"|"fatal") (default "info")
+Target:                       path to file'
 maintainer: foo@bar.com
 format: habitat
 habitat:
