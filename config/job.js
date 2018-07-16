@@ -11,13 +11,18 @@ const sdJoi = Joi.extend(joi => ({
     base: joi.string(),
     name: 'string',
     language: {
-        commitBranch: 'needs to be a commit branch string/regex'
+        commitBranch: 'invalid trigger format'
     },
     rules: [
         {
             name: 'commitBranch',
             validate(params, value, state, options) {
                 const matched = Regex.TRIGGER.exec(value);
+
+                if (!matched) {
+                    return this.createError('string.commitBranch', { v: value }, state, options);
+                }
+
                 // e.g. value = ~commit:/^user-.*$/ => brFilter = /^user-.*$/
                 const brFilter = matched[SPECIFIC_BRANCH_POS];
 
@@ -111,7 +116,8 @@ const SCHEMA_JOBNAME = Joi.string().regex(Regex.JOB_NAME);
 const SCHEMA_TRIGGER = sdJoi.string().regex(Regex.TRIGGER).commitBranch();
 const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne
 const SCHEMA_EXTERNAL_TRIGGER = Joi.string().regex(Regex.EXTERNAL_TRIGGER); // ~sd@123:main
-const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(SCHEMA_JOBNAME, SCHEMA_TRIGGER);
+const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(
+    SCHEMA_INTERNAL_TRIGGER, SCHEMA_JOBNAME, SCHEMA_TRIGGER);
 const SCHEMA_REQUIRES = Joi.alternatives().try(
     Joi.array().items(SCHEMA_REQUIRES_VALUE),
     SCHEMA_REQUIRES_VALUE
