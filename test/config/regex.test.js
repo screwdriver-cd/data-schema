@@ -34,15 +34,31 @@ describe('config regex', () => {
         });
     });
 
+    describe('pr trigger', () => {
+        it('checks good trigger', () => {
+            assert.isTrue(config.regex.TRIGGER.test('~pr'));
+            assert.isTrue(config.regex.TRIGGER.test('~pr:master'));
+            assert.isTrue(config.regex.PR_TRIGGER.test('~pr'));
+            assert.isTrue(config.regex.PR_TRIGGER.test('~pr:master'));
+        });
+
+        it('fails on bad trigger', () => {
+            assert.isFalse(config.regex.TRIGGER.test('~pr:'));
+            assert.isFalse(config.regex.PR_TRIGGER.test('~pr:'));
+        });
+    });
+
     describe('commit trigger', () => {
         it('checks good trigger', () => {
             assert.isTrue(config.regex.TRIGGER.test('~commit'));
             assert.isTrue(config.regex.TRIGGER.test('~commit:master'));
+            assert.isTrue(config.regex.COMMIT_TRIGGER.test('~commit'));
+            assert.isTrue(config.regex.COMMIT_TRIGGER.test('~commit:master'));
         });
 
         it('fails on bad trigger', () => {
-            assert.isFalse(config.regex.TRIGGER.test('~'));
             assert.isFalse(config.regex.TRIGGER.test('~commit:'));
+            assert.isFalse(config.regex.COMMIT_TRIGGER.test('~commit:'));
         });
     });
 
