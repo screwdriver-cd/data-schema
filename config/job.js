@@ -4,23 +4,23 @@ const Annotations = require('./annotations');
 const Joi = require('joi');
 const Regex = require('./regex');
 
-const SPECIFIC_BRANCH_POS = 3;
+const SPECIFIC_BRANCH_POS = 4;
 
 // ref. https://github.com/hapijs/joi/blob/v13.3.0/API.md#extendextension
 const sdJoi = Joi.extend(joi => ({
     base: joi.string(),
     name: 'string',
     language: {
-        commitBranch: 'invalid trigger format'
+        branchFilter: 'invalid trigger format'
     },
     rules: [
         {
-            name: 'commitBranch',
+            name: 'branchFilter',
             validate(params, value, state, options) {
                 const matched = Regex.TRIGGER.exec(value);
 
                 if (!matched) {
-                    return this.createError('string.commitBranch', { v: value }, state, options);
+                    return this.createError('string.branchFilter', { v: value }, state, options);
                 }
 
                 // e.g. value = ~commit:/^user-.*$/ => brFilter = /^user-.*$/
@@ -37,7 +37,7 @@ const sdJoi = Joi.extend(joi => ({
                         /* eslint-enable */
                     } catch (e) {
                         return this.createError(
-                            'string.commitBranch', { v: value, err: e.message }, state, options);
+                            'string.branchFilter', { v: value, err: e.message }, state, options);
                     }
                 }
 
@@ -113,7 +113,7 @@ const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
 const SCHEMA_JOBNAME = Joi.string().regex(Regex.JOB_NAME);
 // ~commit, ~commit:staging, ~commit:/^user-.*$/, ~pr, etc.
-const SCHEMA_TRIGGER = sdJoi.string().regex(Regex.TRIGGER).commitBranch();
+const SCHEMA_TRIGGER = sdJoi.string().regex(Regex.TRIGGER).branchFilter();
 const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne
 const SCHEMA_EXTERNAL_TRIGGER = Joi.string().regex(Regex.EXTERNAL_TRIGGER); // ~sd@123:main
 const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(
