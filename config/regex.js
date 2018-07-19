@@ -48,7 +48,9 @@ module.exports = {
     EXTERNAL_TRIGGER: /^~sd@(\d+):([\w-]+)$/,
     // Can be ~pr, ~commit, or ~commit:branchName, or ~sd@123:component
     // Note: if you modify this regex, you must modify `sdJoi` definition in the `config/job.js`
-    TRIGGER: /^~(sd@\d+:[\w-]+|pr|commit(:(.+))?)$/,
+    TRIGGER: /^~(sd@\d+:[\w-]+|(pr|commit)(:(.+))?)$/,
+    // Can be ~pr or ~pr:branchName
+    PR_TRIGGER: /^~pr(:.+)?$/,
     // Can be ~commit or ~commit:branchName
     COMMIT_TRIGGER: /^~commit(:.+)?$/,
     // IEEE Std 1003.1-2001
