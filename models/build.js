@@ -29,9 +29,9 @@ const STEP = {
         .isoDate()
         .description('When this step stopped running')
         .example('2017-01-06T01:49:51.676057192Z'),
-    pages: Joi
+    lines: Joi
         .number().integer()
-        .description('Number of Step log pages')
+        .description('Number of Step log lines')
         .example(100)
 };
 const MODEL = {
@@ -106,7 +106,7 @@ const MODEL = {
     steps: Joi
         .array().items(
             Joi.object(
-                mutate(STEP, ['name'], ['code', 'startTime', 'endTime', 'command', 'pages'])
+                mutate(STEP, ['name'], ['code', 'startTime', 'endTime', 'command', 'lines'])
             ).description('Step metadata'))
         .description('List of steps'),
 
@@ -200,7 +200,7 @@ module.exports = {
         'startTime',
         'endTime',
         'command',
-        'pages'
+        'lines'
     ])).label('Get Step Metadata'),
 
     /**
@@ -213,7 +213,7 @@ module.exports = {
         'code',
         'startTime',
         'endTime',
-        'pages'
+        'lines'
     ])).label('Update Step Metadata'),
 
     /**
