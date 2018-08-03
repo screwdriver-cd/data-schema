@@ -4,36 +4,9 @@ const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Scm = require('../core/scm');
 const Job = require('../config/job');
+const Step = require('./step');
 const PARENT_BUILD_ID = Joi.number().integer().positive();
 
-const STEP = {
-    name: Joi
-        .string()
-        .description('Name of the Step')
-        .example('install'),
-    command: Joi
-        .string()
-        .description('Command of the Step to execute')
-        .example('npm install'),
-    code: Joi
-        .number().integer()
-        .description('Exit code')
-        .example(1),
-    startTime: Joi
-        .string()
-        .isoDate()
-        .description('When this step started')
-        .example('2017-01-06T01:49:50.384359267Z'),
-    endTime: Joi
-        .string()
-        .isoDate()
-        .description('When this step stopped running')
-        .example('2017-01-06T01:49:51.676057192Z'),
-    lines: Joi
-        .number().integer()
-        .description('Number of Step log lines')
-        .example(100)
-};
 const MODEL = {
     id: Joi
         .number().integer().positive()
@@ -104,10 +77,7 @@ const MODEL = {
         .description('Key=>Value information from the build itself'),
 
     steps: Joi
-        .array().items(
-            Joi.object(
-                mutate(STEP, ['name'], ['code', 'startTime', 'endTime', 'command', 'lines'])
-            ).description('Step metadata'))
+        .array().items(Step.get)
         .description('List of steps'),
 
     status: Joi
@@ -193,15 +163,7 @@ module.exports = {
      * @property getStep
      * @type {Joi}
      */
-    getStep: Joi.object(mutate(STEP, [
-        'name'
-    ], [
-        'code',
-        'startTime',
-        'endTime',
-        'command',
-        'lines'
-    ])).label('Get Step Metadata'),
+    getStep: Step.get,
 
     /**
      * Properties when updating step data
@@ -209,12 +171,7 @@ module.exports = {
      * @property updateStep
      * @type {Joi}
      */
-    updateStep: Joi.object(mutate(STEP, [], [
-        'code',
-        'startTime',
-        'endTime',
-        'lines'
-    ])).label('Update Step Metadata'),
+    updateStep: Step.update,
 
     /**
      * List of fields that determine a unique row
