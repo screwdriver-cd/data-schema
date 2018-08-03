@@ -2,6 +2,7 @@
 
 const banner = require('./banner');
 const build = require('./build');
+const step = require('./step');
 const event = require('./event');
 const job = require('./job');
 const pipeline = require('./pipeline');
@@ -18,6 +19,7 @@ const commandTag = require('./commandTag');
 module.exports = {
     banner,
     build,
+    step,
     event,
     job,
     pipeline,
