@@ -15,7 +15,7 @@ const MODEL = {
         .example(123345),
 
     name: Joi
-        .string()
+        .string().max(64)
         .description('Name of the Step')
         .example('install'),
 
