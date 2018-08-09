@@ -10,12 +10,13 @@ describe('api pagination', () => {
             assert.isNull(validate('pagination.yaml', api.pagination).error);
         });
 
-        it('defaults both', () => {
+        it('defaults', () => {
             const validatedObject = validate('pagination.defaults.yaml', api.pagination);
 
             assert.isNull(validatedObject.error);
-            assert.equal(validatedObject.value.page, 1);
-            assert.equal(validatedObject.value.count, 50);
+            assert.equal(validatedObject.value.page, undefined);
+            assert.equal(validatedObject.value.count, undefined);
+            assert.equal(validatedObject.value.sort, 'descending');
         });
     });
 });
