@@ -148,6 +148,16 @@ describe('config regex', () => {
         });
     });
 
+    describe('images', () => {
+        it('checks good image names', () => {
+            assert.isTrue(config.regex.IMAGE_NAME.test('10-13_931-9E501_20180531234344_platform'));
+        });
+
+        it('fails on bad image names', () => {
+            assert.isFalse(config.regex.IMAGE_NAME.test('ubuntu abc"CPU'));
+        });
+    });
+
     describe('steps', () => {
         it('checks good step names', () => {
             assert.isTrue(config.regex.STEP_NAME.test('foo-BAR_15'));
