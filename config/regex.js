@@ -36,6 +36,8 @@ module.exports = {
     // Full name of template and version with grouping for the namespace
     // eslint-disable-next-line max-len
     FULL_TEMPLATE_NAME_WITH_NAMESPACE: /^([\w-]+)\/([\w/-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-]+)))?$/,
+    // Images cannot contain dangerous shell metacharacters '";&|><*?`$()[]!# or space; {} is allowed for matrix mode
+    IMAGE_NAME: /^[^;&|><*?`$()!#'" ]+$/,
     // Steps can only be named with A-Z,a-z,0-9,-,_
     STEP_NAME: /^[\w-]+$/,
     // Jobs can only be named with A-Z,a-z,0-9,-,_

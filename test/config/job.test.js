@@ -79,6 +79,10 @@ describe('config job', () => {
         it('validates an image', () => {
             assert.isNull(validate('config.job.image.yaml', config.job.image).error);
         });
+
+        it('returns error for bad image', () => {
+            assert.isNotNull(validate('config.job.image.bad.yaml', config.job.image).error);
+        });
     });
 
     describe('settings', () => {
