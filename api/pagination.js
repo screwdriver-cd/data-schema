@@ -16,7 +16,11 @@ const MODEL = {
         .string().lowercase()
         .valid(['ascending', 'descending'])
         .default('descending')
-        .description('Sorting option')
+        .description('Sorting option'),
+
+    sortBy: Joi
+        .string().lowercase().max(100)
+        .description('Field to sort by')
 };
 
 /**
