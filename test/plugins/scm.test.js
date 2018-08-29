@@ -41,6 +41,10 @@ describe('scm test', () => {
             assert.isNull(validate('scm.getFile.yaml', scm.getFile).error);
         });
 
+        it('validates with optional scmInfo', () => {
+            assert.isNull(validate('scm.getFileWithScmInfo.yaml', scm.getFile).error);
+        });
+
         it('fails', () => {
             assert.isNotNull(validate('empty.yaml', scm.getFile).error);
         });
@@ -74,6 +78,10 @@ describe('scm test', () => {
     describe('decorateUrl', () => {
         it('validates', () => {
             assert.isNull(validate('scm.decorateUrl.yaml', scm.decorateUrl).error);
+        });
+
+        it('validates with optional scmInfo', () => {
+            assert.isNull(validate('scm.decorateUrlWithScmInfo.yaml', scm.decorateUrl).error);
         });
 
         it('fails', () => {
