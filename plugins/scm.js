@@ -17,7 +17,7 @@ const scmInfo = Joi.object({
     host: Joi.string().required(),
     owner: Joi.string().required(),
     repo: Joi.string().required()
-});
+}).optional();
 const sha = Joi.reach(models.build.base, 'sha').required();
 const token = Joi.reach(models.user.base, 'token').required();
 const type = Joi.reach(core.scm.hook, 'type').required();
@@ -85,7 +85,7 @@ const GET_FILE = Joi.object().keys({
     path: Joi.string().required(),
     ref: Joi.string().optional(),
     scmContext,
-    scmInfo: scmInfo.optional()
+    scmInfo
 }).required();
 
 const GET_CHANGED_FILES_INPUT = Joi.object().keys({
@@ -109,7 +109,7 @@ const DECORATE_URL = Joi.object().keys({
     scmUri,
     token,
     scmContext,
-    scmInfo: scmInfo.optional()
+    scmInfo
 }).required();
 
 const DECORATE_COMMIT = Joi.object().keys({

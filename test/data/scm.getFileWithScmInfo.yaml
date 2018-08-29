@@ -1,0 +1,10 @@
+scmUri: github.com:12345678:master
+token: thisisatokenthingy
+path: screwdriver.yaml
+ref: 46f1a0bd5592a2f9244ca321b129902a06b53e03
+scmContext: github:github.com
+scmInfo:
+    branch: master
+    host: github.com
+    owner: testowner
+    repo: testrepo
