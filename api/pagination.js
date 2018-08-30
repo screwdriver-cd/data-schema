@@ -19,7 +19,7 @@ const MODEL = {
         .description('Sorting option'),
 
     sortBy: Joi
-        .string().lowercase().max(100)
+        .string().max(100)
         .description('Field to sort by')
 };
 

@@ -25,7 +25,7 @@ const SCHEMA_SCAN = Joi.object().keys({
         page: Joi.number().integer().positive().required()
     }),
     sort: Joi.string().lowercase().valid(['ascending', 'descending']).default('descending'),
-    sortBy: Joi.string().lowercase().max(100)
+    sortBy: Joi.string().max(100)
 });
 
 module.exports = {

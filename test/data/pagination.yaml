@@ -1,4 +1,4 @@
 page: 3
 count: 30
 sort: 'ascending'
-sortBy: 'name'
+sortBy: 'scmRepo.name'
