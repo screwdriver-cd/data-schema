@@ -1,8 +1,8 @@
 scmUri: github.com:12345678:master
 token: 'thisisatokenthingy'
+prNum: null
 scmContext: github:github.com
-scmInfo:
+scmRepo:
     branch: master
-    host: github.com
-    owner: testowner
-    repo: testrepo
+    url: https://github.com/org/name/tree/master
+    name: org/name
