@@ -11,6 +11,10 @@ describe('scm test', () => {
             assert.isNull(validate('scm.getPermissions.yaml', scm.getPermissions).error);
         });
 
+        it('validates with scmRepo', () => {
+            assert.isNull(validate('scm.getPermissionsWithScmRepo.yaml', scm.getPermissions).error);
+        });
+
         it('fails', () => {
             assert.isNotNull(validate('empty.yaml', scm.getPermissions).error);
         });
@@ -19,6 +23,10 @@ describe('scm test', () => {
     describe('getCommitSha', () => {
         it('validates', () => {
             assert.isNull(validate('scm.getCommitSha.yaml', scm.getCommitSha).error);
+        });
+
+        it('validates with scmRepo', () => {
+            assert.isNull(validate('scm.getCommitShaWithScmRepo.yaml', scm.getCommitSha).error);
         });
 
         it('fails', () => {
@@ -41,8 +49,8 @@ describe('scm test', () => {
             assert.isNull(validate('scm.getFile.yaml', scm.getFile).error);
         });
 
-        it('validates with optional scmInfo', () => {
-            assert.isNull(validate('scm.getFileWithScmInfo.yaml', scm.getFile).error);
+        it('validates with optional scmRepo', () => {
+            assert.isNull(validate('scm.getFileWithScmRepo.yaml', scm.getFile).error);
         });
 
         it('fails', () => {
@@ -80,8 +88,8 @@ describe('scm test', () => {
             assert.isNull(validate('scm.decorateUrl.yaml', scm.decorateUrl).error);
         });
 
-        it('validates with optional scmInfo', () => {
-            assert.isNull(validate('scm.decorateUrlWithScmInfo.yaml', scm.decorateUrl).error);
+        it('validates with optional scmRepo', () => {
+            assert.isNull(validate('scm.decorateUrlWithScmRepo.yaml', scm.decorateUrl).error);
         });
 
         it('fails', () => {
