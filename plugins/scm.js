@@ -3,6 +3,7 @@
 const core = require('../core');
 const Joi = require('joi');
 const models = require('../models');
+const Scm = require('../core/scm');
 
 const buildStatus = Joi.reach(models.build.base, 'status').required();
 const checkoutUrl = Joi.reach(models.pipeline.create, 'checkoutUrl').required();
@@ -12,12 +13,6 @@ const pipelineId = Joi.reach(models.pipeline.base, 'id').optional();
 const prNum = Joi.reach(core.scm.hook, 'prNum').allow(null).optional();
 const scmContext = Joi.reach(models.pipeline.base, 'scmContext').optional();
 const scmUri = Joi.reach(models.pipeline.base, 'scmUri').required();
-const scmInfo = Joi.object({
-    branch: Joi.string().required(),
-    host: Joi.string().required(),
-    owner: Joi.string().required(),
-    repo: Joi.string().required()
-}).optional();
 const sha = Joi.reach(models.build.base, 'sha').required();
 const token = Joi.reach(models.user.base, 'token').required();
 const type = Joi.reach(core.scm.hook, 'type').required();
@@ -58,14 +53,16 @@ const GET_CHECKOUT_COMMAND = Joi.object().keys({
 const GET_PERMISSIONS = Joi.object().keys({
     scmUri,
     token,
-    scmContext
+    scmContext,
+    scmRepo: Scm.repo.optional()
 }).required();
 
 const GET_COMMIT_SHA = Joi.object().keys({
     scmUri,
     token,
     prNum,
-    scmContext
+    scmContext,
+    scmRepo: Scm.repo.optional()
 }).required();
 
 const UPDATE_COMMIT_STATUS = Joi.object().keys({
@@ -85,7 +82,7 @@ const GET_FILE = Joi.object().keys({
     path: Joi.string().required(),
     ref: Joi.string().optional(),
     scmContext,
-    scmInfo
+    scmRepo: Scm.repo.optional()
 }).required();
 
 const GET_CHANGED_FILES_INPUT = Joi.object().keys({
@@ -109,7 +106,7 @@ const DECORATE_URL = Joi.object().keys({
     scmUri,
     token,
     scmContext,
-    scmInfo
+    scmRepo: Scm.repo.optional()
 }).required();
 
 const DECORATE_COMMIT = Joi.object().keys({
