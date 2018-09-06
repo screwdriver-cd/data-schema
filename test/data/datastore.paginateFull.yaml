@@ -4,6 +4,6 @@ paginate:
     count: 2
 search:
     field: 'scmRepo'
-    term: '%name%screwdriver-cd/screwdriver%'
+    keyword: '%name%screwdriver-cd/screwdriver%'
 sortBy: 'scmRepo'
 sort: ascending

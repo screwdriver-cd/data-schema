@@ -26,7 +26,7 @@ const SCHEMA_SCAN = Joi.object().keys({
     }),
     search: Joi.object().keys({
         field: Joi.string().max(100).required(),
-        term: Joi.string().max(200).required()
+        keyword: Joi.string().max(200).required()
     }),
     sort: Joi.string().lowercase().valid(['ascending', 'descending']).default('descending'),
     sortBy: Joi.string().max(100)

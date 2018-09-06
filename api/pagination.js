@@ -14,7 +14,7 @@ const MODEL = {
 
     search: Joi
         .string().max(200)
-        .description('Term to search by'),
+        .description('Keyword to search by'),
 
     sort: Joi
         .string().lowercase()
