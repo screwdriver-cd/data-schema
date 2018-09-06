@@ -50,6 +50,10 @@ describe('datastore test', () => {
             assert.isNull(validate('datastore.paginate.yaml', datastore.scan).error);
         });
 
+        it('validates the update with all keys', () => {
+            assert.isNull(validate('datastore.paginateFull.yaml', datastore.scan).error);
+        });
+
         it('fails the update', () => {
             assert.isNotNull(validate('empty.yaml', datastore.scan).error);
         });

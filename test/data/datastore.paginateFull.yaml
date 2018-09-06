@@ -1,0 +1,9 @@
+table: 'jobs'
+paginate:
+    page: 1
+    count: 2
+search:
+    field: 'scmRepo'
+    term: '%name%screwdriver-cd/screwdriver%'
+sortBy: 'scmRepo'
+sort: ascending
