@@ -3,6 +3,8 @@ shared:
 
 jobs:
     main:
+        environment:
+            SD_SONAR_OPTS: "-Dsonar.sources=. -Dsonar.inclusions=*.js -Dsonar.exclusions=test/*,**/node_modules/** -Dsonar.javascript.lcov.reportPath=artifacts/coverage/lcov.info"
         requires: [~pr, ~commit]
         steps:
             - install: npm install
