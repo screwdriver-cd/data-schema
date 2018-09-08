@@ -12,6 +12,10 @@ const MODEL = {
         .max(50)
         .description('Count to paginate'),
 
+    search: Joi
+        .string().max(200)
+        .description('Keyword to search by'),
+
     sort: Joi
         .string().lowercase()
         .valid(['ascending', 'descending'])
