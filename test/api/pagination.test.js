@@ -10,6 +10,10 @@ describe('api pagination', () => {
             assert.isNull(validate('pagination.yaml', api.pagination).error);
         });
 
+        it('all keys', () => {
+            assert.isNull(validate('paginationFull.yaml', api.pagination).error);
+        });
+
         it('defaults', () => {
             const validatedObject = validate('pagination.defaults.yaml', api.pagination);
 
