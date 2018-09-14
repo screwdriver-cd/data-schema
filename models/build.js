@@ -139,10 +139,8 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(MODEL, [
-        'status'
-    ], [
-        'meta', 'statusMessage'
+    update: Joi.object(mutate(MODEL, [], [
+        'status', 'meta', 'statusMessage'
     ])).label('Update Build'),
 
     /**

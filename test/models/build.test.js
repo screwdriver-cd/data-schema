@@ -30,6 +30,10 @@ describe('model build', () => {
             assert.isNull(validate('build.update.yaml', models.build.update).error);
         });
 
+        it('validates the update with only statusMessage', () => {
+            assert.isNull(validate('build.update.optional.yaml', models.build.update).error);
+        });
+
         it('fails the update', () => {
             assert.isNotNull(validate('empty.yaml', models.build.update).error);
         });
