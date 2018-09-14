@@ -92,8 +92,7 @@ const MODEL = {
             'UNSTABLE'
         ])
         .description('Current status of the build')
-        .example('SUCCESS')
-        .default('QUEUED'),
+        .example('SUCCESS'),
 
     statusMessage: Joi
         .string()
