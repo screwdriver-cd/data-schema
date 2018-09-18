@@ -27,11 +27,13 @@ const SCHEMA_USER = Joi.object().keys({
         .example('https://avatars.githubusercontent.com/u/622065?v=3')
 }).label('SCM User');
 
+const REPO_NAME = Joi.string()
+    .required()
+    .label('Organization and repository name')
+    .example('screwdriver-cd/screwdriver');
+
 const SCHEMA_REPO = Joi.object().keys({
-    name: Joi.string()
-        .required()
-        .label('Organization and repository name')
-        .example('screwdriver-cd/screwdriver'),
+    name: REPO_NAME,
 
     branch: Joi.string()
         .required()
@@ -155,6 +157,7 @@ module.exports = {
     command: SCHEMA_COMMAND,
     commit: SCHEMA_COMMIT,
     repo: SCHEMA_REPO,
+    repoName: REPO_NAME,
     user: SCHEMA_USER,
     hook: SCHEMA_HOOK,
     pr: SCHEMA_PR
