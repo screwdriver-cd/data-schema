@@ -23,6 +23,8 @@ const MODEL = {
         .description('Identifier of this pipeline')
         .example(123345),
 
+    name: Scm.repoName.optional(),
+
     scmUri: Joi
         .string().regex(Regex.SCM_URI).max(128)
         .description('Unique identifier for the application')
@@ -82,7 +84,7 @@ module.exports = {
         'id', 'scmUri', 'scmContext', 'createTime', 'admins'
     ], [
         'workflowGraph', 'scmRepo', 'annotations', 'lastEventId',
-        'configPipelineId', 'childPipelines'
+        'configPipelineId', 'childPipelines', 'name'
     ])).label('Get Pipeline'),
 
     /**
