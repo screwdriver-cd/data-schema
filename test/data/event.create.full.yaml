@@ -8,3 +8,4 @@ configPipelineSha: ccc49349d3cffbd12ea9e3d41521480b4aa5de5f
 meta:
   foo: bar
   one: 1
+branch: foo
