@@ -17,6 +17,7 @@ const SCHEMA_SAVE = Joi.object().keys({
     table,
     params: Joi.object().unknown(true).min(1).required()
 });
+const SCHEMA_SEARCH_FIELD = Joi.string().max(100).required();
 const SCHEMA_SCAN = Joi.object().keys({
     table,
     params: Joi.object(),
@@ -25,7 +26,10 @@ const SCHEMA_SCAN = Joi.object().keys({
         page: Joi.number().integer().positive().required()
     }),
     search: Joi.object().keys({
-        field: Joi.string().max(100).required(),
+        field: Joi.alternatives().try(
+            Joi.array().items(SCHEMA_SEARCH_FIELD),
+            SCHEMA_SEARCH_FIELD
+        ),
         keyword: Joi.string().max(200).required()
     }),
     sort: Joi.string().lowercase().valid(['ascending', 'descending']).default('descending'),

@@ -1,0 +1,9 @@
+table: 'jobs'
+paginate:
+    page: 1
+    count: 2
+search:
+    field: ['namespace', 'name', 'description']
+    keyword: '%screwdriver%'
+sortBy: 'name'
+sort: ascending
