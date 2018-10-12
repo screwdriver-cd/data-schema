@@ -65,7 +65,7 @@ const SCHEMA_MATRIX = Joi.object()
         }
     });
 // Secrets must be all uppercase
-const SCHEMA_SECRET = Joi.string().regex(Regex.ENV_NAME).max(25);
+const SCHEMA_SECRET = Joi.string().regex(Regex.ENV_NAME).max(64);
 const SCHEMA_SECRETS = Joi.array()
     .items(SCHEMA_SECRET)
     .min(0);
