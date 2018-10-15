@@ -75,6 +75,12 @@ describe('config job', () => {
         });
     });
 
+    describe('cache', () => {
+        it('validates cache', () => {
+            assert.isNull(validate('config.job.cache.yaml', config.job.cache).error);
+        });
+    });
+
     describe('image', () => {
         it('validates an image', () => {
             assert.isNull(validate('config.job.image.yaml', config.job.image).error);
