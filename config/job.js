@@ -85,6 +85,7 @@ const SCHEMA_ENVIRONMENT = Joi.object()
             }
         }
     });
+const SCHEMA_JOBNAME = Joi.string().regex(Regex.JOB_NAME);
 const SCHEMA_STEP_STRING = Joi.string();
 const SCHEMA_STEP_OBJECT = Joi.object()
     // Steps can only be named with A-Z,a-z,0-9,-,_
@@ -109,7 +110,6 @@ const SCHEMA_SETTINGS = Joi.object().optional();
 const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJECT);
 const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
-const SCHEMA_JOBNAME = Joi.string().regex(Regex.JOB_NAME);
 // ~commit, ~commit:staging, ~commit:/^user-.*$/, ~pr, etc.
 const SCHEMA_TRIGGER = sdJoi.string().regex(Regex.TRIGGER).branchFilter();
 const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne
