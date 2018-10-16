@@ -23,6 +23,12 @@ describe('config base', () => {
         });
     });
 
+    describe('cache', () => {
+        it('validates the cache object', () => {
+            assert.isNull(validate('config.base.cache.yaml', config.base.cache).error);
+        });
+    });
+
     describe('childPipelines', () => {
         it('validates the childPipelines object', () => {
             assert.isNull(validate('config.base.childPipelines.yaml',

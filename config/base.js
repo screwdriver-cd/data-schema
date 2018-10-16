@@ -5,6 +5,22 @@ const Job = require('./job');
 const Joi = require('joi');
 const Regex = require('./regex');
 
+const SCHEMA_JOBNAME = Joi.string().regex(Regex.JOB_NAME);
+const SCHEMA_CACHE_VALUE = Joi.string().uri({
+    relativeOnly: true
+});
+const SCHEMA_CACHE_LIST = Joi.array().items(SCHEMA_CACHE_VALUE).min(1);
+const SCHEMA_CACHE_JOB = Joi.object()
+    .pattern(SCHEMA_JOBNAME, SCHEMA_CACHE_LIST)
+    .unknown(false)
+    .length(1);
+const SCHEMA_CACHE_JOB_LIST = Joi.array().items(SCHEMA_CACHE_JOB).min(1);
+const SCHEMA_CACHE = Joi.object({
+    event: SCHEMA_CACHE_LIST,
+    pipeline: SCHEMA_CACHE_LIST,
+    job: SCHEMA_CACHE_JOB_LIST
+}).or('event', 'pipeline', 'job');
+
 const SCHEMA_JOBS = Joi.object()
     // Jobs can only be named with A-Z,a-z,0-9,-,_
     .pattern(Regex.JOB_NAME, Job.job)
@@ -26,6 +42,7 @@ const SCHEMA_CONFIG = Joi.object()
         annotations: Annotations.annotations,
         jobs: SCHEMA_JOBS,
         shared: SCHEMA_SHARED,
+        cache: SCHEMA_CACHE,
         childPipelines: SCHEMA_CHILD_PIPELINES
     })
     .requiredKeys('jobs')
@@ -38,6 +55,7 @@ const SCHEMA_CONFIG = Joi.object()
 module.exports = {
     jobs: SCHEMA_JOBS,
     shared: SCHEMA_SHARED,
+    cache: SCHEMA_CACHE,
     childPipelines: SCHEMA_CHILD_PIPELINES,
     config: SCHEMA_CONFIG
 };
