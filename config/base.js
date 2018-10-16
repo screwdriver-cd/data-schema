@@ -10,15 +10,13 @@ const SCHEMA_CACHE_VALUE = Joi.string().uri({
     relativeOnly: true
 });
 const SCHEMA_CACHE_LIST = Joi.array().items(SCHEMA_CACHE_VALUE).min(1);
-const SCHEMA_CACHE_JOB = Joi.object()
+const SCHEMA_CACHE_JOBS = Joi.object()
     .pattern(SCHEMA_JOBNAME, SCHEMA_CACHE_LIST)
-    .unknown(false)
-    .length(1);
-const SCHEMA_CACHE_JOB_LIST = Joi.array().items(SCHEMA_CACHE_JOB).min(1);
+    .unknown(false);
 const SCHEMA_CACHE = Joi.object({
     event: SCHEMA_CACHE_LIST,
     pipeline: SCHEMA_CACHE_LIST,
-    job: SCHEMA_CACHE_JOB_LIST
+    job: SCHEMA_CACHE_JOBS
 }).or('event', 'pipeline', 'job');
 
 const SCHEMA_JOBS = Joi.object()
