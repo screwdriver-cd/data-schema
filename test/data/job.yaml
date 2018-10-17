@@ -17,9 +17,7 @@ permutations:
       cache:
         pipeline: ['test']
         event: ['test2']
-        job:
-            foo: ['test3']
-            bar: ['test4', 'test5']
+        job: ['test3', 'test4']
 
     - image: node:6
       commands:

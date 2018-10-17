@@ -3,3 +3,4 @@ event: ["target/generated-intermediate-resouce/*"]
 job:
     build: ["target/some-artifact.zip"]
     publish-preview: ["target/some-artifact.zip"]
+    test: []
