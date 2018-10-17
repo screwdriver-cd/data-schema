@@ -9,7 +9,7 @@ const SCHEMA_JOBNAME = Joi.string().regex(Regex.JOB_NAME);
 const SCHEMA_CACHE_VALUE = Joi.string().uri({
     relativeOnly: true
 });
-const SCHEMA_CACHE_LIST = Joi.array().items(SCHEMA_CACHE_VALUE).min(1);
+const SCHEMA_CACHE_LIST = Joi.array().items(SCHEMA_CACHE_VALUE);
 const SCHEMA_CACHE_JOBS = Joi.object()
     .pattern(SCHEMA_JOBNAME, SCHEMA_CACHE_LIST)
     .unknown(false);
@@ -17,6 +17,11 @@ const SCHEMA_CACHE = Joi.object({
     event: SCHEMA_CACHE_LIST,
     pipeline: SCHEMA_CACHE_LIST,
     job: SCHEMA_CACHE_JOBS
+}).or('event', 'pipeline', 'job');
+const SCHEMA_CACHE_PERMUTATION = Joi.object({
+    event: SCHEMA_CACHE_LIST,
+    pipeline: SCHEMA_CACHE_LIST,
+    job: SCHEMA_CACHE_LIST
 }).or('event', 'pipeline', 'job');
 
 const SCHEMA_JOBS = Joi.object()
@@ -54,6 +59,7 @@ module.exports = {
     jobs: SCHEMA_JOBS,
     shared: SCHEMA_SHARED,
     cache: SCHEMA_CACHE,
+    cachePerm: SCHEMA_CACHE_PERMUTATION,
     childPipelines: SCHEMA_CHILD_PIPELINES,
     config: SCHEMA_CONFIG
 };

@@ -23,7 +23,7 @@ const SCHEMA_JOB_COMMANDS = Joi.array()
 const SCHEMA_JOB_PERMUTATION = Joi.object()
     .keys({
         annotations: Annotations.annotations,
-        cache: Base.cache,
+        cache: Base.cachePerm,
         commands: SCHEMA_JOB_COMMANDS,
         description: Job.description,
         environment: Job.environment,
