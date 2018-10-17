@@ -14,6 +14,12 @@ permutations:
           command: npm run build
       environment:
         NODE_VERSION: 4
+      cache:
+        pipeline: ['test']
+        event: ['test2']
+        job:
+            foo: ['test3']
+            bar: ['test4', 'test5']
 
     - image: node:6
       commands:
@@ -25,3 +31,5 @@ permutations:
           command: npm run build
       environment:
         NODE_VERSION: 6
+      cache:
+        event: ['test2']
