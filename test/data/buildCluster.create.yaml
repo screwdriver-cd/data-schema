@@ -1,0 +1,5 @@
+# BuildCluster create example
+name: iOS
+scmOrganizations: [screwdriver-cd]
+managedBy: screwdriver
+managedByEmail: foo@bar.com
