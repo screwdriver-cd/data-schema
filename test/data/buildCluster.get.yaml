@@ -5,5 +5,5 @@ description: 'Build cluster for iOS team'
 scmContext: 'github:github.come'
 scmOrganizations: [screwdriver-cd]
 isActive: true
-managedBy: screwdriver
-managedByEmail: foo@bar.com
+defaultCluster: false
+maintainer: foo@bar.com

@@ -36,16 +36,13 @@ const MODEL = {
         .example(true)
         .default(true),
 
-    managedBy: Joi
-        .string().valid([
-            'screwdriver',
-            'external'
-        ])
-        .description('Current state of the Job')
-        .example('screwdriver')
-        .default('screwdriver'),
+    defaultCluster: Joi
+        .boolean()
+        .description('Flag the default cluster when user does not specify a build cluster')
+        .example(true)
+        .default(false),
 
-    managedByEmail: Command.maintainer
+    maintainer: Command.maintainer
 };
 
 module.exports = {
@@ -64,7 +61,7 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'name', 'scmContext', 'scmOrganizations', 'isActive', 'managedBy', 'managedByEmail'
+        'id', 'name', 'scmContext', 'scmOrganizations', 'isActive', 'defaultCluster', 'maintainer'
     ], [
         'description'
     ])).label('Get BuildCluster'),
@@ -76,7 +73,7 @@ module.exports = {
      * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [], [
-        'description', 'isActive', 'scmOrganizations', 'managedBy', 'managedByEmail'
+        'description', 'isActive', 'scmOrganizations', 'defaultCluster', 'maintainer'
     ])).label('Update BuildCluster'),
 
     /**
@@ -86,7 +83,7 @@ module.exports = {
      * @type {Joi}
      */
     create: Joi.object(mutate(MODEL, [
-        'name', 'scmOrganizations', 'managedBy', 'managedByEmail'
+        'name', 'scmOrganizations', 'defaultCluster', 'maintainer'
     ], [
         'description', 'isActive'
     ])).label('Create Build'),

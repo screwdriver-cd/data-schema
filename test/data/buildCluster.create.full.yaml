@@ -3,5 +3,5 @@ name: iOS
 description: 'Build cluster for iOS team'
 scmOrganizations: [screwdriver-cd]
 isActive: true
-managedBy: screwdriver
-managedByEmail: foo@bar.com
+defaultCluster: false
+maintainer: foo@bar.com
