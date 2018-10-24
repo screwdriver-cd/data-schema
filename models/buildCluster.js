@@ -70,13 +70,13 @@ module.exports = {
     ])).label('Get BuildCluster'),
 
     /**
-     * Properties for BuildCluster that will come back during a UPDATE request
+     * Properties for BuildCluster that will be passed during a UPDATE request
      *
      * @property update
      * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [], [
-        'description', 'isActive', 'scmOrganizations', 'managedByEmail'
+        'description', 'isActive', 'scmOrganizations', 'managedBy', 'managedByEmail'
     ])).label('Update BuildCluster'),
 
     /**
