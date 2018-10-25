@@ -2,5 +2,5 @@
 description: 'Build cluster for iOS team'
 scmOrganizations: [screwdriver-cd]
 isActive: true
-defaultCluster: false
+managedByScrewdriver: false
 maintainer: foo@bar.com

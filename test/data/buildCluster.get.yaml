@@ -2,8 +2,8 @@
 id: 1
 name: iOS
 description: 'Build cluster for iOS team'
-scmContext: 'github:github.come'
+scmContext: 'github:github.com'
 scmOrganizations: [screwdriver-cd]
 isActive: true
-defaultCluster: false
+managedByScrewdriver: false
 maintainer: foo@bar.com

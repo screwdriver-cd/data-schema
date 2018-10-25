@@ -4,3 +4,4 @@ npm-debug.log
 .DS_STORE
 .*.swp
 package-lock.json
+.nyc_output/
