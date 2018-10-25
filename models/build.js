@@ -6,6 +6,7 @@ const Scm = require('../core/scm');
 const Job = require('../config/job');
 const Step = require('./step');
 const PARENT_BUILD_ID = Joi.number().integer().positive();
+const buildClusterName = Joi.reach(require('./buildCluster').base, 'name');
 
 const MODEL = {
     id: Joi
@@ -97,7 +98,9 @@ const MODEL = {
     statusMessage: Joi
         .string()
         .description('Status message to describe status of the build')
-        .example('Build failed due to infrastructure error')
+        .example('Build failed due to infrastructure error'),
+
+    buildClusterName
 };
 
 const parentBuildIdSchema = Joi
@@ -129,7 +132,8 @@ module.exports = {
         'id', 'jobId', 'number', 'cause', 'createTime', 'status'
     ], [
         'container', 'parentBuildId', 'sha', 'startTime', 'endTime',
-        'meta', 'parameters', 'steps', 'commit', 'eventId', 'environment', 'statusMessage'
+        'meta', 'parameters', 'steps', 'commit', 'eventId', 'environment',
+        'statusMessage', 'buildClusterName'
     ])).label('Get Build'),
 
     /**

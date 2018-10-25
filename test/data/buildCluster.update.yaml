@@ -1,0 +1,6 @@
+# BuildCluster update example
+description: 'Build cluster for iOS team'
+scmOrganizations: [screwdriver-cd]
+isActive: true
+managedByScrewdriver: false
+maintainer: foo@bar.com
