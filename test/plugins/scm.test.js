@@ -20,6 +20,16 @@ describe('scm test', () => {
         });
     });
 
+    describe('getOrgPermissions', () => {
+        it('validates', () => {
+            assert.isNull(validate('scm.getOrgPermissions.yaml', scm.getOrgPermissions).error);
+        });
+
+        it('fails', () => {
+            assert.isNotNull(validate('empty.yaml', scm.getOrgPermissions).error);
+        });
+    });
+
     describe('getCommitSha', () => {
         it('validates', () => {
             assert.isNull(validate('scm.getCommitSha.yaml', scm.getCommitSha).error);

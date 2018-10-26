@@ -1,0 +1,4 @@
+username: foo
+token: 'thisisatokenthingy'
+scmContext: github:github.com
+organization: screwdriver-cd
