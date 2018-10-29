@@ -4,3 +4,4 @@ scmOrganizations: [screwdriver-cd]
 isActive: true
 managedByScrewdriver: false
 maintainer: foo@bar.com
+weightage: 50
