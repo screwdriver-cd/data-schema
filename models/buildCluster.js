@@ -42,7 +42,15 @@ const MODEL = {
         .example(true)
         .default(false),
 
-    maintainer: Command.maintainer
+    maintainer: Command.maintainer,
+
+    weightage: Joi
+        .number()
+        .min(1)
+        .max(100)
+        .description('Weight percentage for build cluster')
+        .example(20)
+        .default(100)
 };
 
 module.exports = {
@@ -62,7 +70,7 @@ module.exports = {
      */
     get: Joi.object(mutate(MODEL, [
         'id', 'name', 'scmContext', 'scmOrganizations', 'isActive',
-        'managedByScrewdriver', 'maintainer'
+        'managedByScrewdriver', 'maintainer', 'weightage'
     ], [
         'description'
     ])).label('Get BuildCluster'),
@@ -74,7 +82,8 @@ module.exports = {
      * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [], [
-        'description', 'isActive', 'scmOrganizations', 'managedByScrewdriver', 'maintainer'
+        'description', 'isActive', 'scmOrganizations', 'managedByScrewdriver',
+        'maintainer', 'weightage'
     ])).label('Update BuildCluster'),
 
     /**
@@ -86,7 +95,7 @@ module.exports = {
     create: Joi.object(mutate(MODEL, [
         'name', 'scmOrganizations', 'managedByScrewdriver', 'maintainer'
     ], [
-        'description', 'isActive'
+        'description', 'isActive', 'weightage'
     ])).label('Create Build'),
 
     /**
