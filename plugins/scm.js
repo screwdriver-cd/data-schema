@@ -57,6 +57,13 @@ const GET_PERMISSIONS = Joi.object().keys({
     scmRepo: Scm.repo.optional()
 }).required();
 
+const GET_ORG_PERMISSIONS = Joi.object().keys({
+    token,
+    scmContext,
+    organization: Joi.string().required(),
+    username
+}).required();
+
 const GET_COMMIT_SHA = Joi.object().keys({
     scmUri,
     token,
@@ -150,6 +157,14 @@ module.exports = {
      * @type {Joi}
      */
     getPermissions: GET_PERMISSIONS,
+
+    /**
+     * Properties for Scm Base that will be passed for the getOrgPermissions method
+     *
+     * @property getOrgPermissions
+     * @type {Joi}
+     */
+    getOrgPermissions: GET_ORG_PERMISSIONS,
 
     /**
      * Properties for Scm Base that will be passed for the getCommitSha method
