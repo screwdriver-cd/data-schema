@@ -10,6 +10,7 @@ const SCHEMA_START = Joi.object().keys({
     annotations: Annotations.annotations,
     blockedBy: Joi.array().items(jobId),
     buildId,
+    buildClusterName: Joi.reach(models.buildCluster.base, 'name'),
     container: Joi.reach(models.build.base, 'container').required(),
     apiUri: Joi.string().uri().required()
         .label('API URI'),
@@ -20,6 +21,7 @@ const SCHEMA_STOP = Joi.object().keys({
     annotations: Annotations.annotations,
     blockedBy: Joi.array().items(jobId),
     buildId,
+    buildClusterName: Joi.reach(models.buildCluster.base, 'name'),
     jobId
 }).required();
 const SCHEMA_STATUS = Joi.object().keys({
