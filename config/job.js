@@ -108,7 +108,13 @@ const SCHEMA_DESCRIPTION = Joi.string().max(100).optional();
 const SCHEMA_IMAGE = Joi.string().regex(Regex.IMAGE_NAME);
 const SCHEMA_SETTINGS = Joi.object().optional();
 const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJECT);
-const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
+const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1).unique((a, b) => {
+    if (typeof a === 'string' || typeof b === 'string') {
+        return false;
+    }
+
+    return Object.keys(a).some(key => b[key]);
+});
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
 // ~commit, ~commit:staging, ~commit:/^user-.*$/, ~pr, etc.
 const SCHEMA_TRIGGER = sdJoi.string().regex(Regex.TRIGGER).branchFilter();

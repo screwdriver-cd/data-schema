@@ -10,7 +10,7 @@ const TEMPLATE_ERROR = Joi.object()
         message: Joi.string()
             .label('Description of a particular validation error'),
         path: Joi.array()
-            .items(Joi.string())
+            .items(Joi.string(), Joi.number().integer())
             .label('Array of path to the field that caused the validation error'),
         type: Joi.string()
             .label('The the Joi-type that categorizes the error')
