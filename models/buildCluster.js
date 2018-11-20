@@ -33,14 +33,12 @@ const MODEL = {
     isActive: Joi
         .boolean()
         .description('Flag if the the build cluster is active')
-        .example(true)
-        .default(true),
+        .example(true),
 
     managedByScrewdriver: Joi
         .boolean()
         .description('Flag if the cluster is managed by screwdriver team')
-        .example(true)
-        .default(false),
+        .example(true),
 
     maintainer: Command.maintainer,
 
@@ -50,7 +48,6 @@ const MODEL = {
         .max(100)
         .description('Weight percentage for build cluster')
         .example(20)
-        .default(100)
 };
 
 module.exports = {

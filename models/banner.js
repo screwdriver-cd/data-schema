@@ -18,8 +18,7 @@ const MODEL = {
     isActive: Joi
         .boolean()
         .description('Flag if the banner is active')
-        .example(true)
-        .default(false),
+        .example(true),
 
     createTime: Joi
         .string()
@@ -42,7 +41,6 @@ const MODEL = {
         .max(32)
         .description('Type/Severity of the banner message')
         .example('info')
-        .default('info')
 };
 
 module.exports = {
