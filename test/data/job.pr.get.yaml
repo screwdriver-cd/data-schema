@@ -1,6 +1,7 @@
 # Job Get Example
 id: 675979578
 name: PR-1:main
+prNum: 1
 description: build and test the code
 pipelineId: 76857568576
 state: ENABLED
