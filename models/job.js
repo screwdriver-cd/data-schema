@@ -16,6 +16,11 @@ const MODEL = {
         .description('Name of the Job')
         .example('main'),
 
+    prParentJobId: Joi
+        .number().integer().positive()
+        .description('Identifier of the parent job for this pr job')
+        .example(98765),
+
     permutations: validator.jobPermutations,
 
     description: Joi
@@ -62,7 +67,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'pipelineId', 'name', 'state'
     ], [
-        'description', 'permutations', 'archived'
+        'description', 'permutations', 'archived', 'prParentJobId'
     ])).label('Get Job'),
 
     /**
