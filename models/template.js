@@ -10,22 +10,12 @@ const MODEL = {
         .number().integer().positive()
         .description('Identifier of this template')
         .example(123345),
-
-    createTime: Joi
-        .string()
-        .isoDate()
-        .max(32)
-        .description('When this template was created')
-        .example('2038-01-19T03:14:08.131Z'),
-
     labels: Joi
         .array()
         .items(Joi.string())
         .description('Labels for template')
         .example(['stable', 'latest', 'beta']),
-
     config: Template.config,
-    namespace: Template.namespace,
     name: Joi
         .string()
         .max(64)
@@ -34,8 +24,15 @@ const MODEL = {
     version: Template.version,
     description: Template.description,
     maintainer: Template.maintainer,
+    pipelineId,
+    namespace: Template.namespace,
     images: Template.images,
-    pipelineId
+    createTime: Joi
+        .string()
+        .isoDate()
+        .max(32)
+        .description('When this template was created')
+        .example('2038-01-19T03:14:08.131Z')
 };
 
 module.exports = {
@@ -54,8 +51,8 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'labels', 'config', 'name', 'version', 'description', 'maintainer', 'pipelineId'
-    ], ['namespace', 'images', 'createTime'])).label('Get Template'),
+        'id', 'labels', 'name', 'version', 'description', 'maintainer', 'pipelineId'
+    ], ['config', 'namespace', 'images', 'createTime'])).label('Get Template'),
 
     /**
      * Properties for template that will be passed during a CREATE request
