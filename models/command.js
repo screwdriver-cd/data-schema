@@ -10,25 +10,23 @@ const MODEL = {
         .number().integer().positive()
         .description('Identifier of this command')
         .example(123345),
-
+    namespace: Command.namespace,
+    version: Command.version,
+    description: Command.description,
+    maintainer: Command.maintainer,
+    format: Command.format,
+    habitat: Command.habitat,
+    docker: Command.docker,
+    binary: Command.binary,
+    name: Command.name,
+    pipelineId,
     createTime: Joi
         .string()
         .isoDate()
         .max(32)
         .description('When this command was created')
         .example('2038-01-19T03:14:08.131Z'),
-
-    namespace: Command.namespace,
-    name: Command.name,
-    version: Command.version,
-    description: Command.description,
-    usage: Command.usage,
-    maintainer: Command.maintainer,
-    format: Command.format,
-    habitat: Command.habitat,
-    docker: Command.docker,
-    binary: Command.binary,
-    pipelineId
+    usage: Command.usage
 };
 
 module.exports = {

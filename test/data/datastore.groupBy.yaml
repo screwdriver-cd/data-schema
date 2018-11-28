@@ -1,0 +1,3 @@
+table: templates
+exclude: [config]
+groupBy: [namespace, name]

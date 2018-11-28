@@ -35,6 +35,10 @@ describe('model template', () => {
             assert.isNull(validate('template.getWithNamespace.yaml', models.template.get).error);
         });
 
+        it('validates the compact get without "config" field', () => {
+            assert.isNull(validate('template.compact.yaml', models.template.get).error);
+        });
+
         it('fails the get', () => {
             assert.isNotNull(validate('empty.yaml', models.template.get).error);
         });
