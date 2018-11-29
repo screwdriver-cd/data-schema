@@ -24,6 +24,7 @@ const SCHEMA_CACHE_PERMUTATION = Joi.object({
     job: SCHEMA_CACHE_LIST
 }).or('event', 'pipeline', 'job');
 
+const SCHEMA_PR_CHAIN = Joi.boolean().default(false);
 const SCHEMA_JOBS = Joi.object()
     // Jobs can only be named with A-Z,a-z,0-9,-,_
     .pattern(Regex.JOB_NAME, Job.job)
@@ -43,6 +44,7 @@ const SCHEMA_CONFIG = Joi.object()
     .keys({
         version: Joi.number().integer().min(1).max(50),
         annotations: Annotations.annotations,
+        prChain: SCHEMA_PR_CHAIN,
         jobs: SCHEMA_JOBS,
         shared: SCHEMA_SHARED,
         cache: SCHEMA_CACHE,
@@ -58,6 +60,7 @@ const SCHEMA_CONFIG = Joi.object()
 module.exports = {
     jobs: SCHEMA_JOBS,
     shared: SCHEMA_SHARED,
+    prChain: SCHEMA_PR_CHAIN,
     cache: SCHEMA_CACHE,
     cachePerm: SCHEMA_CACHE_PERMUTATION,
     childPipelines: SCHEMA_CHILD_PIPELINES,

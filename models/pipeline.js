@@ -62,7 +62,10 @@ const MODEL = {
         .example(123),
 
     childPipelines: Base.childPipelines
-        .description('Configuration of child pipelines')
+        .description('Configuration of child pipelines'),
+
+    prChain: Base.prChain
+        .description('Configuration of prChain')
 };
 
 module.exports = {
@@ -84,7 +87,7 @@ module.exports = {
         'id', 'scmUri', 'scmContext', 'createTime', 'admins'
     ], [
         'workflowGraph', 'scmRepo', 'annotations', 'lastEventId',
-        'configPipelineId', 'childPipelines', 'name'
+        'configPipelineId', 'childPipelines', 'name', 'prChain'
     ])).label('Get Pipeline'),
 
     /**

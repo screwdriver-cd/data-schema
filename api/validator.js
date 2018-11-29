@@ -51,6 +51,7 @@ const SCHEMA_OUTPUT = Joi.object()
         errors: Joi.array().items(Joi.string()).optional(),
         jobs: SCHEMA_JOBS,
         childPipelines: Base.childPipelines,
+        prChain: Base.prChain,
         workflowGraph: WorkflowGraph.workflowGraph
     })
     .label('Execution information');
