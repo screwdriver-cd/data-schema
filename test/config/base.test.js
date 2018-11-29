@@ -23,6 +23,12 @@ describe('config base', () => {
         });
     });
 
+    describe('prChain', () => {
+        it('validates the prChain flag', () => {
+            assert.isNull(validate('config.base.prChain.yaml', config.base.prChain).error);
+        });
+    });
+
     describe('cache', () => {
         it('validates the cache object', () => {
             assert.isNull(validate('config.base.cache.yaml', config.base.cache).error);
