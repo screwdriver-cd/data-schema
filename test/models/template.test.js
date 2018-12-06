@@ -24,11 +24,20 @@ describe('model template', () => {
         it('fails the create', () => {
             assert.isNotNull(validate('empty.yaml', models.template.create).error);
         });
+
+        it('fails the create with duplicate steps', () => {
+            assert.isNotNull(validate('template.createWithDupSteps.yaml',
+                models.template.create).error);
+        });
     });
 
     describe('get', () => {
         it('validates the get', () => {
             assert.isNull(validate('template.get.yaml', models.template.get).error);
+        });
+
+        it('validates the get with duplicate steps', () => {
+            assert.isNull(validate('template.getWithDupSteps.yaml', models.template.get).error);
         });
 
         it('validates the get with namespace', () => {

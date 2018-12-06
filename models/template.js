@@ -35,6 +35,8 @@ const MODEL = {
         .example('2038-01-19T03:14:08.131Z')
 };
 
+const CREATE_MODEL = Object.assign({}, MODEL, { config: Template.configNoDupSteps });
+
 module.exports = {
     /**
      * All the available properties of Template
@@ -60,7 +62,7 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(mutate(MODEL, [
+    create: Joi.object(mutate(CREATE_MODEL, [
         'config', 'name', 'version', 'description', 'maintainer'
     ], ['labels', 'namespace', 'images'])).label('Create Template'),
 
