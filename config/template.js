@@ -92,5 +92,6 @@ module.exports = {
     description: TEMPLATE_DESCRIPTION,
     maintainer: TEMPLATE_MAINTAINER,
     config: Job.job,
+    configNoDupSteps: Job.jobNoDupSteps,
     images: TEMPLATE_IMAGES
 };

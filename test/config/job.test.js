@@ -55,10 +55,6 @@ describe('config job', () => {
         it('validates steps', () => {
             assert.isNull(validate('config.job.steps.yaml', config.job.steps).error);
         });
-
-        it('return error for bad steps', () => {
-            assert.isNotNull(validate('config.job.steps.bad.yaml', config.job.steps).error);
-        });
     });
 
     describe('secrets', () => {

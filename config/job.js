@@ -108,7 +108,8 @@ const SCHEMA_DESCRIPTION = Joi.string().max(100).optional();
 const SCHEMA_IMAGE = Joi.string().regex(Regex.IMAGE_NAME);
 const SCHEMA_SETTINGS = Joi.object().optional();
 const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJECT);
-const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1).unique((a, b) => {
+const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
+const SCHEMA_STEPS_NO_DUPS = Joi.array().items(SCHEMA_STEP).min(1).unique((a, b) => {
     if (typeof a === 'string' || typeof b === 'string') {
         return false;
     }
@@ -155,6 +156,22 @@ const SCHEMA_JOB = Joi.object()
         template: SCHEMA_TEMPLATE
     })
     .default({});
+const SCHEMA_JOB_NO_DUP_STEPS = Joi.object()
+    .keys({
+        annotations: Annotations.annotations,
+        description: SCHEMA_DESCRIPTION,
+        environment: SCHEMA_ENVIRONMENT,
+        image: SCHEMA_IMAGE,
+        matrix: SCHEMA_MATRIX,
+        requires: SCHEMA_REQUIRES,
+        blockedBy: SCHEMA_BLOCKEDBY,
+        secrets: SCHEMA_SECRETS,
+        settings: SCHEMA_SETTINGS,
+        sourcePaths: SCHEMA_SOURCEPATHS,
+        steps: SCHEMA_STEPS_NO_DUPS,
+        template: SCHEMA_TEMPLATE
+    })
+    .default({});
 
 /**
  * Various components of a Job
@@ -166,6 +183,7 @@ module.exports = {
     environment: SCHEMA_ENVIRONMENT,
     image: SCHEMA_IMAGE,
     job: SCHEMA_JOB,
+    jobNoDupSteps: SCHEMA_JOB_NO_DUP_STEPS,
     matrix: SCHEMA_MATRIX,
     requires: SCHEMA_REQUIRES,
     blockedBy: SCHEMA_BLOCKEDBY,
