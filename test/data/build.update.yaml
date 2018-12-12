@@ -3,3 +3,5 @@ status: FAILURE
 statusMessage: 'Build failed to start due to infrastructure error'
 meta:
     yes: no
+stats:
+  queueTime: '2017-01-06T01:49:50.384359267Z'
