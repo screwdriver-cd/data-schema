@@ -6,6 +6,7 @@ const models = require('../models');
 const buildId = Joi.reach(models.build.base, 'id').required();
 const jobId = Joi.reach(models.job.base, 'id');
 const SCHEMA_START = Joi.object().keys({
+    build: Joi.object(),
     jobId,
     annotations: Annotations.annotations,
     blockedBy: Joi.array().items(jobId),

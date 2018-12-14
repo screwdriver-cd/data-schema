@@ -6,3 +6,6 @@ number: 1473900790309
 cause: Commit ccc493 was pushed to master
 status: SUCCESS
 createTime: "2017-04-20"
+stats:
+  queueEnterTime: '2017-01-06T01:49:50.384359267Z'
+  imagePullStartTime: '2017-01-06T02:49:50.384359267Z'

@@ -100,6 +100,19 @@ const MODEL = {
         .description('Status message to describe status of the build')
         .example('Build failed due to infrastructure error'),
 
+    stats: Joi
+        .object()
+        .keys({
+            queueEnterTime: Joi.string().isoDate()
+                .description('When this build enters queue'),
+            imagePullStartTime: Joi.string().isoDate()
+                .description('When this build starts pulling image'),
+            hostname: Joi.string()
+                .description('Where this build is run')
+        })
+        .unknown(true) // allow other fields
+        .description('Stats for this build'),
+
     buildClusterName
 };
 
@@ -133,7 +146,7 @@ module.exports = {
     ], [
         'container', 'parentBuildId', 'sha', 'startTime', 'endTime',
         'meta', 'parameters', 'steps', 'commit', 'eventId', 'environment',
-        'statusMessage', 'buildClusterName'
+        'statusMessage', 'stats', 'buildClusterName'
     ])).label('Get Build'),
 
     /**
@@ -143,7 +156,7 @@ module.exports = {
      * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [], [
-        'status', 'meta', 'statusMessage'
+        'status', 'meta', 'statusMessage', 'stats'
     ])).label('Update Build'),
 
     /**
@@ -155,7 +168,8 @@ module.exports = {
     create: Joi.object(mutate(MODEL, [
         'jobId'
     ], [
-        'meta'
+        'meta',
+        'stats'
     ])).label('Create Build'),
 
     /**
