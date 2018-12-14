@@ -103,9 +103,9 @@ const MODEL = {
     stats: Joi
         .object()
         .keys({
-            queueTime: Joi.string().isoDate()
+            queueEnterTime: Joi.string().isoDate()
                 .description('When this build enters queue'),
-            imagePullTime: Joi.string().isoDate()
+            imagePullStartTime: Joi.string().isoDate()
                 .description('When this build starts pulling image'),
             hostname: Joi.string()
                 .description('Where this build is run')
