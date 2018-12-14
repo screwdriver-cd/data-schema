@@ -110,6 +110,7 @@ const MODEL = {
             hostname: Joi.string()
                 .description('Where this build is run')
         })
+        .unknown(true) // allow other fields
         .description('Stats for this build'),
 
     buildClusterName
