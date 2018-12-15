@@ -44,6 +44,16 @@ describe('scm test', () => {
         });
     });
 
+    describe('addPrComment', () => {
+        it('validates', () => {
+            assert.isNull(validate('scm.addPrComment.yaml', scm.addPrComment).error);
+        });
+
+        it('fails', () => {
+            assert.isNotNull(validate('empty.yaml', scm.addPrComment).error);
+        });
+    });
+
     describe('updateCommitStatus', () => {
         it('validates', () => {
             assert.isNull(validate('scm.updateCommitStatus.yaml', scm.updateCommitStatus).error);

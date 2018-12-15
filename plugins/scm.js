@@ -72,6 +72,14 @@ const GET_COMMIT_SHA = Joi.object().keys({
     scmRepo: Scm.repo.optional()
 }).required();
 
+const ADD_PR_COMMENT = Joi.object().keys({
+    scmUri,
+    token,
+    prNum,
+    comment: Joi.string().required(),
+    scmContext
+}).required();
+
 const UPDATE_COMMIT_STATUS = Joi.object().keys({
     scmUri,
     token,
@@ -173,6 +181,14 @@ module.exports = {
      * @type {Joi}
      */
     getCommitSha: GET_COMMIT_SHA,
+
+    /**
+     * Properties for Scm Base that will be passed for the addPrComment method
+     *
+     * @property addPrComment
+     * @type {Joi}
+     */
+    addPrComment: ADD_PR_COMMENT,
 
     /**
      * Properties for Scm Base that will be passed for the updateCommitStatus method
