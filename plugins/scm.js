@@ -75,7 +75,7 @@ const GET_COMMIT_SHA = Joi.object().keys({
 const ADD_PR_COMMENT = Joi.object().keys({
     scmUri,
     token,
-    prNum,
+    prNum: Joi.reach(core.scm.hook, 'prNum').required(),
     comment: Joi.string().required(),
     scmContext
 }).required();
