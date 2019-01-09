@@ -72,14 +72,23 @@ const SCHEMA_COMMIT = Joi.object().keys({
         .uri()
         .required()
         .label('Link to commit')
-        .example('https://github.com/scredriver-cd/screwdriver/commit/8843d7f92416211de')
+        .example('https://github.com/screwdriver-cd/screwdriver/commit/8843d7f92416211de')
 }).label('SCM Commit');
 
 const SCHEMA_PR = Joi.object().keys({
     url: Joi.string()
         .uri()
         .label('Link to PR')
-        .example('https://git.ouroath.com/MAILSERVICES/gdpr-event-processor/pull/1')
+        .example('https://github.com/screwdriver-cd/screwdriver/pull/1'),
+    title: Joi.string()
+        .max(512)
+        .label('Title of the pull request'),
+    createTime: Joi.date().iso()
+        .label('Creation Time of the pull request')
+        .example('2018-10-10T21:35:31Z'),
+    username: Joi.string()
+        .label('Username')
+        .example('d2lam')
 }).label('SCM Pull Request');
 
 const SCHEMA_HOOK = Joi.object().keys({
@@ -147,10 +156,7 @@ const SCHEMA_HOOK = Joi.object().keys({
         .required()
         .label('Type of the event'),
 
-    username: Joi.string()
-        .required()
-        .label('Username')
-        .example('d2lam')
+    username: Joi.reach(SCHEMA_USER, 'username')
 }).label('SCM Hook');
 
 module.exports = {
