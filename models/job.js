@@ -3,6 +3,7 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const validator = require('../api/validator');
+const SCM_PR_SCHEMA = require('../core/scm').pr;
 
 const MODEL = {
     id: Joi
@@ -49,6 +50,13 @@ const MODEL = {
         .default(false)
 };
 
+const EXTENDED_MODEL = {
+    title: Joi.reach(SCM_PR_SCHEMA, 'title'),
+    createTime: Joi.reach(SCM_PR_SCHEMA, 'createTime'),
+    username: Joi.reach(SCM_PR_SCHEMA, 'username'),
+    ...MODEL
+};
+
 module.exports = {
     /**
      * All the available properties of Job
@@ -64,10 +72,12 @@ module.exports = {
      * @property get
      * @type {Joi}
      */
-    get: Joi.object(mutate(MODEL, [
+    get: Joi.object(mutate(EXTENDED_MODEL, [
         'id', 'pipelineId', 'name', 'state'
     ], [
-        'description', 'permutations', 'archived', 'prParentJobId'
+        'description', 'permutations', 'archived', 'prParentJobId',
+        // possible extended fields for pull/merge request info from scm
+        'url', 'title', 'createTime'
     ])).label('Get Job'),
 
     /**
@@ -93,7 +103,7 @@ module.exports = {
      * @property allKeys
      * @type {Array}
      */
-    allKeys: Object.keys(MODEL),
+    allKeys: Object.keys(EXTENDED_MODEL),
 
     /**
      * Tablename to be used in the datastore
