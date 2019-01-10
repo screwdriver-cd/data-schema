@@ -77,7 +77,7 @@ module.exports = {
     ], [
         'description', 'permutations', 'archived', 'prParentJobId',
         // possible extended fields for pull/merge request info from scm
-        'url', 'title', 'createTime'
+        'username', 'title', 'createTime'
     ])).label('Get Job'),
 
     /**
