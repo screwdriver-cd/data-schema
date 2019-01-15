@@ -43,6 +43,22 @@ const MODEL = {
         .example('ENABLED')
         .default('ENABLED'),
 
+    stateChanger: Joi
+        .string()
+        .max(128)
+        .description('Username for who changed the state'),
+
+    stateChangeTime: Joi
+        .string()
+        .isoDate()
+        .description('When the state of the job was changed'),
+
+    stateChangeMessage: Joi
+        .string()
+        .max(512)
+        .description('Reason why disabling or enabling job')
+        .example('Testing out new feature change in beta only'),
+
     archived: Joi
         .boolean()
         .description('Flag if the job is archived')
@@ -77,7 +93,8 @@ module.exports = {
     ], [
         'description', 'permutations', 'archived', 'prParentJobId',
         // possible extended fields for pull/merge request info from scm
-        'username', 'title', 'createTime'
+        'username', 'title', 'createTime', 'stateChanger', 'stateChangeTime',
+        'stateChangeMessage'
     ])).label('Get Job'),
 
     /**
@@ -87,7 +104,8 @@ module.exports = {
      * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [], [
-        'state'
+        'state', 'stateChanger', 'stateChangeTime',
+        'stateChangeMessage'
     ])).label('Update Job'),
 
     /**
