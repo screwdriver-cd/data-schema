@@ -1,0 +1,4 @@
+state: 'ENABLED'
+stateChanger: 'd2lam'
+stateChangeTime: '2011-01-26T19:01:12Z'
+stateChangeMessage: 'Testing out new feature change in beta only'

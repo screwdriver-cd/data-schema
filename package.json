@@ -42,9 +42,9 @@
     "eslint": "^4.19.1",
     "eslint-config-screwdriver": "^3.0.1",
     "jenkins-mocha": "^6.0.0",
-    "js-yaml": "^3.12.0"
+    "js-yaml": "^3.12.1"
   },
   "dependencies": {
-    "joi": "^13.5.2"
+    "joi": "^13.7.0"
   }
 }
