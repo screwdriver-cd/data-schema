@@ -1,7 +1,7 @@
 'use strict';
 
 const Joi = require('joi');
-const mutate = require('../lib/mutate');
+// const mutate = require('../lib/mutate');
 
 const MODEL = {
     buildId: Joi
@@ -167,24 +167,6 @@ module.exports = {
     base: Joi.object(MODEL).label('BuildReport'),
 
     /**
-     * Properties for BuildReport that will come back during a GET request
-     *
-     * @property get
-     * @type {Joi}
-     */
-    get: Joi.object(mutate(MODEL, [
-        'id'
-    ], [])).label('Get Build Report'),
-
-    /**
-     * Properties for BuildReport that will come back during a LIST request.
-     * The LIST request will list all banners
-     */
-    list: Joi.array().items(Joi.object(mutate(MODEL, [
-        'id'
-    ], []))).label('List Build Reports'),
-
-    /**
      * List of fields that determine a unique row
      *
      * @property keys
@@ -213,6 +195,7 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: [{ fields: ['buildId'] }, { fields: ['created', 'buildId'] },
+    indexes: [{ fields: ['buildId'] }, { fields: ['pipelineId'] },
+        { fields: ['created', 'buildId'] },
         { fields: ['created', 'pipelineId'] }, { fields: ['created', 'eventId'] }]
 };
