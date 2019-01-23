@@ -45,18 +45,18 @@ module.exports = {
     allKeys: Object.keys(MODEL),
 
     /**
-     * List of indexes to create in the datastore
-     *
-     * @property indexes
-     * @type {Array}
-     */
-    indexes: ['namespace', 'name', 'tag'],
-
-    /**
      * Tablename to be used in the datastore
      *
      * @property tableName
      * @type {String}
      */
-    tableName: 'commandTags'
+    tableName: 'commandTags',
+
+    /**
+     * List of indexes to create in the datastore
+     *
+     * @property indexes
+     * @type {Array}
+     */
+    indexes: [{ fields: ['namespace'] }, { fields: ['name'] }, { fields: ['tag'] }]
 };

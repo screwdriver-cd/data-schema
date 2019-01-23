@@ -95,5 +95,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['pipelineId']
+    indexes: [{ fields: ['pipelineId'] }]
 };

@@ -74,5 +74,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['username', 'scmContext']
+    indexes: [{ fields: ['username'] }, { fields: ['scmContext'] }]
 };

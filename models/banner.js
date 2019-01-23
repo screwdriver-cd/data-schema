@@ -134,5 +134,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['isActive']
+    indexes: [{ fields: ['isActive'] }]
 };

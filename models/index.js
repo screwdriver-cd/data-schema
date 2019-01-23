@@ -3,6 +3,7 @@
 const banner = require('./banner');
 const build = require('./build');
 const buildCluster = require('./buildCluster');
+const buildReport = require('./buildReport');
 const step = require('./step');
 const event = require('./event');
 const job = require('./job');
@@ -21,6 +22,7 @@ module.exports = {
     banner,
     build,
     buildCluster,
+    buildReport,
     step,
     event,
     job,
