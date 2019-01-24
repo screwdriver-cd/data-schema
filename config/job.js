@@ -85,7 +85,7 @@ const SCHEMA_ENVIRONMENT = Joi.object()
             }
         }
     });
-const SCHEMA_JOBNAME = Joi.string().regex(Regex.JOB_NAME);
+const SCHEMA_JOBNAME = Joi.string().max(100).regex(Regex.JOB_NAME);
 const SCHEMA_STEP_STRING = Joi.string();
 const SCHEMA_STEP_OBJECT = Joi.object()
     // Steps can only be named with A-Z,a-z,0-9,-,_
@@ -196,6 +196,6 @@ module.exports = {
     steps: SCHEMA_STEPS,
     template: SCHEMA_TEMPLATE,
     requiresValue: SCHEMA_REQUIRES_VALUE,
-    jobname: SCHEMA_JOBNAME,
+    jobName: SCHEMA_JOBNAME,
     trigger: SCHEMA_TRIGGER
 };
