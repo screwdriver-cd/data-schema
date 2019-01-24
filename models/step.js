@@ -119,5 +119,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: [{ fields: ['buildId'] }, { fields: ['name'] }]
+    indexes: [{ fields: ['startTime'] }, { fields: ['buildId'] }, { fields: ['name'] }]
 };

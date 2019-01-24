@@ -135,5 +135,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: [{ fields: ['scmUri'] }]
+    indexes: [{ fields: ['createTime'] }, { fields: ['scmUri'] }]
 };
