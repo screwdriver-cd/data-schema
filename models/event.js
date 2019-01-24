@@ -131,7 +131,7 @@ module.exports = {
      * @property rangeKeys
      * @type {Array}
      */
-    rangeKeys: ['createTime', 'createTime'],
+    rangeKeys: ['createTime', 'pipelineId', 'type'],
 
     /**
      * Tablename to be used in the datastore

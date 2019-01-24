@@ -204,7 +204,7 @@ module.exports = {
      * @property rangeKeys
      * @type {Array}
      */
-    rangeKeys: ['number', null, 'number'],
+    rangeKeys: ['number', 'number', null, 'number'],
 
     /**
      * List of all fields in the model
