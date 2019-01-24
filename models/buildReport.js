@@ -2,159 +2,52 @@
 
 const Joi = require('joi');
 // const mutate = require('../lib/mutate');
+const buildId = Joi.reach(require('./build').base, 'id');
+const startTime = Joi.reach(require('./build').base, 'startTime');
+const endTime = Joi.reach(require('./build').base, 'endTime');
+const status = Joi.reach(require('./build').base, 'status');
+const cluster = Joi.reach(require('./buildCluster').base, 'name');
+const stats = Joi.reach(require('./build').base, 'stats');
+const eventId = Joi.reach(require('./event').base, 'id');
+const eventCreateTime = Joi.reach(require('./event').base, 'createTime');
+const eventType = Joi.reach(require('./event').base, 'type');
+const pipelineId = Joi.reach(require('./pipeline').base, 'id');
+const scmUri = Joi.reach(require('./pipeline').base, 'scmUri');
+const scmContext = Joi.reach(require('./pipeline').base, 'scmContext');
+const pipelineCreateTime = Joi.reach(require('./pipeline').base, 'createTime');
 
 const MODEL = {
-    buildId: Joi
-        .number().integer().positive()
-        .description('Build identifier')
-        .example(123345),
-
-    jobId: Joi
-        .number().integer().positive()
-        .description('Job identifier')
-        .example(123345),
-
-    parentBuildId: Joi
-        .string()
-        .description('Parent build(s) identifier(s)')
-        .example([123, 234]),
-
-    number: Joi
-        .number().positive()
-        .description('Timestamp of create time')
-        .example(1473900790309),
-
+    buildId,
+    startTime,
+    endTime,
+    status,
+    cluster,
+    stats,
+    eventId,
+    eventCreateTime,
+    eventType,
+    pipelineId,
+    scmUri,
+    scmContext,
+    pipelineCreateTime,
     created: Joi
         .string()
         .max(10)
         .isoDate()
         .description('Build created'),
-
-    createdWeek: Joi
-        .string()
-        .max(10)
-        .isoDate()
-        .description('Build created week'),
-
-    createTime: Joi
-        .string()
-        .max(32)
-        .isoDate()
-        .description('Build created timestamp')
-        .example('2017-01-06T01:49:50.384359267Z'),
-
-    startTime: Joi
-        .string()
-        .max(32)
-        .isoDate()
-        .description('Build created timestamp')
-        .example('2017-01-06T01:49:50.384359267Z'),
-
-    endTime: Joi
-        .string()
-        .max(32)
-        .isoDate()
-        .description('Build created timestamp')
-        .example('2017-01-06T01:49:50.384359267Z'),
-
-    status: Joi
-        .string()
-        .description('Build status')
-        .example('SUCCESS'),
-
-    statusMessage: Joi
-        .string()
-        .description('Build status message')
-        .example('Build failed due to infrastructure error'),
-
-    cluster: Joi
-        .string()
-        .description('Build cluster')
-        .example('gq1'),
-
-    stats: Joi
-        .string()
-        .description('Build stats'),
-
     totalSteps: Joi
         .number().positive()
         .description('total steps for a build')
         .example(10),
-
     stepsDuration: Joi
         .string()
         .max(32)
         .isoDate()
         .description('Duration between first and last step')
         .example('01:49:50.384359267Z'),
-
     steps: Joi
         .string()
-        .description('Steps'),
-
-    eventId: Joi
-        .number().positive()
-        .description('Event id')
-        .example(1),
-
-    eventCreateTime: Joi
-        .string()
-        .max(32)
-        .isoDate()
-        .description('Event create time')
-        .example('01:49:50.384359267Z'),
-
-    eventType: Joi
-        .string()
-        .description('Event type')
-        .example('~pr'),
-
-    startFrom: Joi
-        .string()
-        .description('start From'),
-
-    parentEventId: Joi
-        .number().integer().positive()
-        .description('Identifier of the parent event')
-        .example(123344),
-
-    causeMessage: Joi
-        .string()
-        .description('Message that describes why the event was created')
-        .example('Merge pull request #26 from screwdriver-cd/data-schema'),
-
-    commit: Joi
-        .string()
-        .description('Commit related to the event'),
-
-    pr: Joi
-        .string()
-        .description('Pull request object that holds information about the pull request'),
-
-    pipelineId: Joi
-        .number().integer().positive()
-        .description('Pipeline identifier')
-        .example(123345),
-
-    scmUri: Joi
-        .string()
-        .description('Unique identifier for the application')
-        .example('github.com:123456:master'),
-
-    scmContext: Joi
-        .string()
-        .description('The SCM in which the repository exists')
-        .example('github:github.com'),
-
-    pipelineCreateTime: Joi
-        .string()
-        .isoDate()
-        .description('Pipeline create time'),
-
-    pipelineLastEventId: Joi
-        .number().integer().positive()
-        .description('Identifier of last event')
-        .example(123345)
+        .description('Steps')
 };
 
 module.exports = {
@@ -196,6 +89,6 @@ module.exports = {
      * @type {Array}
      */
     indexes: [{ fields: ['buildId'] }, { fields: ['pipelineId'] },
-        { fields: ['created', 'buildId'] },
+        { fields: ['eventId'] }, { fields: ['created', 'buildId'] },
         { fields: ['created', 'pipelineId'] }, { fields: ['created', 'eventId'] }]
 };
