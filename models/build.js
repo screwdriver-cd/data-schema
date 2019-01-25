@@ -222,7 +222,7 @@ module.exports = {
     tableName: 'builds',
 
     /**
-     * List of indexes to create in the datastore
+     * List of indexes to create in datastore
      *
      * @property indexes
      * @type {Array}
