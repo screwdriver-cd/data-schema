@@ -59,6 +59,11 @@ describe('scm test', () => {
             assert.isNull(validate('scm.updateCommitStatus.yaml', scm.updateCommitStatus).error);
         });
 
+        it('validates with extra optional params (context and description)', () => {
+            assert.isNull(validate('scm.updateCommitStatusFull.yaml',
+                scm.updateCommitStatus).error);
+        });
+
         it('fails', () => {
             assert.isNotNull(validate('empty.yaml', scm.updateCommitStatus).error);
         });
