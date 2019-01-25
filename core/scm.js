@@ -88,7 +88,11 @@ const SCHEMA_PR = Joi.object().keys({
         .example('2018-10-10T21:35:31Z'),
     username: Joi.string()
         .label('Username')
-        .example('d2lam')
+        .example('d2lam'),
+    userProfile: Joi.string()
+        .uri()
+        .label('Link to Profile')
+        .example('https://github.com/anonymous')
 }).label('SCM Pull Request');
 
 const SCHEMA_HOOK = Joi.object().keys({
