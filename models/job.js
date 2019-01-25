@@ -13,7 +13,7 @@ const MODEL = {
 
     name: Joi
         .string().regex(/^(PR-[0-9]+:)?[\w-]+$/)
-        .max(50)
+        .max(110)
         .description('Name of the Job')
         .example('main'),
 
@@ -70,6 +70,8 @@ const EXTENDED_MODEL = {
     title: Joi.reach(SCM_PR_SCHEMA, 'title'),
     createTime: Joi.reach(SCM_PR_SCHEMA, 'createTime'),
     username: Joi.reach(SCM_PR_SCHEMA, 'username'),
+    userProfile: Joi.reach(SCM_PR_SCHEMA, 'userProfile'),
+    url: Joi.reach(SCM_PR_SCHEMA, 'url'),
     ...MODEL
 };
 
@@ -92,9 +94,10 @@ module.exports = {
         'id', 'pipelineId', 'name', 'state'
     ], [
         'description', 'permutations', 'archived', 'prParentJobId',
+        // job enable/disable state change
+        'stateChanger', 'stateChangeTime', 'stateChangeMessage',
         // possible extended fields for pull/merge request info from scm
-        'username', 'title', 'createTime', 'stateChanger', 'stateChangeTime',
-        'stateChangeMessage'
+        'username', 'title', 'createTime', 'url', 'userProfile'
     ])).label('Get Job'),
 
     /**
@@ -137,5 +140,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['pipelineId', 'state']
+    indexes: [{ fields: ['pipelineId'] }, { fields: ['state'] }]
 };

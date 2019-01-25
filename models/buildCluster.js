@@ -124,5 +124,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['name']
+    indexes: [{ fields: ['name'] }]
 };

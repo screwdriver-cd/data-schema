@@ -15,6 +15,10 @@ describe('config base', () => {
         it('validates a list of jobs', () => {
             assert.isNull(validate('config.base.jobs.yaml', config.base.jobs).error);
         });
+
+        it('throws error for a job with long job name', () => {
+            assert.isNotNull(validate('config.base.jobs.badJobName.yaml', config.base.jobs).error);
+        });
     });
 
     describe('shared', () => {
