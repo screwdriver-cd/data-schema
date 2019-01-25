@@ -97,14 +97,6 @@ module.exports = {
     allKeys: Object.keys(MODEL),
 
     /**
-     * List of indexes to create in the datastore
-     *
-     * @property indexes
-     * @type {Array}
-     */
-    indexes: ['namespace', 'name'],
-
-    /**
      * Primary column to sort queries by.
      * This defines queries to optionally sort a query result set by id.
      * Each range key matches up with an element in the indexes property
@@ -120,5 +112,13 @@ module.exports = {
      * @property tableName
      * @type {String}
      */
-    tableName: 'commands'
+    tableName: 'commands',
+
+    /**
+     * List of indexes to create in the datastore
+     *
+     * @property indexes
+     * @type {Array}
+     */
+    indexes: [{ fields: ['namespace'] }, { fields: ['name'] }]
 };
