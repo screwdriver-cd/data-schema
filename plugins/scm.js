@@ -88,7 +88,9 @@ const UPDATE_COMMIT_STATUS = Joi.object().keys({
     jobName,
     url: Joi.string().uri().required(),
     pipelineId,
-    scmContext
+    scmContext,
+    context: Joi.string().max(100).optional(),
+    description: Joi.string().max(200).optional()
 }).required();
 
 const GET_FILE = Joi.object().keys({
