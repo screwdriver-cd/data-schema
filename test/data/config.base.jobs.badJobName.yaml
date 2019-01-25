@@ -1,0 +1,12 @@
+main:
+    image: node:{{NODE_VERSION}}
+    steps:
+        - init: npm install
+        - test: npm test
+
+this-is-a-job-with-waaaaaaaaaaaaaaaaaaaay-too-many-characters-and-there-is-over-one-hundred-which-means-this-test-should-fail:
+    image: node:4
+    steps:
+        - publish: npm publish
+    secrets:
+        - NPM_TOKEN
