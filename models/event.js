@@ -116,14 +116,6 @@ module.exports = {
     ])).label('Create Event'),
 
     /**
-     * List of indexes to create in the datastore
-     *
-     * @property indexes
-     * @type {Array}
-     */
-    indexes: ['pipelineId', 'type'],
-
-    /**
      * List of fields that determine a unique row
      *
      * @property keys
@@ -139,7 +131,7 @@ module.exports = {
      * @property rangeKeys
      * @type {Array}
      */
-    rangeKeys: ['createTime', 'createTime'],
+    rangeKeys: ['createTime', 'pipelineId', 'type'],
 
     /**
      * Tablename to be used in the datastore
@@ -147,5 +139,14 @@ module.exports = {
      * @property tableName
      * @type {String}
      */
-    tableName: 'events'
+    tableName: 'events',
+
+    /**
+     * List of indexes to create in the datastore
+     *
+     * @property indexes
+     * @type {Array}
+     */
+    indexes: [{ fields: ['createTime', 'pipelineId'] }, { fields: ['pipelineId'] },
+        { fields: ['type'] }]
 };

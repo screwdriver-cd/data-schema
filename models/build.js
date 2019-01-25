@@ -204,7 +204,7 @@ module.exports = {
      * @property rangeKeys
      * @type {Array}
      */
-    rangeKeys: ['number', null, 'number'],
+    rangeKeys: ['number', 'number', 'number'],
 
     /**
      * List of all fields in the model
@@ -227,5 +227,6 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: ['jobId', 'parentBuildId', 'eventId']
+    indexes: [{ fields: ['eventId', 'createTime'] }, { fields: ['jobId'] },
+        { fields: ['parentBuildId'] }]
 };
