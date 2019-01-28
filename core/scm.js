@@ -144,6 +144,11 @@ const SCHEMA_HOOK = Joi.object().keys({
         .optional()
         .label('PR original source'),
 
+    prTitle: Joi.string()
+        .allow('')
+        .optional()
+        .label('PR title'),
+
     scmContext: Joi
         .string().max(128)
         .required()
