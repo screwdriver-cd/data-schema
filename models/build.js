@@ -56,6 +56,7 @@ const MODEL = {
     createTime: Joi
         .string()
         .isoDate()
+        .max(32)
         .description('When this build was created'),
 
     startTime: Joi
@@ -228,5 +229,5 @@ module.exports = {
      * @type {Array}
      */
     indexes: [{ fields: ['eventId', 'createTime'] }, { fields: ['jobId'] },
-        { fields: ['parentBuildId'] }]
+        { fields: [{ attribute: 'parentBuildId', length: 32 }] }]
 };

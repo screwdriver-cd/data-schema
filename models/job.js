@@ -39,6 +39,7 @@ const MODEL = {
             'ENABLED',
             'DISABLED'
         ])
+        .max(10)
         .description('Current state of the Job')
         .example('ENABLED')
         .default('ENABLED'),
