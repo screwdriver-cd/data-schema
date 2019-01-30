@@ -4,6 +4,9 @@ annotations:
 blockedBy:
     - 1111
     - 2222
+freezeWindows:
+    - "* * ? * 1"
+    - "0-59 0-23 * 1 ?"
 buildId: 8609
 buildClusterName: sd
 container: node:4

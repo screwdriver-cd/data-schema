@@ -1,6 +1,7 @@
 'use strict';
 
 const Annotations = require('../config/annotations');
+const Job = require('../config/job');
 const Joi = require('joi');
 const models = require('../models');
 const buildId = Joi.reach(models.build.base, 'id').required();
@@ -10,6 +11,7 @@ const SCHEMA_START = Joi.object().keys({
     jobId,
     annotations: Annotations.annotations,
     blockedBy: Joi.array().items(jobId),
+    freezeWindows: Job.freezeWindows,
     buildId,
     buildClusterName: Joi.reach(models.buildCluster.base, 'name'),
     container: Joi.reach(models.build.base, 'container').required(),
@@ -21,6 +23,7 @@ const SCHEMA_START = Joi.object().keys({
 const SCHEMA_STOP = Joi.object().keys({
     annotations: Annotations.annotations,
     blockedBy: Joi.array().items(jobId),
+    freezeWindows: Job.freezeWindows,
     buildId,
     buildClusterName: Joi.reach(models.buildCluster.base, 'name'),
     jobId
