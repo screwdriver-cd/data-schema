@@ -3,6 +3,7 @@
 const Annotations = require('./annotations');
 const Joi = require('joi');
 const Regex = require('./regex');
+const Cron = require('./cronExpression');
 
 const SPECIFIC_BRANCH_POS = 4;
 
@@ -121,6 +122,7 @@ const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
 const SCHEMA_TRIGGER = sdJoi.string().regex(Regex.TRIGGER).branchFilter();
 const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne
 const SCHEMA_EXTERNAL_TRIGGER = Joi.string().regex(Regex.EXTERNAL_TRIGGER); // ~sd@123:main
+const SCHEMA_CRON_EXPRESSION = Cron.string().cron();
 const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(
     SCHEMA_INTERNAL_TRIGGER, SCHEMA_JOBNAME, SCHEMA_TRIGGER);
 const SCHEMA_REQUIRES = Joi.alternatives().try(
@@ -134,6 +136,10 @@ const SCHEMA_BLOCKEDBY_VALUE = Joi.alternatives().try(
 const SCHEMA_BLOCKEDBY = Joi.alternatives().try(
     Joi.array().items(SCHEMA_BLOCKEDBY_VALUE),
     SCHEMA_BLOCKEDBY_VALUE
+);
+const SCHEMA_FREEZEWINDOWS = Joi.alternatives().try(
+    Joi.array().items(SCHEMA_CRON_EXPRESSION),
+    SCHEMA_CRON_EXPRESSION
 );
 const SCHEMA_SOURCEPATH = Joi.string().max(100).optional();
 const SCHEMA_SOURCEPATHS = Joi.alternatives().try(
@@ -149,6 +155,7 @@ const SCHEMA_JOB = Joi.object()
         matrix: SCHEMA_MATRIX,
         requires: SCHEMA_REQUIRES,
         blockedBy: SCHEMA_BLOCKEDBY,
+        freezeWindows: SCHEMA_FREEZEWINDOWS,
         secrets: SCHEMA_SECRETS,
         settings: SCHEMA_SETTINGS,
         sourcePaths: SCHEMA_SOURCEPATHS,
@@ -165,6 +172,7 @@ const SCHEMA_JOB_NO_DUP_STEPS = Joi.object()
         matrix: SCHEMA_MATRIX,
         requires: SCHEMA_REQUIRES,
         blockedBy: SCHEMA_BLOCKEDBY,
+        freezeWindows: SCHEMA_FREEZEWINDOWS,
         secrets: SCHEMA_SECRETS,
         settings: SCHEMA_SETTINGS,
         sourcePaths: SCHEMA_SOURCEPATHS,
@@ -187,6 +195,7 @@ module.exports = {
     matrix: SCHEMA_MATRIX,
     requires: SCHEMA_REQUIRES,
     blockedBy: SCHEMA_BLOCKEDBY,
+    freezeWindows: SCHEMA_FREEZEWINDOWS,
     secret: SCHEMA_SECRET,
     secrets: SCHEMA_SECRETS,
     settings: SCHEMA_SETTINGS,

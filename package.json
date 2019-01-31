@@ -46,6 +46,7 @@
     "js-yaml": "^3.12.1"
   },
   "dependencies": {
-    "joi": "^13.7.0"
+    "joi": "^13.7.0",
+    "cron-parser": "^2.7.3"
   }
 }

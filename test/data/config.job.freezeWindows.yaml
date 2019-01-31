@@ -1,0 +1,7 @@
+image: node:6
+steps:
+    - publish: npm publish
+requires: ~commit
+freezeWindows:
+    - "* * ? * 1"
+    - "0-59 0-23 * 1 ?"

@@ -6,3 +6,6 @@ jobId: 1234
 blockedBy:
   - 111
   - 222
+freezeWindows:
+  - "* * ? * 1"
+  - "0-59 0-23 * 1 ?"

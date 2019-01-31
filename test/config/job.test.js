@@ -40,6 +40,14 @@ describe('config job', () => {
             assert.isNotNull(validate('config.job.blockedBy.bad.yaml', config.job.job).error);
         });
 
+        it('validates a job with freezeWindows', () => {
+            assert.isNull(validate('config.job.freezeWindows.yaml', config.job.job).error);
+        });
+
+        it('returns error for bad freezeWindows format', () => {
+            assert.isNotNull(validate('config.job.freezeWindows.bad.yaml', config.job.job).error);
+        });
+
         it('validates a description', () => {
             assert.isNull(validate('config.job.description.yaml', config.job.job).error);
         });
