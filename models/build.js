@@ -106,6 +106,8 @@ const MODEL = {
         .keys({
             queueEnterTime: Joi.string().isoDate()
                 .description('When this build enters queue'),
+            blockedStartTime: Joi.string().isoDate()
+                .description('When this build is blocked'),
             imagePullStartTime: Joi.string().isoDate()
                 .description('When this build starts pulling image'),
             hostname: Joi.string()
