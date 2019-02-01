@@ -62,6 +62,10 @@ describe('datastore test', () => {
             assert.isNull(validate('datastore.groupBy.yaml', datastore.scan).error);
         });
 
+        it('validates the startTime and endTime options', () => {
+            assert.isNull(validate('datastore.startTime.yaml', datastore.scan).error);
+        });
+
         it('fails the update', () => {
             assert.isNotNull(validate('empty.yaml', datastore.scan).error);
         });

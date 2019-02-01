@@ -35,7 +35,9 @@ const SCHEMA_SCAN = Joi.object().keys({
     sort: Joi.string().lowercase().valid(['ascending', 'descending']).default('descending'),
     sortBy: Joi.string().max(100),
     exclude: Joi.array().items(Joi.string().max(100)).max(100),
-    groupBy: Joi.array().items(Joi.string().max(100)).max(100)
+    groupBy: Joi.array().items(Joi.string().max(100)).max(100),
+    startTime: Joi.string().isoDate(),
+    endTime: Joi.string().isoDate()
 });
 
 module.exports = {
