@@ -91,7 +91,9 @@ const MODEL = {
             'RUNNING', // after the build is created, went through the queue, and has started
             'SUCCESS',
             'BLOCKED',
-            'UNSTABLE'
+            'UNSTABLE',
+            'COLLAPSED', // when the build is collapsed
+            'FROZEN' // when the build is frozen due to freeze window
         ])
         .description('Current status of the build')
         .example('SUCCESS'),
