@@ -7,7 +7,9 @@ const validate = require('../helper').validate;
 describe('executor test', () => {
     describe('start', () => {
         it('validates the start', () => {
-            assert.isNull(validate('executor.start.yaml', executor.start).error);
+            assert.isNull(validate('executor.start.yaml', executor.start, {
+                tokenGen: () => {}
+            }).error);
         });
 
         it('validates the start with no annotations', () => {
