@@ -1,3 +1,4 @@
 table: templates
 exclude: [config]
 groupBy: [namespace, name]
+timeKey: 'startTime'
