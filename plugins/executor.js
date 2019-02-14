@@ -8,6 +8,11 @@ const buildId = Joi.reach(models.build.base, 'id').required();
 const eventId = Joi.reach(models.event.base, 'id');
 const jobId = Joi.reach(models.job.base, 'id');
 
+const SCHEMA_JOB = Joi.object().keys({
+    id: jobId.required(),
+    name: Joi.reach(models.job.base, 'name').required()
+}).unknown();
+
 const SCHEMA_PIPELINE = Joi.object().keys({
     id: Joi.reach(models.pipeline.base, 'id').required(),
     scmContext: Joi.reach(models.pipeline.base, 'scmContext').required()
@@ -15,7 +20,7 @@ const SCHEMA_PIPELINE = Joi.object().keys({
 
 const SCHEMA_START = Joi.object().keys({
     build: Joi.object(),
-    jobId,
+    job: SCHEMA_JOB,
     annotations: Annotations.annotations,
     blockedBy: Joi.array().items(jobId),
     freezeWindows: Job.freezeWindows,
