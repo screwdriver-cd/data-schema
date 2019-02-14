@@ -37,7 +37,8 @@ const SCHEMA_SCAN = Joi.object().keys({
     exclude: Joi.array().items(Joi.string().max(100)).max(100),
     groupBy: Joi.array().items(Joi.string().max(100)).max(100),
     startTime: Joi.string().isoDate(),
-    endTime: Joi.string().isoDate()
+    endTime: Joi.string().isoDate(),
+    timeKey: Joi.string()
 });
 
 module.exports = {
