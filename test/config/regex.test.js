@@ -94,6 +94,14 @@ describe('config regex', () => {
         it('fails on bad formatted command full names', () => {
             assert.isFalse(config.regex.FULL_COMMAND_NAME.test('namespace::command@1.2.3'));
         });
+
+        it('checks good command tag names', () => {
+            assert.isTrue(config.regex.COMMAND_TAG_NAME.test('stable'));
+        });
+
+        it('checks good template tag names', () => {
+            assert.isTrue(config.regex.COMMAND_TAG_NAME.test('v1.2.3'));
+        });
     });
 
     describe('templates', () => {
