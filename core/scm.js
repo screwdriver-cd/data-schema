@@ -99,7 +99,7 @@ const SCHEMA_HOOK = Joi.object().keys({
     action: Joi.string()
         .when('type', { is: 'pr',
             then: Joi.valid(['opened', 'reopened', 'closed', 'synchronized']) })
-        .when('type', { is: 'repo', then: Joi.valid('push') })
+        .when('type', { is: 'repo', then: Joi.valid(['push', 'release', 'create']) })
         .when('type', { is: 'ping', then: Joi.allow('').optional(), otherwise: Joi.required() })
         .label('Action of the event'),
 
