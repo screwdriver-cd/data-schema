@@ -48,13 +48,17 @@ module.exports = {
     INTERNAL_TRIGGER: /^~([\w-]+)$/,
     // External trigger like ~sd@123:component
     EXTERNAL_TRIGGER: /^~sd@(\d+):([\w-]+)$/,
-    // Can be ~pr, ~commit, or ~commit:branchName, or ~sd@123:component
+    // Can be ~pr, ~commit, ~release, ~tag or ~commit:branchName, or ~sd@123:component
     // Note: if you modify this regex, you must modify `sdJoi` definition in the `config/job.js`
-    TRIGGER: /^~(sd@\d+:[\w-]+|(pr|commit)(:(.+))?)$/,
+    TRIGGER: /^~(sd@\d+:[\w-]+|(pr|commit|release|tag)(:(.+))?)$/,
     // Can be ~pr or ~pr:branchName
     PR_TRIGGER: /^~pr(:.+)?$/,
     // Can be ~commit or ~commit:branchName
     COMMIT_TRIGGER: /^~commit(:.+)?$/,
+    // Can be ~release or ~release:branchName
+    RELEASE_TRIGGER: /^~release(:.+)?$/,
+    // Can be ~tag or ~tag:branchName
+    TAG_TRIGGER: /^~tag(:.+)?$/,
     // IEEE Std 1003.1-2001
     // Environment names contain uppercase letters, digits, and underscore
     // They cannot start with digits

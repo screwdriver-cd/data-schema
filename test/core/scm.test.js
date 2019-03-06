@@ -58,6 +58,14 @@ describe('scm core', () => {
             assert.isNull(validate('scm.hook.ping.yaml', core.scm.hook).error);
         });
 
+        it('validates the release hook', () => {
+            assert.isNull(validate('scm.hook.release.yaml', core.scm.hook).error);
+        });
+
+        it('validates the tag hook', () => {
+            assert.isNull(validate('scm.hook.tag.yaml', core.scm.hook).error);
+        });
+
         it('fails the commit', () => {
             assert.isNotNull(validate('empty.yaml', core.scm.hook).error);
         });
