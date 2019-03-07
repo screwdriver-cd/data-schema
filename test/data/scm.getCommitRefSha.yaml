@@ -2,3 +2,4 @@ token: 'thisisatokenthingy'
 owner: 'owner'
 repo: 'repo'
 ref: '0.0.1'
+scmContext: github:github.com
