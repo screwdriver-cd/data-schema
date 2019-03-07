@@ -136,8 +136,8 @@ const SCHEMA_HOOK = Joi.object().keys({
         .label('PR reference of the repository'),
 
     ref: Joi.string()
-        .allow('')
-        .optional()
+        .when('action',
+            { is: ['release', 'tag'], then: Joi.required(), otherwise: Joi.allow('').optional() })
         .label('reference of the repository'),
 
     prSource: Joi.string()
