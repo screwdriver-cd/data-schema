@@ -1,0 +1,4 @@
+token: 'thisisatokenthingy'
+owner: 'owner'
+repo: 'repo'
+ref: '0.0.1'

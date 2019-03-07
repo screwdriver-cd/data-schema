@@ -44,6 +44,16 @@ describe('scm test', () => {
         });
     });
 
+    describe('getCommitRefSha', () => {
+        it('validates', () => {
+            assert.isNull(validate('scm.getCommitRefSha.yaml', scm.getCommitRefSha).error);
+        });
+
+        it('fails', () => {
+            assert.isNotNull(validate('empty.yaml', scm.getCommitRefSha).error);
+        });
+    });
+
     describe('addPrComment', () => {
         it('validates', () => {
             assert.isNull(validate('scm.addPrComment.yaml', scm.addPrComment).error);
