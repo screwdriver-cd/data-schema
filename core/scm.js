@@ -135,6 +135,11 @@ const SCHEMA_HOOK = Joi.object().keys({
         .optional()
         .label('PR reference of the repository'),
 
+    ref: Joi.string()
+        .allow('')
+        .optional()
+        .label('reference of the repository'),
+
     prSource: Joi.string()
         .allow('')
         .when('type', {

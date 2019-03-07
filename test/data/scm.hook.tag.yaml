@@ -6,3 +6,4 @@ hookId: 81e6bd80-9a2c-11e6-939d-beaa5d9adaf3
 scmContext: github:github.com
 type: repo
 username: stjohnjohnson
+ref: 0.0.1

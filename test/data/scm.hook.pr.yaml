@@ -6,6 +6,7 @@ hookId: 81e6bd80-9a2c-11e6-939d-beaa5d9adaf3
 lastCommitMessage: meow
 prNum: 123
 prRef: reference
+ref: reference
 prTitle: 'Update the README with new information'
 prSource: fork
 scmContext: github:github.com
