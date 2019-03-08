@@ -99,7 +99,7 @@ const SCHEMA_HOOK = Joi.object().keys({
     action: Joi.string()
         .when('type', { is: 'pr',
             then: Joi.valid(['opened', 'reopened', 'closed', 'synchronized']) })
-        .when('type', { is: 'repo', then: Joi.valid(['push', 'release', 'create']) })
+        .when('type', { is: 'repo', then: Joi.valid(['push', 'release', 'tag']) })
         .when('type', { is: 'ping', then: Joi.allow('').optional(), otherwise: Joi.required() })
         .label('Action of the event'),
 
@@ -135,6 +135,11 @@ const SCHEMA_HOOK = Joi.object().keys({
         .optional()
         .label('PR reference of the repository'),
 
+    ref: Joi.string()
+        .when('action',
+            { is: ['release', 'tag'], then: Joi.required(), otherwise: Joi.allow('').optional() })
+        .label('reference of the repository'),
+
     prSource: Joi.string()
         .allow('')
         .when('type', {
@@ -156,6 +161,7 @@ const SCHEMA_HOOK = Joi.object().keys({
         .example('github:github.com'),
 
     sha: Joi.string().hex()
+        .when('action', { is: ['release', 'tag'], then: Joi.allow('').optional() })
         .when('type', { is: 'ping', then: Joi.allow('').optional(), otherwise: Joi.required() })
         .label('Commit SHA')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
