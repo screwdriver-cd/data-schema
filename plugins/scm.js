@@ -115,7 +115,7 @@ const GET_CHANGED_FILES_INPUT = Joi.object().keys({
     payload: Joi.object().allow(null).required(),
     token,
     scmContext,
-    scmUri,
+    scmUri: scmUri.optional(),
     prNum
 }).required();
 
