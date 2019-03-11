@@ -112,9 +112,11 @@ const GET_FILE = Joi.object().keys({
 
 const GET_CHANGED_FILES_INPUT = Joi.object().keys({
     type,
-    payload: Joi.object().required(),
+    payload: Joi.object().allow(null).required(),
     token,
-    scmContext
+    scmContext,
+    scmUri,
+    prNum
 }).required();
 
 const GET_CHANGED_FILES_OUTPUT = Joi.alternatives().try(
