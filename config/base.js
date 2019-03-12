@@ -43,7 +43,6 @@ const SCHEMA_CONFIG = Joi.object()
     .keys({
         version: Joi.number().integer().min(1).max(50),
         annotations: Annotations.annotations,
-        prChain: SCHEMA_PR_CHAIN,
         jobs: SCHEMA_JOBS,
         shared: SCHEMA_SHARED,
         cache: SCHEMA_CACHE,
@@ -59,7 +58,7 @@ const SCHEMA_CONFIG = Joi.object()
 module.exports = {
     jobs: SCHEMA_JOBS,
     shared: SCHEMA_SHARED,
-    prChain: SCHEMA_PR_CHAIN,
+    prChain: SCHEMA_PR_CHAIN, // This is still used by pipeline schema.
     cache: SCHEMA_CACHE,
     cachePerm: SCHEMA_CACHE_PERMUTATION,
     childPipelines: SCHEMA_CHILD_PIPELINES,
