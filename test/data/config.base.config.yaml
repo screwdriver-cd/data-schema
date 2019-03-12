@@ -10,8 +10,6 @@ shared:
     environment:
         NODE_TAG: latest
 
-prChain: true
-
 jobs:
     first:
         environment:
