@@ -43,6 +43,10 @@ describe('model event', () => {
             assert.isNull(validate('event.get.full.yaml', models.event.get).error);
         });
 
+        it('validates the get with pr fields', () => {
+            assert.isNull(validate('event.get.pr.yaml', models.event.get).error);
+        });
+
         it('fails the get', () => {
             assert.isNotNull(validate('empty.yaml', models.event.get).error);
         });
