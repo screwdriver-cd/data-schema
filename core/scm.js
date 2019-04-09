@@ -83,6 +83,10 @@ const SCHEMA_PR = Joi.object().keys({
     title: Joi.string()
         .max(512)
         .label('Title of the pull request'),
+    ref: Joi.string()
+        .allow('')
+        .optional()
+        .label('Ref of the pull request'),
     createTime: Joi.date().iso()
         .label('Creation Time of the pull request')
         .example('2018-10-10T21:35:31Z'),
