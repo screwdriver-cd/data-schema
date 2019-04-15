@@ -6,7 +6,8 @@ const Regex = require('../config/regex');
 const SCHEMA_USER = Joi.object().keys({
     url: Joi.string()
         .uri()
-        .required()
+        .allow('')
+        .optional()
         .label('Link to Profile')
         .example('https://github.com/stjohnjohnson'),
 
@@ -22,7 +23,8 @@ const SCHEMA_USER = Joi.object().keys({
 
     avatar: Joi.string()
         .uri()
-        .required()
+        .allow('')
+        .optional()
         .label('Link to Avatar')
         .example('https://avatars.githubusercontent.com/u/622065?v=3')
 }).label('SCM User');
