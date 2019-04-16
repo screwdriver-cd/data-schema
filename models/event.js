@@ -118,7 +118,7 @@ module.exports = {
      */
     create: Joi.object(mutate(CREATE_MODEL, [], [
         'pipelineId', 'startFrom', 'buildId', 'causeMessage', 'parentBuildId', 'parentEventId',
-        'configPipelineSha', 'meta', 'prNum'
+        'configPipelineSha', 'meta', 'prNum', 'creator'
     ])).label('Create Event'),
 
     /**
