@@ -47,7 +47,7 @@ const COMMAND_DESCRIPTION = Joi
 
 const COMMAND_USAGE = Joi
     .string()
-    .max(1024)
+    .max(4096)
     .allow('')
     .description('Usage and arguments of the command')
     .example('sd_cmd exec foo/bar@1 -h <host> -d <domain>');
