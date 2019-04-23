@@ -65,9 +65,12 @@ const MODEL = {
         .description('Configuration of child pipelines'),
 
     // This property is set from the `chainPR` annotation.
-    // We preserve its property name for the current Models and UI implementations.
+    // We don't change this property name because `alter table` will be needed
+    // in existing DB table and moreover UI still uses this property name.
+    // We will add `chainPR` property setter/getter method to pipeline model instead
+    // in order to convert the `prChain` to `chainPR`.
     prChain: Base.prChain
-        .description('Configuration of prChain')
+        .description('Configuration of chainPR')
 };
 
 module.exports = {
