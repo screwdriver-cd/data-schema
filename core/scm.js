@@ -70,6 +70,10 @@ const SCHEMA_COMMIT = Joi.object().keys({
         .required()
         .label('Author of the commit'),
 
+    committer: SCHEMA_USER
+        .optional()
+        .label('Committer of the commit'),
+
     url: Joi.string()
         .uri()
         .required()
