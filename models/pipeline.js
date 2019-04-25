@@ -8,13 +8,16 @@ const Scm = require('../core/scm');
 const WorkflowGraph = require('../config/workflowGraph');
 const mutate = require('../lib/mutate');
 
-const CHECKOUT_URL = {
+const CREATE_MODEL = {
     checkoutUrl: Joi
         .string().regex(Regex.CHECKOUT_URL)
         .description('Checkout url for the application')
         .example('git@github.com:screwdriver-cd/data-schema.git#master')
         .example('https://github.com/screwdriver-cd/data-schema.git#master')
-        .required()
+        .required(),
+    rootDir: Joi.string().max(100).allow('').optional()
+        .description('Root directory (relative to checkoutUrl)')
+        .example('src/app/component')
 };
 
 const MODEL = {
@@ -101,7 +104,9 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(CHECKOUT_URL).label('Create Pipeline'),
+    create: Joi.object(mutate(CREATE_MODEL, [], [
+        'checkoutUrl', 'rootDir'
+    ])).label('Create Pipeline'),
 
     /**
      * Properties for Pipeline that will be passed during an UPDATE request
@@ -109,7 +114,9 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(CHECKOUT_URL).label('Update Pipeline'),
+    update: Joi.object(mutate(CREATE_MODEL, [], [
+        'checkoutUrl', 'rootDir'
+    ])).label('Update Pipeline'),
 
     /**
      * List of fields that determine a unique row
