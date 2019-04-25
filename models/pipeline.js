@@ -31,7 +31,8 @@ const MODEL = {
     scmUri: Joi
         .string().regex(Regex.SCM_URI).max(128)
         .description('Unique identifier for the application')
-        .example('github.com:123456:master'),
+        .example('github.com:123456:master')
+        .example('github.com:123456:master:src/app/component'),
 
     scmContext: Joi
         .string().max(128)
