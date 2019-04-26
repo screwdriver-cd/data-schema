@@ -11,7 +11,9 @@ const hook = core.scm.hook.required();
 const jobName = Joi.reach(models.job.base, 'name').optional();
 const pipelineId = Joi.reach(models.pipeline.base, 'id').optional();
 const prNum = Joi.reach(core.scm.hook, 'prNum').allow(null).optional();
+const rootDir = Scm.rootDir.optional();
 const scmContext = Joi.reach(models.pipeline.base, 'scmContext').optional();
+const scmRepo = Scm.repo.optional();
 const scmUri = Joi.reach(models.pipeline.base, 'scmUri').required();
 const sha = Joi.reach(models.build.base, 'sha').required();
 const token = Joi.reach(models.user.base, 'token').required();
@@ -54,7 +56,7 @@ const GET_PERMISSIONS = Joi.object().keys({
     scmUri,
     token,
     scmContext,
-    scmRepo: Scm.repo.optional()
+    scmRepo
 }).required();
 
 const GET_ORG_PERMISSIONS = Joi.object().keys({
@@ -69,7 +71,7 @@ const GET_COMMIT_SHA = Joi.object().keys({
     token,
     prNum,
     scmContext,
-    scmRepo: Scm.repo.optional()
+    scmRepo
 }).required();
 
 const GET_COMMIT_REF_SHA = Joi.object().keys({
@@ -107,7 +109,7 @@ const GET_FILE = Joi.object().keys({
     path: Joi.string().required(),
     ref: Joi.string().optional(),
     scmContext,
-    scmRepo: Scm.repo.optional()
+    scmRepo
 }).required();
 
 const GET_CHANGED_FILES_INPUT = Joi.object().keys({
@@ -133,7 +135,7 @@ const DECORATE_URL = Joi.object().keys({
     scmUri,
     token,
     scmContext,
-    scmRepo: Scm.repo.optional()
+    scmRepo
 }).required();
 
 const DECORATE_COMMIT = Joi.object().keys({
@@ -151,6 +153,7 @@ const DECORATE_AUTHOR = Joi.object().keys({
 
 const PARSE_URL = Joi.object().keys({
     checkoutUrl,
+    rootDir,
     token,
     scmContext
 }).required();

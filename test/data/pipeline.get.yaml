@@ -10,6 +10,7 @@ scmRepo:
     name: screwdriver-cd/screwdriver
     branch: master
     url: https://github.com/screwdriver-cd/screwdriver/tree/master
+    rootDir: src/app/component
 annotations:
     screwdriver.cd/executor.resource:
         - XCODE8

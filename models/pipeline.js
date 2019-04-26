@@ -15,9 +15,8 @@ const CREATE_MODEL = {
         .example('git@github.com:screwdriver-cd/data-schema.git#master')
         .example('https://github.com/screwdriver-cd/data-schema.git#master')
         .required(),
-    rootDir: Joi.string().max(100).allow('').optional()
-        .description('Root directory (relative to checkoutUrl)')
-        .example('src/app/component')
+
+    rootDir: Scm.rootDir
 };
 
 const MODEL = {
