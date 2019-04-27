@@ -104,8 +104,8 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(mutate(CREATE_MODEL, [], [
-        'checkoutUrl', 'rootDir'
+    create: Joi.object(mutate(CREATE_MODEL, ['checkoutUrl'], [
+        'rootDir'
     ])).label('Create Pipeline'),
 
     /**

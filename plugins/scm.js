@@ -49,7 +49,8 @@ const GET_CHECKOUT_COMMAND = Joi.object().keys({
     commitBranch: Joi.string().optional(),
     manifest: Joi.string().optional(),
     parentConfig: PARENT_CONFIG.optional(),
-    scmContext
+    scmContext,
+    rootDir
 }).required();
 
 const GET_PERMISSIONS = Joi.object().keys({
