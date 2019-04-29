@@ -67,7 +67,8 @@ module.exports = {
     // eslint-disable-next-line max-len
     CHECKOUT_URL: /^(?:(?:https:\/\/(?:[^@/:\s]+@)?)|git@)+([^/:\s]+)(?:\/|:)([^/:\s]+)\/([^\s]+?)(?:\.git)?(#[^\s]+)?$/,
     // scmUri. For example: github.com:abc-123:master or bitbucket.org:{123}:master
-    SCM_URI: /^([^:]+):([^:]+):([^:]+)$/,
+    // Optionally, can have rootDir. For example: github.com:abc-123:master:src/app/component
+    SCM_URI: /^([^:]+):([^:]+):([^:]+)(?::([^:]+))?$/,
     // Image aliases can only contain A-Z,a-z,0-9,-,_
     IMAGE_ALIAS: /^[\w-]+$/
 };

@@ -1,3 +1,4 @@
 checkoutUrl: git@github.com:screwdriver-cd/data-model.git#master
 token: 'thisisatokenthingy'
 scmContext: github:github.com
+rootDir: src/app/component
