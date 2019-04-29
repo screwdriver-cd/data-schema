@@ -34,6 +34,10 @@ const REPO_NAME = Joi.string()
     .label('Organization and repository name')
     .example('screwdriver-cd/screwdriver');
 
+const ROOT_DIR = Joi.string().max(100).allow('').optional()
+    .description('Root directory (relative to checkoutUrl)')
+    .example('src/app/component');
+
 const SCHEMA_REPO = Joi.object().keys({
     name: REPO_NAME,
 
@@ -46,7 +50,9 @@ const SCHEMA_REPO = Joi.object().keys({
         .uri()
         .required()
         .label('Link to Repository')
-        .example('https://github.com/screwdriver-cd/screwdriver/tree/master')
+        .example('https://github.com/screwdriver-cd/screwdriver/tree/master'),
+
+    rootDir: ROOT_DIR
 }).label('SCM Repository');
 
 const SCHEMA_COMMAND = Joi.object().keys({
@@ -189,6 +195,7 @@ module.exports = {
     commit: SCHEMA_COMMIT,
     repo: SCHEMA_REPO,
     repoName: REPO_NAME,
+    rootDir: ROOT_DIR,
     user: SCHEMA_USER,
     hook: SCHEMA_HOOK,
     pr: SCHEMA_PR
