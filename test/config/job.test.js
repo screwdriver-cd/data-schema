@@ -81,6 +81,10 @@ describe('config job', () => {
         it('validates environment', () => {
             assert.isNull(validate('config.job.environment.yaml', config.job.environment).error);
         });
+        it('validates environment as an array', () => {
+            assert.isNull(validate('config.job.environment.array.yaml',
+                config.job.environment).error);
+        });
     });
 
     describe('image', () => {

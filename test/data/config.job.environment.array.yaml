@@ -1,0 +1,5 @@
+- NODE_VERSION: 15
+- PLATFORM_COLOR: blue
+- COMPLEX_VALUE1:
+    foo: bar
+- COMPLEX_VALUE2: [1,2,3]
