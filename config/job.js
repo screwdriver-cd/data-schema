@@ -70,7 +70,7 @@ const SCHEMA_SECRET = Joi.string().regex(Regex.ENV_NAME).max(64);
 const SCHEMA_SECRETS = Joi.array()
     .items(SCHEMA_SECRET)
     .min(0);
-const SCHEMA_ENVIRONMENT_OBJECT = Joi.object()
+const SCHEMA_ENVIRONMENT = Joi.object()
     // IEEE Std 1003.1-2001
     // Environment names contain uppercase letters, digits, and underscore
     // They cannot start with digits
@@ -86,9 +86,6 @@ const SCHEMA_ENVIRONMENT_OBJECT = Joi.object()
             }
         }
     });
-const SCHEMA_ENVIRONMENT = Joi.alternatives().try(
-    Joi.array().items(SCHEMA_ENVIRONMENT_OBJECT).min(1),
-    SCHEMA_ENVIRONMENT_OBJECT);
 const SCHEMA_JOBNAME = Joi.string().max(100).regex(Regex.JOB_NAME);
 const SCHEMA_STEP_STRING = Joi.string();
 const SCHEMA_STEP_OBJECT = Joi.object()
