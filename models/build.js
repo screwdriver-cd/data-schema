@@ -129,7 +129,16 @@ const parentBuildIdSchema = Joi
     .description('Identifier(s) of this parent build')
     .example([123, 234]);
 
-const GET_MODEL = Object.assign({}, MODEL, { parentBuildId: parentBuildIdSchema });
+const environmentSchema = Joi
+    .alternatives().try(
+        Joi.array().items(Job.environment).min(1),
+        Job.environment
+    );
+
+const GET_MODEL = Object.assign({}, MODEL, {
+    parentBuildId: parentBuildIdSchema,
+    environment: environmentSchema
+});
 
 module.exports = {
     /**
