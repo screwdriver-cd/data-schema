@@ -131,7 +131,7 @@ const parentBuildIdSchema = Joi
 
 const environmentSchema = Joi
     .alternatives().try(
-        Joi.array().items(Job.environment).min(1),
+        Joi.array().items(Job.environment),
         Job.environment
     );
 
