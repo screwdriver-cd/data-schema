@@ -187,7 +187,24 @@ const SCHEMA_HOOK = Joi.object().keys({
         .required()
         .label('Type of the event'),
 
-    username: Joi.reach(SCHEMA_USER, 'username')
+    username: Joi.reach(SCHEMA_USER, 'username'),
+
+    releaseId: Joi.number()
+        .integer()
+        .positive()
+        .optional()
+        .label('Release id'),
+
+    releaseName: Joi.string()
+        .allow('')
+        .optional()
+        .label('Name of the event'),
+
+    releaseAuthor: Joi.string()
+        .allow('')
+        .optional()
+        .label('Author of the event')
+
 }).label('SCM Hook');
 
 module.exports = {
