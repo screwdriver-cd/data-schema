@@ -189,9 +189,8 @@ const SCHEMA_HOOK = Joi.object().keys({
 
     username: Joi.reach(SCHEMA_USER, 'username'),
 
-    releaseId: Joi.number()
-        .integer()
-        .positive()
+    releaseId: Joi.string()
+        .allow('')
         .optional()
         .label('Release id'),
 
