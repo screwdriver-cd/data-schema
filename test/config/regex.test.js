@@ -48,6 +48,34 @@ describe('config regex', () => {
         });
     });
 
+    describe('core trigger', () => {
+        it('checks good trigger', () => {
+            assert.isTrue(config.regex.CORE_TRIGGER.test('~commit'));
+            assert.isTrue(config.regex.CORE_TRIGGER.test('~commit:master'));
+            assert.isTrue(config.regex.CORE_TRIGGER.test('~pr'));
+            assert.isTrue(config.regex.CORE_TRIGGER.test('~pr:master'));
+        });
+
+        it('fails on bad trigger', () => {
+            assert.isFalse(config.regex.CORE_TRIGGER.test('~tag'));
+            assert.isFalse(config.regex.CORE_TRIGGER.test('~release'));
+        });
+    });
+
+    describe('extra trigger', () => {
+        it('checks good trigger', () => {
+            assert.isTrue(config.regex.EXTRA_TRIGGER.test('~tag'));
+            assert.isTrue(config.regex.EXTRA_TRIGGER.test('~tag:master'));
+            assert.isTrue(config.regex.EXTRA_TRIGGER.test('~release'));
+            assert.isTrue(config.regex.EXTRA_TRIGGER.test('~release:master'));
+        });
+
+        it('fails on bad trigger', () => {
+            assert.isFalse(config.regex.EXTRA_TRIGGER.test('~commit'));
+            assert.isFalse(config.regex.EXTRA_TRIGGER.test('~pr'));
+        });
+    });
+
     describe('commit trigger', () => {
         it('checks good trigger', () => {
             assert.isTrue(config.regex.TRIGGER.test('~commit'));
