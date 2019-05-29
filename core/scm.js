@@ -108,7 +108,10 @@ const SCHEMA_PR = Joi.object().keys({
     userProfile: Joi.string()
         .uri()
         .label('Link to Profile')
-        .example('https://github.com/anonymous')
+        .example('https://github.com/anonymous'),
+    baseBranch: Joi.string()
+        .label('Base branch of the pull request')
+        .example('master')
 }).label('SCM Pull Request');
 
 const SCHEMA_HOOK = Joi.object().keys({
