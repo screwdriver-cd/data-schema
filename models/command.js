@@ -26,7 +26,9 @@ const MODEL = {
         .max(32)
         .description('When this command was created')
         .example('2038-01-19T03:14:08.131Z'),
-    usage: Command.usage
+    usage: Command.usage,
+    trusted: Joi.boolean()
+        .description('Mark whether command is trusted')
 };
 
 module.exports = {
@@ -58,7 +60,8 @@ module.exports = {
         'docker',
         'binary',
         'createTime',
-        'usage'
+        'usage',
+        'trusted'
     ])).label('Get Command'),
 
     /**
