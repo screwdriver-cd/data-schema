@@ -48,6 +48,34 @@ describe('config regex', () => {
         });
     });
 
+    describe('core trigger', () => {
+        it('checks good trigger', () => {
+            assert.isTrue(config.regex.CORE_TRIGGER.test('~commit'));
+            assert.isTrue(config.regex.CORE_TRIGGER.test('~commit:master'));
+            assert.isTrue(config.regex.CORE_TRIGGER.test('~pr'));
+            assert.isTrue(config.regex.CORE_TRIGGER.test('~pr:master'));
+        });
+
+        it('fails on bad trigger', () => {
+            assert.isFalse(config.regex.CORE_TRIGGER.test('~tag'));
+            assert.isFalse(config.regex.CORE_TRIGGER.test('~release'));
+        });
+    });
+
+    describe('extra trigger', () => {
+        it('checks good trigger', () => {
+            assert.isTrue(config.regex.EXTRA_TRIGGER.test('~tag'));
+            assert.isTrue(config.regex.EXTRA_TRIGGER.test('~tag:master'));
+            assert.isTrue(config.regex.EXTRA_TRIGGER.test('~release'));
+            assert.isTrue(config.regex.EXTRA_TRIGGER.test('~release:master'));
+        });
+
+        it('fails on bad trigger', () => {
+            assert.isFalse(config.regex.EXTRA_TRIGGER.test('~commit'));
+            assert.isFalse(config.regex.EXTRA_TRIGGER.test('~pr'));
+        });
+    });
+
     describe('commit trigger', () => {
         it('checks good trigger', () => {
             assert.isTrue(config.regex.TRIGGER.test('~commit'));
@@ -352,12 +380,13 @@ describe('config regex', () => {
     describe('scmUri', () => {
         it('checks good scmUri', () => {
             assert.isTrue(config.regex.SCM_URI.test('github.com:abc-123:master'));
+            assert.isTrue(config.regex.SCM_URI.test('github.com:abc-123:master:src/app/component'));
             assert.isTrue(config.regex.SCM_URI.test('bitbucket.org:d2lam/{123}:master'));
         });
 
         it('fails on bad scmUri', () => {
             assert.isFalse(config.regex.SCM_URI.test('github.com:master'));
-            assert.isFalse(config.regex.SCM_URI.test('github.com:master:a:b'));
+            assert.isFalse(config.regex.SCM_URI.test('github.com:master:a:b:c'));
             assert.isFalse(config.regex.SCM_URI.test('bitbucket.org:{123}'));
         });
     });

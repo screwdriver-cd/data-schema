@@ -35,6 +35,16 @@ describe('scm core', () => {
         });
     });
 
+    describe('pr', () => {
+        it('validates the pr', () => {
+            assert.isNull(validate('scm.pr.yaml', core.scm.pr).error);
+        });
+
+        it('fails the pr', () => {
+            assert.isNotNull(validate('empty.yaml', core.scm.pr).error);
+        });
+    });
+
     describe('user', () => {
         it('validates the user', () => {
             assert.isNull(validate('scm.user.yaml', core.scm.user).error);

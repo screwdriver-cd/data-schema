@@ -1,7 +1,7 @@
 # Pipeline Get Example
 id: 12742
 name: screwdriver-cd/screwdriver
-scmUri: github.com:12345678:master
+scmUri: github.com:12345678:master:src/app/component
 scmContext: github:github.com
 createTime: "2017-04-11"
 admins:
@@ -10,6 +10,7 @@ scmRepo:
     name: screwdriver-cd/screwdriver
     branch: master
     url: https://github.com/screwdriver-cd/screwdriver/tree/master
+    rootDir: src/app/component
 annotations:
     screwdriver.cd/executor.resource:
         - XCODE8

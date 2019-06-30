@@ -68,7 +68,10 @@ const MODEL = {
             edges: [{ src: '~commit', dest: 'main' }, { src: 'main', dest: 'publish' }]
         }),
     pr: Scm.pr
-        .description('Pull request object that holds information about the pull request')
+        .description('Pull request object that holds information about the pull request'),
+
+    prNum: prNum
+        .description('Pull request number if it is a PR event')
 };
 
 const CREATE_MODEL = Object.assign({}, MODEL, {
@@ -103,7 +106,7 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'type'
     ], [
-        'causeMessage', 'meta', 'parentEventId', 'startFrom', 'workflowGraph', 'pr',
+        'causeMessage', 'meta', 'parentEventId', 'startFrom', 'workflowGraph', 'pr', 'prNum',
         'configPipelineSha'
     ])).label('Get Event'),
 
@@ -115,7 +118,7 @@ module.exports = {
      */
     create: Joi.object(mutate(CREATE_MODEL, [], [
         'pipelineId', 'startFrom', 'buildId', 'causeMessage', 'parentBuildId', 'parentEventId',
-        'configPipelineSha', 'meta', 'prNum'
+        'configPipelineSha', 'meta', 'prNum', 'creator'
     ])).label('Create Event'),
 
     /**

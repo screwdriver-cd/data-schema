@@ -5,3 +5,4 @@ scmRepo:
     branch: master
     url: https://github.com/org/name/tree/master
     name: org/name
+    rootDir: src/app/component
