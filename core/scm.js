@@ -6,7 +6,8 @@ const Regex = require('../config/regex');
 const SCHEMA_USER = Joi.object().keys({
     url: Joi.string()
         .uri()
-        .required()
+        .allow('')
+        .optional()
         .label('Link to Profile')
         .example('https://github.com/stjohnjohnson'),
 
@@ -22,7 +23,8 @@ const SCHEMA_USER = Joi.object().keys({
 
     avatar: Joi.string()
         .uri()
-        .required()
+        .allow('')
+        .optional()
         .label('Link to Avatar')
         .example('https://avatars.githubusercontent.com/u/622065?v=3')
 }).label('SCM User');
@@ -31,6 +33,10 @@ const REPO_NAME = Joi.string()
     .required()
     .label('Organization and repository name')
     .example('screwdriver-cd/screwdriver');
+
+const ROOT_DIR = Joi.string().max(100).allow('').optional()
+    .description('Root directory (relative to checkoutUrl)')
+    .example('src/app/component');
 
 const SCHEMA_REPO = Joi.object().keys({
     name: REPO_NAME,
@@ -44,7 +50,9 @@ const SCHEMA_REPO = Joi.object().keys({
         .uri()
         .required()
         .label('Link to Repository')
-        .example('https://github.com/screwdriver-cd/screwdriver/tree/master')
+        .example('https://github.com/screwdriver-cd/screwdriver/tree/master'),
+
+    rootDir: ROOT_DIR
 }).label('SCM Repository');
 
 const SCHEMA_COMMAND = Joi.object().keys({
@@ -68,6 +76,10 @@ const SCHEMA_COMMIT = Joi.object().keys({
         .required()
         .label('Author of the commit'),
 
+    committer: SCHEMA_USER
+        .optional()
+        .label('Committer of the commit'),
+
     url: Joi.string()
         .uri()
         .required()
@@ -83,6 +95,10 @@ const SCHEMA_PR = Joi.object().keys({
     title: Joi.string()
         .max(512)
         .label('Title of the pull request'),
+    ref: Joi.string()
+        .allow('')
+        .optional()
+        .label('Ref of the pull request'),
     createTime: Joi.date().iso()
         .label('Creation Time of the pull request')
         .example('2018-10-10T21:35:31Z'),
@@ -92,7 +108,10 @@ const SCHEMA_PR = Joi.object().keys({
     userProfile: Joi.string()
         .uri()
         .label('Link to Profile')
-        .example('https://github.com/anonymous')
+        .example('https://github.com/anonymous'),
+    baseBranch: Joi.string()
+        .label('Base branch of the pull request')
+        .example('master')
 }).label('SCM Pull Request');
 
 const SCHEMA_HOOK = Joi.object().keys({
@@ -171,7 +190,23 @@ const SCHEMA_HOOK = Joi.object().keys({
         .required()
         .label('Type of the event'),
 
-    username: Joi.reach(SCHEMA_USER, 'username')
+    username: Joi.reach(SCHEMA_USER, 'username'),
+
+    releaseId: Joi.string()
+        .allow('')
+        .optional()
+        .label('Release id'),
+
+    releaseName: Joi.string()
+        .allow('')
+        .optional()
+        .label('Name of the event'),
+
+    releaseAuthor: Joi.string()
+        .allow('')
+        .optional()
+        .label('Author of the event')
+
 }).label('SCM Hook');
 
 module.exports = {
@@ -179,6 +214,7 @@ module.exports = {
     commit: SCHEMA_COMMIT,
     repo: SCHEMA_REPO,
     repoName: REPO_NAME,
+    rootDir: ROOT_DIR,
     user: SCHEMA_USER,
     hook: SCHEMA_HOOK,
     pr: SCHEMA_PR

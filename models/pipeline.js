@@ -8,13 +8,15 @@ const Scm = require('../core/scm');
 const WorkflowGraph = require('../config/workflowGraph');
 const mutate = require('../lib/mutate');
 
-const CHECKOUT_URL = {
+const CREATE_MODEL = {
     checkoutUrl: Joi
         .string().regex(Regex.CHECKOUT_URL)
         .description('Checkout url for the application')
         .example('git@github.com:screwdriver-cd/data-schema.git#master')
         .example('https://github.com/screwdriver-cd/data-schema.git#master')
-        .required()
+        .required(),
+
+    rootDir: Scm.rootDir
 };
 
 const MODEL = {
@@ -28,7 +30,8 @@ const MODEL = {
     scmUri: Joi
         .string().regex(Regex.SCM_URI).max(128)
         .description('Unique identifier for the application')
-        .example('github.com:123456:master'),
+        .example('github.com:123456:master')
+        .example('github.com:123456:master:src/app/component'),
 
     scmContext: Joi
         .string().max(128)
@@ -65,9 +68,12 @@ const MODEL = {
         .description('Configuration of child pipelines'),
 
     // This property is set from the `chainPR` annotation.
-    // We preserve its property name for the current Models and UI implementations.
+    // We don't change this property name because `alter table` will be needed
+    // in existing DB table and moreover UI still uses this property name.
+    // We will add `chainPR` property setter/getter method to pipeline model instead
+    // in order to convert the `prChain` to `chainPR`.
     prChain: Base.prChain
-        .description('Configuration of prChain')
+        .description('Configuration of chainPR')
 };
 
 module.exports = {
@@ -98,7 +104,9 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(CHECKOUT_URL).label('Create Pipeline'),
+    create: Joi.object(mutate(CREATE_MODEL, ['checkoutUrl'], [
+        'rootDir'
+    ])).label('Create Pipeline'),
 
     /**
      * Properties for Pipeline that will be passed during an UPDATE request
@@ -106,7 +114,9 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(CHECKOUT_URL).label('Update Pipeline'),
+    update: Joi.object(mutate(CREATE_MODEL, [], [
+        'checkoutUrl', 'rootDir'
+    ])).label('Update Pipeline'),
 
     /**
      * List of fields that determine a unique row

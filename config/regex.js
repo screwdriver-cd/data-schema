@@ -51,6 +51,10 @@ module.exports = {
     // Can be ~pr, ~commit, ~release, ~tag or ~commit:branchName, or ~sd@123:component
     // Note: if you modify this regex, you must modify `sdJoi` definition in the `config/job.js`
     TRIGGER: /^~(sd@\d+:[\w-]+|(pr|commit|release|tag)(:(.+))?)$/,
+    // Triggers which always create event
+    CORE_TRIGGER: /^~(pr|commit)(:(.+))?$/,
+    // Triggers which does not create empty events
+    EXTRA_TRIGGER: /^~(release|tag)(:(.+))?$/,
     // Can be ~pr or ~pr:branchName
     PR_TRIGGER: /^~pr(:.+)?$/,
     // Can be ~commit or ~commit:branchName
@@ -67,7 +71,8 @@ module.exports = {
     // eslint-disable-next-line max-len
     CHECKOUT_URL: /^(?:(?:https:\/\/(?:[^@/:\s]+@)?)|git@)+([^/:\s]+)(?:\/|:)([^/:\s]+)\/([^\s]+?)(?:\.git)?(#[^\s]+)?$/,
     // scmUri. For example: github.com:abc-123:master or bitbucket.org:{123}:master
-    SCM_URI: /^([^:]+):([^:]+):([^:]+)$/,
+    // Optionally, can have rootDir. For example: github.com:abc-123:master:src/app/component
+    SCM_URI: /^([^:]+):([^:]+):([^:]+)(?::([^:]+))?$/,
     // Image aliases can only contain A-Z,a-z,0-9,-,_
     IMAGE_ALIAS: /^[\w-]+$/
 };

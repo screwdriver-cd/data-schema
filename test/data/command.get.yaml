@@ -18,3 +18,4 @@ habitat:
 #binary:
 #    file: ./foobar.sh
 pipelineId: 8765
+trusted: true

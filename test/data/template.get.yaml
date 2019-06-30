@@ -20,3 +20,4 @@ config:
     FOO: bar
   secrets:
      - NPM_TOKEN
+trusted: true

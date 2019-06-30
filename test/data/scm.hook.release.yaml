@@ -7,3 +7,6 @@ scmContext: github:github.com
 type: repo
 username: stjohnjohnson
 ref: super-tag
+releaseId: '11248890'
+releaseName: super-release
+releaseAuthor: stjohnjohnson
