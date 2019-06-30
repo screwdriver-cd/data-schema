@@ -64,6 +64,8 @@ const MODEL = {
     childPipelines: Base.childPipelines
         .description('Configuration of child pipelines'),
 
+    // This property is set from the `chainPR` annotation.
+    // We preserve its property name for the current Models and UI implementations.
     prChain: Base.prChain
         .description('Configuration of prChain')
 };

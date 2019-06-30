@@ -72,6 +72,14 @@ const GET_COMMIT_SHA = Joi.object().keys({
     scmRepo: Scm.repo.optional()
 }).required();
 
+const GET_COMMIT_REF_SHA = Joi.object().keys({
+    token,
+    owner: Joi.string().required(),
+    repo: Joi.string().required(),
+    ref: Joi.string().required(),
+    scmContext
+}).required();
+
 const ADD_PR_COMMENT = Joi.object().keys({
     scmUri,
     token,
@@ -104,9 +112,11 @@ const GET_FILE = Joi.object().keys({
 
 const GET_CHANGED_FILES_INPUT = Joi.object().keys({
     type,
-    payload: Joi.object().required(),
+    payload: Joi.object().allow(null).required(),
     token,
-    scmContext
+    scmContext,
+    scmUri: scmUri.optional(),
+    prNum
 }).required();
 
 const GET_CHANGED_FILES_OUTPUT = Joi.alternatives().try(
@@ -183,6 +193,14 @@ module.exports = {
      * @type {Joi}
      */
     getCommitSha: GET_COMMIT_SHA,
+
+    /**
+     * Properties for Scm Base that will be passed for the getCommitSRefha method
+     *
+     * @property getCommitRefSha
+     * @type {Joi}
+     */
+    getCommitRefSha: GET_COMMIT_REF_SHA,
 
     /**
      * Properties for Scm Base that will be passed for the addPrComment method

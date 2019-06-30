@@ -62,6 +62,34 @@ describe('config regex', () => {
         });
     });
 
+    describe('release trigger', () => {
+        it('checks good trigger', () => {
+            assert.isTrue(config.regex.TRIGGER.test('~release'));
+            assert.isTrue(config.regex.TRIGGER.test('~release:master'));
+            assert.isTrue(config.regex.RELEASE_TRIGGER.test('~release'));
+            assert.isTrue(config.regex.RELEASE_TRIGGER.test('~release:master'));
+        });
+
+        it('fails on bad trigger', () => {
+            assert.isFalse(config.regex.TRIGGER.test('~release:'));
+            assert.isFalse(config.regex.COMMIT_TRIGGER.test('~release:'));
+        });
+    });
+
+    describe('tag trigger', () => {
+        it('checks good trigger', () => {
+            assert.isTrue(config.regex.TRIGGER.test('~tag'));
+            assert.isTrue(config.regex.TRIGGER.test('~tag:master'));
+            assert.isTrue(config.regex.TAG_TRIGGER.test('~tag'));
+            assert.isTrue(config.regex.TAG_TRIGGER.test('~tag:master'));
+        });
+
+        it('fails on bad trigger', () => {
+            assert.isFalse(config.regex.TRIGGER.test('~tag:'));
+            assert.isFalse(config.regex.TAG_TRIGGER.test('~tag:'));
+        });
+    });
+
     describe('commands', () => {
         it('checks good command namespaces', () => {
             assert.isTrue(config.regex.COMMAND_NAMESPACE.test('chefdk'));
