@@ -127,7 +127,7 @@ describe('config regex', () => {
             assert.isTrue(config.regex.COMMAND_TAG_NAME.test('stable'));
         });
 
-        it('checks good template tag names', () => {
+        it('checks good command dotted tag names', () => {
             assert.isTrue(config.regex.COMMAND_TAG_NAME.test('v1.2.3'));
         });
     });
