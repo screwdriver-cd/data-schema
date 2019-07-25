@@ -9,7 +9,7 @@ module.exports = {
     COMMAND_NAMESPACE: /^[\w-]+$/,
     // Command names can only be named with A-Z,a-z,0-9,-,_
     COMMAND_NAME: /^[\w-]+$/,
-    // Command tags must start with an alpha character (A-Z,a-z) and can only contain A-Z,a-z,0-9,-,_
+    // Command tags must start with an alpha character (A-Z,a-z) and can only contain A-Z,a-z,0-9,-,_,.
     COMMAND_TAG_NAME: /^[a-zA-Z][\w-.]+$/,
     // Full name of command and version. Can be <COMMAND_NAMESPACE>/<COMMAND_NAME>@<VERSION> or <COMMAND_NAMESPACE>/<COMMAND_NAME>@<COMMAND_TAG_NAME>
     // Example: chefdk/knife@1.2.3 or chefdk/knife@stable
@@ -22,8 +22,8 @@ module.exports = {
     TEMPLATE_NAME_ALLOW_SLASH: /^(?:([\w-]+)\/)?([\w-]+)$/,
     // Templates can only be named with A-Z,a-z,0-9,-,_ if namespace exists
     TEMPLATE_NAME_NO_SLASH: /^[\w-]+$/,
-    // Template tags must start with an alpha character (A-Z,a-z) and can only contain A-Z,a-z,0-9,-,_
-    TEMPLATE_TAG_NAME: /^[a-zA-Z][\w-]+$/,
+    // Template tags must start with an alpha character (A-Z,a-z) and can only contain A-Z,a-z,0-9,-,_,.
+    TEMPLATE_TAG_NAME: /^[a-zA-Z][\w-.]+$/,
     // Version can only have up to 2 decimals, like 1.2.3
     // It can also be just major or major and minor versions, like 1 or 1.2
     VERSION: /^(\d+)(\.\d+)?(\.\d+)?$/,

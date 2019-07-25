@@ -200,6 +200,14 @@ describe('config regex', () => {
         it('fails on bad template names', () => {
             assert.isFalse(config.regex.TEMPLATE_NAME_NO_SLASH.test('run all the things'));
         });
+
+        it('checks good template tag names', () => {
+            assert.isTrue(config.regex.TEMPLATE_TAG_NAME.test('stable'));
+        });
+
+        it('checks good template dotted tag names', () => {
+            assert.isTrue(config.regex.TEMPLATE_TAG_NAME.test('v1.2.3'));
+        });
     });
 
     describe('versions', () => {
