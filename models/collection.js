@@ -41,7 +41,13 @@ const MODEL = {
 
     pipelineIds: Joi
         .array()
-        .items(Joi.number().integer().positive())
+        .items(Joi.number().integer().positive()),
+
+    type: Joi
+        .string()
+        .max(32)
+        .description('Collection type')
+        .example('default')
 };
 const GET_MODEL = Object.assign({}, MODEL, { pipelines: PIPELINES_MODEL });
 
@@ -64,7 +70,8 @@ module.exports = {
         'id',
         'name',
         'pipelineIds',
-        'pipelines'
+        'pipelines',
+        'type'
     ], [
         'description'
     ])).label('Get collection'),
@@ -77,7 +84,8 @@ module.exports = {
         'id',
         'name',
         'pipelineIds',
-        'userId'
+        'userId',
+        'type'
     ], [
         'description'
     ]))).label('List collections for requesting user'),
@@ -89,7 +97,8 @@ module.exports = {
      * @type {Joi}
      */
     create: Joi.object(mutate(MODEL, [
-        'name'
+        'name',
+        'type'
     ], [
         'description',
         'pipelineIds'
