@@ -46,6 +46,7 @@ const MODEL = {
     type: Joi
         .string()
         .max(32)
+        .valid(['default', 'shared', 'normal'])
         .description('Collection type')
         .example('default')
 };
