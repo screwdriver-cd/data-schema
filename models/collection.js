@@ -46,11 +46,19 @@ const MODEL = {
     type: Joi
         .string()
         .max(32)
-        .valid(['default', 'normal'])
+        .valid(['', 'default', 'normal'])
         .description('Collection type')
         .example('default')
 };
-const GET_MODEL = Object.assign({}, MODEL, { pipelines: PIPELINES_MODEL });
+const GET_MODEL = Object.assign({}, MODEL, { 
+    pipelines: PIPELINES_MODEL,
+    type: Joi
+        .string()
+        .max(32)
+        .valid(['default', 'normal', 'shared'])
+        .description('Collection type')
+        .example('default')
+});
 
 module.exports = {
     /**
@@ -71,10 +79,11 @@ module.exports = {
         'id',
         'name',
         'pipelineIds',
-        'pipelines',
-        'type'
+        'pipelines'
     ], [
-        'description'
+        'type',
+        'description',
+        'userId'
     ])).label('Get collection'),
 
     /**
@@ -85,9 +94,9 @@ module.exports = {
         'id',
         'name',
         'pipelineIds',
-        'userId',
-        'type'
+        'userId'
     ], [
+        'type',
         'description'
     ]))).label('List collections for requesting user'),
 
@@ -98,9 +107,9 @@ module.exports = {
      * @type {Joi}
      */
     create: Joi.object(mutate(MODEL, [
-        'name',
-        'type'
+        'name'
     ], [
+        'type',
         'description',
         'pipelineIds'
     ])).label('Create collection'),
@@ -114,7 +123,8 @@ module.exports = {
     update: Joi.object(mutate(MODEL, [], [
         'name',
         'description',
-        'pipelineIds'
+        'pipelineIds',
+        'type'
     ])).label('Update collection'),
 
     /**
