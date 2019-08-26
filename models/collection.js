@@ -50,7 +50,7 @@ const MODEL = {
         .description('Collection type')
         .example('default')
 };
-const GET_MODEL = Object.assign({}, MODEL, { 
+const GET_MODEL = Object.assign({}, MODEL, {
     pipelines: PIPELINES_MODEL,
     type: Joi
         .string()
