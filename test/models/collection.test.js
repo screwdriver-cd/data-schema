@@ -43,6 +43,13 @@ describe('collection template', () => {
             );
         });
 
+        it('validates the create with a type', () => {
+            assert.isNull(validate(
+                'collection.createWithType.yaml',
+                models.collection.create).error
+            );
+        });
+
         it('validates the create with pipeline ids', () => {
             assert.isNull(validate(
                 'collection.createWithPipelineIds.yaml',

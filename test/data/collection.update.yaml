@@ -1,6 +1,7 @@
 # Collection Update Example
 name: 'New Collection'
 description: 'Changed description'
+type: 'normal'
 pipelineIds:
     - 15
     - 25
