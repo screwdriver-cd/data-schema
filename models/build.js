@@ -16,8 +16,6 @@ const MODEL = {
 
     environment: Job.environment,
 
-    parameters: Job.parameters,
-
     eventId: Joi
         .number().integer().positive()
         .description('Identifier of the parent event')
@@ -71,8 +69,7 @@ const MODEL = {
         .isoDate()
         .description('When this build stopped running'),
 
-    parameters: Joi
-        .object()
+    parameters: Job.parameters
         .description('Input parameters that defined this build'),
 
     meta: Joi

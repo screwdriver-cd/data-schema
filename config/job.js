@@ -88,9 +88,9 @@ const SCHEMA_ENVIRONMENT = Joi.object()
     });
 const SCHEMA_PARAMETERS_STRING = Joi.string();
 const SCHEMA_PARAMETERS_OBJECT = Joi.object({
-        value: Joi.string().required(),
-        description: Joi.string(),
-    })
+    value: Joi.string().required(),
+    description: Joi.string()
+})
     .options({
         language: {
             object: {
@@ -99,7 +99,10 @@ const SCHEMA_PARAMETERS_OBJECT = Joi.object({
             }
         }
     });
-const SCHEMA_PARAMETERS = Joi.alternatives().try(SCHEMA_PARAMETERS_STRING, SCHEMA_PARAMETERS_OBJECT);
+
+const SCHEMA_PARAMETERS = Joi.object()
+    .pattern(Joi.any(),
+        Joi.alternatives().try(SCHEMA_PARAMETERS_STRING, SCHEMA_PARAMETERS_OBJECT));
 const SCHEMA_JOBNAME = Joi.string().max(100).regex(Regex.JOB_NAME);
 const SCHEMA_STEP_STRING = Joi.string();
 const SCHEMA_STEP_OBJECT = Joi.object()

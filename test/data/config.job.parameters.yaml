@@ -1,0 +1,5 @@
+# Job Parameters Example
+auth_strategy: simple
+user:
+    value: sd-bot
+    description: User running build

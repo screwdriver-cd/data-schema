@@ -117,4 +117,10 @@ describe('config job', () => {
                 .error);
         });
     });
+
+    describe('parameters', () => {
+        it.only('validates parameters', () => {
+            assert.isNull(validate('config.job.parameters.yaml', config.job.parameters).error);
+        });
+    });
 });
