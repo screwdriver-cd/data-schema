@@ -42,4 +42,52 @@ describe('model job', () => {
             assert.isNotNull(validate('empty.yaml', models.job.update).error);
         });
     });
+
+    describe('keys', () => {
+        it('has the correct keys', () => {
+            const expectedKeys = ['pipelineId', 'name'];
+
+            expectedKeys.forEach((keyName) => {
+                assert.include(models.job.keys, keyName, `Key name ${keyName} not included`);
+            });
+        });
+    });
+
+    describe('allKeys', () => {
+        it('lists all of the fields in the model', () => {
+            const expectedKeys = [
+                'id',
+                'name',
+                'prParentJobId',
+                'description',
+                'pipelineId',
+                'state',
+                'stateChanger',
+                'stateChangeTime',
+                'stateChangeMessage',
+                'archived'
+            ];
+
+            expectedKeys.forEach((keyName) => {
+                assert.include(models.job.allKeys, keyName, `Key name ${keyName} not included`);
+            });
+        });
+    });
+
+    describe('tableName', () => {
+        it('provides the correct table name', () => {
+            assert.strictEqual(models.job.tableName, 'jobs');
+        });
+    });
+
+    describe('indexes', () => {
+        it('defines the correct indexes', () => {
+            const expected = [{ fields: ['pipelineId', 'state'] }, { fields: ['state'] }];
+            const indexes = models.job.indexes;
+
+            expected.forEach((indexName) => {
+                assert.include(indexes, indexName, `Index name ${indexName} not included`);
+            });
+        });
+    });
 });
