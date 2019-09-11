@@ -94,8 +94,7 @@ const SCHEMA_PARAMETERS_OBJECT = Joi.object({
     .options({
         language: {
             object: {
-                allowUnknown: 'only supports uppercase letters, digits, and underscore (cannot '
-                + 'start with digit)'
+                allowUnknown: 'only supports string or key: { value, description } pair as values'
             }
         }
     });
