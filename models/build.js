@@ -16,6 +16,8 @@ const MODEL = {
 
     environment: Job.environment,
 
+    parameters: Job.parameters,
+
     eventId: Joi
         .number().integer().positive()
         .description('Identifier of the parent event')

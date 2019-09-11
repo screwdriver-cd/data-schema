@@ -86,6 +86,20 @@ const SCHEMA_ENVIRONMENT = Joi.object()
             }
         }
     });
+const SCHEMA_PARAMETERS_STRING = Joi.string();
+const SCHEMA_PARAMETERS_OBJECT = Joi.object({
+        value: Joi.string().required(),
+        description: Joi.string(),
+    })
+    .options({
+        language: {
+            object: {
+                allowUnknown: 'only supports uppercase letters, digits, and underscore (cannot '
+                + 'start with digit)'
+            }
+        }
+    });
+const SCHEMA_PARAMETERS = Joi.alternatives().try(SCHEMA_PARAMETERS_STRING, SCHEMA_PARAMETERS_OBJECT);
 const SCHEMA_JOBNAME = Joi.string().max(100).regex(Regex.JOB_NAME);
 const SCHEMA_STEP_STRING = Joi.string();
 const SCHEMA_STEP_OBJECT = Joi.object()
@@ -104,7 +118,6 @@ const SCHEMA_STEP_OBJECT = Joi.object()
             }
         }
     });
-
 const SCHEMA_DESCRIPTION = Joi.string().max(100).optional();
 const SCHEMA_IMAGE = Joi.string().regex(Regex.IMAGE_NAME);
 const SCHEMA_SETTINGS = Joi.object().optional();
@@ -151,6 +164,7 @@ const SCHEMA_JOB = Joi.object()
         annotations: Annotations.annotations,
         description: SCHEMA_DESCRIPTION,
         environment: SCHEMA_ENVIRONMENT,
+        parameters: SCHEMA_PARAMETERS,
         image: SCHEMA_IMAGE,
         matrix: SCHEMA_MATRIX,
         requires: SCHEMA_REQUIRES,
@@ -189,6 +203,7 @@ module.exports = {
     annotations: Annotations.annotations,
     description: SCHEMA_DESCRIPTION,
     environment: SCHEMA_ENVIRONMENT,
+    parameters: SCHEMA_PARAMETERS,
     image: SCHEMA_IMAGE,
     job: SCHEMA_JOB,
     jobNoDupSteps: SCHEMA_JOB_NO_DUP_STEPS,
