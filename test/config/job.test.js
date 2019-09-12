@@ -119,7 +119,7 @@ describe('config job', () => {
     });
 
     describe('parameters', () => {
-        it.only('validates parameters', () => {
+        it('validates parameters', () => {
             assert.isNull(validate('config.job.parameters.yaml', config.job.parameters).error);
         });
     });
