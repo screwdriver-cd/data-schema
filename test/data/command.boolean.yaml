@@ -1,0 +1,21 @@
+# Command Get Example
+id: 123234135
+createTime: '2017-01-06T01:49:50.384359267Z'
+namespace: foo
+name: bar
+version: '1.0'
+description: |
+  Lorem ipsum dolor sit amet.
+maintainer: foo@bar.com
+format: habitat
+habitat:
+    mode: remote
+    package: core/git/2.14.1
+    command: git
+#docker:
+#    image: chefdk:1.2.3
+#    command: knife
+#binary:
+#    file: ./foobar.sh
+pipelineId: 8765
+trusted: '1'

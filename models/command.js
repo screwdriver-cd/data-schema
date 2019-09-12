@@ -27,7 +27,7 @@ const MODEL = {
         .description('When this command was created')
         .example('2038-01-19T03:14:08.131Z'),
     usage: Command.usage,
-    trusted: Joi.boolean()
+    trusted: Joi.boolean().falsy('0').truthy('1')
         .description('Mark whether command is trusted')
 };
 

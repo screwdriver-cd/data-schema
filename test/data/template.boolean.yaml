@@ -1,0 +1,23 @@
+# Template GET Example
+id: 123234135
+createTime: '2017-01-06T01:49:50.384359267Z'
+name: test/template
+version: "1.3"
+description: Template for testing
+maintainer: foo@bar.com
+pipelineId: 8765
+labels:
+    - stable
+    - test
+    - beta
+config:
+  image: node:6
+  steps:
+    - install: npm install
+    - test: npm test
+    - echo: echo $FOO
+  environment:
+    FOO: bar
+  secrets:
+     - NPM_TOKEN
+trusted: '1'

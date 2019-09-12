@@ -33,7 +33,7 @@ const MODEL = {
         .max(32)
         .description('When this template was created')
         .example('2038-01-19T03:14:08.131Z'),
-    trusted: Joi.boolean()
+    trusted: Joi.boolean().falsy('0').truthy('1')
         .description('Mark whether template is trusted')
 };
 

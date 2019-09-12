@@ -48,6 +48,10 @@ describe('model template', () => {
             assert.isNull(validate('template.compact.yaml', models.template.get).error);
         });
 
+        it('validates boolean in mysql', () => {
+            assert.isNull(validate('template.boolean.yaml', models.template.get).error);
+        });
+
         it('fails the get', () => {
             assert.isNotNull(validate('empty.yaml', models.template.get).error);
         });

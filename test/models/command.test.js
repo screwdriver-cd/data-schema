@@ -26,6 +26,10 @@ describe('model command', () => {
             assert.isNull(validate('command.get.yaml', models.command.get).error);
         });
 
+        it('validates boolean in mysql', () => {
+            assert.isNull(validate('command.boolean.yaml', models.command.get).error);
+        });
+
         it('fails the get', () => {
             assert.isNotNull(validate('empty.yaml', models.command.get).error);
         });
