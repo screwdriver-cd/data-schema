@@ -1,4 +1,4 @@
-# SCM Hook example
+# Invalid SCM Hook commitAuthors 
 action: push
 branch: master
 checkoutUrl: git@github.com:screwdriver-cd/data-model.git#master
@@ -8,4 +8,4 @@ sha: ccc49349d3cffbd12ea9e3d41521480b4aa5de5f
 type: repo
 username: stjohnjohnson
 ref: reference
-commitAuthors: ['john1', 'john2']
+commitAuthors: john1

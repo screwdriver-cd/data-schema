@@ -64,6 +64,14 @@ describe('scm core', () => {
             assert.isNull(validate('scm.hook.push.yaml', core.scm.hook).error);
         });
 
+        it('fails the push hook because commiter author is not array', () => {
+            assert.isNotNull(validate('scm.hook.push.invalid-commiters.yaml', core.scm.hook).error);
+        });
+
+        it('fails the push hook because commiter author is not an array of string', () => {
+            assert.isNotNull(validate('scm.hook.push.invalid-array.yaml', core.scm.hook).error);
+        });
+
         it('validates the ping hook', () => {
             assert.isNull(validate('scm.hook.ping.yaml', core.scm.hook).error);
         });
