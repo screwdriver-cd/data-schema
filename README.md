@@ -30,6 +30,47 @@ Each model contains eight (8) schemas:
  - `tableName` - Internal name of the table
  - `indexes` - Secondary indexes to make search/lookup faster
 
+## Migrations
+sequelize-cli migrations keep track of changes to the database, will help to get to new state and revert the changes in order to get back to the old or desired state.
+
+reference links: 
+1. https://sequelize.org/master/manual/migrations.html
+2. https://github.com/sequelize/cli/tree/master
+
+CAUTION: Create migrations user (sd_migrator) in DB and this user should be given restrictive privileges to perform DDL operations. Be careful when reverting migrations, as this may end up in table getting deleted if user has privileges.
+
+### Existing Screwdriver instance
+Create new table SequelizeMeta in existing screwdriver database. Insert a record (name column matching filename) into SequelizeMeta table for each initdb- file under migrations folder. This will ensure migrations will not run for these files. 
+
+```bash
+    CREATE TABLE public."SequelizeMeta" (
+        name character varying(255) NOT NULL,
+        updated timestamp without time zone DEFAULT now(),
+        CONSTRAINT "SequelizeMeta_pkey" PRIMARY KEY (name)
+    )
+
+    INSERT INTO public."SequelizeMeta"(name) VALUES ('initdb-banners.js');
+```
+
+### New Screwdriver instance
+To track migrations timestamp, create new table SequelizeMeta as below in existing screwdriver database; otherwise sequelize-cli will automatically create SequelizeMeta without 'updated' column.
+
+```bash
+    CREATE TABLE public."SequelizeMeta" (
+        name character varying(255) NOT NULL,
+        updated timestamp without time zone DEFAULT now(),
+        CONSTRAINT "SequelizeMeta_pkey" PRIMARY KEY (name)
+    )
+```
+
+### Usage
+```bash
+
+npx sequelize db:migrate --env=development --config=./config/migrationsConfig.js --migrations-path=./migrations
+
+npx sequelize db:migrate:undo --env=development --config=./config/migrationsConfig.js --migrations-path=./migrations
+``` 
+
 ## Usage
 
 ```bash
