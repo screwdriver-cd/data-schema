@@ -56,5 +56,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: [{ fields: ['src'] }]
+    indexes: [{ fields: ['dest'] }, { fields: ['src'] }]
 };

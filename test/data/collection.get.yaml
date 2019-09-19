@@ -3,11 +3,12 @@ id: 123
 name: 'Screwdriver'
 description: 'Collection of screwdriver related pipelines'
 pipelineIds: [12742, 12576]
+type: 'normal'
 pipelines:
     - id: 12742
       scmUri: github.com:12345678:master
       scmContext: github:mygithub
-      createTime: "2017-07-14"
+      createTime: "2019-07-14"
       admins:
         username: true
       scmRepo:

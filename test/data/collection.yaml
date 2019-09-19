@@ -2,6 +2,7 @@
 id: 123
 userId: 456
 name: 'Screwdriver'
+type: 'normal'
 description: 'A collection for screwdriver pipelines'
 pipelineIds:
     - 1

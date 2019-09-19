@@ -80,6 +80,7 @@ const GET_COMMIT_REF_SHA = Joi.object().keys({
     owner: Joi.string().required(),
     repo: Joi.string().required(),
     ref: Joi.string().required(),
+    refType: Joi.string().required(),
     scmContext
 }).required();
 
