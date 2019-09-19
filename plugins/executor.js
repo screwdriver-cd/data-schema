@@ -8,6 +8,8 @@ const buildId = Joi.reach(models.build.base, 'id').required();
 const eventId = Joi.reach(models.event.base, 'id');
 const jobId = Joi.reach(models.job.base, 'id');
 const jobName = Joi.reach(models.job.base, 'name');
+const jobState = Joi.reach(models.job.base, 'state');
+const jobArchived = Joi.reach(models.job.base, 'archived');
 
 const SCHEMA_PIPELINE = Joi.object().keys({
     id: Joi.reach(models.pipeline.base, 'id').required(),
@@ -18,6 +20,8 @@ const SCHEMA_START = Joi.object().keys({
     build: Joi.object(),
     jobId,
     jobName,
+    jobState,
+    jobArchived,
     annotations: Annotations.annotations,
     blockedBy: Joi.array().items(jobId),
     freezeWindows: Job.freezeWindows,
