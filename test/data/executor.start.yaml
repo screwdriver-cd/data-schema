@@ -1,5 +1,7 @@
 jobId: 1234
 jobName: component
+jobState: ENABLED
+jobArchived: false
 annotations:
     beta.screwdriver.cd/executor: k8s
 blockedBy:
