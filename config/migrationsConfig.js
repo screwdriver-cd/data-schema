@@ -2,7 +2,7 @@
 
 module.exports = {
     development: {
-        url: process.env.DATASTORE_SEQUELIZE_URL,
+        url: process.env.DEV_DATASTORE_SEQUELIZE_URL,
         logging: true
     },
     test: {

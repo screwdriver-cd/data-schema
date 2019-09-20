@@ -63,8 +63,20 @@ To track migrations timestamp, create new table SequelizeMeta as below in existi
     )
 ```
 
+### Environment variables 
+DEV_DATASTORE_SEQUELIZE_URL => dialect://username:password@host/database_name
+TEST_DATASTORE_SEQUELIZE_URL => dialect://username:password@host/database_name
+DATASTORE_SEQUELIZE_URL => dialect://username:password@host/database_name
+DATASTORE_SEQUELIZE_OWNER => default: postgres
+DATASTORE_SEQUELIZE_SCHEMA => default: public
+DATASTORE_SEQUELIZE_LOCKTIMEOUT => default: '2s'
+DATASTORE_SEQUELIZE_PREFIX => if table names need to be prefixed (ex: 'beta-')
+
 ### Usage
+Before running npx sequelize, need to install pg, sequelize, sequelize-cli npm packages
+
 ```bash
+npm install pg sequelize sequelize-cli 
 
 npx sequelize db:migrate --env=development --config=./config/migrationsConfig.js --migrations-path=./migrations
 

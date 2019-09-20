@@ -2,7 +2,7 @@
 
 'use strict';
 
-const owner = process.env.DATASTORE_SEQUELIZE_OWNER;
+const owner = process.env.DATASTORE_SEQUELIZE_OWNER || 'postgres';
 const schema = process.env.DATASTORE_SEQUELIZE_SCHEMA || 'public';
 const lockTimeout = process.env.DATASTORE_SEQUELIZE_LOCKTIMEOUT || '2s';
 const prefix = process.env.DATASTORE_SEQUELIZE_PREFIX || '';
