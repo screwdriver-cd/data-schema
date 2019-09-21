@@ -31,16 +31,16 @@ Each model contains eight (8) schemas:
  - `indexes` - Secondary indexes to make search/lookup faster
 
 ## Migrations
-sequelize-cli migrations keep track of changes to the database, will help to get to new state and revert the changes in order to get back to the old or desired state.
+Sequelize-cli migrations keep track of changes to the database, will help to get to a new state and revert the changes in order to get back to the old or desired state. Always ensure models and migration files are in sync. Create new migration files for any new DDL changes. Do not update or delete migration files, once its migrated to the database. 
 
 reference links: 
 1. https://sequelize.org/master/manual/migrations.html
 2. https://github.com/sequelize/cli/tree/master
 
-CAUTION: Create migrations user (sd_migrator) in DB and this user should be given restrictive privileges to perform DDL operations. Be careful when reverting migrations, as this may end up in table getting deleted if user has privileges.
+CAUTION: Create migrations user (sd_migrator) in DB and this user should be given restrictive privileges to perform DDL operations. Be careful when reverting migrations, as this may end up in table getting deleted if the user has privileges.
 
 ### Existing Screwdriver instance
-Create new table SequelizeMeta in existing screwdriver database. Insert a record (name column matching filename) into SequelizeMeta table for each initdb- file under migrations folder. This will ensure migrations will not run for these files. 
+Create a new table SequelizeMeta in the existing screwdriver database. Insert a record (name column matching filename) into the SequelizeMeta table for each initdb- file under the migrations folder. This will ensure migrations will not run for these files. After insert, verify the SequelizeMeta table has 16 records.
 
 ```bash
     CREATE TABLE public."SequelizeMeta" (
@@ -64,9 +64,9 @@ To track migrations timestamp, create new table SequelizeMeta as below in existi
 ```
 
 ### Environment variables 
-DEV_DATASTORE_SEQUELIZE_URL => dialect://username:password@host/database_name
-TEST_DATASTORE_SEQUELIZE_URL => dialect://username:password@host/database_name
-DATASTORE_SEQUELIZE_URL => dialect://username:password@host/database_name
+DEV_DATASTORE_SEQUELIZE_URL => dialect://username:password@devhost:port/database_name
+TEST_DATASTORE_SEQUELIZE_URL => dialect://username:password@testhost:port/database_name
+DATASTORE_SEQUELIZE_URL => dialect://username:password@prodhost:port/database_name
 DATASTORE_SEQUELIZE_OWNER => default: postgres
 DATASTORE_SEQUELIZE_SCHEMA => default: public
 DATASTORE_SEQUELIZE_LOCKTIMEOUT => default: '2s'
