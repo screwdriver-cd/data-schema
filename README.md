@@ -73,14 +73,14 @@ DATASTORE_SEQUELIZE_LOCKTIMEOUT => default: '2s'
 DATASTORE_SEQUELIZE_PREFIX => if table names need to be prefixed (ex: 'beta-')
 
 ### Usage
-pg, sequelize, sequelize-cli npm packages are pre-requisite for npx sequelize.
+npx, pg, sequelize, sequelize-cli npm packages are pre-requisite for npx sequelize.
 
 ```bash
 postgres:
-    npm install pg sequelize sequelize-cli 
+    npm install npx pg sequelize sequelize-cli 
 
 mysql:
-    npm install mysql2 sequelize sequelize-cli 
+    npm install npx mysql2 sequelize sequelize-cli 
 
 npx sequelize db:migrate --env=development --config=./config/migrationsConfig.js --migrations-path=./migrations
 
