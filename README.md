@@ -76,7 +76,11 @@ DATASTORE_SEQUELIZE_PREFIX => if table names need to be prefixed (ex: 'beta-')
 pg, sequelize, sequelize-cli npm packages are pre-requisite for npx sequelize.
 
 ```bash
-npm install pg sequelize sequelize-cli 
+postgres:
+    npm install pg sequelize sequelize-cli 
+
+mysql:
+    npm install mysql2 sequelize sequelize-cli 
 
 npx sequelize db:migrate --env=development --config=./config/migrationsConfig.js --migrations-path=./migrations
 
