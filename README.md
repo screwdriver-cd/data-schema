@@ -31,7 +31,7 @@ Each model contains eight (8) schemas:
  - `indexes` - Secondary indexes to make search/lookup faster
 
 ## Migrations
-Sequelize-cli migrations keep track of changes to the database, will help to get to a new state and revert the changes in order to get back to the old or desired state. Always ensure models and migration files are in sync. Create new migration files for any new DDL changes. Do not update or delete migration files, once its migrated to the database. 
+Sequelize-cli migrations keep track of changes to the database, will help to get to a new state and revert the changes in order to get back to the old or desired state. Ensure models and migration files are in sync. Create new migration files for any new DDL changes. Do not update or delete migration files, once its migrated and available in the  database. 
 
 reference links: 
 1. https://sequelize.org/master/manual/migrations.html
@@ -82,9 +82,9 @@ postgres:
 mysql:
     npm install npx mysql2 sequelize sequelize-cli 
 
-npx sequelize db:migrate --env=development --config=./config/migrationsConfig.js --migrations-path=./migrations
+npx sequelize-cli db:migrate --env=development --config=./config/migrationsConfig.js --migrations-path=./migrations
 
-npx sequelize db:migrate:undo --env=development --config=./config/migrationsConfig.js --migrations-path=./migrations
+npx sequelize-cli db:migrate:undo --env=development --config=./config/migrationsConfig.js --migrations-path=./migrations
 ``` 
 
 ## Usage
