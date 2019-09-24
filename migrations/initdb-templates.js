@@ -2,20 +2,12 @@
 
 'use strict';
 
-const owner = process.env.DATASTORE_SEQUELIZE_OWNER || 'postgres';
-const schema = process.env.DATASTORE_SEQUELIZE_SCHEMA || 'public';
-const lockTimeout = process.env.DATASTORE_SEQUELIZE_LOCKTIMEOUT || '2s';
 const prefix = process.env.DATASTORE_SEQUELIZE_PREFIX || '';
 const table = `${prefix}templates`;
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         await queryInterface.sequelize.transaction(async (transaction) => {
-            await queryInterface.sequelize.query(
-                `SET lock_timeout TO '${lockTimeout}';`, { transaction });
-            await queryInterface.sequelize.query(
-                `SET ROLE TO ${owner};`, { transaction });
-
             await queryInterface.createTable(table, {
                 id: {
                     allowNull: false,
@@ -56,9 +48,6 @@ module.exports = {
                 trusted: {
                     type: Sequelize.BOOLEAN
                 }
-            },
-            {
-                schema: `${schema}`
             }, { transaction }
             );
 
@@ -82,10 +71,6 @@ module.exports = {
                     name: `${table}_namespace`,
                     transaction
                 }
-            );
-
-            await queryInterface.sequelize.query(
-                `alter table "${table}" owner to ${owner};`, { transaction }
             );
         });
     },

@@ -37,7 +37,7 @@ reference links:
 1. https://sequelize.org/master/manual/migrations.html
 2. https://github.com/sequelize/cli/tree/master
 
-CAUTION: Create migrations user (sd_migrator) in DB and this user should be given restrictive privileges to perform DDL operations. Be careful when reverting migrations, as this may end up in table getting deleted if the user has privileges.
+CAUTION: Create migrations user (sd_migrator) in DB and this user should be given restrictive privileges to perform DDL operations. Be careful when reverting migrations, as this may end up in table getting DELETED if the user has PRIVILEGES.
 
 ### Existing Screwdriver instance
 Create a new table SequelizeMeta in the existing screwdriver database. Insert a record (name column matching filename) into the SequelizeMeta table for each initdb- file under the migrations folder. This will ensure migrations will not run for these files. After insert, verify the SequelizeMeta table has 16 records.
@@ -64,13 +64,17 @@ To track migrations timestamp, create new table SequelizeMeta as below in existi
 ```
 
 ### Environment variables 
+
+```bash
+postgres - postgres://user:password@host:port/db
+mysql - mysql://user:password@host:post/db
+sqlite - sqlite:/dir/file.db
+
 DEV_DATASTORE_SEQUELIZE_URL => dialect://username:password@devhost:port/database_name
 TEST_DATASTORE_SEQUELIZE_URL => dialect://username:password@testhost:port/database_name
 DATASTORE_SEQUELIZE_URL => dialect://username:password@prodhost:port/database_name
-DATASTORE_SEQUELIZE_OWNER => default: postgres
-DATASTORE_SEQUELIZE_SCHEMA => default: public
-DATASTORE_SEQUELIZE_LOCKTIMEOUT => default: '2s'
 DATASTORE_SEQUELIZE_PREFIX => if table names need to be prefixed (ex: 'beta-')
+```
 
 ### Usage
 npx, pg, sequelize, sequelize-cli npm packages are pre-requisite for npx sequelize.
@@ -81,6 +85,9 @@ postgres:
 
 mysql:
     npm install npx mysql2 sequelize sequelize-cli 
+
+sqlite3:
+    npm install npx sqlite3 sequelize sequelize-cli 
 
 npx sequelize-cli db:migrate --env=development --config=./config/migrationsConfig.js --migrations-path=./migrations
 
