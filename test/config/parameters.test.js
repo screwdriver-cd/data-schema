@@ -7,7 +7,7 @@ const validate = require('../helper').validate;
 describe('config parameters', () => {
     describe('parameters', () => {
         it('validates parameters', () => {
-            assert.isNull(validate('config.job.parameters.yaml', config.job.parameters).error);
+            assert.isNull(validate('config.parameters.yaml', config.job.parameters).error);
         });
     });
 });
