@@ -1,4 +1,5 @@
 'use strict';
+
 const Joi = require('joi');
 
 const SCHEMA_PARAMETERS_STRING = Joi.string();
