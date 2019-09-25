@@ -78,15 +78,9 @@ DATASTORE_SEQUELIZE_PREFIX => if table names need to be prefixed (ex: 'beta-')
 
 ### Usage
 ```bash
-postgres:
-    npm install npx pg sequelize sequelize-cli 
-
-mysql:
-    npm install npx mysql2 sequelize sequelize-cli 
-
-sqlite3:
-    npm install npx sqlite3 sequelize sequelize-cli 
-
+postgres: npm install npx pg sequelize sequelize-cli 
+mysql: npm install npx mysql2 sequelize sequelize-cli 
+sqlite3: npm install npx sqlite3 sequelize sequelize-cli 
 
 npx sequelize-cli db:migrate --env=development --config=./config/migrationsConfig.js --migrations-path=./migrations
 

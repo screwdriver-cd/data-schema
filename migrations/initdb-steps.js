@@ -54,7 +54,7 @@ module.exports = {
                 }
             );
 
-            await queryInterface.addIndex(table, ['buildId'],
+            await queryInterface.addIndex(table, ['name'],
                 {
                     name: `${table}_name`,
                     transaction
