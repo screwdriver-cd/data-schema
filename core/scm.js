@@ -193,7 +193,8 @@ const SCHEMA_HOOK = Joi.object().keys({
     username: Joi.reach(SCHEMA_USER, 'username'),
 
     commitAuthors: Joi.array()
-        .items(Joi.string())
+        .items(Joi.string().allow(''))
+        .allow([])
         .optional()
         .label('Commit authors'),
 
