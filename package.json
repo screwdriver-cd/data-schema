@@ -43,7 +43,12 @@
     "eslint": "^4.19.1",
     "eslint-config-screwdriver": "^3.0.1",
     "jenkins-mocha": "^8.0.0",
-    "js-yaml": "^3.12.1"
+    "js-yaml": "^3.12.1",
+    "pg": "^7.12.1",
+    "mysql2": "^1.7.0",
+    "sqlite3": "^4.1.0",
+    "sequelize": "^5.18.4",
+    "sequelize-cli": "^5.5.1"
   },
   "dependencies": {
     "joi": "^13.7.0",
