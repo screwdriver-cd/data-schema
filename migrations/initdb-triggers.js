@@ -32,7 +32,14 @@ module.exports = {
                 }
             );
 
-            await queryInterface.addIndex(table, ['dest', 'src'],
+            await queryInterface.addIndex(table, ['src'],
+                {
+                    name: `${table}_src`,
+                    transaction
+                }
+            );
+
+            await queryInterface.addIndex(table, ['dest'],
                 {
                     name: `${table}_dest`,
                     transaction

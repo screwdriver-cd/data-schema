@@ -56,9 +56,9 @@ module.exports = {
                 }
             );
 
-            await queryInterface.addIndex(table, ['pipelineId'],
+            await queryInterface.addIndex(table, ['pipelineId', 'state'],
                 {
-                    name: `${table}_pipeline_id`,
+                    name: `${table}_pipeline_id_state`,
                     transaction
                 }
             );
