@@ -25,7 +25,7 @@ module.exports = {
                     type: Sequelize.TEXT
                 },
                 admins: {
-                    type: Sequelize.TEXT
+                    type: Sequelize.TEXT('medium')
                 },
                 annotations: {
                     type: Sequelize.TEXT
