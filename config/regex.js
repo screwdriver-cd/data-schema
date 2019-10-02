@@ -46,11 +46,17 @@ module.exports = {
     PR_JOB_NAME: /^(PR-\d+)(?::([\w-]+))?$/,
     // Internal trigger like ~component or ~main
     INTERNAL_TRIGGER: /^~([\w-]+)$/,
+
+    // Don't combine EXTERNAL_TRIGGER and EXTERNAL_TRIGGER_AND for backward compatibility
+    // BlockBy does not support EXTERNAL_TRIGGER_AND
     // External trigger like ~sd@123:component
     EXTERNAL_TRIGGER: /^~sd@(\d+):([\w-]+)$/,
+    // External trigger like sd@123:component
+    EXTERNAL_TRIGGER_AND: /^sd@(\d+):([\w-]+)$/,
+
     // Can be ~pr, ~commit, ~release, ~tag or ~commit:branchName, or ~sd@123:component
     // Note: if you modify this regex, you must modify `sdJoi` definition in the `config/job.js`
-    TRIGGER: /^~(sd@\d+:[\w-]+|(pr|commit|release|tag)(:(.+))?)$/,
+    TRIGGER: /^~?(sd@\d+:[\w-]+|(pr|commit|release|tag)(:(.+))?)$/,
     // Triggers which always create event
     CORE_TRIGGER: /^~(pr|commit)(:(.+))?$/,
     // Triggers which does not create empty events
