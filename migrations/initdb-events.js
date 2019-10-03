@@ -56,6 +56,9 @@ module.exports = {
                 },
                 prNum: {
                     type: Sequelize.DOUBLE
+                },
+                baseBranch: {
+                    type: Sequelize.TEXT
                 }
             }, { transaction }
             );
