@@ -32,7 +32,7 @@ Each model contains eight (8) schemas:
 
 ## Contributing
 
-Please read [##Migrations](./CONTRIBUTING.md) before adding anything to the data-schema
+Please read [Migrations](./CONTRIBUTING.md#migrations) before adding anything to the data-schema
 
 ## Usage
 
