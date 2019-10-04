@@ -30,16 +30,9 @@ Each model contains eight (8) schemas:
  - `tableName` - Internal name of the table
  - `indexes` - Secondary indexes to make search/lookup faster
 
-## Migrations
-Sequelize-cli migrations keep track of changes to the database, will help to get to a new state and revert the changes in order to get back to the old or desired state. Ensure models and migration files are in sync. Create new migration files for any new DDL changes. Do not update or delete migration files, once its migrated and available in the  database. 
+## Contributing
 
-reference links: 
-1. https://sequelize.org/master/manual/migrations.html
-2. https://github.com/sequelize/cli/tree/master
-
-CAUTION: Create migrations user (sd_migrator) in DB and this user should be given restrictive privileges to perform DDL operations. Be careful when reverting migrations, as this may end up in table getting DELETED if the user has PRIVILEGES.
-
-[Read more on DB schema migrations](DBMIGRATION.md)
+Please read [##Migrations](./CONTRIBUTING.md) before adding anything to the data-schema
 
 ## Usage
 
