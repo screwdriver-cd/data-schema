@@ -52,10 +52,10 @@ module.exports = {
                     type: Sequelize.TEXT
                 },
                 parameters: {
-                    type: Sequelize.TEXT('medium')
+                    type: Sequelize.TEXT
                 },
                 meta: {
-                    type: Sequelize.TEXT('medium')
+                    type: Sequelize.TEXT
                 },
                 steps: {
                     type: Sequelize.TEXT

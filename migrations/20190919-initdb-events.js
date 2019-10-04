@@ -46,7 +46,7 @@ module.exports = {
                     type: Sequelize.DOUBLE
                 },
                 meta: {
-                    type: Sequelize.TEXT('medium')
+                    type: Sequelize.TEXT
                 },
                 pr: {
                     type: Sequelize.TEXT
