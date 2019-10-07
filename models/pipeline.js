@@ -6,6 +6,7 @@ const Joi = require('joi');
 const Regex = require('../config/regex');
 const Scm = require('../core/scm');
 const WorkflowGraph = require('../config/workflowGraph');
+const Parameters = require('../config/parameters');
 const mutate = require('../lib/mutate');
 
 const CREATE_MODEL = {
@@ -73,7 +74,9 @@ const MODEL = {
     // We will add `chainPR` property setter/getter method to pipeline model instead
     // in order to convert the `prChain` to `chainPR`.
     prChain: Base.prChain
-        .description('Configuration of chainPR')
+        .description('Configuration of chainPR'),
+
+    parameters: Parameters.parameters
 };
 
 module.exports = {
@@ -95,7 +98,8 @@ module.exports = {
         'id', 'scmUri', 'scmContext', 'createTime', 'admins'
     ], [
         'workflowGraph', 'scmRepo', 'annotations', 'lastEventId',
-        'configPipelineId', 'childPipelines', 'name', 'prChain'
+        'configPipelineId', 'childPipelines', 'name', 'prChain',
+        'parameters'
     ])).label('Get Pipeline'),
 
     /**

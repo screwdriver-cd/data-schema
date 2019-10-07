@@ -1,9 +1,10 @@
 'use strict';
 
+const Joi = require('joi');
 const Annotations = require('../config/annotations');
 const Base = require('../config/base');
 const Job = require('../config/job');
-const Joi = require('joi');
+const Parameters = require('../config/parameters');
 const Regex = require('../config/regex');
 const WorkflowGraph = require('../config/workflowGraph');
 
@@ -52,7 +53,8 @@ const SCHEMA_OUTPUT = Joi.object()
         errors: Joi.array().items(Joi.string()).optional(),
         jobs: SCHEMA_JOBS,
         childPipelines: Base.childPipelines,
-        workflowGraph: WorkflowGraph.workflowGraph
+        workflowGraph: WorkflowGraph.workflowGraph,
+        parameters: Parameters.parameters
     })
     .label('Execution information');
 
