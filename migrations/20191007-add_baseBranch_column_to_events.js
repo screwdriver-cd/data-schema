@@ -8,10 +8,8 @@ const table = `${prefix}events`;
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         await queryInterface.sequelize.transaction(async (transaction) => {
-            await queryInterface.createTable(table, {
-                baseBranch: {
-                    type: Sequelize.TEXT
-                }
+            await queryInterface.addColumn(table, 'baseBranch', {
+                type: Sequelize.TEXT
             }, { transaction }
             );
         });
