@@ -31,6 +31,14 @@ const MODEL = {
         .description('Identifier(s) of this parent build(s)')
         .example([123, 234]),
 
+    parentBuilds: Joi
+        .object()
+        .pattern(/\d/, Joi.object())
+        .example({
+            111: { eventId: 2, jobA: { buildId: 13 } },
+            222: { eventId: 3, jobB: { buildId: 14 } }
+        }),
+
     number: Joi
         .number().positive()
         .description('Timestamp of create time')
@@ -158,7 +166,7 @@ module.exports = {
     get: Joi.object(mutate(GET_MODEL, [
         'id', 'jobId', 'number', 'cause', 'createTime', 'status'
     ], [
-        'container', 'parentBuildId', 'sha', 'startTime', 'endTime',
+        'container', 'parentBuildId', 'parentBuilds', 'sha', 'startTime', 'endTime',
         'meta', 'parameters', 'steps', 'commit', 'eventId', 'environment',
         'statusMessage', 'stats', 'buildClusterName'
     ])).label('Get Build'),
@@ -170,7 +178,7 @@ module.exports = {
      * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [], [
-        'status', 'meta', 'statusMessage', 'stats'
+        'status', 'meta', 'statusMessage', 'stats', 'parentBuilds'
     ])).label('Update Build'),
 
     /**
@@ -183,7 +191,8 @@ module.exports = {
         'jobId'
     ], [
         'meta',
-        'stats'
+        'stats',
+        'parentBuilds'
     ])).label('Create Build'),
 
     /**
