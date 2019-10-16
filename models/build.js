@@ -35,8 +35,8 @@ const MODEL = {
         .object()
         .pattern(/\d/, Joi.object())
         .example({
-            111: { eventId: 2, jobA: { buildId: 13 } },
-            222: { eventId: 3, jobB: { buildId: 14 } }
+            111: { eventId: 2, jobA: 333, jobB: 444 },
+            222: { eventId: 3, jobC: 555 }
         }),
 
     number: Joi
@@ -178,7 +178,7 @@ module.exports = {
      * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [], [
-        'status', 'meta', 'statusMessage', 'stats', 'parentBuilds'
+        'status', 'meta', 'statusMessage', 'stats'
     ])).label('Update Build'),
 
     /**
@@ -191,8 +191,7 @@ module.exports = {
         'jobId'
     ], [
         'meta',
-        'stats',
-        'parentBuilds'
+        'stats'
     ])).label('Create Build'),
 
     /**
