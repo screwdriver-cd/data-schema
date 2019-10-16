@@ -20,7 +20,7 @@ const MODEL = {
         .description('Identifier of the parent event')
         .example(123344),
     causeMessage: Joi
-        .string().max(512).truncate()
+        .string().max(512).truncate().allow('')
         .description('Message that describes why the event was created')
         .example('Merge pull request #26 from screwdriver-cd/data-schema'),
     commit: Scm.commit
