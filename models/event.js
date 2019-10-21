@@ -20,7 +20,7 @@ const MODEL = {
         .description('Identifier of the parent event')
         .example(123344),
     causeMessage: Joi
-        .string().max(512).truncate()
+        .string().max(512).truncate().allow('')
         .description('Message that describes why the event was created')
         .example('Merge pull request #26 from screwdriver-cd/data-schema'),
     commit: Scm.commit
@@ -69,9 +69,12 @@ const MODEL = {
         }),
     pr: Scm.pr
         .description('Pull request object that holds information about the pull request'),
-
     prNum: prNum
-        .description('Pull request number if it is a PR event')
+        .description('Pull request number if it is a PR event'),
+    baseBranch: Joi
+        .string()
+        .description('build base branch')
+        .example('develop')
 };
 
 const CREATE_MODEL = Object.assign({}, MODEL, {
@@ -107,7 +110,7 @@ module.exports = {
         'id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'type'
     ], [
         'causeMessage', 'meta', 'parentEventId', 'startFrom', 'workflowGraph', 'pr', 'prNum',
-        'configPipelineSha'
+        'configPipelineSha', 'baseBranch'
     ])).label('Get Event'),
 
     /**
@@ -118,7 +121,7 @@ module.exports = {
      */
     create: Joi.object(mutate(CREATE_MODEL, [], [
         'pipelineId', 'startFrom', 'buildId', 'causeMessage', 'parentBuildId', 'parentEventId',
-        'configPipelineSha', 'meta', 'prNum', 'creator'
+        'configPipelineSha', 'meta', 'prNum', 'creator', 'baseBranch'
     ])).label('Create Event'),
 
     /**

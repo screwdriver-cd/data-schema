@@ -4,6 +4,7 @@ const Annotations = require('./annotations');
 const Job = require('./job');
 const Joi = require('joi');
 const Regex = require('./regex');
+const Parameters = require('./parameters');
 
 const SCHEMA_CACHE_VALUE = Joi.string().uri({
     relativeOnly: true
@@ -46,7 +47,8 @@ const SCHEMA_CONFIG = Joi.object()
         jobs: SCHEMA_JOBS,
         shared: SCHEMA_SHARED,
         cache: SCHEMA_CACHE,
-        childPipelines: SCHEMA_CHILD_PIPELINES
+        childPipelines: SCHEMA_CHILD_PIPELINES,
+        parameters: Parameters.parameters
     })
     .requiredKeys('jobs')
     .unknown(false);

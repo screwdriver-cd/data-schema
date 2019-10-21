@@ -6,6 +6,7 @@ const Joi = require('joi');
 const models = require('../models');
 const buildId = Joi.reach(models.build.base, 'id').required();
 const eventId = Joi.reach(models.event.base, 'id');
+const causeMessage = Joi.reach(models.event.base, 'causeMessage');
 const jobId = Joi.reach(models.job.base, 'id');
 const jobName = Joi.reach(models.job.base, 'name');
 const jobState = Joi.reach(models.job.base, 'state');
@@ -18,6 +19,7 @@ const SCHEMA_PIPELINE = Joi.object().keys({
 
 const SCHEMA_START = Joi.object().keys({
     build: Joi.object(),
+    causeMessage,
     jobId,
     jobName,
     jobState,
