@@ -3,9 +3,11 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Scm = require('../core/scm');
+const Regex = require('../config/regex');
 const Job = require('../config/job');
 const Step = require('./step');
-const PARENT_BUILD_ID = Joi.number().integer().positive();
+const ID = Joi.number().integer().positive();
+const PARENT_BUILD_ID = ID;
 const buildClusterName = Joi.reach(require('./buildCluster').base, 'name');
 
 const MODEL = {
@@ -33,10 +35,13 @@ const MODEL = {
 
     parentBuilds: Joi
         .object()
-        .pattern(/\d/, Joi.object())
+        .pattern(/\d/, Joi.object({
+            eventId: ID,
+            jobs: Joi.object().pattern(Regex.JOB_NAME, ID)
+        }))
         .example({
-            111: { eventId: 2, jobA: 333, jobB: 444 },
-            222: { eventId: 3, jobC: 555 }
+            111: { eventId: 2, jobs: { jobA: 333, jobB: 444 } },
+            222: { eventId: 3, jobs: { jobC: 555 } }
         }),
 
     number: Joi
