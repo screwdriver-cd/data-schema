@@ -10,5 +10,16 @@ stats:
   blockedStartTime: '2017-01-06T01:49:50.384359267Z'
   queueEnterTime: '2017-01-06T01:49:50.384359267Z'
   imagePullStartTime: '2017-01-06T02:49:50.384359267Z'
+parentBuilds:
+  111:
+    eventId: 1
+    jobs:
+        component: 666
+        deploy: 777
+  222:
+    eventId: 2
+    jobs:
+        component: 888
+        deploy: 999
 environment:
   FOO: 'BAR'
