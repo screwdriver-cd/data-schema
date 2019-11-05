@@ -9,6 +9,9 @@ describe('model trigger', () => {
         it('validates the base', () => {
             assert.isNull(validate('trigger.yaml', models.trigger.base).error);
         });
+        it('validates the base with AND', () => {
+            assert.isNull(validate('trigger.and.yaml', models.trigger.base).error);
+        });
     });
 
     describe('keys', () => {

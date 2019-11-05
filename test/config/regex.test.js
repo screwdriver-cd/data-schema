@@ -22,6 +22,14 @@ describe('config regex', () => {
         it('fails on bad external trigger', () => {
             assert.isFalse(config.regex.EXTERNAL_TRIGGER.test('~sd:123'));
         });
+
+        it('checks good external trigger AND', () => {
+            assert.isTrue(config.regex.EXTERNAL_TRIGGER_AND.test('sd@123:main'));
+        });
+
+        it('fails on bad external trigger AND', () => {
+            assert.isFalse(config.regex.EXTERNAL_TRIGGER.test('sd:123'));
+        });
     });
 
     describe('trigger', () => {

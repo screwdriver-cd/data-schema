@@ -8,12 +8,14 @@ const MODEL = {
         .number().integer().positive()
         .example(12345),
 
-    src: Joi
-        .string().regex(Regex.EXTERNAL_TRIGGER).max(64)
+    src: Joi.alternatives().try(
+        Joi.string().regex(Regex.EXTERNAL_TRIGGER).max(64),
+        Joi.string().regex(Regex.EXTERNAL_TRIGGER_AND).max(64))
         .example('~sd@1234:component'),
 
-    dest: Joi
-        .string().regex(Regex.EXTERNAL_TRIGGER).max(64)
+    dest: Joi.alternatives().try(
+        Joi.string().regex(Regex.EXTERNAL_TRIGGER).max(64),
+        Joi.string().regex(Regex.EXTERNAL_TRIGGER_AND).max(64))
         .example('~sd@5678:test')
 
 };
