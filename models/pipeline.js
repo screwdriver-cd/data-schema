@@ -8,6 +8,7 @@ const Scm = require('../core/scm');
 const WorkflowGraph = require('../config/workflowGraph');
 const Parameters = require('../config/parameters');
 const mutate = require('../lib/mutate');
+const buildClusterName = Joi.reach(require('./buildCluster').base, 'name');
 
 const CREATE_MODEL = {
     checkoutUrl: Joi
@@ -76,7 +77,9 @@ const MODEL = {
     prChain: Base.prChain
         .description('Configuration of chainPR'),
 
-    parameters: Parameters.parameters
+    parameters: Parameters.parameters,
+
+    buildClusterName
 };
 
 module.exports = {
@@ -99,7 +102,7 @@ module.exports = {
     ], [
         'workflowGraph', 'scmRepo', 'annotations', 'lastEventId',
         'configPipelineId', 'childPipelines', 'name', 'prChain',
-        'parameters'
+        'parameters', 'buildClusterName'
     ])).label('Get Pipeline'),
 
     /**
