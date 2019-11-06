@@ -7,7 +7,7 @@ const table = `${prefix}pipelines`;
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.addColumn(table, 'baseBranch', {
+        await queryInterface.addColumn(table, 'buildClusterName', {
             type: Sequelize.STRING(50)
         });
     }
