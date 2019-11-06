@@ -8,6 +8,8 @@ const Scm = require('../core/scm');
 const WorkflowGraph = require('../config/workflowGraph');
 const Parameters = require('../config/parameters');
 const mutate = require('../lib/mutate');
+const ScmContext = require('../config/scmContext');
+const buildClusterName = Joi.reach(require('./buildCluster').base, 'name');
 
 const CREATE_MODEL = {
     checkoutUrl: Joi
@@ -34,12 +36,9 @@ const MODEL = {
         .example('github.com:123456:master')
         .example('github.com:123456:master:src/app/component'),
 
-    scmContext: Joi
-        .string().max(128)
-        .description('The SCM in which the repository exists')
-        .example('github:github.com'),
-
     scmRepo: Scm.repo,
+
+    scmContext: ScmContext.name,
 
     createTime: Joi
         .string()
@@ -76,7 +75,9 @@ const MODEL = {
     prChain: Base.prChain
         .description('Configuration of chainPR'),
 
-    parameters: Parameters.parameters
+    parameters: Parameters.parameters,
+
+    buildClusterName
 };
 
 module.exports = {
@@ -99,7 +100,7 @@ module.exports = {
     ], [
         'workflowGraph', 'scmRepo', 'annotations', 'lastEventId',
         'configPipelineId', 'childPipelines', 'name', 'prChain',
-        'parameters'
+        'parameters', 'buildClusterName'
     ])).label('Get Pipeline'),
 
     /**

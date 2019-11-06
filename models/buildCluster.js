@@ -3,7 +3,7 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Command = require('../config/command');
-const scmContext = Joi.reach(require('./pipeline').base, 'scmContext');
+const ScmContext = require('../config/scmContext');
 const scmOrganization = Joi
     .string().max(100)
     .description('SCM organization name')
@@ -26,7 +26,7 @@ const MODEL = {
         .description('Description of the build cluster')
         .example('Build cluster for iOS team'),
 
-    scmContext,
+    scmContext: ScmContext.name,
 
     scmOrganizations: Joi.array().items(scmOrganization),
 
