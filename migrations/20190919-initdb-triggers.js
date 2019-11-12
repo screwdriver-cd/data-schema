@@ -13,7 +13,7 @@ module.exports = {
                     allowNull: false,
                     autoIncrement: true,
                     primaryKey: true,
-                    type: Sequelize.INTEGER
+                    type: Sequelize.INTEGER.UNSIGNED
                 },
                 src: {
                     type: Sequelize.STRING(64)

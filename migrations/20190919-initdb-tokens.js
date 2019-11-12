@@ -13,7 +13,7 @@ module.exports = {
                     allowNull: false,
                     autoIncrement: true,
                     primaryKey: true,
-                    type: Sequelize.INTEGER
+                    type: Sequelize.INTEGER.UNSIGNED
                 },
                 hash: {
                     type: Sequelize.STRING(86)
