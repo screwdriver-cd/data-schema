@@ -141,7 +141,7 @@ const SCHEMA_FREEZEWINDOWS = Joi.alternatives().try(
     Joi.array().items(SCHEMA_CRON_EXPRESSION),
     SCHEMA_CRON_EXPRESSION
 );
-const SCHEMA_SOURCEPATH = Joi.string().max(100).optional();
+const SCHEMA_SOURCEPATH = Joi.string().max(1024).optional();
 const SCHEMA_SOURCEPATHS = Joi.alternatives().try(
     Joi.array().items(SCHEMA_SOURCEPATH),
     SCHEMA_SOURCEPATH
