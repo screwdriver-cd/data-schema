@@ -35,7 +35,10 @@ const SCHEMA_LOGLINE = Joi.object().keys({
         .example(1472084645.33),
     m: Joi
         .string().allow('')
-        .description('Line Message')
+        .description('Line Message'),
+    s: Joi
+        .string().min(1)
+        .description('Step Name')
 }).label('Log Line');
 
 const SCHEMA_OUTPUT = Joi.array().items(SCHEMA_LOGLINE)
