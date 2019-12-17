@@ -26,7 +26,7 @@ const MODEL = {
         .description('Description of the build cluster')
         .example('Build cluster for iOS team'),
 
-    scmContext,
+    scmContexts: Joi.array().items(scmContext),
 
     scmOrganizations: Joi.array().items(scmOrganization),
 
@@ -66,7 +66,7 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'name', 'scmContext', 'scmOrganizations', 'isActive',
+        'id', 'name', 'scmContexts', 'scmOrganizations', 'isActive',
         'managedByScrewdriver', 'maintainer', 'weightage'
     ], [
         'description'
@@ -90,7 +90,7 @@ module.exports = {
      * @type {Joi}
      */
     create: Joi.object(mutate(MODEL, [
-        'name', 'scmOrganizations', 'managedByScrewdriver', 'maintainer'
+        'name', 'scmContexts', 'scmOrganizations', 'managedByScrewdriver', 'maintainer'
     ], [
         'description', 'isActive', 'weightage'
     ])).label('Create Build'),

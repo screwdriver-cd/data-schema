@@ -1,6 +1,7 @@
 # BuildCluster create example
 name: iOS
 description: 'Build cluster for iOS team'
+scmContexts: ['github:github.com', 'github:github.co.jp']
 scmOrganizations: [screwdriver-cd]
 isActive: true
 managedByScrewdriver: false
