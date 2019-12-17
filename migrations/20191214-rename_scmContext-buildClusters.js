@@ -9,7 +9,7 @@ module.exports = {
     up: async (queryInterface, Sequelize) => {
         try {
             await queryInterface.sequelize.query('SET SQL_MODE = CONCAT(@@SQL_MODE, ' +
-                '\',ANSI_QUOTES\')');
+                '\',ANSI_QUOTES,PIPES_AS_CONCAT\')');
             // eslint-disable-next-line no-empty
         } catch (e) {}
 
@@ -19,13 +19,19 @@ module.exports = {
             await queryInterface.renameColumn(table, 'scmContext', 'scmContexts',
                 { transaction });
             await queryInterface.sequelize.query(`UPDATE "${table}"
-                SET "scmContexts" = CONCAT('["', "scmContexts", '"]')`,
+                SET "scmContexts" = '["' ||  "scmContexts" || '"]' `,
             { transaction });
         });
 
         try {
             await queryInterface.sequelize.query('SET SQL_MODE = REPLACE(@@SQL_MODE, ' +
                 '\'ANSI_QUOTES\', \'\')');
+            // eslint-disable-next-line no-empty
+        } catch (e) {}
+
+        try {
+            await queryInterface.sequelize.query('SET SQL_MODE = REPLACE(@@SQL_MODE, ' +
+                '\'PIPES_AS_CONCAT\', \'\')');
             // eslint-disable-next-line no-empty
         } catch (e) {}
     }
