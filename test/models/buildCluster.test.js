@@ -45,4 +45,26 @@ describe('model buildCluster', () => {
             assert.isNotNull(validate('empty.yaml', models.buildCluster.get).error);
         });
     });
+
+    describe('keys', () => {
+        it('has the correct keys', () => {
+            const expectedKeys = ['name', 'scmContext'];
+
+            expectedKeys.forEach((keyName) => {
+                assert.include(models.buildCluster.keys, keyName,
+                    `Key name ${keyName} not included`);
+            });
+        });
+    });
+
+    describe('indexes', () => {
+        it('defines the correct indexes', () => {
+            const expected = [{ fields: ['name'] }];
+            const indexes = models.buildCluster.indexes;
+
+            expected.forEach((indexName) => {
+                assert.include(indexes, indexName, `Index name ${indexName} not included`);
+            });
+        });
+    });
 });
