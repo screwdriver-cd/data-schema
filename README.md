@@ -1,4 +1,4 @@
-# Screwdriver Data Schema
+# Screwdriver Data  Schema
 [![Version][npm-image]][npm-url] ![Downloads][downloads-image] [![Build Status][status-image]][status-url] [![Open Issues][issues-image]][issues-url] [![Dependency Status][daviddm-image]][daviddm-url] ![License][license-image]
 
 > Internal data schema of [Screwdriver](https://github.com/screwdriver-cd/screwdriver)
