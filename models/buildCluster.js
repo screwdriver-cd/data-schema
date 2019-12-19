@@ -101,7 +101,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['name', 'scmContext'],
+    keys: ['name'],
 
     /**
      * List of all fields in the model
