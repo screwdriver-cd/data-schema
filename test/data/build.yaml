@@ -49,3 +49,7 @@ steps:
         code: 0
         startTime: "2038-01-19T03:15:09.115Z"
         endTime: "2038-01-19T03:15:10.130Z"
+parentBuilds: {
+    111: { eventId: 2, jobs: { jobA: 333, jobB: 444 } },
+    222: { eventId: 3, jobs: { jobC: 555 } }
+}
