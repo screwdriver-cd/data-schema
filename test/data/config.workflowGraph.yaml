@@ -2,8 +2,16 @@ nodes:
     - name: ~commit
     - name: main
     - name: publish
+    - name: sd@123:publish
+    - name: sd@333:E
+    - name: G
 edges:
     - src: ~commit
       dest: main
     - src: main
       dest: publish
+    - src: sd@123:publish
+      dest: sd@333:E
+    - src: sd@333:E
+      dest: G
+      join: true

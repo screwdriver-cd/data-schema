@@ -1,7 +1,7 @@
 'use strict';
 
 const Joi = require('joi');
-const { jobName, requiresValue } = require('../config/job');
+const { externalTrigger, jobName, requiresValue } = require('../config/job');
 
 const SCHEMA_WORKFLOW_GRAPH = Joi.object().keys({
     nodes: Joi.array().items(Joi.object().keys({
@@ -9,7 +9,8 @@ const SCHEMA_WORKFLOW_GRAPH = Joi.object().keys({
     }).unknown()),
     edges: Joi.array().items(Joi.object().keys({
         src: requiresValue,
-        dest: jobName
+        dest: Joi.alternatives().try(
+            externalTrigger, jobName)
     }).unknown())
 });
 

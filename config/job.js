@@ -121,7 +121,10 @@ const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
 // ~commit, ~commit:staging, ~commit:/^user-.*$/, ~pr, etc.
 const SCHEMA_TRIGGER = sdJoi.string().regex(Regex.TRIGGER).branchFilter();
 const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne
-const SCHEMA_EXTERNAL_TRIGGER = Joi.string().regex(Regex.EXTERNAL_TRIGGER); // ~sd@123:main
+const SCHEMA_EXTERNAL_TRIGGER = Joi.alternatives().try(
+    Joi.string().regex(Regex.EXTERNAL_TRIGGER).max(64),
+    Joi.string().regex(Regex.EXTERNAL_TRIGGER_AND).max(64))
+    .example('~sd@1234:component'); // ~sd@123:main or sd@123:main
 const SCHEMA_CRON_EXPRESSION = Cron.string().cron();
 const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(
     SCHEMA_INTERNAL_TRIGGER, SCHEMA_JOBNAME, SCHEMA_TRIGGER);
@@ -206,5 +209,6 @@ module.exports = {
     template: SCHEMA_TEMPLATE,
     requiresValue: SCHEMA_REQUIRES_VALUE,
     jobName: SCHEMA_JOBNAME,
+    externalTrigger: SCHEMA_EXTERNAL_TRIGGER,
     trigger: SCHEMA_TRIGGER
 };
