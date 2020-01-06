@@ -8,6 +8,7 @@ const Job = require('../config/job');
 const Step = require('./step');
 const ID = Joi.number().integer().positive();
 const PARENT_BUILD_ID = ID;
+const PARENT_BUILDS_ID = Joi.alternatives().try(ID, Joi.valid(null));
 const buildClusterName = Joi.reach(require('./buildCluster').base, 'name');
 
 const MODEL = {
@@ -36,8 +37,8 @@ const MODEL = {
     parentBuilds: Joi
         .object()
         .pattern(/\d/, Joi.object({
-            eventId: ID.allow(null),
-            jobs: Joi.object().pattern(Regex.JOB_NAME, ID.allow(null))
+            eventId: PARENT_BUILDS_ID,
+            jobs: Joi.object().pattern(Regex.JOB_NAME, PARENT_BUILDS_ID)
         }))
         .example({
             111: { eventId: 2, jobs: { jobA: 333, jobB: null } },
