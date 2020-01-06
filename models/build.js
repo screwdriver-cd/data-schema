@@ -36,11 +36,11 @@ const MODEL = {
     parentBuilds: Joi
         .object()
         .pattern(/\d/, Joi.object({
-            eventId: ID,
-            jobs: Joi.object().pattern(Regex.JOB_NAME, ID)
+            eventId: ID.allow(null),
+            jobs: Joi.object().pattern(Regex.JOB_NAME, ID.allow(null))
         }))
         .example({
-            111: { eventId: 2, jobs: { jobA: 333, jobB: 444 } },
+            111: { eventId: 2, jobs: { jobA: 333, jobB: null } },
             222: { eventId: 3, jobs: { jobC: 555 } }
         }),
 
