@@ -12,10 +12,10 @@ stats:
   imagePullStartTime: '2017-01-06T02:49:50.384359267Z'
 parentBuilds:
   111:
-    eventId: 1
+    eventId: null
     jobs:
         component: 666
-        deploy: 777
+        deploy: null
   222:
     eventId: 2
     jobs:
