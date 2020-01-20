@@ -92,6 +92,10 @@ const MODEL = {
         .default({})
         .description('Key=>Value information from the build itself'),
 
+    steps: Joi
+        .array().items(Step.get)
+        .description('List of steps'),
+
     status: Joi
         .string().valid([
             'ABORTED',
