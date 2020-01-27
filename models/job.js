@@ -64,7 +64,18 @@ const MODEL = {
         .boolean()
         .description('Flag if the job is archived')
         .example(true)
-        .default(false)
+        .default(false),
+
+    templateDetails: Joi
+        .object({
+            name: Joi.string(),
+            namespace: Joi.string(),
+            version: Joi.string(),
+            maintainer: Joi.string(),
+            trusted: Joi.string()
+        })
+        .description('Information about the template that is used by the job')
+        .example({ name: "gridci-6_10_3", namespace: "HadoopTools", version: "1.0.0", maintainer: "hadoop@oath.com", trusted: "true" })
 };
 
 const EXTENDED_MODEL = {
@@ -94,7 +105,7 @@ module.exports = {
     get: Joi.object(mutate(EXTENDED_MODEL, [
         'id', 'pipelineId', 'name', 'state'
     ], [
-        'description', 'permutations', 'archived', 'prParentJobId',
+        'description', 'permutations', 'archived', 'prParentJobId', 'templateDetails',
         // job enable/disable state change
         'stateChanger', 'stateChangeTime', 'stateChangeMessage',
         // possible extended fields for pull/merge request info from scm
