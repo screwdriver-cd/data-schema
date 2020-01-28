@@ -64,18 +64,7 @@ const MODEL = {
         .boolean()
         .description('Flag if the job is archived')
         .example(true)
-        .default(false),
-
-    templateDetails: Joi
-        .object({
-            name: Joi.string(),
-            namespace: Joi.string(),
-            version: Joi.string(),
-            maintainer: Joi.string(),
-            trusted: Joi.string()
-        })
-        .description('Information about the template that is used by the job')
-        .example({ name: "gridci-6_10_3", namespace: "HadoopTools", version: "1.0.0", maintainer: "hadoop@oath.com", trusted: "true" })
+        .default(false)
 };
 
 const EXTENDED_MODEL = {
