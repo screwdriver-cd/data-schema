@@ -124,7 +124,7 @@ const SCHEMA_TEMPLATE_DETAILS = Joi.object({
     version: Joi.string()
 })
     .description('Information about the template that is used by the job')
-    .example({ name: "gridci-6_10_3", namespace: "HadoopTools", version: "1.0.0" })
+    .example({ name: 'gridci-6_10_3', namespace: 'HadoopTools', version: '1.0.0' })
 // ~commit, ~commit:staging, ~commit:/^user-.*$/, ~pr, etc.
 const SCHEMA_TRIGGER = sdJoi.string().regex(Regex.TRIGGER).branchFilter();
 const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne
