@@ -118,7 +118,13 @@ const SCHEMA_STEPS_NO_DUPS = Joi.array().items(SCHEMA_STEP).min(1).unique((a, b)
     return Object.keys(a).some(key => b[key]);
 });
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
-const SCHEMA_TEMPLATE_DETAILS = Joi.object();
+const SCHEMA_TEMPLATE_DETAILS = Joi.object({
+    name: Joi.string(),
+    namespace: Joi.string(),
+    version: Joi.string()
+})
+    .description('Information about the template that is used by the job')
+    .example({ name: "gridci-6_10_3", namespace: "HadoopTools", version: "1.0.0" })
 // ~commit, ~commit:staging, ~commit:/^user-.*$/, ~pr, etc.
 const SCHEMA_TRIGGER = sdJoi.string().regex(Regex.TRIGGER).branchFilter();
 const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne

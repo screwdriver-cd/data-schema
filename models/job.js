@@ -94,7 +94,7 @@ module.exports = {
     get: Joi.object(mutate(EXTENDED_MODEL, [
         'id', 'pipelineId', 'name', 'state'
     ], [
-        'description', 'permutations', 'archived', 'prParentJobId', 'templateDetails',
+        'description', 'permutations', 'archived', 'prParentJobId',
         // job enable/disable state change
         'stateChanger', 'stateChangeTime', 'stateChangeMessage',
         // possible extended fields for pull/merge request info from scm
