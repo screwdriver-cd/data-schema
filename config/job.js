@@ -118,6 +118,10 @@ const SCHEMA_STEPS_NO_DUPS = Joi.array().items(SCHEMA_STEP).min(1).unique((a, b)
     return Object.keys(a).some(key => b[key]);
 });
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
+const SCHEMA_TEMPLATEID = Joi
+    .number().integer().positive()
+    .description('Identifier for this job\'s template')
+    .example(123345);
 // ~commit, ~commit:staging, ~commit:/^user-.*$/, ~pr, etc.
 const SCHEMA_TRIGGER = sdJoi.string().regex(Regex.TRIGGER).branchFilter();
 const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne
@@ -163,7 +167,8 @@ const SCHEMA_JOB = Joi.object()
         settings: SCHEMA_SETTINGS,
         sourcePaths: SCHEMA_SOURCEPATHS,
         steps: SCHEMA_STEPS,
-        template: SCHEMA_TEMPLATE
+        template: SCHEMA_TEMPLATE,
+        templateId: SCHEMA_TEMPLATEID
     })
     .default({});
 const SCHEMA_JOB_NO_DUP_STEPS = Joi.object()
@@ -207,6 +212,7 @@ module.exports = {
     step: SCHEMA_STEP,
     steps: SCHEMA_STEPS,
     template: SCHEMA_TEMPLATE,
+    templateId: SCHEMA_TEMPLATEID,
     requiresValue: SCHEMA_REQUIRES_VALUE,
     jobName: SCHEMA_JOBNAME,
     externalTrigger: SCHEMA_EXTERNAL_TRIGGER,

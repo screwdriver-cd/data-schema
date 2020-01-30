@@ -64,7 +64,12 @@ const MODEL = {
         .boolean()
         .description('Flag if the job is archived')
         .example(true)
-        .default(false)
+        .default(false),
+
+    templateId: Joi
+        .number().integer().positive()
+        .description('Identifier for this job\'s template')
+        .example(123345)
 };
 
 const EXTENDED_MODEL = {
@@ -94,7 +99,7 @@ module.exports = {
     get: Joi.object(mutate(EXTENDED_MODEL, [
         'id', 'pipelineId', 'name', 'state'
     ], [
-        'description', 'permutations', 'archived', 'prParentJobId',
+        'description', 'permutations', 'archived', 'prParentJobId', 'templateId',
         // job enable/disable state change
         'stateChanger', 'stateChangeTime', 'stateChangeMessage',
         // possible extended fields for pull/merge request info from scm
