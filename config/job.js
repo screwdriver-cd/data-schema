@@ -4,6 +4,7 @@ const Annotations = require('./annotations');
 const Joi = require('joi');
 const Regex = require('./regex');
 const Cron = require('./cronExpression');
+const Template = require('./template');
 
 const SPECIFIC_BRANCH_POS = 4;
 
@@ -119,9 +120,9 @@ const SCHEMA_STEPS_NO_DUPS = Joi.array().items(SCHEMA_STEP).min(1).unique((a, b)
 });
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
 const SCHEMA_TEMPLATE_DETAILS = Joi.object({
-    name: Joi.string(),
-    namespace: Joi.string(),
-    version: Joi.string()
+    name: Template.name,
+    namespace: Template.namespace,
+    version: Template.version
 })
     .description('Information about the template that is used by the job')
     .example({ name: 'gridci-6_10_3', namespace: 'HadoopTools', version: '1.0.0' });
