@@ -4,7 +4,6 @@ const Annotations = require('./annotations');
 const Joi = require('joi');
 const Regex = require('./regex');
 const Cron = require('./cronExpression');
-const Template = require('./template');
 
 const SPECIFIC_BRANCH_POS = 4;
 
@@ -119,10 +118,25 @@ const SCHEMA_STEPS_NO_DUPS = Joi.array().items(SCHEMA_STEP).min(1).unique((a, b)
     return Object.keys(a).some(key => b[key]);
 });
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
-const SCHEMA_TEMPLATE_DETAILS = Joi.object({
-    name: Template.name,
-    namespace: Template.namespace,
-    version: Template.version
+const SCHEMA_TEMPLATE_DETAILS = Joi.object().keys({
+    name: Joi.alternatives()
+        .when('namespace', { is: Joi.exist(),
+            then: Joi.string().regex(Regex.TEMPLATE_NAME_NO_SLASH).max(64),
+            otherwise: Joi.string().regex(Regex.TEMPLATE_NAME_ALLOW_SLASH).max(64) })
+        .description('Name of the Template')
+        .example('node/npm-install'),
+    namespace: Joi
+        .string()
+        .regex(Regex.VERSION)
+        .max(16)
+        .description('Version of the Template')
+        .example('1.2'),
+    version: Joi
+        .string()
+        .regex(Regex.EXACT_VERSION)
+        .max(16)
+        .description('Exact version of the Template')
+        .example('1.2.3')
 })
     .description('Information about the template that is used by the job')
     .example({ name: 'gridci-6_10_3', namespace: 'HadoopTools', version: '1.0.0' });
