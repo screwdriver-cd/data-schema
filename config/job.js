@@ -122,7 +122,8 @@ const SCHEMA_TEMPLATEID = Joi
     .number().integer().positive()
     .description('Identifier for this job\'s template')
     .example(123345)
-    .optional();
+    .optional()
+    .allow(null);
 // ~commit, ~commit:staging, ~commit:/^user-.*$/, ~pr, etc.
 const SCHEMA_TRIGGER = sdJoi.string().regex(Regex.TRIGGER).branchFilter();
 const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne
