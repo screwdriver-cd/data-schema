@@ -132,6 +132,11 @@ const MODEL = {
         .unknown(true) // allow other fields
         .description('Stats for this build'),
 
+    templateId: Joi
+        .number().integer().positive()
+        .description('Identifier for this job\'s template')
+        .example(123345),
+
     buildClusterName
 };
 
@@ -174,7 +179,7 @@ module.exports = {
     ], [
         'container', 'parentBuildId', 'parentBuilds', 'sha', 'startTime', 'endTime',
         'meta', 'parameters', 'steps', 'commit', 'eventId', 'environment',
-        'statusMessage', 'stats', 'buildClusterName'
+        'statusMessage', 'stats', 'buildClusterName', 'templateId'
     ])).label('Get Build'),
 
     /**
