@@ -92,10 +92,6 @@ const MODEL = {
         .default({})
         .description('Key=>Value information from the build itself'),
 
-    steps: Joi
-        .array().items(Step.get)
-        .description('List of steps'),
-
     status: Joi
         .string().valid([
             'ABORTED',
@@ -149,9 +145,14 @@ const environmentSchema = Joi
         Job.environment
     );
 
+const stepsSchema = Joi
+    .array().items(Step.get)
+    .description('List of steps');
+
 const GET_MODEL = Object.assign({}, MODEL, {
     parentBuildId: parentBuildIdSchema,
-    environment: environmentSchema
+    environment: environmentSchema,
+    steps: stepsSchema
 });
 
 module.exports = {
