@@ -8,9 +8,10 @@ const table = `${prefix}builds`;
 module.exports = {
     // eslint-disable-next-line no-unused-vars
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.sequelize.transaction(async (transaction) => {
-            await queryInterface.removeColumn(table, 'steps', { transaction });
-        });
+        try {
+            await queryInterface.removeColumn(table, 'steps');
+            // eslint-disable-next-line no-empty
+        } catch (e) {}
     }
 };
 
