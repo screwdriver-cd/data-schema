@@ -49,10 +49,13 @@ module.exports = {
 
     // Don't combine EXTERNAL_TRIGGER and EXTERNAL_TRIGGER_AND for backward compatibility
     // BlockBy does not support EXTERNAL_TRIGGER_AND
-    // External trigger like ~sd@123:component
+    // External trigger like ~sd@123:component (OR case)
     EXTERNAL_TRIGGER: /^~sd@(\d+):([\w-]+)$/,
-    // External trigger like sd@123:component
+    // External trigger like sd@123:component (AND case)
     EXTERNAL_TRIGGER_AND: /^sd@(\d+):([\w-]+)$/,
+    // External trigger (OR and AND case)
+    // Can be ~sd@123:component or sd@123:component
+    EXTERNAL_TRIGGER_ALL: /^~?sd@(\d+):([\w-]+)$/,
 
     // Can be ~pr, ~commit, ~release, ~tag or ~commit:branchName, or ~sd@123:component
     // Note: if you modify this regex, you must modify `sdJoi` definition in the `config/job.js`
