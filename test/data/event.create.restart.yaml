@@ -1,2 +1,9 @@
 # Event Create for Restarting a Build Example
 buildId: 123
+parentBuildId: [2]
+parentBuilds:
+    123:
+        eventId: 555
+        jobs:
+            main: 1
+            fork: 2
