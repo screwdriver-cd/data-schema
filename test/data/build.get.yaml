@@ -21,5 +21,30 @@ parentBuilds:
     jobs:
         component: 888
         deploy: 999
+steps:
+    -
+        name: sd-setup
+        command: "git clone https://gist.github.com/3d2388b2a7ba658cdcdaffa8cd874e50.git ci"
+        code: 0
+        startTime: "2038-01-19T03:15:08.131Z"
+        endTime: "2038-01-19T03:15:08.532Z"
+    -
+        name: install
+        command: "npm install"
+        code: 1
+        startTime: "2038-01-19T03:15:08.532Z"
+        endTime: "2038-01-19T03:15:09.114Z"
+    -
+        name: test
+        command: "npm test"
+    -
+        name: publish
+        command: "./ci/publish.sh"
+    -
+        name: sd-cleanup
+        command: "./ci/cleanup.sh"
+        code: 0
+        startTime: "2038-01-19T03:15:09.115Z"
+        endTime: "2038-01-19T03:15:10.130Z"
 environment:
   FOO: 'BAR'
