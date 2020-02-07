@@ -1,12 +1,8 @@
 # Job Get Example
 id: 675979578
-name: PR-1:main
+name: main
 description: build and test the code
 pipelineId: 76857568576
 state: ENABLED
 archived: false
-prParentJobId: 9876
-username: whatever
-title: update stuff
-createTime: '2011-01-26T19:01:12Z'
-templateId: 3
+templateId: 4
