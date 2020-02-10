@@ -127,9 +127,7 @@ const SCHEMA_TEMPLATEID = Joi
 // ~commit, ~commit:staging, ~commit:/^user-.*$/, ~pr, etc.
 const SCHEMA_TRIGGER = sdJoi.string().regex(Regex.TRIGGER).branchFilter();
 const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne
-const SCHEMA_EXTERNAL_TRIGGER = Joi.alternatives().try(
-    Joi.string().regex(Regex.EXTERNAL_TRIGGER).max(64),
-    Joi.string().regex(Regex.EXTERNAL_TRIGGER_AND).max(64))
+const SCHEMA_EXTERNAL_TRIGGER = Joi.string().regex(Regex.EXTERNAL_TRIGGER_ALL)
     .example('~sd@1234:component'); // ~sd@123:main or sd@123:main
 const SCHEMA_CRON_EXPRESSION = Cron.string().cron();
 const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(
@@ -140,7 +138,7 @@ const SCHEMA_REQUIRES = Joi.alternatives().try(
 );
 const SCHEMA_BLOCKEDBY_VALUE = Joi.alternatives().try(
     SCHEMA_INTERNAL_TRIGGER,
-    SCHEMA_EXTERNAL_TRIGGER
+    Joi.string().regex(Regex.EXTERNAL_TRIGGER)
 );
 const SCHEMA_BLOCKEDBY = Joi.alternatives().try(
     Joi.array().items(SCHEMA_BLOCKEDBY_VALUE),
