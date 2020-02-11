@@ -66,6 +66,10 @@ describe('datastore test', () => {
             assert.isNull(validate('datastore.startTime.yaml', datastore.scan).error);
         });
 
+        it('validates the aggregationField option', () => {
+            assert.isNull(validate('datastore.aggregationField.yaml', datastore.scan).error);
+        });
+
         it('fails the update', () => {
             assert.isNotNull(validate('empty.yaml', datastore.scan).error);
         });
