@@ -45,6 +45,11 @@ describe('model build', () => {
             assert.include(validate('build.get.yaml', models.build.get).value.meta, {});
         });
 
+        it('validates the get with templateId defined', () => {
+            assert.isNull(validate('build.get.templateId.yaml', models.build.get).error);
+            assert.include(validate('build.get.templateId.yaml', models.build.get).value.meta, {});
+        });
+
         it('validates the get with environment as an array', () => {
             assert.isNull(validate('build.get.environment.yaml', models.build.get).error);
             assert.include(validate('build.get.environment.yaml', models.build.get).value.meta, {});
