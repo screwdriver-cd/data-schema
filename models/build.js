@@ -262,5 +262,5 @@ module.exports = {
      * @type {Array}
      */
     indexes: [{ fields: ['eventId', 'createTime'] }, { fields: ['jobId'] },
-        { fields: [{ attribute: 'parentBuildId', length: 32 }] }]
+        { fields: [{ attribute: 'parentBuildId', length: 32 }] }, { fields: ['templateId'] }]
 };

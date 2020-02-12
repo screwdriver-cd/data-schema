@@ -86,7 +86,8 @@ describe('model job', () => {
 
     describe('indexes', () => {
         it('defines the correct indexes', () => {
-            const expected = [{ fields: ['pipelineId', 'state'] }, { fields: ['state'] }];
+            const expected = [{ fields: ['pipelineId', 'state'] }, { fields: ['state'] },
+                { fields: ['templateId'] }];
             const indexes = models.job.indexes;
 
             expected.forEach((indexName) => {
