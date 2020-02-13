@@ -11,8 +11,8 @@ module.exports = {
             await queryInterface.addColumn(table, 'templateId', {
                 type: Sequelize.INTEGER }, { transaction });
 
-            await queryInterface.addIndex(table, 'templateId', {
-                name: `${table}_template_id` }, { transaction });
+            await queryInterface.addIndex(table, ['templateId'], {
+                name: `${table}_template_id`, transaction });
         });
     }
 };
