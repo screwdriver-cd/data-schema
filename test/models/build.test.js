@@ -77,4 +77,17 @@ describe('model build', () => {
             assert.isNotNull(validate('empty.yaml', models.build.updateStep).error);
         });
     });
+
+    describe('indexes', () => {
+        it('defines the correct indexes', () => {
+            const expected = [{ fields: ['eventId', 'createTime'] }, { fields: ['jobId'] },
+                { fields: [{ attribute: 'parentBuildId', length: 32 }] },
+                { fields: ['templateId'] }];
+            const indexes = models.build.indexes;
+
+            expected.forEach((indexName) => {
+                assert.include(indexes, indexName, `Index name ${indexName} not included`);
+            });
+        });
+    });
 });
