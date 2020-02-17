@@ -9,7 +9,7 @@ module.exports = {
     up: async (queryInterface, Sequelize) => {
         await queryInterface.sequelize.transaction(async (transaction) => {
             await queryInterface.addColumn(table, 'templateId', {
-                type: Sequelize.INTEGER }, { transaction });
+                type: Sequelize.DOUBLE }, { transaction });
 
             await queryInterface.addIndex(table, ['templateId'], {
                 name: `${table}_template_id`, transaction });
