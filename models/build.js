@@ -38,7 +38,7 @@ const MODEL = {
         .object()
         .pattern(/\d/, Joi.object({
             eventId: PARENT_BUILDS_ID,
-            jobs: Joi.object().pattern(Regex.JOB_NAME, PARENT_BUILDS_ID)
+            jobs: Joi.object().pattern(Regex.ALL_JOB_NAME, PARENT_BUILDS_ID)
         }))
         .example({
             111: { eventId: 2, jobs: { jobA: 333, jobB: null } },
