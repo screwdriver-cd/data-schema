@@ -41,6 +41,16 @@ const SCHEMA_SCAN = Joi.object().keys({
     timeKey: Joi.string(),
     aggregationField: Joi.string()
 });
+const SCHEMA_QUERY = Joi.object().keys({
+    table,
+    queries: Joi.array().items(
+        Joi.object().keys({
+            dbType: Joi.string(),
+            query: Joi.string()
+    })),
+    replacements: Joi.object(),
+    rawResponse: Joi.boolean()
+});
 
 module.exports = {
     /**
@@ -81,5 +91,13 @@ module.exports = {
      * @property scan
      * @type {Joi}
      */
-    scan: SCHEMA_SCAN
+    scan: SCHEMA_SCAN,
+
+    /**
+     * Properties for Datastore that will be passed for the QUERY method
+     *
+     * @property query
+     * @type {Joi}
+     */
+    query: SCHEMA_QUERY
 };
