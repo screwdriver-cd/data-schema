@@ -102,7 +102,7 @@ const SCHEMA_PR = Joi.object().keys({
     prSource: Joi.string()
         .allow('')
         .optional()
-        .label('Origin of the pull reqyest'),
+        .label('Origin of the pull request'),
     prBranchName: Joi.string()
         .allow('')
         .optional()
