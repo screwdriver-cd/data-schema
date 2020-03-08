@@ -45,9 +45,9 @@ const SCHEMA_QUERY = Joi.object().keys({
     table,
     queries: Joi.array().items(
         Joi.object().keys({
-            dbType: Joi.string(),
-            query: Joi.string()
-    })),
+            dbType: Joi.string().required(),
+            query: Joi.string().required()
+        })).required(),
     replacements: Joi.object(),
     rawResponse: Joi.boolean()
 });
