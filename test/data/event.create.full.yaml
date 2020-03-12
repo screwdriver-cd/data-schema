@@ -2,6 +2,7 @@
 startFrom: main
 parentBuildId: 123
 parentEventId: 123456
+groupEventId: 123456
 pipelineId: 1235123
 creator:
     name: sd:scheduler
