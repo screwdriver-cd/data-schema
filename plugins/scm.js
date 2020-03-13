@@ -46,6 +46,8 @@ const GET_CHECKOUT_COMMAND = Joi.object().keys({
     repo: Joi.string().required(),
     sha: Joi.string().required(),
     prRef: Joi.string().optional(),
+    prSource: Joi.string().optional(),
+    prBranchName: Joi.string().optional(),
     commitBranch: Joi.string().optional(),
     manifest: Joi.string().optional(),
     parentConfig: PARENT_CONFIG.optional(),

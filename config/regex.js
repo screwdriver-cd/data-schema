@@ -44,6 +44,8 @@ module.exports = {
     JOB_NAME: /^[\w-]+$/,
     // PR JOB Name can only be PR-1 or PR-1:main, group1: PR-prNum, group2: jobName
     PR_JOB_NAME: /^(PR-\d+)(?::([\w-]+))?$/,
+    // Match all possible job name
+    ALL_JOB_NAME: /^(PR-[0-9]+:)?[\w-]+$/,
     // Internal trigger like ~component or ~main
     INTERNAL_TRIGGER: /^~([\w-]+)$/,
 

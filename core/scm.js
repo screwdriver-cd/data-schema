@@ -99,6 +99,14 @@ const SCHEMA_PR = Joi.object().keys({
         .allow('')
         .optional()
         .label('Ref of the pull request'),
+    prSource: Joi.string()
+        .allow('')
+        .optional()
+        .label('Origin of the pull request'),
+    prBranchName: Joi.string()
+        .allow('')
+        .optional()
+        .label('Branch name of the pull request'),
     createTime: Joi.date().iso()
         .label('Creation Time of the pull request')
         .example('2018-10-10T21:35:31Z'),
