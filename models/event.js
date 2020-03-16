@@ -55,9 +55,9 @@ const MODEL = {
         .description('SHA of the configuration pipeline this project depends on')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
     startFrom: Joi
-        .string()
+        .alternatives().try(trigger, jobName)
         .description('Event start point - a job name or trigger name (~commit/~pr)')
-        .example('main'),
+        .example('~commit'),
     type: Joi
         .string().valid([
             'pr',
@@ -83,7 +83,6 @@ const MODEL = {
 };
 
 const CREATE_MODEL = Object.assign({}, MODEL, {
-    startFrom: Joi.alternatives().try(trigger, jobName),
     buildId,
     parentBuildId,
     parentBuilds,
