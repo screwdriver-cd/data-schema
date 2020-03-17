@@ -16,7 +16,7 @@ const SCHEMA_PIPELINE = Joi.object().keys({
     id: Joi.reach(models.pipeline.base, 'id').required(),
     scmContext: Joi.reach(models.pipeline.base, 'scmContext').required()
 }).unknown();
-
+const pipelineId = Joi.reach(models.pipeline.base, 'id');
 const SCHEMA_START = Joi.object().keys({
     build: Joi.object(),
     causeMessage,
@@ -31,6 +31,7 @@ const SCHEMA_START = Joi.object().keys({
     eventId,
     tokenGen: Joi.func(),
     pipeline: SCHEMA_PIPELINE,
+    pipelineId,
     buildClusterName: Joi.reach(models.buildCluster.base, 'name'),
     container: Joi.reach(models.build.base, 'container').required(),
     apiUri: Joi.string().uri().required()
@@ -45,10 +46,15 @@ const SCHEMA_STOP = Joi.object().keys({
     freezeWindows: Job.freezeWindows,
     buildId,
     buildClusterName: Joi.reach(models.buildCluster.base, 'name'),
-    jobId
+    jobId,
+    token: Joi.string().label('Build JWT'),
+    pipelineId
 }).required();
 const SCHEMA_STATUS = Joi.object().keys({
-    buildId
+    buildId,
+    token: Joi.string().label('Build JWT'),
+    pipelineId,
+    jobId
 }).required();
 
 module.exports = {
