@@ -18,7 +18,11 @@ const MODEL = {
         .example(123345),
     parentEventId: Joi
         .number().integer().positive()
-        .description('Identifier of the parent event')
+        .description('Identifier of the direct parent event')
+        .example(123344),
+    groupEventId: Joi
+        .number().integer().positive()
+        .description('Identifier of the group parent event')
         .example(123344),
     causeMessage: Joi
         .string().max(512).truncate().allow('')
@@ -51,9 +55,9 @@ const MODEL = {
         .description('SHA of the configuration pipeline this project depends on')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
     startFrom: Joi
-        .string()
+        .alternatives().try(trigger, jobName)
         .description('Event start point - a job name or trigger name (~commit/~pr)')
-        .example('main'),
+        .example('~commit'),
     type: Joi
         .string().valid([
             'pr',
@@ -79,7 +83,6 @@ const MODEL = {
 };
 
 const CREATE_MODEL = Object.assign({}, MODEL, {
-    startFrom: Joi.alternatives().try(trigger, jobName),
     buildId,
     parentBuildId,
     parentBuilds,
@@ -111,8 +114,8 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'type'
     ], [
-        'causeMessage', 'meta', 'parentEventId', 'startFrom', 'workflowGraph', 'pr', 'prNum',
-        'configPipelineSha', 'baseBranch'
+        'causeMessage', 'meta', 'parentEventId', 'groupEventId', 'startFrom',
+        'workflowGraph', 'pr', 'prNum', 'configPipelineSha', 'baseBranch'
     ])).label('Get Event'),
 
     /**
@@ -123,7 +126,8 @@ module.exports = {
      */
     create: Joi.object(mutate(CREATE_MODEL, [], [
         'pipelineId', 'startFrom', 'buildId', 'causeMessage', 'parentBuildId', 'parentEventId',
-        'configPipelineSha', 'meta', 'prNum', 'creator', 'baseBranch', 'parentBuilds'
+        'groupEventId', 'configPipelineSha', 'meta', 'prNum', 'creator', 'baseBranch',
+        'parentBuilds'
     ])).label('Create Event'),
 
     /**
