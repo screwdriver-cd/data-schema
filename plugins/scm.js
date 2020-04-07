@@ -168,6 +168,16 @@ const GET_BRANCH_LIST = Joi.object().keys({
     scmContext
 }).required();
 
+const OPEN_PR = Joi.object().keys({
+    scmUri,
+    token,
+    files: Joi.array().items(Joi.objects().keys({
+        fileName: Joi.string().required(),
+        fileContent: Joi.string().required()
+    })).required(),
+    scmContext
+}).required();
+
 module.exports = {
     /**
      * Properties for Scm Base that will be passed for the addWebhook method
@@ -303,5 +313,13 @@ module.exports = {
      * @property getBranchList
      * @type {Joi}
      */
-    getBranchList: GET_BRANCH_LIST
+    getBranchList: GET_BRANCH_LIST,
+
+    /**
+     * Properties for Scm Base that will be passed for the openPr method
+     *
+     * @property openPr
+     * @type {Joi}
+     */
+    openPr: OPEN_PR
 };
