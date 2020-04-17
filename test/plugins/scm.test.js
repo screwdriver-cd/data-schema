@@ -201,4 +201,14 @@ describe('scm test', () => {
             assert.isNotNull(validate('empty.yaml', scm.getBranchList).error);
         });
     });
+
+    describe('openPr', () => {
+        it('validates', () => {
+            assert.isNull(validate('scm.openPr.yaml', scm.openPr).error);
+        });
+
+        it('fails', () => {
+            assert.isNotNull(validate('empty.yaml', scm.openPr).error);
+        });
+    });
 });

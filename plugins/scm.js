@@ -171,10 +171,12 @@ const GET_BRANCH_LIST = Joi.object().keys({
 const OPEN_PR = Joi.object().keys({
     scmUri,
     token,
-    files: Joi.array().items(Joi.objects().keys({
-        fileName: Joi.string().required(),
-        fileContent: Joi.string().required()
-    })).required(),
+    files: Joi.array().items(
+        Joi.object().keys({
+            fileName: Joi.string().required(),
+            fileContent: Joi.string().required()
+        })
+    ).min(1).required(),
     scmContext
 }).required();
 

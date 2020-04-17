@@ -1,0 +1,6 @@
+scmUri: github.com:126987453:master
+token: thisisashinytoken
+files: [{
+  fileName: 'file',
+  fileContent: 'content'
+}]
