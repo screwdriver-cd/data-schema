@@ -153,6 +153,7 @@ const SCHEMA_SOURCEPATHS = Joi.alternatives().try(
     Joi.array().items(SCHEMA_SOURCEPATH),
     SCHEMA_SOURCEPATH
 );
+const SCHEMA_CACHE = Joi.boolean().optional();
 const SCHEMA_JOB = Joi.object()
     .keys({
         annotations: Annotations.annotations,
@@ -168,7 +169,8 @@ const SCHEMA_JOB = Joi.object()
         sourcePaths: SCHEMA_SOURCEPATHS,
         steps: SCHEMA_STEPS,
         template: SCHEMA_TEMPLATE,
-        templateId: SCHEMA_TEMPLATEID
+        templateId: SCHEMA_TEMPLATEID,
+        cache: SCHEMA_CACHE
     })
     .default({});
 const SCHEMA_JOB_NO_DUP_STEPS = Joi.object()
@@ -185,7 +187,8 @@ const SCHEMA_JOB_NO_DUP_STEPS = Joi.object()
         settings: SCHEMA_SETTINGS,
         sourcePaths: SCHEMA_SOURCEPATHS,
         steps: SCHEMA_STEPS_NO_DUPS,
-        template: SCHEMA_TEMPLATE
+        template: SCHEMA_TEMPLATE,
+        cache: SCHEMA_CACHE
     })
     .default({});
 
@@ -216,5 +219,6 @@ module.exports = {
     requiresValue: SCHEMA_REQUIRES_VALUE,
     jobName: SCHEMA_JOBNAME,
     externalTrigger: SCHEMA_EXTERNAL_TRIGGER,
-    trigger: SCHEMA_TRIGGER
+    trigger: SCHEMA_TRIGGER,
+    cache: SCHEMA_CACHE
 };
