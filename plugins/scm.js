@@ -173,11 +173,13 @@ const OPEN_PR = Joi.object().keys({
     token,
     files: Joi.array().items(
         Joi.object().keys({
-            fileName: Joi.string().required(),
-            fileContent: Joi.string().required()
+            name: Joi.string().required(),
+            content: Joi.string().required()
         })
     ).min(1).required(),
-    scmContext
+    scmContext,
+    title: Joi.string().required(),
+    message: Joi.string().required()
 }).required();
 
 module.exports = {
