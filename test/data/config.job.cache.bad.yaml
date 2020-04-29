@@ -1,0 +1,5 @@
+image: node:12
+steps:
+    - publish: npm publish
+requires: ~commit
+cache: event
