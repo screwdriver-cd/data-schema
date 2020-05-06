@@ -74,4 +74,22 @@ describe('datastore test', () => {
             assert.isNotNull(validate('empty.yaml', datastore.scan).error);
         });
     });
+
+    describe('query', () => {
+        it('validates the query', () => {
+            assert.isNull(validate('datastore.query.yaml', datastore.query).error);
+        });
+
+        it('validates the query with replacements', () => {
+            assert.isNull(validate('datastore.query.replacements.yaml', datastore.query).error);
+        });
+
+        it('validates the query with rawResponse', () => {
+            assert.isNull(validate('datastore.query.rawResponse.yaml', datastore.query).error);
+        });
+
+        it('fails the query', () => {
+            assert.isNotNull(validate('empty.yaml', datastore.query).error);
+        });
+    });
 });
