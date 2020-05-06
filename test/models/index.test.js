@@ -32,7 +32,7 @@ describe('model commmons', () => {
     });
 
     // See https://github.com/screwdriver-cd/datastore-sequelize/blob/master/index.js#L311
-    it('selected models have same length of indexes and rangeKeys.', () => {
+    it('selected models have same length of indexes and rangeKeys', () => {
         modelsToCheck.forEach((model) => {
             if (Object.prototype.hasOwnProperty.call(models[model], 'rangeKeys')) {
                 assert.strictEqual(
