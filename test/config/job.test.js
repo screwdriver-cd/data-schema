@@ -51,6 +51,14 @@ describe('config job', () => {
         it('validates a description', () => {
             assert.isNull(validate('config.job.description.yaml', config.job.job).error);
         });
+
+        it('validates a job with cache', () => {
+            assert.isNull(validate('config.job.cache.yaml', config.job.job).error);
+        });
+
+        it('returns error for bad blockedBy format', () => {
+            assert.isNotNull(validate('config.job.cache.bad.yaml', config.job.job).error);
+        });
     });
 
     describe('matrix', () => {

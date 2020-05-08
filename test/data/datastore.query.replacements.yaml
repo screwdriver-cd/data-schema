@@ -1,0 +1,8 @@
+table: 'jobs'
+queries: [{
+    dbType: 'postgres',
+    query: 'SELECT * FROM builds WHERE "id" in (:ids)'
+}]
+replacements: {
+    ids: [1,2,3]
+}

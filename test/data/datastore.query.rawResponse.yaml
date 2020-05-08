@@ -1,0 +1,6 @@
+table: 'jobs'
+queries: [{
+    dbType: 'postgres',
+    query: 'SELECT * FROM builds'
+}]
+rawResponse: true
