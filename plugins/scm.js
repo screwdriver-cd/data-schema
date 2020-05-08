@@ -169,7 +169,7 @@ const GET_BRANCH_LIST = Joi.object().keys({
 }).required();
 
 const OPEN_PR = Joi.object().keys({
-    scmUri,
+    checkoutUrl,
     token,
     files: Joi.array().items(
         Joi.object().keys({

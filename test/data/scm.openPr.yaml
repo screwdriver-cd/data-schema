@@ -1,4 +1,4 @@
-scmUri: github.com:126987453:master
+checkoutUrl: git@github.com:screwdriver-cd/data-model.git#master
 token: thisisashinytoken
 files: [{
   name: 'file',
