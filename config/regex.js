@@ -15,7 +15,7 @@ module.exports = {
     // Example: chefdk/knife@1.2.3 or chefdk/knife@stable
     // Only <COMMAND_NAMESPACE>/<COMMAND_NAME> or <COMMAND_NAMESPACE>/<COMMAND_NAME> is also acceptable
     FULL_COMMAND_NAME:
-        /^([\w-]+)\/([\w-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-]+)))?$/,
+        /^([\w-]+)\/([\w-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-.]+)))?$/,
     // Template namespaces can only be named with A-Z,a-z,0-9,-,_
     TEMPLATE_NAMESPACE: /^[\w-]+$/,
     // Templates can only be named with A-Z,a-z,0-9,-,_,/; can only contain one /
@@ -32,7 +32,7 @@ module.exports = {
     // Full name of template and version. Can be <TEMPLATE_NAME>@<VERSION> or <TEMPLATE_NAME>@<TEMPLATE_TAG_NAME>
     // Example: chef/publish@1.2.3 or chef/publish@stable
     // Only <TEMPLATE_NAME> or <TEMPLATE_NAME>@ is also acceptable
-    FULL_TEMPLATE_NAME: /^([\w/-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-]+)))?$/,
+    FULL_TEMPLATE_NAME: /^([\w/-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-.]+)))?$/,
     // Full name of template and version with grouping for the namespace
     // eslint-disable-next-line max-len
     FULL_TEMPLATE_NAME_WITH_NAMESPACE: /^([\w-]+)\/([\w/-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-]+)))?$/,
