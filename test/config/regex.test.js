@@ -151,6 +151,10 @@ describe('config regex', () => {
             assert.isTrue(config.regex.FULL_COMMAND_NAME.test('chefdk/knife'));
         });
 
+        it('checks good command full names with tag including dot', () => {
+            assert.isTrue(config.regex.FULL_COMMAND_NAME.test('chefdk/knife@v1.1.1'));
+        });
+
         it('fails on bad command full names', () => {
             assert.isFalse(config.regex.FULL_COMMAND_NAME.test('bad name'));
         });
@@ -195,6 +199,10 @@ describe('config regex', () => {
 
         it('checks good template full names without version', () => {
             assert.isTrue(config.regex.FULL_TEMPLATE_NAME.test('chefdk/knife'));
+        });
+
+        it('checks good template full names with tag including dot', () => {
+            assert.isTrue(config.regex.FULL_TEMPLATE_NAME.test('chefdk/knife@v1.1.1'));
         });
 
         it('fails on bad template full names', () => {
