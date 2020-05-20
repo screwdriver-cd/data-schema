@@ -107,7 +107,29 @@ const SCHEMA_STEP_OBJECT = Joi.object()
 
 const SCHEMA_DESCRIPTION = Joi.string().max(100).optional();
 const SCHEMA_IMAGE = Joi.string().regex(Regex.IMAGE_NAME);
-const SCHEMA_SETTINGS = Joi.object().optional();
+const SCHEMA_EMAIL_ADDR_STRING = Joi.string().email();
+const SCHEMA_STATUS_STRING = Joi.string().regex(Regex.STATUS);
+const SCHEMA_SLACK_CHANNEL_STRING = Joi.string();
+const SCHEMA_SETTINGS_EMAIL = Joi.alternatives().try(
+    Joi.array().items(SCHEMA_EMAIL_ADDR_STRING),
+    Joi.object().keys({
+        addresses: Joi.array().items(SCHEMA_EMAIL_ADDR_STRING).optional(),
+        statuses: Joi.array().items(SCHEMA_STATUS_STRING).optional()
+    })
+);
+const SCHEMA_SETTINGS_SLACK = Joi.alternatives().try(
+    Joi.array().items(SCHEMA_SLACK_CHANNEL_STRING),
+    Joi.object().keys({
+        channels: Joi.array().items(SCHEMA_SLACK_CHANNEL_STRING).optional(),
+        statuses: Joi.array().items(SCHEMA_STATUS_STRING).optional(),
+        minimized: Joi.bool().optional()
+    })
+);
+const SCHEMA_SETTINGS = Joi.object()
+    .keys({
+        email: SCHEMA_SETTINGS_EMAIL.optional(),
+        slack: SCHEMA_SETTINGS_SLACK.optional()
+    });
 const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJECT);
 const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
 const SCHEMA_STEPS_NO_DUPS = Joi.array().items(SCHEMA_STEP).min(1).unique((a, b) => {

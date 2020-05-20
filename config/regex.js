@@ -85,5 +85,7 @@ module.exports = {
     // Optionally, can have rootDir. For example: github.com:abc-123:master:src/app/component
     SCM_URI: /^([^:]+):([^:]+):([^:]+)(?::([^:]+))?$/,
     // Image aliases can only contain A-Z,a-z,0-9,-,_
-    IMAGE_ALIAS: /^[\w-]+$/
+    IMAGE_ALIAS: /^[\w-]+$/,
+    // Status can only contain A-Z
+    STATUS: /^[A-Z]+$/
 };
