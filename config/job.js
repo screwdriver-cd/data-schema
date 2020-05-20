@@ -111,6 +111,7 @@ const SCHEMA_EMAIL_ADDR_STRING = Joi.string().email();
 const SCHEMA_STATUS_STRING = Joi.string().regex(Regex.STATUS);
 const SCHEMA_SLACK_CHANNEL_STRING = Joi.string();
 const SCHEMA_SETTINGS_EMAIL = Joi.alternatives().try(
+    SCHEMA_EMAIL_ADDR_STRING.optional(),
     Joi.array().items(SCHEMA_EMAIL_ADDR_STRING),
     Joi.object().keys({
         addresses: Joi.array().items(SCHEMA_EMAIL_ADDR_STRING).optional(),
@@ -118,6 +119,7 @@ const SCHEMA_SETTINGS_EMAIL = Joi.alternatives().try(
     })
 );
 const SCHEMA_SETTINGS_SLACK = Joi.alternatives().try(
+    SCHEMA_SLACK_CHANNEL_STRING.optional(),
     Joi.array().items(SCHEMA_SLACK_CHANNEL_STRING),
     Joi.object().keys({
         channels: Joi.array().items(SCHEMA_SLACK_CHANNEL_STRING).optional(),
