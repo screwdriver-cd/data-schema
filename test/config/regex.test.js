@@ -273,6 +273,14 @@ describe('config regex', () => {
             assert.deepEqual('PR-1:main-job'.match(config.regex.PR_JOB_NAME)[2], 'main-job');
         });
 
+        it('checks all possible job names', () => {
+            assert.isTrue(config.regex.ALL_JOB_NAME.test('foo-BAR_15'));
+            assert.isTrue(config.regex.ALL_JOB_NAME.test('PR-1'));
+            assert.isTrue(config.regex.ALL_JOB_NAME.test('PR-1:main'));
+            assert.isTrue(config.regex.ALL_JOB_NAME.test('PR-1:main-job'));
+            assert.isTrue(config.regex.ALL_JOB_NAME.test('PR-1:sd@21:external_fork'));
+        });
+
         it('checks bad PR job names', () => {
             assert.isFalse(config.regex.PR_JOB_NAME.test('PR-1-main'));
             assert.isFalse(config.regex.PR_JOB_NAME.test('PR-1:main:job'));
