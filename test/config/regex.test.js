@@ -390,6 +390,16 @@ describe('config regex', () => {
                         'data.schema',
                         '#banana'
                     ]
+                },
+                {
+                    url: 'org-1234@bitbucket.org:screwdriver-cd/data.schema#banana',
+                    match: [
+                        'org-1234@bitbucket.org:screwdriver-cd/data.schema#banana',
+                        'bitbucket.org',
+                        'screwdriver-cd',
+                        'data.schema',
+                        '#banana'
+                    ]
                 }
             ];
 
