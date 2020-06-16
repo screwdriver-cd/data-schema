@@ -8,7 +8,7 @@ const TOKEN_CONFIG = Joi.object({
     buildId: Joi.reach(models.build.base, 'id').required(),
     jobId: Joi.reach(models.job.base, 'id').required(),
     eventId: Joi.reach(models.event.base, 'id'),
-    isPR: Joi.boolean().required().default(false),
+    isPR: Joi.boolean().required().default(true),
     pipelineId: Joi.reach(models.pipeline.base, 'id').required(),
     scmContext: Joi.reach(models.pipeline.base, 'scmContext').required(),
     configPipelineId: Joi.reach(models.pipeline.base, 'id').optional(),
