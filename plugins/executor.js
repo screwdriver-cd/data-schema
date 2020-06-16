@@ -38,7 +38,9 @@ const SCHEMA_START = Joi.object().keys({
         .label('API URI'),
     token: Joi.string().required()
         .label('Build JWT'),
-    enqueueTime: Joi.date().iso()
+    enqueueTime: Joi.date().iso(),
+    isPR: Joi.boolean().optional().default(false),
+    prParentJobId: jobId.optional()
 }).required();
 const SCHEMA_STOP = Joi.object().keys({
     annotations: Annotations.annotations,
