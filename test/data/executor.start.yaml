@@ -25,3 +25,5 @@ pipeline:
     scmContext: http://mock
     admin: admin
     token: asdf
+isPR: true
+prParentJobId: 457
