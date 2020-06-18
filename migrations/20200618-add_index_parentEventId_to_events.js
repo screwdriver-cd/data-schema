@@ -4,6 +4,7 @@
 
 const prefix = process.env.DATASTORE_SEQUELIZE_PREFIX || '';
 const table = `${prefix}events`;
+
 module.exports = {
     up: async (queryInterface) => {
         await queryInterface.sequelize.transaction(async (transaction) => {
@@ -12,4 +13,3 @@ module.exports = {
         });
     }
 };
-
