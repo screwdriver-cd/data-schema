@@ -146,7 +146,7 @@ module.exports = {
      * @property rangeKeys
      * @type {Array}
      */
-    rangeKeys: ['createTime', 'pipelineId', 'type', 'groupEventId'],
+    rangeKeys: ['createTime', 'pipelineId', 'type', 'groupEventId', 'parentEventId'],
 
     /**
      * Tablename to be used in the datastore
@@ -162,6 +162,11 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: [{ fields: ['createTime', 'pipelineId'] }, { fields: ['pipelineId'] },
-        { fields: ['type'] }, { fields: ['groupEventId'] }]
+    indexes: [
+        { fields: ['createTime', 'pipelineId'] },
+        { fields: ['pipelineId'] },
+        { fields: ['type'] },
+        { fields: ['groupEventId'] },
+        { fields: ['parentEventId'] }
+    ]
 };
