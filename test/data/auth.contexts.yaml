@@ -2,3 +2,4 @@
 -
   context: this is a context,
   displayName: this is a display name
+  autoDeployKeyGeneration: true
