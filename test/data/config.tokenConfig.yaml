@@ -1,0 +1,9 @@
+username: 123
+buildId: 123
+jobId: 567
+eventId: 666
+isPR: true
+pipelineId: 1
+scmContext: "github.com"
+prParentJobId: 456
+
