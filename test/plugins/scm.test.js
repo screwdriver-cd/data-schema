@@ -194,7 +194,7 @@ describe('scm test', () => {
 
     describe('addDeployKey', () => {
         it('validates', () => {
-            assert.isNull(validate('scm.addDeploy.yaml', scm.addDeployKey).error);
+            assert.isNull(validate('scm.addDeployKey.yaml', scm.addDeployKey).error);
         });
 
         it('fails', () => {
