@@ -30,6 +30,10 @@ describe('api validator', () => {
             assert.isNull(validate('validator.erroroutput.yaml', api.validator.output).error);
         });
 
+        it('validates basic output with warnings', () => {
+            assert.isNull(validate('validator.warningsoutput.yaml', api.validator.output).error);
+        });
+
         it('validates output with childPipelines', () => {
             assert.isNull(
                 validate('validator-with-childPipelines.output.yaml', api.validator.output).error);
