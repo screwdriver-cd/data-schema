@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 
 const MODEL = {
     page: Joi
@@ -18,7 +18,7 @@ const MODEL = {
 
     sort: Joi
         .string().lowercase()
-        .valid(['ascending', 'descending'])
+        .valid('ascending', 'descending')
         .default('descending')
         .description('Sorting option'),
 

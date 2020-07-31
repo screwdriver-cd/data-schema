@@ -24,7 +24,16 @@ describe('config job', () => {
             assert.isNotNull(result.error);
             assert.match(result.error,
                 // eslint-disable-next-line no-useless-escape
-                /^.*\"requires" with value "~sd@123" fails to match the required pattern.*$/);
+                /^.*\"requires" does not match any of the allowed types.*$/);
+        });
+
+        it('validates a job with incorrect pattern in require', () => {
+            const result = validate('config.job.jobv2.externalrequires.bad1.yaml', config.job.job);
+
+            assert.isNotNull(result.error);
+            assert.match(result.error,
+                // eslint-disable-next-line no-useless-escape
+                /^.*\"requires" does not match any of the allowed types.*$/);
         });
 
         it('returns error for requires with bad commit branch regex', () => {

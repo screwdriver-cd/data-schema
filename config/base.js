@@ -2,7 +2,7 @@
 
 const Annotations = require('./annotations');
 const Job = require('./job');
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const Regex = require('./regex');
 const Parameters = require('./parameters');
 
@@ -35,22 +35,20 @@ const SCHEMA_SCM_URL = Joi.string().regex(Regex.CHECKOUT_URL);
 const SCHEMA_SCM_URLS = Joi.array().items(SCHEMA_SCM_URL).min(1);
 const SCHEMA_CHILD_PIPELINES = Joi.object()
     .keys({
-        scmUrls: SCHEMA_SCM_URLS,
+        scmUrls: SCHEMA_SCM_URLS.required(),
         startAll: Joi.boolean()
     })
-    .requiredKeys('scmUrls')
     .unknown(false);
 const SCHEMA_CONFIG = Joi.object()
     .keys({
         version: Joi.number().integer().min(1).max(50),
         annotations: Annotations.annotations,
-        jobs: SCHEMA_JOBS,
+        jobs: SCHEMA_JOBS.required(),
         shared: SCHEMA_SHARED,
         cache: SCHEMA_CACHE,
         childPipelines: SCHEMA_CHILD_PIPELINES,
         parameters: Parameters.parameters
     })
-    .requiredKeys('jobs')
     .unknown(false);
 
 /**

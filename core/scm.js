@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const Regex = require('../config/regex');
 
 const SCHEMA_USER = Joi.object().keys({
@@ -124,9 +124,11 @@ const SCHEMA_PR = Joi.object().keys({
 
 const SCHEMA_HOOK = Joi.object().keys({
     action: Joi.string()
-        .when('type', { is: 'pr',
-            then: Joi.valid(['opened', 'reopened', 'closed', 'synchronized']) })
-        .when('type', { is: 'repo', then: Joi.valid(['push', 'release', 'tag']) })
+        .when('type', {
+            is: 'pr',
+            then: Joi.valid('opened', 'reopened', 'closed', 'synchronized')
+        })
+        .when('type', { is: 'repo', then: Joi.valid('push', 'release', 'tag') })
         .when('type', { is: 'ping', then: Joi.allow('').optional(), otherwise: Joi.required() })
         .label('Action of the event'),
 
@@ -171,7 +173,7 @@ const SCHEMA_HOOK = Joi.object().keys({
         .allow('')
         .when('type', {
             is: 'pr',
-            then: Joi.valid(['fork', 'branch'])
+            then: Joi.valid('fork', 'branch')
         })
         .optional()
         .label('PR original source'),
@@ -188,21 +190,27 @@ const SCHEMA_HOOK = Joi.object().keys({
         .example('github:github.com'),
 
     sha: Joi.string().hex()
-        .when('action', { is: ['release', 'tag'], then: Joi.allow('').optional() })
-        .when('type', { is: 'ping', then: Joi.allow('').optional(), otherwise: Joi.required() })
+        .when('action', {
+            is: ['release', 'tag'],
+            then: Joi.allow('', null).optional()
+        })
+        .when('type', {
+            is: 'ping',
+            then: Joi.allow('', null).optional(),
+            otherwise: Joi.required()
+        })
         .label('Commit SHA')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
 
     type: Joi.string()
-        .valid(['pr', 'repo', 'ping'])
+        .valid('pr', 'repo', 'ping')
         .required()
         .label('Type of the event'),
 
-    username: Joi.reach(SCHEMA_USER, 'username'),
+    username: SCHEMA_USER.extract('username'),
 
     commitAuthors: Joi.array()
         .items(Joi.string().allow(''))
-        .allow([])
         .optional()
         .label('Commit authors'),
 

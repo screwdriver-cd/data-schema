@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 
 const SCHEMA_KEY = Joi.object().keys({
     key: Joi.string().label('Public Key for Verifying JWTs')

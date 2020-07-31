@@ -1,27 +1,26 @@
 'use strict';
 
 const Annotations = require('./annotations');
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const Regex = require('./regex');
-const Cron = require('./cronExpression');
+const sdCron = require('./cronExpression');
 
 const SPECIFIC_BRANCH_POS = 4;
 
-// ref. https://github.com/hapijs/joi/blob/v13.3.0/API.md#extendextension
+// ref. https://github.com/sideway/joi/blob/v17.1.1/API.md#extendextensions
 const sdJoi = Joi.extend(joi => ({
+    type: 'string',
     base: joi.string(),
-    name: 'string',
-    language: {
-        branchFilter: 'invalid trigger format'
+    messages: {
+        'string.branchFilter': '"{{#label}}" has invalid trigger format {{#q}}'
     },
-    rules: [
-        {
-            name: 'branchFilter',
-            validate(params, value, state, options) {
+    rules: {
+        branchFilter: {
+            validate(value, helpers) {
                 const matched = Regex.TRIGGER.exec(value);
 
                 if (!matched) {
-                    return this.createError('string.branchFilter', { v: value }, state, options);
+                    return helpers.error('string.branchFilter', { q: value });
                 }
 
                 // e.g. value = ~commit:/^user-.*$/ => brFilter = /^user-.*$/
@@ -37,8 +36,9 @@ const sdJoi = Joi.extend(joi => ({
                         const re = new RegExp(filterRegex);
                         /* eslint-enable */
                     } catch (e) {
-                        return this.createError(
-                            'string.branchFilter', { v: value, err: e.message }, state, options);
+                        console.log('===>>', value, e.message);
+
+                        return helpers.error('string.branchFilter', { q: value });
                     }
                 }
 
@@ -46,7 +46,7 @@ const sdJoi = Joi.extend(joi => ({
                 return value;
             }
         }
-    ]
+    }
 }));
 
 const SCHEMA_MATRIX = Joi.object()
@@ -57,14 +57,8 @@ const SCHEMA_MATRIX = Joi.object()
     // All others are marked as invalid
     .unknown(false)
     // Add documentation
-    .options({
-        language: {
-            object: {
-                allowUnknown: 'only supports uppercase letters, digits, and underscore (cannot '
-                + 'start with digit)'
-            }
-        }
-    });
+    .description('only supports uppercase letters, digits, and underscore (cannot '
+        + 'start with digit)');
 // Secrets must be all uppercase
 const SCHEMA_SECRET = Joi.string().regex(Regex.ENV_NAME).max(64);
 const SCHEMA_SECRETS = Joi.array()
@@ -78,14 +72,8 @@ const SCHEMA_ENVIRONMENT = Joi.object()
     // All others are marked as invalid
     .unknown(false)
     // Add documentation
-    .options({
-        language: {
-            object: {
-                allowUnknown: 'only supports uppercase letters, digits, and underscore (cannot '
-                + 'start with digit)'
-            }
-        }
-    });
+    .description('only supports uppercase letters, digits, and underscore (cannot '
+        + 'start with digit)');
 const SCHEMA_JOBNAME = Joi.string().max(100).regex(Regex.JOB_NAME);
 const SCHEMA_STEP_STRING = Joi.string();
 const SCHEMA_STEP_OBJECT = Joi.object()
@@ -97,13 +85,7 @@ const SCHEMA_STEP_OBJECT = Joi.object()
     // And there can be only one command per step
     .length(1)
     // Add documentation
-    .options({
-        language: {
-            object: {
-                allowUnknown: 'only supports the following characters A-Z,a-z,0-9,-,_'
-            }
-        }
-    });
+    .description('only supports the following characters A-Z,a-z,0-9,-,_');
 
 const SCHEMA_DESCRIPTION = Joi.string().max(100).optional();
 const SCHEMA_IMAGE = Joi.string().regex(Regex.IMAGE_NAME);
@@ -125,11 +107,11 @@ const SCHEMA_TEMPLATEID = Joi
     .optional()
     .allow(null);
 // ~commit, ~commit:staging, ~commit:/^user-.*$/, ~pr, etc.
-const SCHEMA_TRIGGER = sdJoi.string().regex(Regex.TRIGGER).branchFilter();
+const SCHEMA_TRIGGER = sdJoi.string().branchFilter();
 const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne
 const SCHEMA_EXTERNAL_TRIGGER = Joi.string().regex(Regex.EXTERNAL_TRIGGER_ALL)
     .example('~sd@1234:component'); // ~sd@123:main or sd@123:main
-const SCHEMA_CRON_EXPRESSION = Cron.string().cron();
+const SCHEMA_CRON_EXPRESSION = sdCron.string().cron();
 const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(
     SCHEMA_INTERNAL_TRIGGER, SCHEMA_JOBNAME, SCHEMA_TRIGGER);
 const SCHEMA_REQUIRES = Joi.alternatives().try(

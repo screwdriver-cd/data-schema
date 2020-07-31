@@ -1,18 +1,14 @@
 'use strict';
 
 const cronParser = require('cron-parser');
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 
 const sdCron = Joi.extend(joi => ({
+    type: 'string',
     base: joi.string(),
-    name: 'string',
-    language: {
-        cron: 'Cron expression for freeze windows'
-    },
-    rules: [
-        {
-            name: 'cron',
-            validate(params, value, state, options) {
+    rules: {
+        cron: {
+            validate(value, helpers) {
                 try {
                     const fields = value.trim().split(/\s+/);
 
@@ -30,14 +26,13 @@ const sdCron = Joi.extend(joi => ({
 
                     cronParser.parseExpression(newCronExp);
                 } catch (err) {
-                    return this.createError(
-                        'string.cron', { v: value, err: err.message }, state, options);
+                    return helpers.error('string.cron', { v: value, err: err.message });
                 }
 
                 return value;
             }
         }
-    ]
+    }
 }));
 
 module.exports = sdCron;

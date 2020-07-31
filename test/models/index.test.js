@@ -9,7 +9,7 @@ describe('model commmons', () => {
 
     const modelsToCheck = fs.readdirSync(modelsPath).filter(file =>
         fs.statSync(`${modelsPath}/${file}`).isFile()
-            && file !== 'index.js' && /^.*\.js$/.test(file))
+        && file !== 'index.js' && /^.*\.js$/.test(file))
         .map(file => file.match(/^(.*)\.js$/)[1]);
 
     it('selected models have tableName defined', () => {
@@ -44,10 +44,12 @@ describe('model commmons', () => {
         });
     });
 
-    it('selected models have (valids|length|max) definition of indexes for MySQL.', () => {
+    it.only('selected models have (valids|length|max) definition of indexes for MySQL.', () => {
         modelsToCheck.forEach((model) => {
             if (Object.prototype.hasOwnProperty.call(models[model], 'indexes')) {
                 models[model].indexes.forEach((columnName) => {
+                    console.log(models[model].base);
+
                     /* eslint no-underscore-dangle: ["error", { "allow": ["_inner"] }] */
                     models[model].base._inner.children.forEach((column) => {
                         const schema = column.schema.describe();

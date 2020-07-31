@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const mutate = require('../lib/mutate');
 const Scm = require('../core/scm');
 const Regex = require('../config/regex');
@@ -9,7 +9,8 @@ const Step = require('./step');
 const ID = Joi.number().integer().positive();
 const PARENT_BUILD_ID = ID;
 const PARENT_BUILDS_ID = Joi.alternatives().try(ID, Joi.valid(null));
-const buildClusterName = Joi.reach(require('./buildCluster').base, 'name');
+const buildClusterSchema = require('./buildCluster');
+const buildClusterName = buildClusterSchema.base.extract('name');
 
 const MODEL = {
     id: Joi
@@ -93,7 +94,7 @@ const MODEL = {
         .description('Key=>Value information from the build itself'),
 
     status: Joi
-        .string().valid([
+        .string().valid(
             'ABORTED',
             'CREATED', // when the build is created but not started
             'FAILURE',
@@ -104,7 +105,7 @@ const MODEL = {
             'UNSTABLE',
             'COLLAPSED', // when the build is collapsed
             'FROZEN' // when the build is frozen due to freeze window
-        ])
+        )
         .description('Current status of the build')
         .example('SUCCESS'),
 

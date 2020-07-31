@@ -1,12 +1,12 @@
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 
 const HABITAT_MODE = Joi
-    .string().valid([
+    .string().valid(
         'remote',
         'local'
-    ])
+    )
     .description('Mode of the Habitat command')
     .example('remote');
 
@@ -27,13 +27,12 @@ const HABITAT_COMMAND = Joi
 
 const SCHEMA_HABITAT = Joi.object()
     .keys({
-        mode: HABITAT_MODE,
+        mode: HABITAT_MODE.required(),
         file: HABITAT_FILE
             .when('mode', { is: 'local', then: Joi.required() }),
-        package: HABITAT_PACKAGE,
-        command: HABITAT_COMMAND
-    })
-    .requiredKeys('mode', 'package', 'command');
+        package: HABITAT_PACKAGE.required(),
+        command: HABITAT_COMMAND.required()
+    });
 
 const DOCKER_IMAGE = Joi
     .string()
@@ -48,10 +47,9 @@ const DOCKER_COMMAND = Joi
 
 const SCHEMA_DOCKER = Joi.object()
     .keys({
-        image: DOCKER_IMAGE,
+        image: DOCKER_IMAGE.required(),
         command: DOCKER_COMMAND
-    })
-    .requiredKeys('image');
+    });
 
 const BINARY_FILE = Joi
     .string()
@@ -60,9 +58,8 @@ const BINARY_FILE = Joi
 
 const SCHEMA_BINARY = Joi.object()
     .keys({
-        file: BINARY_FILE
-    })
-    .requiredKeys('file');
+        file: BINARY_FILE.required()
+    });
 
 /**
  * The definition of the Command pieces

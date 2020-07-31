@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const mutate = require('../lib/mutate');
 
 const MODEL = {
@@ -33,12 +33,7 @@ const MODEL = {
         .description('Username of user creating the banner')
         .example('batman123'),
 
-    type: Joi
-        .string().valid([
-            'info',
-            'warn'
-        ])
-        .max(32)
+    type: Joi.string().valid('info', 'warn')
         .description('Type/Severity of the banner message')
         .example('info')
 };

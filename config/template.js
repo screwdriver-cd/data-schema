@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const Job = require('./job');
 const Regex = require('./regex');
 
@@ -13,10 +13,11 @@ const TEMPLATE_NAMESPACE = Joi
 
 // Don't allow slashes in the template name when namespace exists
 // Allow one slash in the template name when namespace does not exist
-const TEMPLATE_NAME = Joi.alternatives()
-    .when('namespace', { is: Joi.exist(),
-        then: Joi.string().regex(Regex.TEMPLATE_NAME_NO_SLASH).max(64),
-        otherwise: Joi.string().regex(Regex.TEMPLATE_NAME_ALLOW_SLASH).max(64) })
+const TEMPLATE_NAME = Joi.alternatives().conditional('namespace', {
+    is: Joi.exist(),
+    then: Joi.string().regex(Regex.TEMPLATE_NAME_NO_SLASH).max(64),
+    otherwise: Joi.string().regex(Regex.TEMPLATE_NAME_ALLOW_SLASH).max(64)
+})
     .description('Name of the Template')
     .example('node/npm-install');
 
@@ -56,27 +57,19 @@ const TEMPLATE_MAINTAINER = Joi
 
 const TEMPLATE_IMAGES = Joi.object()
     .pattern(Regex.IMAGE_ALIAS, Job.image)
-    .min(1)
-    .options({
-        language: {
-            object: {
-                allowUnknown: 'only supports the following characters A-Z,a-z,0-9,-,_'
-            }
-        }
-    });
+    .description('only supports the following characters A-Z,a-z,0-9,-,_')
+    .min(1);
 
 const SCHEMA_TEMPLATE = Joi.object()
     .keys({
         namespace: TEMPLATE_NAMESPACE,
-        name: TEMPLATE_NAME,
-        version: TEMPLATE_VERSION,
-        description: TEMPLATE_DESCRIPTION,
-        maintainer: TEMPLATE_MAINTAINER,
-        config: Job.job,
+        name: TEMPLATE_NAME.required(),
+        version: TEMPLATE_VERSION.required(),
+        description: TEMPLATE_DESCRIPTION.required(),
+        maintainer: TEMPLATE_MAINTAINER.required(),
+        config: Job.job.required(),
         images: TEMPLATE_IMAGES
-    })
-    .requiredKeys('name', 'version', 'description', 'maintainer',
-        'config', 'config.image', 'config.steps');
+    });
 
 /**
  * The definition of the Template pieces

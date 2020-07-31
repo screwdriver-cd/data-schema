@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const { externalTrigger, jobName, requiresValue } = require('../config/job');
 
 const SCHEMA_WORKFLOW_GRAPH = Joi.object().keys({

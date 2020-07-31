@@ -1,9 +1,9 @@
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const mutate = require('../lib/mutate');
 const Command = require('../config/command');
-const pipelineId = Joi.reach(require('./pipeline').base, 'id');
+const pipelineId = require('./pipeline').base.extract('id');
 
 const MODEL = {
     id: Joi

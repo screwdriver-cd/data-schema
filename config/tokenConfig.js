@@ -1,18 +1,18 @@
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const models = require('../models');
 
 const TOKEN_CONFIG = Joi.object({
     username: [Joi.string().required(), Joi.ref('buildId')],
-    buildId: Joi.reach(models.build.base, 'id').required(),
-    jobId: Joi.reach(models.job.base, 'id').required(),
-    eventId: Joi.reach(models.event.base, 'id'),
+    buildId: models.build.base.extract('id').required(),
+    jobId: models.job.base.extract('id').required(),
+    eventId: models.event.base.extract('id'),
     isPR: Joi.boolean().required(),
-    pipelineId: Joi.reach(models.pipeline.base, 'id').required(),
-    scmContext: Joi.reach(models.pipeline.base, 'scmContext').required(),
-    configPipelineId: Joi.reach(models.pipeline.base, 'id').optional(),
-    prParentJobId: Joi.reach(models.job.base, 'id').optional()
+    pipelineId: models.pipeline.base.extract('id').required(),
+    scmContext: models.pipeline.base.extract('scmContext').required(),
+    configPipelineId: models.pipeline.base.extract('id').optional(),
+    prParentJobId: models.job.base.extract('id').optional()
 });
 
 /**

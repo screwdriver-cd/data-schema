@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const mutate = require('../lib/mutate');
 const validator = require('../api/validator');
 const SCM_PR_SCHEMA = require('../core/scm').pr;
@@ -35,11 +35,10 @@ const MODEL = {
         .example(123345),
 
     state: Joi
-        .string().valid([
+        .string().valid(
             'ENABLED',
             'DISABLED'
-        ])
-        .max(10)
+        )
         .description('Current state of the Job')
         .example('ENABLED')
         .default('ENABLED'),
@@ -73,11 +72,11 @@ const MODEL = {
 };
 
 const EXTENDED_MODEL = {
-    title: Joi.reach(SCM_PR_SCHEMA, 'title'),
-    createTime: Joi.reach(SCM_PR_SCHEMA, 'createTime'),
-    username: Joi.reach(SCM_PR_SCHEMA, 'username'),
-    userProfile: Joi.reach(SCM_PR_SCHEMA, 'userProfile'),
-    url: Joi.reach(SCM_PR_SCHEMA, 'url'),
+    title: SCM_PR_SCHEMA.extract('title'),
+    createTime: SCM_PR_SCHEMA.extract('createTime'),
+    username: SCM_PR_SCHEMA.extract('username'),
+    userProfile: SCM_PR_SCHEMA.extract('userProfile'),
+    url: SCM_PR_SCHEMA.extract('url'),
     ...MODEL
 };
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const Annotations = require('../config/annotations');
 const Base = require('../config/base');
 const Job = require('../config/job');
