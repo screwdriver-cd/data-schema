@@ -44,7 +44,7 @@ describe('model commmons', () => {
         });
     });
 
-    it.only('selected models have (valids|length|max) definition of indexes for MySQL.', () => {
+    it('selected models have (valids|length|max) definition of indexes for MySQL.', () => {
         modelsToCheck.forEach((model) => {
             if (Object.prototype.hasOwnProperty.call(models[model], 'indexes')) {
                 models[model].indexes.forEach((index) => {
