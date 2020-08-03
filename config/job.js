@@ -36,8 +36,6 @@ const sdJoi = Joi.extend(joi => ({
                         const re = new RegExp(filterRegex);
                         /* eslint-enable */
                     } catch (e) {
-                        console.log('===>>', value, e.message);
-
                         return helpers.error('string.branchFilter', { q: value });
                     }
                 }

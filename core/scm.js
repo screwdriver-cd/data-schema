@@ -200,10 +200,11 @@ const SCHEMA_HOOK = Joi.object().keys({
                 then: Joi.optional().allow('')
             })
         .concat(Joi.string().hex()
-        .when('type', {
-                is: 'ping',
-                then: Joi.optional().allow('')
-            }))
+            .when('type',
+                {
+                    is: 'ping',
+                    then: Joi.optional().allow('')
+                }))
         .required()
         .label('Commit SHA')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
