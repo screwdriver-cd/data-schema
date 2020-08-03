@@ -166,7 +166,11 @@ const SCHEMA_HOOK = Joi.object().keys({
 
     ref: Joi.string()
         .when('action',
-            { is: ['release', 'tag'], then: Joi.required(), otherwise: Joi.allow('').optional() })
+            {
+                is: Joi.valid('release', 'tag'),
+                then: Joi.required(),
+                otherwise: Joi.optional()
+            })
         .label('reference of the repository'),
 
     prSource: Joi.string()
@@ -190,15 +194,17 @@ const SCHEMA_HOOK = Joi.object().keys({
         .example('github:github.com'),
 
     sha: Joi.string().hex()
-        .when('action', {
-            is: ['release', 'tag'],
-            then: Joi.allow('', null).optional()
-        })
+        .when('action',
+            {
+                is: Joi.valid('release', 'tag'),
+                then: Joi.optional().allow('')
+            })
+        .concat(Joi.string().hex()
         .when('type', {
-            is: 'ping',
-            then: Joi.allow('', null).optional(),
-            otherwise: Joi.required()
-        })
+                is: 'ping',
+                then: Joi.optional().allow('')
+            }))
+        .required()
         .label('Commit SHA')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
 
