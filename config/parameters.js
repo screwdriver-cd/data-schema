@@ -6,7 +6,9 @@ const SCHEMA_PARAMETERS_STRING = Joi.string();
 const SCHEMA_PARAMETERS_OBJECT = Joi.object({
     value: Joi.alternatives().try(Joi.string(), Joi.array().items(Joi.string())).required(),
     description: Joi.string()
-}).description('only supports string or key: { value, description } pair as values');
+}).messages({
+    'any.required': 'only supports string or key pair {#value}:{#description} as values'
+});
 
 const SCHEMA_PARAMETERS = Joi.object()
     .pattern(Joi.any(),

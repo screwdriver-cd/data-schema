@@ -57,7 +57,9 @@ const TEMPLATE_MAINTAINER = Joi
 
 const TEMPLATE_IMAGES = Joi.object()
     .pattern(Regex.IMAGE_ALIAS, Job.image)
-    .description('only supports the following characters A-Z,a-z,0-9,-,_')
+    .messages({
+        'any.pattern': 'only supports the following characters A-Z,a-z,0-9,-,_'
+    })
     .min(1);
 
 const SCHEMA_TEMPLATE = Joi.object()
