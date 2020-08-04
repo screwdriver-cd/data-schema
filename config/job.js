@@ -56,8 +56,8 @@ const SCHEMA_MATRIX = Joi.object()
     .unknown(false)
     // Add documentation
     .messages({
-        'any.pattern': `only supports uppercase letters, digits, and underscore${
-            +'(cannot start with digit)'}`
+        'object.unknown': 'only supports uppercase letters, digits, and underscore '
+            + '(cannot start with digit)'
     });
 // Secrets must be all uppercase
 const SCHEMA_SECRET = Joi.string().regex(Regex.ENV_NAME).max(64);
@@ -73,7 +73,7 @@ const SCHEMA_ENVIRONMENT = Joi.object()
     .unknown(false)
     // Add documentation
     .messages({
-        'any.pattern': 'only supports uppercase letters, digits, and underscore (cannot '
+        'object.unknown': 'only supports uppercase letters, digits, and underscore (cannot '
             + 'start with digit)'
     });
 const SCHEMA_JOBNAME = Joi.string().max(100).regex(Regex.JOB_NAME);
@@ -87,7 +87,7 @@ const SCHEMA_STEP_OBJECT = Joi.object()
     // And there can be only one command per step
     .length(1)
     // Add documentation
-    .messages({ 'any.pattern': 'only supports the following characters A-Z,a-z,0-9,-,_' });
+    .messages({ 'object.unknown': 'only supports the following characters A-Z,a-z,0-9,-,_' });
 
 const SCHEMA_DESCRIPTION = Joi.string().max(100).optional();
 const SCHEMA_IMAGE = Joi.string().regex(Regex.IMAGE_NAME);
