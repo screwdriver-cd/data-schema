@@ -2,7 +2,7 @@
 
 const Annotations = require('../config/annotations');
 const Base = require('../config/base');
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const Regex = require('../config/regex');
 const Scm = require('../core/scm');
 const WorkflowGraph = require('../config/workflowGraph');

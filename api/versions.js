@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 
 const SCHEMA_PACKAGE_VERSIONS = Joi.array().items(
     Joi.string().description('Package and its version')

@@ -1,7 +1,7 @@
 'use strict';
 
 const cronParser = require('cron-parser');
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 
 const sdCron = Joi.extend(joi => ({
     type: 'string',

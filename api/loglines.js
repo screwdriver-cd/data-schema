@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const Build = require('../models/build');
 
 const SCHEMA_PARAMS = Joi.object().keys({

@@ -2,7 +2,7 @@
 
 const Annotations = require('../config/annotations');
 const Job = require('../config/job');
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const models = require('../models');
 const buildId = models.build.base.extract('id').required();
 const eventId = models.event.base.extract('id');

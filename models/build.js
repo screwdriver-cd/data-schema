@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Scm = require('../core/scm');
 const Regex = require('../config/regex');

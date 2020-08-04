@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const mutate = require('../lib/mutate');
 // Token hash length, measured in bits
 const HASH_LENGTH = 512;

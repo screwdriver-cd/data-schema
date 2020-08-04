@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 
 // List of data, eventually key-value pairs
 const SCHEMA_ANNOTATIONS = Joi.object().optional();

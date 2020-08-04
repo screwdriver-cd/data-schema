@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Command = require('../config/command');
 const pipelineId = require('./pipeline').base.extract('id');

@@ -1,7 +1,7 @@
 'use strict';
 
 const core = require('../core');
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const models = require('../models');
 const Scm = require('../core/scm');
 

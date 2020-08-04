@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const executor = require('./executor');
 const SCHEMA_EXECUTOR_CONFIG = Joi.object().keys({
     name: Joi.string().required(),

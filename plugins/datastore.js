@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const table = Joi.string().required();
 const SCHEMA_ID = Joi.object().keys({
     table,

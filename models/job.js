@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const validator = require('../api/validator');
 const SCM_PR_SCHEMA = require('../core/scm').pr;

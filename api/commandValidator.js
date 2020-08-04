@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 
 // essentially a Joi.ValidationError.details object
 const COMMAND_ERROR = Joi.object()

@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const models = require('../models');
 
 const TOKEN_CONFIG = Joi.object({

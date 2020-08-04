@@ -2,7 +2,7 @@
 
 const Annotations = require('./annotations');
 const Job = require('./job');
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const Regex = require('./regex');
 const Parameters = require('./parameters');
 

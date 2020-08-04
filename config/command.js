@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const Regex = require('./regex');
 const CommandFormat = require('./commandFormat');
 
