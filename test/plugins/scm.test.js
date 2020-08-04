@@ -192,6 +192,16 @@ describe('scm test', () => {
         });
     });
 
+    describe('addDeployKey', () => {
+        it('validates', () => {
+            assert.isNull(validate('scm.addDeployKey.yaml', scm.addDeployKey).error);
+        });
+
+        it('fails', () => {
+            assert.isNotNull(validate('empty.yaml', scm.addDeployKey).error);
+        });
+    });
+
     describe('getBranchList', () => {
         it('validates', () => {
             assert.isNull(validate('scm.getBranchList.yaml', scm.getBranchList).error);

@@ -1,0 +1,5 @@
+---
+checkoutUrl: git@github.com:screwdriver-cd/data-model.git#master
+token: thisisashinytoken
+scmContext: github:github.com
+      
