@@ -17,7 +17,8 @@ const SCHEMA_CRUMB = Joi.object().keys({
 const SCHEMA_CONTEXTS = Joi.array().items(
     Joi.object().keys({
         context: Joi.string().label('Context name'),
-        displayName: Joi.string().label('Display name')
+        displayName: Joi.string().label('Display name'),
+        autoDeployKeyGeneration: Joi.boolean().label('Auto deploy key generation flag')
     }).label('Context Object')
 ).label('Array of Contexts');
 

@@ -4,6 +4,7 @@ const core = require('../core');
 const Joi = require('joi');
 const models = require('../models');
 const Scm = require('../core/scm');
+const Regex = require('../config/regex');
 
 const buildStatus = models.build.base.extract('status').required();
 const checkoutUrl = models.pipeline.create.extract('checkoutUrl').required();
@@ -31,6 +32,13 @@ const ADD_WEBHOOK = Joi.object().keys({
     }),
     scmContext
 }).required();
+
+const ADD_DEPLOY_KEY = Joi.object().keys({
+    checkoutUrl: Joi
+        .string().regex(Regex.CHECKOUT_URL),
+    token,
+    scmContext
+});
 
 const PARENT_CONFIG = Joi.object().keys({
     branch: Joi.string().required(),
@@ -190,6 +198,14 @@ module.exports = {
      * @type {Joi}
      */
     addWebhook: ADD_WEBHOOK,
+
+    /**
+     * Properties for Scm Base that will be passed for the addDeployKey method
+     *
+     * @property addDeployKey
+     * @type {Joi}
+     */
+    addDeployKey: ADD_DEPLOY_KEY,
 
     /**
      * Properties for Scm Base that will be passed for the getPermissions method
