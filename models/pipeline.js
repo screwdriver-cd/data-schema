@@ -17,7 +17,8 @@ const CREATE_MODEL = {
         .example('https://github.com/screwdriver-cd/data-schema.git#master')
         .required(),
 
-    rootDir: Scm.rootDir
+    rootDir: Scm.rootDir,
+    autoKeysGeneration: Joi.boolean().optional()
 };
 
 const MODEL = {
@@ -109,7 +110,7 @@ module.exports = {
      * @type {Joi}
      */
     create: Joi.object(mutate(CREATE_MODEL, ['checkoutUrl'], [
-        'rootDir'
+        'rootDir', 'autoKeysGeneration'
     ])).label('Create Pipeline'),
 
     /**
