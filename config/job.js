@@ -12,7 +12,7 @@ const sdJoi = Joi.extend(joi => ({
     type: 'string',
     base: joi.string(),
     messages: {
-        'string.branchFilter': '"{{#label}}" has invalid trigger format {{#q}}'
+        'string.branchFilter': '{{#label}} has invalid trigger format {{#q}}'
     },
     rules: {
         branchFilter: {

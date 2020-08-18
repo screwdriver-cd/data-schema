@@ -169,7 +169,7 @@ const SCHEMA_HOOK = Joi.object().keys({
             {
                 is: Joi.valid('release', 'tag'),
                 then: Joi.required(),
-                otherwise: Joi.optional()
+                otherwise: Joi.allow('').optional()
             })
         .label('reference of the repository'),
 
