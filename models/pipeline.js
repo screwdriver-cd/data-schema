@@ -120,7 +120,7 @@ module.exports = {
      * @type {Joi}
      */
     update: Joi.object(mutate(CREATE_MODEL, [], [
-        'checkoutUrl', 'rootDir'
+        'checkoutUrl', 'rootDir', 'autoKeysGeneration'
     ])).label('Update Pipeline'),
 
     /**
