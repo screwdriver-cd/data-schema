@@ -20,6 +20,11 @@ describe('config template', () => {
                 config.template.template).error);
         });
 
+        it('returns error when config.image or config.steps not in template', () => {
+            assert.isNotNull(validate('config.template.badConfig.yaml',
+                config.template.template).error);
+        });
+
         it('returns error when template namespace has bad format', () => {
             assert.isNotNull(validate('config.template.badWithNamespace.yaml',
                 config.template.template).error);

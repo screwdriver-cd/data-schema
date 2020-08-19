@@ -3,7 +3,8 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Command = require('../config/command');
-const scmContext = Joi.reach(require('./pipeline').base, 'scmContext');
+const pipelineBaseSchema = require('./pipeline').base;
+const scmContext = pipelineBaseSchema.extract('scmContext');
 const scmOrganization = Joi
     .string().max(100)
     .description('SCM organization name')

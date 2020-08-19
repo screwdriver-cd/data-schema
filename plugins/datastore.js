@@ -32,7 +32,7 @@ const SCHEMA_SCAN = Joi.object().keys({
         ),
         keyword: Joi.string().max(200).required()
     }),
-    sort: Joi.string().lowercase().valid(['ascending', 'descending']).default('descending'),
+    sort: Joi.string().lowercase().valid('ascending', 'descending').default('descending'),
     sortBy: Joi.string().max(100),
     exclude: Joi.array().items(Joi.string().max(100)).max(100),
     groupBy: Joi.array().items(Joi.string().max(100)).max(100),
