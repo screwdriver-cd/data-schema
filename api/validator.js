@@ -35,7 +35,8 @@ const SCHEMA_JOB_PERMUTATION = Joi.object()
         settings: Job.settings,
         sourcePaths: Job.sourcePaths,
         freezeWindows: Job.freezeWindows,
-        templateId: Job.templateId
+        templateId: Job.templateId,
+        subscribe: Base.subscribe
     }).label('Job permutation');
 
 const SCHEMA_JOB_PERMUTATIONS = Joi.array().items(SCHEMA_JOB_PERMUTATION)
