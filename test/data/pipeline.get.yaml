@@ -25,3 +25,9 @@ childPipelines:
         - git@github.com:org/repo.git
         - https://github.com:org/repo2.git
     startAll: true
+subscribedScmUrls:
+    - git@github.com:supra08/test.template.git
+    - git@github.com:supra08/quickstart-generic.git#master
+subscribedScmUrlsWithActions:
+    - git@github.com:supra08/test.template.git: [~commit, ~tags, ~release]
+    - git@github.com:supra08/quickstart-generic.git#master: [~commit, ~tags, ~release]
