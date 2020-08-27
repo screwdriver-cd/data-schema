@@ -80,10 +80,11 @@ const MODEL = {
     parameters: Parameters.parameters,
 
     // This field is kept for making the pipelines queryable.
-    subscribedScmUrls: Joi.array().items(Joi.string())
+    subscribedScmUrls: Joi.array().items(Joi.string().regex(Regex.CHECKOUT_URL))
         .description('List of subscribed scm urls'),
 
-    subscribedScmUrlsWithActions: Joi.array()
+    subscribedScmUrlsWithActions: Joi.array().items(Joi.object()
+        .pattern(Regex.CHECKOUT_URL, Joi.array().items(Joi.string().regex(Regex.TRIGGER))))
         .description('List of subscribed scm urls paired with actions')
 };
 

@@ -42,7 +42,9 @@ const SCHEMA_CHILD_PIPELINES = Joi.object()
 
 const SCHEMA_SUBSCRIBE = Joi.object()
     .keys({
-        scmUrls: Joi.array().items(Joi.object())
+        scmUrls: Joi.array()
+            .items(Joi.object()
+                .pattern(Regex.CHECKOUT_URL, Joi.array().items(Joi.string().regex(Regex.TRIGGER))))
     });
 
 const SCHEMA_CONFIG = Joi.object()
