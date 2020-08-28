@@ -84,7 +84,7 @@ const MODEL = {
         .description('List of subscribed scm urls'),
 
     subscribedScmUrlsWithActions: Joi.array().items(Joi.object()
-        .pattern(Regex.CHECKOUT_URL, Joi.array().items(Joi.string().regex(Regex.TRIGGER))))
+        .pattern(Regex.CHECKOUT_URL, Joi.array().items(Joi.string().regex(Regex.WEBHOOK_EVENT))))
         .description('List of subscribed scm urls paired with actions')
 };
 

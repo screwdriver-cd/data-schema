@@ -44,7 +44,7 @@ const SCHEMA_SUBSCRIBE = Joi.object()
     .keys({
         scmUrls: Joi.array()
             .items(Joi.object()
-                .pattern(Regex.CHECKOUT_URL, Joi.array().items(Joi.string().regex(Regex.TRIGGER))))
+                .pattern(Regex.CHECKOUT_URL, Joi.array().items(Joi.string().regex(Regex.WEBHOOK_EVENT))))
     });
 
 const SCHEMA_CONFIG = Joi.object()
