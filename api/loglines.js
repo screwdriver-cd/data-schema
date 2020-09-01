@@ -21,7 +21,13 @@ const SCHEMA_QUERY = Joi.object().keys({
         .string().lowercase()
         .valid('ascending', 'descending')
         .default('ascending')
-        .description('Sorting option for lines')
+        .description('Sorting option for lines'),
+    type: Joi
+        .string()
+        .valid(['download', 'preview'])
+        .default('preview')
+        .label('Flag to trigger type either to download or preview')
+
 }).label('Query Parameters');
 
 const SCHEMA_LOGLINE = Joi.object().keys({
