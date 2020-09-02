@@ -80,12 +80,13 @@ const MODEL = {
     parameters: Parameters.parameters,
 
     // This field is kept for making the pipelines queryable.
-    subscribedScmUrls: Joi.array().items(Joi.string().regex(Regex.CHECKOUT_URL))
+    subscribedScmUrls: Joi.array().items(Joi.string().regex(Regex.SCM_URI))
         .description('List of subscribed scm urls'),
 
-    subscribedScmUrlsWithActions: Joi.array().items(Joi.object()
-        .pattern(Regex.CHECKOUT_URL, Joi.array().items(Joi.string().regex(Regex.WEBHOOK_EVENT))))
-        .description('List of subscribed scm urls paired with actions')
+    subscribedScmUrlsWithActions: Joi.array().items(Joi.object().keys({
+        scmUri: Regex.SCM_URI,
+        actions: Joi.array().items(Joi.string())
+    })).description('List of subscribed scm urls paired with actions')
 };
 
 module.exports = {
