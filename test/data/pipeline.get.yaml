@@ -25,9 +25,6 @@ childPipelines:
         - git@github.com:org/repo.git
         - https://github.com:org/repo2.git
     startAll: true
-subscribedScmUrls:
-    - github.com:56781234:master
-    - github.com:34568912:master
 subscribedScmUrlsWithActions:
     - scmUri: github.com:56781234:master
       actions: [commit, tag, release]
