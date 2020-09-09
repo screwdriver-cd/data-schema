@@ -24,7 +24,7 @@ const SCHEMA_QUERY = Joi.object().keys({
         .description('Sorting option for lines'),
     type: Joi
         .string()
-        .valid(['download', 'preview'])
+        .valid('download', 'preview')
         .default('preview')
         .label('Flag to trigger type either to download or preview')
 
@@ -47,8 +47,10 @@ const SCHEMA_LOGLINE = Joi.object().keys({
         .description('Step Name')
 }).label('Log Line');
 
-const SCHEMA_OUTPUT = Joi.array().items(SCHEMA_LOGLINE)
-    .label('List of Log Lines');
+const SCHEMA_OUTPUT = Joi.alternatives().try(
+    Joi.array().items(SCHEMA_LOGLINE),
+    Joi.string()
+).label('List of Log Lines');
 
 /**
  * Input and output specification for reading log lines
