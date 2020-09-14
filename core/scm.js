@@ -234,7 +234,12 @@ const SCHEMA_HOOK = Joi.object().keys({
     releaseAuthor: Joi.string()
         .allow('')
         .optional()
-        .label('Author of the event')
+        .label('Author of the event'),
+
+    deleted: Joi.boolean()
+        .allow(null)
+        .optional()
+        .label('Deleted status of the event')
 
 }).label('SCM Hook');
 
