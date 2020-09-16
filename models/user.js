@@ -23,7 +23,12 @@ const MODEL = {
         .string()
         .max(128)
         .description('The SCM to which the user belongs')
-        .example('github:github.com')
+        .example('github:github.com'),
+
+    settings: Joi
+        .object()
+        .description('User settings')
+        .example({ display: { jobNameLength: 20 } })
 };
 
 module.exports = {
@@ -44,6 +49,16 @@ module.exports = {
     create: Joi.object(mutate(MODEL, [
         'username', 'scmContext'
     ], [])).label('Create User'),
+
+    /**
+     * Properties for User that will come back during a GET request
+     *
+     * @property get
+     * @type {Joi}
+     */
+    get: Joi.object(mutate(MODEL, [
+        'id', 'username', 'scmContext', 'settings'
+    ], [])).label('Get User'),
 
     /**
      * List of fields that determine a unique row

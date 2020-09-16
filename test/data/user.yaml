@@ -1,3 +1,6 @@
 # User Example
 username: batman
 scmContext: github:github.com
+settings:
+    display:
+        jobNameLength: 20

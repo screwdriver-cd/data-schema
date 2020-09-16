@@ -77,7 +77,12 @@ const MODEL = {
     prChain: Base.prChain
         .description('Configuration of chainPR'),
 
-    parameters: Parameters.parameters
+    parameters: Parameters.parameters,
+
+    settings: Joi
+        .object()
+        .description('Settings of this pipeline')
+        .example({ metrics: { downtimeJobs: ['staging', 'production'] } })
 };
 
 module.exports = {
@@ -100,7 +105,7 @@ module.exports = {
     ], [
         'workflowGraph', 'scmRepo', 'annotations', 'lastEventId',
         'configPipelineId', 'childPipelines', 'name', 'prChain',
-        'parameters'
+        'parameters', 'settings'
     ])).label('Get Pipeline'),
 
     /**

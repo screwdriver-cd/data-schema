@@ -25,3 +25,8 @@ childPipelines:
         - git@github.com:org/repo.git
         - https://github.com:org/repo2.git
     startAll: true
+settings:
+    metrics:
+        downtimeJobs:
+            - staging
+            - production
