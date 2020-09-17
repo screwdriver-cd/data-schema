@@ -57,8 +57,18 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'username', 'scmContext', 'settings'
-    ], [])).label('Get User'),
+        'id', 'username', 'scmContext'
+    ], ['settings'])).label('Get User'),
+
+    /**
+     * Properties for User that will be passed during a UPDATE request
+     *
+     * @property update
+     * @type {Joi}
+     */
+    update: Joi.object(mutate(MODEL, [], [
+        'settings'
+    ])).label('Update User'),
 
     /**
      * List of fields that determine a unique row
