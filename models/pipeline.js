@@ -85,6 +85,10 @@ const MODEL = {
         .example({ metrics: { downtimeJobs: ['staging', 'production'] } })
 };
 
+const UPDATE_MODEL = Object.assign({}, CREATE_MODEL, {
+    settings: MODEL.settings
+});
+
 module.exports = {
     /**
      * All the available properties of Pipeline
@@ -124,8 +128,8 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(CREATE_MODEL, [], [
-        'checkoutUrl', 'rootDir', 'autoKeysGeneration'
+    update: Joi.object(mutate(UPDATE_MODEL, [], [
+        'checkoutUrl', 'rootDir', 'autoKeysGeneration', 'settings'
     ])).label('Update Pipeline'),
 
     /**
