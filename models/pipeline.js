@@ -77,7 +77,12 @@ const MODEL = {
     prChain: Base.prChain
         .description('Configuration of chainPR'),
 
-    parameters: Parameters.parameters
+    parameters: Parameters.parameters,
+
+    subscribedScmUrlsWithActions: Joi.array().items(Joi.object().keys({
+        scmUri: Regex.SCM_URI,
+        actions: Joi.array().items(Joi.string())
+    })).description('List of subscribed scm urls paired with actions')
 };
 
 module.exports = {
@@ -100,7 +105,7 @@ module.exports = {
     ], [
         'workflowGraph', 'scmRepo', 'annotations', 'lastEventId',
         'configPipelineId', 'childPipelines', 'name', 'prChain',
-        'parameters'
+        'parameters', 'subscribedScmUrlsWithActions'
     ])).label('Get Pipeline'),
 
     /**
