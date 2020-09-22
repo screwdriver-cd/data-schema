@@ -105,7 +105,7 @@ module.exports = {
     ], [
         'workflowGraph', 'scmRepo', 'annotations', 'lastEventId',
         'configPipelineId', 'childPipelines', 'name', 'prChain',
-        'parameters', 'subscribedScmUrlsWithActions', 'subscribedScmUrls'
+        'parameters', 'subscribedScmUrlsWithActions'
     ])).label('Get Pipeline'),
 
     /**
