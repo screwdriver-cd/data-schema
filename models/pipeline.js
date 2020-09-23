@@ -95,6 +95,14 @@ module.exports = {
     base: Joi.object(MODEL).label('Pipeline'),
 
     /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
+
+    /**
      * Properties for Pipeline that will come back during a GET request
      *
      * @property get

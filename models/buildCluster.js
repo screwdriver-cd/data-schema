@@ -61,6 +61,14 @@ module.exports = {
     base: Joi.object(MODEL).label('BuildCluster'),
 
     /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
+
+    /**
      * Properties for BuildCluster that will come back during a GET request
      *
      * @property get

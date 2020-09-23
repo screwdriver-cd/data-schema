@@ -41,6 +41,14 @@ module.exports = {
     base: Joi.object(MODEL).label('Command'),
 
     /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
+
+    /**
      * Properties for command that will come back during a GET request
      *
      * @property get
