@@ -34,6 +34,7 @@ const MODEL = {
         .example('batman123'),
 
     type: Joi.string().valid('info', 'warn')
+        .max(32)
         .description('Type/Severity of the banner message')
         .example('info')
 };

@@ -63,6 +63,7 @@ const MODEL = {
             'pr',
             'pipeline'
         )
+        .max(10)
         .description('Type of the event')
         .example('pr'),
     workflowGraph: WorkflowGraph.workflowGraph
