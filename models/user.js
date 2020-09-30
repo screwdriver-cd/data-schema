@@ -36,6 +36,14 @@ module.exports = {
     base: Joi.object(MODEL).label('User'),
 
     /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
+
+    /**
      * Properties for User that will be passed during a CREATE request
      *
      * @property create

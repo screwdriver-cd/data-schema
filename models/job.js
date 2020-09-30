@@ -39,6 +39,7 @@ const MODEL = {
             'ENABLED',
             'DISABLED'
         )
+        .max(10)
         .description('Current state of the Job')
         .example('ENABLED')
         .default('ENABLED'),
@@ -88,6 +89,14 @@ module.exports = {
      * @type {Joi}
      */
     base: Joi.object(MODEL).label('Job'),
+
+    /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
 
     /**
      * Properties for Job that will come back during a GET request

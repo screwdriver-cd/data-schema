@@ -56,17 +56,13 @@ describe('model commmons', () => {
 
                         // console.log(column, columnName);
                         if (column.key === columnName && schema.type === 'string') {
-                            if (schema.valids || !schema.rules) {
-                                // OK
-                            } else {
-                                const result = schema.rules.find(
-                                    rule => rule.name === 'max' || rule.name === 'length');
+                            const result = !schema.rules ? undefined : schema.rules.find(
+                                rule => rule.name === 'max' || rule.name === 'length');
 
-                                assert.isDefined(
-                                    result,
-                                    `${model}.${columnName} schema must have ` +
-                                    '(valids|length|max) definition.');
-                            }
+                            assert.isDefined(
+                                result,
+                                `${model}.${columnName} schema must have ` +
+                                '(valids|length|max) definition.');
                         }
                     });
                 });

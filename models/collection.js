@@ -70,6 +70,14 @@ module.exports = {
     base: Joi.object(MODEL).label('Collection'),
 
     /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
+
+    /**
      * Properties for collection that will come back during a GET request
      *
      * @property get

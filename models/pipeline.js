@@ -77,7 +77,12 @@ const MODEL = {
     prChain: Base.prChain
         .description('Configuration of chainPR'),
 
-    parameters: Parameters.parameters
+    parameters: Parameters.parameters,
+
+    subscribedScmUrlsWithActions: Joi.array().items(Joi.object().keys({
+        scmUri: Regex.SCM_URI,
+        actions: Joi.array().items(Joi.string())
+    })).description('List of subscribed scm urls paired with actions')
 };
 
 module.exports = {
@@ -90,6 +95,14 @@ module.exports = {
     base: Joi.object(MODEL).label('Pipeline'),
 
     /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
+
+    /**
      * Properties for Pipeline that will come back during a GET request
      *
      * @property get
@@ -100,7 +113,7 @@ module.exports = {
     ], [
         'workflowGraph', 'scmRepo', 'annotations', 'lastEventId',
         'configPipelineId', 'childPipelines', 'name', 'prChain',
-        'parameters'
+        'parameters', 'subscribedScmUrlsWithActions'
     ])).label('Get Pipeline'),
 
     /**

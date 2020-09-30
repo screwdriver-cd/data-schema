@@ -63,6 +63,7 @@ const MODEL = {
             'pr',
             'pipeline'
         )
+        .max(10)
         .description('Type of the event')
         .example('pr'),
     workflowGraph: WorkflowGraph.workflowGraph
@@ -103,6 +104,14 @@ module.exports = {
      * @type {Joi}
      */
     base: Joi.object(MODEL).label('Event'),
+
+    /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
 
     /**
      * Properties for Event that will come back during a GET request
