@@ -66,6 +66,11 @@ const MODEL = {
         .description('SHA this project was built on')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
 
+    subscribedConfigSha: Joi
+        .string().hex()
+        .description('SHA this project was built on')
+        .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
+
     commit: Scm.commit,
 
     createTime: Joi
@@ -171,6 +176,14 @@ module.exports = {
     base: Joi.object(MODEL).label('Build'),
 
     /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
+
+    /**
      * Properties for Build that will come back during a GET request
      *
      * @property get
@@ -181,7 +194,7 @@ module.exports = {
     ], [
         'container', 'parentBuildId', 'parentBuilds', 'sha', 'startTime', 'endTime',
         'meta', 'parameters', 'steps', 'commit', 'eventId', 'environment',
-        'statusMessage', 'stats', 'buildClusterName', 'templateId'
+        'statusMessage', 'stats', 'buildClusterName', 'templateId', 'subscribedConfigSha'
     ])).label('Get Build'),
 
     /**

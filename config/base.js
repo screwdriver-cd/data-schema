@@ -39,6 +39,15 @@ const SCHEMA_CHILD_PIPELINES = Joi.object()
         startAll: Joi.boolean()
     })
     .unknown(false);
+
+const SCHEMA_SUBSCRIBE = Joi.object()
+    .keys({
+        scmUrls: Joi.array()
+            .items(Joi.object()
+                .pattern(Regex.CHECKOUT_URL, Joi.array()
+                    .items(Joi.string().regex(Regex.WEBHOOK_EVENT))))
+    });
+
 const SCHEMA_CONFIG = Joi.object()
     .keys({
         version: Joi.number().integer().min(1).max(50),
@@ -47,6 +56,7 @@ const SCHEMA_CONFIG = Joi.object()
         shared: SCHEMA_SHARED,
         cache: SCHEMA_CACHE,
         childPipelines: SCHEMA_CHILD_PIPELINES,
+        subscribe: SCHEMA_SUBSCRIBE,
         parameters: Parameters.parameters
     })
     .unknown(false);
@@ -62,5 +72,6 @@ module.exports = {
     cache: SCHEMA_CACHE,
     cachePerm: SCHEMA_CACHE_PERMUTATION,
     childPipelines: SCHEMA_CHILD_PIPELINES,
-    config: SCHEMA_CONFIG
+    config: SCHEMA_CONFIG,
+    subscribe: SCHEMA_SUBSCRIBE
 };

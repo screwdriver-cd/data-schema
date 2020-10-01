@@ -81,6 +81,12 @@ const MODEL = {
     parameters: Parameters.parameters,
 
     settings: Settings.pipelineSettings
+
+    subscribedScmUrlsWithActions: Joi.array().items(Joi.object().keys({
+        scmUri: Regex.SCM_URI,
+        actions: Joi.array().items(Joi.string())
+    })).description('List of subscribed scm urls paired with actions')
+
 };
 
 const UPDATE_MODEL = Object.assign({}, CREATE_MODEL, {
@@ -97,6 +103,14 @@ module.exports = {
     base: Joi.object(MODEL).label('Pipeline'),
 
     /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
+
+    /**
      * Properties for Pipeline that will come back during a GET request
      *
      * @property get
@@ -107,7 +121,7 @@ module.exports = {
     ], [
         'workflowGraph', 'scmRepo', 'annotations', 'lastEventId',
         'configPipelineId', 'childPipelines', 'name', 'prChain',
-        'parameters', 'settings'
+        'parameters', 'subscribedScmUrlsWithActions', 'settings'
     ])).label('Get Pipeline'),
 
     /**

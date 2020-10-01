@@ -29,3 +29,8 @@ settings:
     metricsDowntimeJobs:
             - staging
             - production
+subscribedScmUrlsWithActions:
+    - scmUri: github.com:56781234:master
+      actions: [commit, tag, release]
+    - scmUri: github.com:34568912:master
+      actions: [commit, tag, release]

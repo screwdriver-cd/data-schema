@@ -24,6 +24,7 @@ const username = models.user.base.extract('username').required();
 const ADD_WEBHOOK = Joi.object().keys({
     scmUri,
     token,
+    actions: Joi.array().items(Joi.string()),
     webhookUrl: Joi.string().uri({
         scheme: [
             'http',
