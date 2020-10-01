@@ -80,13 +80,12 @@ const MODEL = {
 
     parameters: Parameters.parameters,
 
-    settings: Settings.pipelineSettings
+    settings: Settings.pipelineSettings,
 
     subscribedScmUrlsWithActions: Joi.array().items(Joi.object().keys({
         scmUri: Regex.SCM_URI,
         actions: Joi.array().items(Joi.string())
     })).description('List of subscribed scm urls paired with actions')
-
 };
 
 const UPDATE_MODEL = Object.assign({}, CREATE_MODEL, {
