@@ -2,6 +2,7 @@
 
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
+const Settings = require('../config/settings');
 
 const MODEL = {
     id: Joi
@@ -25,10 +26,7 @@ const MODEL = {
         .description('The SCM to which the user belongs')
         .example('github:github.com'),
 
-    settings: Joi
-        .object()
-        .description('User settings')
-        .example({ display: { jobNameLength: 20 } })
+    settings: Settings.userSettings
 };
 
 module.exports = {
@@ -56,9 +54,9 @@ module.exports = {
      * @property get
      * @type {Joi}
      */
-    get: Joi.object(mutate(MODEL, [
-        'id', 'username', 'scmContext'
-    ], ['settings'])).label('Get User'),
+    get: Joi.object(mutate(MODEL, [], [
+        'id', 'username', 'scmContext', 'settings'
+    ])).label('Get User'),
 
     /**
      * Properties for User that will be passed during a UPDATE request

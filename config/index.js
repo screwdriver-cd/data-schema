@@ -5,11 +5,12 @@ const base = require('./base');
 const command = require('./command');
 const commandFormat = require('./commandFormat');
 const job = require('./job');
-const regex = require('./regex');
-const template = require('./template');
-const workflowGraph = require('./workflowGraph');
 const parameters = require('./parameters');
+const regex = require('./regex');
+const settings = require('./settings');
+const template = require('./template');
 const tokenConfig = require('./tokenConfig');
+const workflowGraph = require('./workflowGraph');
 
 module.exports = {
     annotations,
@@ -17,9 +18,10 @@ module.exports = {
     command,
     commandFormat,
     job,
-    regex,
-    template,
-    workflowGraph,
     parameters,
-    tokenConfig
+    regex,
+    settings,
+    template,
+    tokenConfig,
+    workflowGraph
 };

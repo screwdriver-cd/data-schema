@@ -26,7 +26,6 @@ childPipelines:
         - https://github.com:org/repo2.git
     startAll: true
 settings:
-    metrics:
-        downtimeJobs:
+    metricsDowntimeJobs:
             - staging
             - production

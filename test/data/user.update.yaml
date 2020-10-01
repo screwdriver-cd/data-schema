@@ -1,4 +1,3 @@
 # User Example
 settings:
-    display:
-        jobNameLength: 35
+    displayJobNameLength: 35

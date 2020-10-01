@@ -3,7 +3,6 @@ checkoutUrl: git@github.com:screwdriver-cd/data-schema.git#branch
 rootDir: src/app/test
 autoKeysGeneration: false
 settings:
-    metrics:
-        downtimeJobs:
+    metricsDowntimeJobs:
             - main
             - production

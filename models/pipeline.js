@@ -4,6 +4,7 @@ const Annotations = require('../config/annotations');
 const Base = require('../config/base');
 const Joi = require('joi');
 const Regex = require('../config/regex');
+const Settings = require('../config/settings');
 const Scm = require('../core/scm');
 const WorkflowGraph = require('../config/workflowGraph');
 const Parameters = require('../config/parameters');
@@ -79,10 +80,7 @@ const MODEL = {
 
     parameters: Parameters.parameters,
 
-    settings: Joi
-        .object()
-        .description('Settings of this pipeline')
-        .example({ metrics: { downtimeJobs: ['staging', 'production'] } })
+    settings: Settings.pipelineSettings
 };
 
 const UPDATE_MODEL = Object.assign({}, CREATE_MODEL, {
