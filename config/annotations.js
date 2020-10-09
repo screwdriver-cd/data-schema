@@ -22,6 +22,7 @@ const RESERVED_JOB_ANNOTATIONS = [
     'screwdriver.cd/coverageScope'
 ];
 const RESERVED_PIPELINE_ANNOTATIONS = [
+    'screwdriver.cd/buildCluster',
     'screwdriver.cd/restrictPR',
     'screwdriver.cd/chainPR',
     'screwdriver.cd/pipelineDescription'
