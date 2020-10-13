@@ -57,7 +57,8 @@ const SCHEMA_OUTPUT = Joi.object()
         childPipelines: Base.childPipelines,
         workflowGraph: WorkflowGraph.workflowGraph,
         parameters: Parameters.parameters,
-        warnAnnotations: Joi.array().optional()
+        warnAnnotations: Joi.array().optional(),
+        subscribe: Base.subscribe
     })
     .label('Execution information');
 
