@@ -4,6 +4,7 @@ const Annotations = require('../config/annotations');
 const Base = require('../config/base');
 const Joi = require('joi');
 const Regex = require('../config/regex');
+const Settings = require('../config/settings');
 const Scm = require('../core/scm');
 const WorkflowGraph = require('../config/workflowGraph');
 const Parameters = require('../config/parameters');
@@ -79,11 +80,17 @@ const MODEL = {
 
     parameters: Parameters.parameters,
 
+    settings: Settings.pipelineSettings,
+
     subscribedScmUrlsWithActions: Joi.array().items(Joi.object().keys({
         scmUri: Regex.SCM_URI,
         actions: Joi.array().items(Joi.string())
     })).description('List of subscribed scm urls paired with actions')
 };
+
+const UPDATE_MODEL = Object.assign({}, CREATE_MODEL, {
+    settings: MODEL.settings
+});
 
 module.exports = {
     /**
@@ -113,7 +120,7 @@ module.exports = {
     ], [
         'workflowGraph', 'scmRepo', 'annotations', 'lastEventId',
         'configPipelineId', 'childPipelines', 'name', 'prChain',
-        'parameters', 'subscribedScmUrlsWithActions'
+        'parameters', 'subscribedScmUrlsWithActions', 'settings'
     ])).label('Get Pipeline'),
 
     /**
@@ -132,8 +139,8 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(CREATE_MODEL, [], [
-        'checkoutUrl', 'rootDir', 'autoKeysGeneration'
+    update: Joi.object(mutate(UPDATE_MODEL, [], [
+        'checkoutUrl', 'rootDir', 'autoKeysGeneration', 'settings'
     ])).label('Update Pipeline'),
 
     /**
