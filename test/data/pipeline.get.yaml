@@ -25,6 +25,10 @@ childPipelines:
         - git@github.com:org/repo.git
         - https://github.com:org/repo2.git
     startAll: true
+settings:
+    metricsDowntimeJobs:
+            - staging
+            - production
 subscribedScmUrlsWithActions:
     - scmUri: github.com:56781234:master
       actions: [commit, tag, release]

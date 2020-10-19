@@ -2,6 +2,7 @@
 
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
+const Settings = require('../config/settings');
 
 const MODEL = {
     id: Joi
@@ -23,7 +24,9 @@ const MODEL = {
         .string()
         .max(128)
         .description('The SCM to which the user belongs')
-        .example('github:github.com')
+        .example('github:github.com'),
+
+    settings: Settings.userSettings
 };
 
 module.exports = {
@@ -52,6 +55,26 @@ module.exports = {
     create: Joi.object(mutate(MODEL, [
         'username', 'scmContext'
     ], [])).label('Create User'),
+
+    /**
+     * Properties for User that will come back during a GET request
+     *
+     * @property get
+     * @type {Joi}
+     */
+    get: Joi.object(mutate(MODEL, [], [
+        'id', 'username', 'scmContext', 'settings'
+    ])).label('Get User'),
+
+    /**
+     * Properties for User that will be passed during a UPDATE request
+     *
+     * @property update
+     * @type {Joi}
+     */
+    update: Joi.object(mutate(MODEL, [], [
+        'settings'
+    ])).label('Update User'),
 
     /**
      * List of fields that determine a unique row

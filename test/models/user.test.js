@@ -20,4 +20,24 @@ describe('model user', () => {
             assert.isNotNull(validate('empty.yaml', models.user.create).error);
         });
     });
+
+    describe('get', () => {
+        it('validates the get', () => {
+            assert.isNull(validate('user.get.yaml', models.user.get).error);
+        });
+
+        it('fails the get', () => {
+            assert.isNotNull(validate('empty.yaml', models.user.get).error);
+        });
+    });
+
+    describe('update', () => {
+        it('validates the update', () => {
+            assert.isNull(validate('user.update.yaml', models.user.update).error);
+        });
+
+        it('fails the update', () => {
+            assert.isNotNull(validate('empty.yaml', models.user.update).error);
+        });
+    });
 });
