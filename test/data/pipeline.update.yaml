@@ -4,5 +4,8 @@ rootDir: src/app/test
 autoKeysGeneration: false
 settings:
     metricsDowntimeJobs:
-            - main
-            - production
+        - 222
+        - 333
+    metricsDowntimeStatuses:
+        - FAILURE
+        - ABORTED
