@@ -27,8 +27,8 @@ childPipelines:
     startAll: true
 settings:
     metricsDowntimeJobs:
-            - staging
-            - production
+            - 123
+            - 456
 subscribedScmUrlsWithActions:
     - scmUri: github.com:56781234:master
       actions: [commit, tag, release]

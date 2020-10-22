@@ -1,7 +1,6 @@
 'use strict';
 
 const Joi = require('joi');
-const Job = require('./job');
 
 const SCHEMA_DISPLAY_JOB_NAME_LENGTH = Joi.number().integer()
     .min(20)
@@ -10,12 +9,21 @@ const SCHEMA_DISPLAY_JOB_NAME_LENGTH = Joi.number().integer()
     .description('Job name length to display on workflowGraph')
     .example(20);
 const SCHEMA_METRICS_DOWNTIME_JOBS = Joi.array().items(
-    Job.jobName
-).description('Jobs to watch for downtime');
+    Joi
+        .number().integer().positive()
+        .description('Identifier for this job')
+        .example(123345)
+        .optional()
+        .allow(null)
+).description('Job IDs to watch for downtime');
+const SCHEMA_METRICS_DOWNTIME_STATUSES = Joi.array().items(
+    Joi.string()
+).description('Build statuses to watch for downtime');
 
 const SCHEMA_PIPELINE_SETTINGS = Joi.object()
     .keys({
-        metricsDowntimeJobs: SCHEMA_METRICS_DOWNTIME_JOBS
+        metricsDowntimeJobs: SCHEMA_METRICS_DOWNTIME_JOBS,
+        metricsDowntimeStatuses: SCHEMA_METRICS_DOWNTIME_STATUSES
     })
     .default({});
 const SCHEMA_USER_SETTINGS = Joi.object()
@@ -26,5 +34,6 @@ const SCHEMA_USER_SETTINGS = Joi.object()
 
 module.exports = {
     pipelineSettings: SCHEMA_PIPELINE_SETTINGS,
-    userSettings: SCHEMA_USER_SETTINGS
+    userSettings: SCHEMA_USER_SETTINGS,
+    metricsDowntimeJobs: SCHEMA_METRICS_DOWNTIME_JOBS
 };
