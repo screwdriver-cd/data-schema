@@ -20,7 +20,8 @@ const RESERVED_JOB_ANNOTATIONS = [
     'screwdriver.cd/dockerCpu',
     'screwdriver.cd/dockerRam',
     'screwdriver.cd/coverageScope',
-    'screwdriver.cd/terminationGracePeriodSeconds'
+    'screwdriver.cd/terminationGracePeriodSeconds',
+    'screwdriver.cd/mergeStep'
 ];
 const RESERVED_PIPELINE_ANNOTATIONS = [
     'screwdriver.cd/buildCluster',
