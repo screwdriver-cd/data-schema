@@ -9,7 +9,7 @@ module.exports = {
     up: async (queryInterface, Sequelize) => {
         await queryInterface.sequelize.transaction(async (transaction) => {
             await queryInterface.changeColumn(table, 'subscribedScmUrlsWithActions', {
-                type: Sequelize.TEXT('medium')}, { transaction });
+                type: Sequelize.TEXT('medium') }, { transaction });
         });
     }
 };
