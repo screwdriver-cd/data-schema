@@ -11,6 +11,18 @@ const PARENT_BUILD_ID = ID;
 const PARENT_BUILDS_ID = Joi.alternatives().try(ID, Joi.valid(null));
 const buildClusterSchema = require('./buildCluster');
 const buildClusterName = buildClusterSchema.base.extract('name');
+const STATUSES = [
+    'ABORTED',
+    'CREATED', // when the build is created but not started
+    'FAILURE',
+    'QUEUED', // when the build is created and put into the queue
+    'RUNNING', // after the build is created, went through the queue, and has started
+    'SUCCESS',
+    'BLOCKED',
+    'UNSTABLE',
+    'COLLAPSED', // when the build is collapsed
+    'FROZEN' // when the build is frozen due to freeze window
+];
 
 const MODEL = {
     id: Joi
@@ -99,18 +111,7 @@ const MODEL = {
         .description('Key=>Value information from the build itself'),
 
     status: Joi
-        .string().valid(
-            'ABORTED',
-            'CREATED', // when the build is created but not started
-            'FAILURE',
-            'QUEUED', // when the build is created and put into the queue
-            'RUNNING', // after the build is created, went through the queue, and has started
-            'SUCCESS',
-            'BLOCKED',
-            'UNSTABLE',
-            'COLLAPSED', // when the build is collapsed
-            'FROZEN' // when the build is frozen due to freeze window
-        )
+        .string().valid(...STATUSES)
         .description('Current status of the build')
         .example('SUCCESS'),
 
@@ -174,6 +175,14 @@ module.exports = {
      * @type {Joi}
      */
     base: Joi.object(MODEL).label('Build'),
+
+    /**
+     * All the available statuses of Build
+     *
+     * @property statuses
+     * @type {Array}
+     */
+    allStatuses: STATUSES,
 
     /**
      * All the available properties of Job
