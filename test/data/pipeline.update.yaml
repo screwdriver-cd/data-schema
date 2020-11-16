@@ -1,3 +1,11 @@
 # Pipeline Create Example
 checkoutUrl: git@github.com:screwdriver-cd/data-schema.git#branch
 rootDir: src/app/test
+autoKeysGeneration: false
+settings:
+    metricsDowntimeJobs:
+        - 222
+        - 333
+    metricsDowntimeStatuses:
+        - FAILURE
+        - ABORTED

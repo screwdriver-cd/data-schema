@@ -4,20 +4,17 @@ const Joi = require('joi');
 
 const SCHEMA_PARAMETERS_STRING = Joi.string();
 const SCHEMA_PARAMETERS_OBJECT = Joi.object({
-    value: Joi.string().required(),
+    value: Joi.alternatives().try(Joi.string(), Joi.array().items(Joi.string())).required(),
     description: Joi.string()
-})
-    .options({
-        language: {
-            object: {
-                allowUnknown: 'only supports string or key: { value, description } pair as values'
-            }
-        }
-    });
+}).messages({
+    'object.unknown': 'only supports string or key: {{#label}} pair as values'
+});
 
 const SCHEMA_PARAMETERS = Joi.object()
     .pattern(Joi.any(),
-        Joi.alternatives().try(SCHEMA_PARAMETERS_STRING, SCHEMA_PARAMETERS_OBJECT))
+        Joi.alternatives().try(SCHEMA_PARAMETERS_STRING,
+            Joi.array().items(SCHEMA_PARAMETERS_STRING),
+            SCHEMA_PARAMETERS_OBJECT))
     .default({});
 
 module.exports = {

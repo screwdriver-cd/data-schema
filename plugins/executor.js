@@ -4,19 +4,19 @@ const Annotations = require('../config/annotations');
 const Job = require('../config/job');
 const Joi = require('joi');
 const models = require('../models');
-const buildId = Joi.reach(models.build.base, 'id').required();
-const eventId = Joi.reach(models.event.base, 'id');
-const causeMessage = Joi.reach(models.event.base, 'causeMessage');
-const jobId = Joi.reach(models.job.base, 'id');
-const jobName = Joi.reach(models.job.base, 'name');
-const jobState = Joi.reach(models.job.base, 'state');
-const jobArchived = Joi.reach(models.job.base, 'archived');
+const buildId = models.build.base.extract('id').required();
+const eventId = models.event.base.extract('id');
+const causeMessage = models.event.base.extract('causeMessage');
+const jobId = models.job.base.extract('id');
+const jobName = models.job.base.extract('name');
+const jobState = models.job.base.extract('state');
+const jobArchived = models.job.base.extract('archived');
 
 const SCHEMA_PIPELINE = Joi.object().keys({
-    id: Joi.reach(models.pipeline.base, 'id').required(),
-    scmContext: Joi.reach(models.pipeline.base, 'scmContext').required()
+    id: models.pipeline.base.extract('id').required(),
+    scmContext: models.pipeline.base.extract('scmContext').required()
 }).unknown();
-const pipelineId = Joi.reach(models.pipeline.base, 'id');
+const pipelineId = models.pipeline.base.extract('id');
 const SCHEMA_START = Joi.object().keys({
     build: Joi.object(),
     causeMessage,
@@ -32,8 +32,8 @@ const SCHEMA_START = Joi.object().keys({
     tokenGen: Joi.func(),
     pipeline: SCHEMA_PIPELINE,
     pipelineId,
-    buildClusterName: Joi.reach(models.buildCluster.base, 'name'),
-    container: Joi.reach(models.build.base, 'container').required(),
+    buildClusterName: models.buildCluster.base.extract('name'),
+    container: models.build.base.extract('container').required(),
     apiUri: Joi.string().uri().required()
         .label('API URI'),
     token: Joi.string().required()
@@ -47,7 +47,7 @@ const SCHEMA_STOP = Joi.object().keys({
     blockedBy: Joi.array().items(jobId),
     freezeWindows: Job.freezeWindows,
     buildId,
-    buildClusterName: Joi.reach(models.buildCluster.base, 'name'),
+    buildClusterName: models.buildCluster.base.extract('name'),
     jobId,
     token: Joi.string().label('Build JWT'),
     pipelineId

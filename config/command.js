@@ -60,24 +60,24 @@ const COMMAND_MAINTAINER = Joi
     .example('foo@bar.com');
 
 const COMMAND_FORMAT = Joi
-    .string().valid([
+    .string().valid(
         'habitat',
         'docker',
         'binary'
-    ])
+    )
     .max(16)
     .description('Format of the Command')
     .example('habitat');
 
 const SCHEMA_COMMAND = Joi.object()
     .keys({
-        namespace: COMMAND_NAMESPACE,
-        name: COMMAND_NAME,
-        version: COMMAND_VERSION,
-        description: COMMAND_DESCRIPTION,
+        namespace: COMMAND_NAMESPACE.required(),
+        name: COMMAND_NAME.required(),
+        version: COMMAND_VERSION.required(),
+        description: COMMAND_DESCRIPTION.required(),
         usage: COMMAND_USAGE,
-        maintainer: COMMAND_MAINTAINER,
-        format: COMMAND_FORMAT,
+        maintainer: COMMAND_MAINTAINER.required(),
+        format: COMMAND_FORMAT.required(),
         habitat: CommandFormat.habitat
             .when('format', { is: 'habitat', then: Joi.required() }),
         docker: CommandFormat.docker
@@ -85,8 +85,6 @@ const SCHEMA_COMMAND = Joi.object()
         binary: CommandFormat.binary
             .when('format', { is: 'binary', then: Joi.required() })
     })
-    .requiredKeys('namespace', 'name', 'version', 'description', 'maintainer',
-        'format')
     // any one of them
     .or('habitat', 'docker', 'binary')
     .xor('habitat', 'docker', 'binary');

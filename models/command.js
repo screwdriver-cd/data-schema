@@ -3,7 +3,7 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Command = require('../config/command');
-const pipelineId = Joi.reach(require('./pipeline').base, 'id');
+const pipelineId = require('./pipeline').base.extract('id');
 
 const MODEL = {
     id: Joi
@@ -39,6 +39,14 @@ module.exports = {
      * @type {Joi}
      */
     base: Joi.object(MODEL).label('Command'),
+
+    /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
 
     /**
      * Properties for command that will come back during a GET request

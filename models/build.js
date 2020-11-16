@@ -9,7 +9,20 @@ const Step = require('./step');
 const ID = Joi.number().integer().positive();
 const PARENT_BUILD_ID = ID;
 const PARENT_BUILDS_ID = Joi.alternatives().try(ID, Joi.valid(null));
-const buildClusterName = Joi.reach(require('./buildCluster').base, 'name');
+const buildClusterSchema = require('./buildCluster');
+const buildClusterName = buildClusterSchema.base.extract('name');
+const STATUSES = [
+    'ABORTED',
+    'CREATED', // when the build is created but not started
+    'FAILURE',
+    'QUEUED', // when the build is created and put into the queue
+    'RUNNING', // after the build is created, went through the queue, and has started
+    'SUCCESS',
+    'BLOCKED',
+    'UNSTABLE',
+    'COLLAPSED', // when the build is collapsed
+    'FROZEN' // when the build is frozen due to freeze window
+];
 
 const MODEL = {
     id: Joi
@@ -65,6 +78,11 @@ const MODEL = {
         .description('SHA this project was built on')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
 
+    subscribedConfigSha: Joi
+        .string().hex()
+        .description('SHA this project was built on')
+        .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
+
     commit: Scm.commit,
 
     createTime: Joi
@@ -93,18 +111,7 @@ const MODEL = {
         .description('Key=>Value information from the build itself'),
 
     status: Joi
-        .string().valid([
-            'ABORTED',
-            'CREATED', // when the build is created but not started
-            'FAILURE',
-            'QUEUED', // when the build is created and put into the queue
-            'RUNNING', // after the build is created, went through the queue, and has started
-            'SUCCESS',
-            'BLOCKED',
-            'UNSTABLE',
-            'COLLAPSED', // when the build is collapsed
-            'FROZEN' // when the build is frozen due to freeze window
-        ])
+        .string().valid(...STATUSES)
         .description('Current status of the build')
         .example('SUCCESS'),
 
@@ -170,6 +177,22 @@ module.exports = {
     base: Joi.object(MODEL).label('Build'),
 
     /**
+     * All the available statuses of Build
+     *
+     * @property statuses
+     * @type {Array}
+     */
+    allStatuses: STATUSES,
+
+    /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
+
+    /**
      * Properties for Build that will come back during a GET request
      *
      * @property get
@@ -180,7 +203,7 @@ module.exports = {
     ], [
         'container', 'parentBuildId', 'parentBuilds', 'sha', 'startTime', 'endTime',
         'meta', 'parameters', 'steps', 'commit', 'eventId', 'environment',
-        'statusMessage', 'stats', 'buildClusterName', 'templateId'
+        'statusMessage', 'stats', 'buildClusterName', 'templateId', 'subscribedConfigSha'
     ])).label('Get Build'),
 
     /**

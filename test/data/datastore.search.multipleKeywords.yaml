@@ -1,0 +1,9 @@
+table: 'jobs'
+paginate:
+    page: 1
+    count: 2
+search:
+    field: 'id'
+    keyword: [1,2,3,4]
+sortBy: 'name'
+sort: ascending

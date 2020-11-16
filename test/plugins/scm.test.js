@@ -2,7 +2,6 @@
 
 const assert = require('chai').assert;
 const scm = require('../../plugins/scm');
-const Joi = require('joi');
 const validate = require('../helper').validate;
 
 describe('scm test', () => {
@@ -178,7 +177,9 @@ describe('scm test', () => {
         });
 
         it('validates null output', () => {
-            assert.isNull(Joi.validate(null, scm.parseHookOutput).error);
+            const res = scm.parseHookOutput.validate(null).error;
+
+            assert.equal(res, undefined);
         });
     });
 
@@ -189,6 +190,16 @@ describe('scm test', () => {
 
         it('fails', () => {
             assert.isNotNull(validate('empty.yaml', scm.addWebhook).error);
+        });
+    });
+
+    describe('addDeployKey', () => {
+        it('validates', () => {
+            assert.isNull(validate('scm.addDeployKey.yaml', scm.addDeployKey).error);
+        });
+
+        it('fails', () => {
+            assert.isNotNull(validate('empty.yaml', scm.addDeployKey).error);
         });
     });
 

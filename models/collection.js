@@ -46,7 +46,7 @@ const MODEL = {
     type: Joi
         .string()
         .max(32)
-        .valid(['', 'default', 'normal'])
+        .valid('', 'default', 'normal')
         .description('Collection type')
         .example('default')
 };
@@ -55,7 +55,7 @@ const GET_MODEL = Object.assign({}, MODEL, {
     type: Joi
         .string()
         .max(32)
-        .valid(['default', 'normal', 'shared'])
+        .valid('default', 'normal', 'shared')
         .description('Collection type')
         .example('default')
 });
@@ -68,6 +68,14 @@ module.exports = {
      * @type {Joi}
      */
     base: Joi.object(MODEL).label('Collection'),
+
+    /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
 
     /**
      * Properties for collection that will come back during a GET request

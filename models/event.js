@@ -5,11 +5,11 @@ const mutate = require('../lib/mutate');
 const Scm = require('../core/scm');
 const WorkflowGraph = require('../config/workflowGraph');
 const { trigger } = require('../config/job');
-const jobName = Joi.reach(require('./job').base, 'name');
-const parentBuildId = Joi.reach(require('./build').get, 'parentBuildId');
-const parentBuilds = Joi.reach(require('./build').get, 'parentBuilds');
-const buildId = Joi.reach(require('./build').get, 'id');
-const prNum = Joi.reach(Scm.hook, 'prNum');
+const jobName = require('./job').base.extract('name');
+const parentBuildId = require('./build').get.extract('parentBuildId');
+const parentBuilds = require('./build').get.extract('parentBuilds');
+const buildId = require('./build').get.extract('id');
+const prNum = Scm.hook.extract('prNum');
 
 const MODEL = {
     id: Joi
@@ -59,10 +59,10 @@ const MODEL = {
         .description('Event start point - a job name or trigger name (~commit/~pr)')
         .example('~commit'),
     type: Joi
-        .string().valid([
+        .string().valid(
             'pr',
             'pipeline'
-        ])
+        )
         .max(10)
         .description('Type of the event')
         .example('pr'),
@@ -106,6 +106,14 @@ module.exports = {
     base: Joi.object(MODEL).label('Event'),
 
     /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
+
+    /**
      * Properties for Event that will come back during a GET request
      *
      * @property get
@@ -146,7 +154,7 @@ module.exports = {
      * @property rangeKeys
      * @type {Array}
      */
-    rangeKeys: ['createTime', 'pipelineId', 'type', 'groupEventId'],
+    rangeKeys: ['createTime', 'pipelineId', 'type', 'groupEventId', 'parentEventId'],
 
     /**
      * Tablename to be used in the datastore
@@ -162,6 +170,11 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: [{ fields: ['createTime', 'pipelineId'] }, { fields: ['pipelineId'] },
-        { fields: ['type'] }, { fields: ['groupEventId'] }]
+    indexes: [
+        { fields: ['createTime', 'pipelineId'] },
+        { fields: ['pipelineId'] },
+        { fields: ['type'] },
+        { fields: ['groupEventId'] },
+        { fields: ['parentEventId'] }
+    ]
 };

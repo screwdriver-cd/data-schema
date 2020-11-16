@@ -30,6 +30,14 @@ module.exports = {
     base: Joi.object(MODEL).label('Trigger'),
 
     /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
+
+    /**
      * List of fields that determine a unique row
      *
      * @property keys

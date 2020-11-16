@@ -88,7 +88,12 @@ describe('model event', () => {
     describe('indexes', () => {
         it('defines the correct indexes', () => {
             const expected = [
-                { fields: ['pipelineId'] }, { fields: ['type'] }, { fields: ['groupEventId'] }];
+                { fields: ['createTime', 'pipelineId'] },
+                { fields: ['pipelineId'] },
+                { fields: ['type'] },
+                { fields: ['groupEventId'] },
+                { fields: ['parentEventId'] }
+            ];
             const indexes = models.event.indexes;
 
             expected.forEach((indexName) => {

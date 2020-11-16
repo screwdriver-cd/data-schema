@@ -35,22 +35,30 @@ const SCHEMA_SCM_URL = Joi.string().regex(Regex.CHECKOUT_URL);
 const SCHEMA_SCM_URLS = Joi.array().items(SCHEMA_SCM_URL).min(1);
 const SCHEMA_CHILD_PIPELINES = Joi.object()
     .keys({
-        scmUrls: SCHEMA_SCM_URLS,
+        scmUrls: SCHEMA_SCM_URLS.required(),
         startAll: Joi.boolean()
     })
-    .requiredKeys('scmUrls')
     .unknown(false);
+
+const SCHEMA_SUBSCRIBE = Joi.object()
+    .keys({
+        scmUrls: Joi.array()
+            .items(Joi.object()
+                .pattern(Regex.CHECKOUT_URL, Joi.array()
+                    .items(Joi.string().regex(Regex.WEBHOOK_EVENT))))
+    });
+
 const SCHEMA_CONFIG = Joi.object()
     .keys({
         version: Joi.number().integer().min(1).max(50),
         annotations: Annotations.annotations,
-        jobs: SCHEMA_JOBS,
+        jobs: SCHEMA_JOBS.required(),
         shared: SCHEMA_SHARED,
         cache: SCHEMA_CACHE,
         childPipelines: SCHEMA_CHILD_PIPELINES,
+        subscribe: SCHEMA_SUBSCRIBE,
         parameters: Parameters.parameters
     })
-    .requiredKeys('jobs')
     .unknown(false);
 
 /**
@@ -64,5 +72,6 @@ module.exports = {
     cache: SCHEMA_CACHE,
     cachePerm: SCHEMA_CACHE_PERMUTATION,
     childPipelines: SCHEMA_CHILD_PIPELINES,
-    config: SCHEMA_CONFIG
+    config: SCHEMA_CONFIG,
+    subscribe: SCHEMA_SUBSCRIBE
 };

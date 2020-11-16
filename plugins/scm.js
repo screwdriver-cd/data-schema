@@ -4,25 +4,27 @@ const core = require('../core');
 const Joi = require('joi');
 const models = require('../models');
 const Scm = require('../core/scm');
+const Regex = require('../config/regex');
 
-const buildStatus = Joi.reach(models.build.base, 'status').required();
-const checkoutUrl = Joi.reach(models.pipeline.create, 'checkoutUrl').required();
+const buildStatus = models.build.base.extract('status').required();
+const checkoutUrl = models.pipeline.create.extract('checkoutUrl').required();
 const hook = core.scm.hook.required();
-const jobName = Joi.reach(models.job.base, 'name').optional();
-const pipelineId = Joi.reach(models.pipeline.base, 'id').optional();
-const prNum = Joi.reach(core.scm.hook, 'prNum').allow(null).optional();
+const jobName = models.job.base.extract('name').optional();
+const pipelineId = models.pipeline.base.extract('id').optional();
+const prNum = core.scm.hook.extract('prNum').allow(null).optional();
 const rootDir = Scm.rootDir.optional();
-const scmContext = Joi.reach(models.pipeline.base, 'scmContext').optional();
+const scmContext = models.pipeline.base.extract('scmContext').optional();
 const scmRepo = Scm.repo.optional();
-const scmUri = Joi.reach(models.pipeline.base, 'scmUri').required();
-const sha = Joi.reach(models.build.base, 'sha').required();
-const token = Joi.reach(models.user.base, 'token').required();
-const type = Joi.reach(core.scm.hook, 'type').required();
-const username = Joi.reach(models.user.base, 'username').required();
+const scmUri = models.pipeline.base.extract('scmUri').required();
+const sha = models.build.base.extract('sha').required();
+const token = models.user.base.extract('token').required();
+const type = core.scm.hook.extract('type').required();
+const username = models.user.base.extract('username').required();
 
 const ADD_WEBHOOK = Joi.object().keys({
     scmUri,
     token,
+    actions: Joi.array().items(Joi.string()),
     webhookUrl: Joi.string().uri({
         scheme: [
             'http',
@@ -31,6 +33,13 @@ const ADD_WEBHOOK = Joi.object().keys({
     }),
     scmContext
 }).required();
+
+const ADD_DEPLOY_KEY = Joi.object().keys({
+    checkoutUrl: Joi
+        .string().regex(Regex.CHECKOUT_URL),
+    token,
+    scmContext
+});
 
 const PARENT_CONFIG = Joi.object().keys({
     branch: Joi.string().required(),
@@ -89,7 +98,7 @@ const GET_COMMIT_REF_SHA = Joi.object().keys({
 const ADD_PR_COMMENT = Joi.object().keys({
     scmUri,
     token,
-    prNum: Joi.reach(core.scm.hook, 'prNum').required(),
+    prNum: core.scm.hook.extract('prNum').required(),
     comment: Joi.string().required(),
     scmContext
 }).required();
@@ -190,6 +199,14 @@ module.exports = {
      * @type {Joi}
      */
     addWebhook: ADD_WEBHOOK,
+
+    /**
+     * Properties for Scm Base that will be passed for the addDeployKey method
+     *
+     * @property addDeployKey
+     * @type {Joi}
+     */
+    addDeployKey: ADD_DEPLOY_KEY,
 
     /**
      * Properties for Scm Base that will be passed for the getPermissions method

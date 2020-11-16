@@ -3,7 +3,7 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Template = require('../config/template');
-const pipelineId = Joi.reach(require('./pipeline').base, 'id');
+const pipelineId = require('./pipeline').base.extract('id');
 
 const MODEL = {
     id: Joi
@@ -47,6 +47,14 @@ module.exports = {
      * @type {Joi}
      */
     base: Joi.object(MODEL).label('Template'),
+
+    /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
 
     /**
      * Properties for template that will come back during a GET request

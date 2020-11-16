@@ -18,7 +18,7 @@ const MODEL = {
 
     sort: Joi
         .string().lowercase()
-        .valid(['ascending', 'descending'])
+        .valid('ascending', 'descending')
         .default('descending')
         .description('Sorting option'),
 

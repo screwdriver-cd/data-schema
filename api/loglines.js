@@ -4,8 +4,8 @@ const Joi = require('joi');
 const Build = require('../models/build');
 
 const SCHEMA_PARAMS = Joi.object().keys({
-    id: Joi.reach(Build.base, 'id'),
-    name: Joi.reach(Build.getStep, 'name')
+    id: Build.base.extract('id'),
+    name: Build.getStep.extract('name')
 }).label('URL Parameters');
 
 const SCHEMA_QUERY = Joi.object().keys({
@@ -19,9 +19,15 @@ const SCHEMA_QUERY = Joi.object().keys({
         .description('Max pages sent per request'),
     sort: Joi
         .string().lowercase()
-        .valid(['ascending', 'descending'])
+        .valid('ascending', 'descending')
         .default('ascending')
-        .description('Sorting option for lines')
+        .description('Sorting option for lines'),
+    type: Joi
+        .string()
+        .valid('download', 'preview')
+        .default('preview')
+        .label('Flag to trigger type either to download or preview')
+
 }).label('Query Parameters');
 
 const SCHEMA_LOGLINE = Joi.object().keys({
@@ -41,8 +47,10 @@ const SCHEMA_LOGLINE = Joi.object().keys({
         .description('Step Name')
 }).label('Log Line');
 
-const SCHEMA_OUTPUT = Joi.array().items(SCHEMA_LOGLINE)
-    .label('List of Log Lines');
+const SCHEMA_OUTPUT = Joi.alternatives().try(
+    Joi.array().items(SCHEMA_LOGLINE),
+    Joi.string()
+).label('List of Log Lines');
 
 /**
  * Input and output specification for reading log lines

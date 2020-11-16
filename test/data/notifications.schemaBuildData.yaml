@@ -1,0 +1,23 @@
+settings:
+    email: 'foo'
+status: 'SUCCESS'
+pipeline:
+    id: '12'
+    scmRepo:
+        name: 'screwdriver-cd/notifications'
+        url: 'http://scmtest/master'
+jobName: 'publish'
+build:
+    id: '1234'
+event:
+    id: '12345'
+    causeMessage: 'Merge pull request #26 from screwdriver-cd/notifications'
+    creator:
+        username: 'foo'
+    commit:
+        author:
+            name: 'foo'
+        message: 'fixing a bug'
+    sha: '1234567890abcdeffedcba098765432100000000'
+buildLink: "http://thisisaSDtest.com/pipelines/12/builds/1234"
+isFixed: false

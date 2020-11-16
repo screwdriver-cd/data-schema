@@ -54,6 +54,10 @@ describe('datastore test', () => {
             assert.isNull(validate('datastore.search.multipleFields.yaml', datastore.scan).error);
         });
 
+        it('validates the update with multiple search keywords', () => {
+            assert.isNull(validate('datastore.search.multipleKeywords.yaml', datastore.scan).error);
+        });
+
         it('validates the update with all keys', () => {
             assert.isNull(validate('datastore.paginateFull.yaml', datastore.scan).error);
         });

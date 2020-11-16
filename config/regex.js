@@ -61,7 +61,7 @@ module.exports = {
 
     // Can be ~pr, ~commit, ~release, ~tag or ~commit:branchName, or ~sd@123:component
     // Note: if you modify this regex, you must modify `sdJoi` definition in the `config/job.js`
-    TRIGGER: /^~?(sd@\d+:[\w-]+|(pr|commit|release|tag)(:(.+))?)$/,
+    TRIGGER: /^~?(sd@\d+:[\w-]+|(pr|commit|release|tag|subscribe)(:(.+))?)$/,
     // Triggers which always create event
     CORE_TRIGGER: /^~(pr|commit)(:(.+))?$/,
     // Triggers which does not create empty events
@@ -85,5 +85,7 @@ module.exports = {
     // Optionally, can have rootDir. For example: github.com:abc-123:master:src/app/component
     SCM_URI: /^([^:]+):([^:]+):([^:]+)(?::([^:]+))?$/,
     // Image aliases can only contain A-Z,a-z,0-9,-,_
-    IMAGE_ALIAS: /^[\w-]+$/
+    IMAGE_ALIAS: /^[\w-]+$/,
+    // Valid Events for webhook
+    WEBHOOK_EVENT: /^~([\w-]+)$/
 };

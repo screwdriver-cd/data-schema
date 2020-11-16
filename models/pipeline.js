@@ -4,6 +4,7 @@ const Annotations = require('../config/annotations');
 const Base = require('../config/base');
 const Joi = require('joi');
 const Regex = require('../config/regex');
+const Settings = require('../config/settings');
 const Scm = require('../core/scm');
 const WorkflowGraph = require('../config/workflowGraph');
 const Parameters = require('../config/parameters');
@@ -17,7 +18,8 @@ const CREATE_MODEL = {
         .example('https://github.com/screwdriver-cd/data-schema.git#master')
         .required(),
 
-    rootDir: Scm.rootDir
+    rootDir: Scm.rootDir,
+    autoKeysGeneration: Joi.boolean().optional()
 };
 
 const MODEL = {
@@ -76,8 +78,19 @@ const MODEL = {
     prChain: Base.prChain
         .description('Configuration of chainPR'),
 
-    parameters: Parameters.parameters
+    parameters: Parameters.parameters,
+
+    settings: Settings.pipelineSettings,
+
+    subscribedScmUrlsWithActions: Joi.array().items(Joi.object().keys({
+        scmUri: Regex.SCM_URI,
+        actions: Joi.array().items(Joi.string())
+    })).description('List of subscribed scm urls paired with actions')
 };
+
+const UPDATE_MODEL = Object.assign({}, CREATE_MODEL, {
+    settings: MODEL.settings
+});
 
 module.exports = {
     /**
@@ -87,6 +100,14 @@ module.exports = {
      * @type {Joi}
      */
     base: Joi.object(MODEL).label('Pipeline'),
+
+    /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
 
     /**
      * Properties for Pipeline that will come back during a GET request
@@ -99,7 +120,7 @@ module.exports = {
     ], [
         'workflowGraph', 'scmRepo', 'annotations', 'lastEventId',
         'configPipelineId', 'childPipelines', 'name', 'prChain',
-        'parameters'
+        'parameters', 'subscribedScmUrlsWithActions', 'settings'
     ])).label('Get Pipeline'),
 
     /**
@@ -109,7 +130,7 @@ module.exports = {
      * @type {Joi}
      */
     create: Joi.object(mutate(CREATE_MODEL, ['checkoutUrl'], [
-        'rootDir'
+        'rootDir', 'autoKeysGeneration'
     ])).label('Create Pipeline'),
 
     /**
@@ -118,8 +139,8 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(CREATE_MODEL, [], [
-        'checkoutUrl', 'rootDir'
+    update: Joi.object(mutate(UPDATE_MODEL, [], [
+        'checkoutUrl', 'rootDir', 'autoKeysGeneration', 'settings'
     ])).label('Update Pipeline'),
 
     /**
