@@ -45,7 +45,7 @@ const MODEL = {
 
     weightage: Joi
         .number()
-        .min(1)
+        .min(0)
         .max(100)
         .description('Weight percentage for build cluster')
         .example(20)
