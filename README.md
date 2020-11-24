@@ -1,5 +1,5 @@
 # Screwdriver Data  Schema
-[![Version][npm-image]][npm-url] ![Downloads][downloads-image] [![Build Status][status-image]][status-url] [![Open Issues][issues-image]][issues-url] [![Dependency Status][daviddm-image]][daviddm-url] ![License][license-image]
+[![Version][npm-image]][npm-url] ![Downloads][downloads-image] [![Build Status][status-image]][status-url] [![Open Issues][issues-image]][issues-url] ![License][license-image]
 
 > Internal data schema of [Screwdriver](https://github.com/screwdriver-cd/screwdriver)
 
@@ -58,5 +58,3 @@ Code licensed under the BSD 3-Clause license. See LICENSE file for terms.
 [issues-url]: https://github.com/screwdriver-cd/screwdriver/issues
 [status-image]: https://cd.screwdriver.cd/pipelines/12/badge
 [status-url]: https://cd.screwdriver.cd/pipelines/12
-[daviddm-image]: https://david-dm.org/screwdriver-cd/data-schema.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/screwdriver-cd/data-schema
