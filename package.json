@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "eslint .",
-    "test": "mocha --recursive --timeout 4000 --retries 1 --exit --color true",
+    "test": "nyc --report-dir ./artifacts/coverage --reporter=lcov mocha --reporter mocha-multi-reporters --reporter-options configFile=./mocha.config.json --recursive --timeout 4000 --retries 1 --exit --allow-uncaught true --color true",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
@@ -43,7 +43,10 @@
     "eslint": "^4.19.1",
     "eslint-config-screwdriver": "^3.0.1",
     "js-yaml": "^3.14.0",
-    "mocha": "^8.0.1",
+    "mocha": "^8.2.1",
+    "mocha-multi-reporters": "^1.5.1",
+    "mocha-sonarqube-reporter": "^1.0.2",
+    "nyc": "^15.0.0",
     "mysql2": "^1.7.0",
     "pg": "^7.18.2",
     "sequelize": "^5.22.3",
