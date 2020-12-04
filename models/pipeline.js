@@ -172,5 +172,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: [{ fields: ['scmUri'] }]
+    indexes: [{ fields: ['scmUri'] }, { fields: ['subscribedScmUrlsWithActions'], length: 128 }]
 };
