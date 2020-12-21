@@ -66,6 +66,6 @@ jobs:
     secrets:
       - NPM_TOKEN
 
-warnAnnotations:
+warnMessages:
 - 'screwdriver.cd/chainPR'
 - 'screwdriver.cd/cpu'
