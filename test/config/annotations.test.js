@@ -11,4 +11,11 @@ describe('config annotations', () => {
                 .error);
         });
     });
+
+    describe('annotations', () => {
+        it('validates annotation docker', () => {
+            assert.isNull(validate('config.annotations1.yaml', config.annotations.annotations)
+                .error);
+        });
+    });
 });
