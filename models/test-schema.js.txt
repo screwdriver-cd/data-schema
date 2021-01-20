@@ -1,0 +1,72 @@
+
+const Joi = require('joi');
+const MODEL = {
+    id: Joi
+        .number().integer().positive()
+        .description('Identifier of this Job')
+        .example(123345),
+
+    name: Joi
+        .string().regex(/^(PR-[0-9]+:)?[\w-]+$/)
+        .max(110)
+        .description('Name of the Job')
+        .example('main'),
+
+    prParentJobId: Joi
+        .number().integer().positive()
+        .description('Identifier of the parent job for this pr job')
+        .example(98765),
+
+    description: Joi
+        .string().max(100)
+        .description('Description of the Job')
+        .example('builds and tests the code'),
+
+    pipelineId: Joi
+        .number().integer().positive()
+        .description('Identifier of this Pipeline')
+        .example(123345),
+
+    state: Joi
+        .string().valid(
+            'ENABLED',
+            'DISABLED'
+        )
+        .description('Current state of the Job')
+        .example('ENABLED')
+        .default('ENABLED'),
+
+    stateChanger: Joi
+        .string()
+        .max(128)
+        .description('Username for who changed the state'),
+
+    stateChangeTime: Joi
+        .string()
+        .isoDate()
+        .description('When the state of the job was changed'),
+
+    stateChangeMessage: Joi
+        .string()
+        .max(512)
+        .description('Reason why disabling or enabling job')
+        .example('Testing out new feature change in beta only'),
+
+    archived: Joi
+        .boolean()
+        .description('Flag if the job is archived')
+        .example(true)
+        .default(false),
+
+    templateId: Joi
+        .number().integer().positive()
+        .description('Identifier for this job\'s template')
+        .example(123345)
+};
+
+
+const models = require('../index').models;
+
+console.log(models['pipeline'].fields['configPipelineId'].describe())
+// console.log(MODEL.templateId.type);
+// console.log(Joi.object().keys(MODEL));

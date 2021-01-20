@@ -16,14 +16,15 @@ const SCHEMA_CACHE_JOBS = Joi.object()
 const SCHEMA_CACHE = Joi.object({
     event: SCHEMA_CACHE_LIST,
     pipeline: SCHEMA_CACHE_LIST,
-    job: SCHEMA_CACHE_JOBS
-}).or('event', 'pipeline', 'job');
+    job: SCHEMA_CACHE_JOBS,
+    dlc: Joi.boolean().default(false)
+}).or('event', 'pipeline', 'job', 'dlc');
 const SCHEMA_CACHE_PERMUTATION = Joi.object({
     event: SCHEMA_CACHE_LIST,
     pipeline: SCHEMA_CACHE_LIST,
-    job: SCHEMA_CACHE_LIST
-}).or('event', 'pipeline', 'job');
-
+    job: SCHEMA_CACHE_LIST,
+    dlc: Joi.boolean().default(false)
+}).or('event', 'pipeline', 'job', 'dlc');
 const SCHEMA_PR_CHAIN = Joi.boolean().default(false);
 const SCHEMA_JOBS = Joi.object()
     // Jobs can only be named with A-Z,a-z,0-9,-,_
