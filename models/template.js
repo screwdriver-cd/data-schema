@@ -34,7 +34,9 @@ const MODEL = {
         .description('When this template was created')
         .example('2038-01-19T03:14:08.131Z'),
     trusted: Joi.boolean()
-        .description('Mark whether template is trusted')
+        .description('Mark whether template is trusted'),
+    latestVersion: Joi.boolean()
+        .description('Whether this is latest version')
 };
 
 const CREATE_MODEL = Object.assign({}, MODEL, { config: Template.configNoDupSteps });
@@ -63,8 +65,21 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(mutate(MODEL, [
-        'id', 'labels', 'name', 'version', 'description', 'maintainer', 'pipelineId'
-    ], ['config', 'namespace', 'images', 'createTime', 'trusted'])).label('Get Template'),
+        'id',
+        'labels',
+        'name',
+        'version',
+        'description',
+        'maintainer',
+        'pipelineId'
+    ], [
+        'config',
+        'namespace',
+        'images',
+        'createTime',
+        'trusted',
+        'latestVersion'
+    ])).label('Get Template'),
 
     /**
      * Properties for template that will be passed during a CREATE request
