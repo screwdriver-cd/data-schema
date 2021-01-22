@@ -40,7 +40,8 @@ const SCHEMA_START = Joi.object().keys({
         .label('Build JWT'),
     enqueueTime: Joi.date().iso(),
     isPR: Joi.boolean().optional().default(true),
-    prParentJobId: jobId.optional()
+    prParentJobId: jobId.optional(),
+    dlc: Joi.boolean().default(false)
 }).required();
 const SCHEMA_STOP = Joi.object().keys({
     annotations: Annotations.annotations,
