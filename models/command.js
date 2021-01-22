@@ -28,7 +28,9 @@ const MODEL = {
         .example('2038-01-19T03:14:08.131Z'),
     usage: Command.usage,
     trusted: Joi.boolean()
-        .description('Mark whether command is trusted')
+        .description('Mark whether command is trusted'),
+    latest: Joi.boolean()
+        .description('Whether this is latest version')
 };
 
 module.exports = {
@@ -69,7 +71,8 @@ module.exports = {
         'binary',
         'createTime',
         'usage',
-        'trusted'
+        'trusted',
+        'latest'
     ])).label('Get Command'),
 
     /**

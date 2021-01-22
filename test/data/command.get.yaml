@@ -19,3 +19,4 @@ habitat:
 #    file: ./foobar.sh
 pipelineId: 8765
 trusted: true
+latest: true
