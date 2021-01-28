@@ -92,6 +92,9 @@ const SCHEMA_STEP_OBJECT = Joi.object()
 
 const SCHEMA_DESCRIPTION = Joi.string().max(100).optional();
 const SCHEMA_IMAGE = Joi.string().regex(Regex.IMAGE_NAME);
+const SCHEMA_ORDER = Joi.array()
+    .items(SCHEMA_STEP_STRING.regex(Regex.STEP_NAME))
+    .min(0);
 const SCHEMA_SETTINGS = Joi.object().optional();
 const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJECT);
 const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
@@ -142,38 +145,40 @@ const SCHEMA_CACHE = Joi.boolean().optional();
 const SCHEMA_JOB = Joi.object()
     .keys({
         annotations: Annotations.annotations,
+        blockedBy: SCHEMA_BLOCKEDBY,
+        cache: SCHEMA_CACHE,
         description: SCHEMA_DESCRIPTION,
         environment: SCHEMA_ENVIRONMENT,
+        freezeWindows: SCHEMA_FREEZEWINDOWS,
         image: SCHEMA_IMAGE,
         matrix: SCHEMA_MATRIX,
+        order: SCHEMA_ORDER,
         requires: SCHEMA_REQUIRES,
-        blockedBy: SCHEMA_BLOCKEDBY,
-        freezeWindows: SCHEMA_FREEZEWINDOWS,
         secrets: SCHEMA_SECRETS,
         settings: SCHEMA_SETTINGS,
         sourcePaths: SCHEMA_SOURCEPATHS,
         steps: SCHEMA_STEPS,
         template: SCHEMA_TEMPLATE,
-        templateId: SCHEMA_TEMPLATEID,
-        cache: SCHEMA_CACHE
+        templateId: SCHEMA_TEMPLATEID
     })
     .default({});
 const SCHEMA_JOB_NO_DUP_STEPS = Joi.object()
     .keys({
         annotations: Annotations.annotations,
+        blockedBy: SCHEMA_BLOCKEDBY,
+        cache: SCHEMA_CACHE,
         description: SCHEMA_DESCRIPTION,
         environment: SCHEMA_ENVIRONMENT,
+        freezeWindows: SCHEMA_FREEZEWINDOWS,
         image: SCHEMA_IMAGE,
         matrix: SCHEMA_MATRIX,
+        order: SCHEMA_ORDER,
         requires: SCHEMA_REQUIRES,
-        blockedBy: SCHEMA_BLOCKEDBY,
-        freezeWindows: SCHEMA_FREEZEWINDOWS,
         secrets: SCHEMA_SECRETS,
         settings: SCHEMA_SETTINGS,
         sourcePaths: SCHEMA_SOURCEPATHS,
         steps: SCHEMA_STEPS_NO_DUPS,
-        template: SCHEMA_TEMPLATE,
-        cache: SCHEMA_CACHE
+        template: SCHEMA_TEMPLATE
     })
     .default({});
 
@@ -183,15 +188,20 @@ const SCHEMA_JOB_NO_DUP_STEPS = Joi.object()
  */
 module.exports = {
     annotations: Annotations.annotations,
+    blockedBy: SCHEMA_BLOCKEDBY,
+    cache: SCHEMA_CACHE,
     description: SCHEMA_DESCRIPTION,
     environment: SCHEMA_ENVIRONMENT,
+    externalTrigger: SCHEMA_EXTERNAL_TRIGGER,
+    freezeWindows: SCHEMA_FREEZEWINDOWS,
     image: SCHEMA_IMAGE,
     job: SCHEMA_JOB,
+    jobName: SCHEMA_JOBNAME,
     jobNoDupSteps: SCHEMA_JOB_NO_DUP_STEPS,
     matrix: SCHEMA_MATRIX,
+    order: SCHEMA_ORDER,
     requires: SCHEMA_REQUIRES,
-    blockedBy: SCHEMA_BLOCKEDBY,
-    freezeWindows: SCHEMA_FREEZEWINDOWS,
+    requiresValue: SCHEMA_REQUIRES_VALUE,
     secret: SCHEMA_SECRET,
     secrets: SCHEMA_SECRETS,
     settings: SCHEMA_SETTINGS,
@@ -201,9 +211,5 @@ module.exports = {
     steps: SCHEMA_STEPS,
     template: SCHEMA_TEMPLATE,
     templateId: SCHEMA_TEMPLATEID,
-    requiresValue: SCHEMA_REQUIRES_VALUE,
-    jobName: SCHEMA_JOBNAME,
-    externalTrigger: SCHEMA_EXTERNAL_TRIGGER,
-    trigger: SCHEMA_TRIGGER,
-    cache: SCHEMA_CACHE
+    trigger: SCHEMA_TRIGGER
 };

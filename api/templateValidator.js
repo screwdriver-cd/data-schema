@@ -28,7 +28,8 @@ const SCHEMA_OUTPUT = Joi.object()
         // since a template could be parseable but invalid, the contents are unpredictable
         template: Joi.object()
             .label('The end-result of parsing the given template')
-            .required()
+            .required(),
+        warnMessages: Joi.array().optional()
     })
     .label('Template validation output');
 
