@@ -46,7 +46,8 @@ const SCHEMA_SCAN = Joi.object().keys({
     startTime: Joi.string().isoDate(),
     endTime: Joi.string().isoDate(),
     timeKey: Joi.string(),
-    aggregationField: Joi.string()
+    aggregationField: Joi.string(),
+    getCount: Joi.boolean()
 });
 const SCHEMA_QUERY = Joi.object().keys({
     table,

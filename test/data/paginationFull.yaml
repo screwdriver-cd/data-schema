@@ -3,3 +3,4 @@ count: 30
 sort: 'ascending'
 sortBy: 'scmRepo.name'
 search: 'screwdriver-cd/screwdriver'
+getCount: true
