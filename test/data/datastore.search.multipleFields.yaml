@@ -7,3 +7,4 @@ search:
     keyword: '%screwdriver%'
 sortBy: 'name'
 sort: ascending
+getCount: true
