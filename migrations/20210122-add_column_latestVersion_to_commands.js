@@ -11,7 +11,7 @@ module.exports = {
             await queryInterface.addColumn(table, 'latest', {
                 type: Sequelize.BOOLEAN }, { transaction });
             // eslint-disable-next-line max-len
-            await queryInterface.sequelize.query(`UPDATE ${table} SET latest = true WHERE id in (SELECT max(id) FROM (SELECT * FROM ${table}) AS cmd GROUP BY namespace, name)`);
+            await queryInterface.sequelize.query(`UPDATE "${table}" SET latest = true WHERE id in (SELECT max(id) FROM (SELECT * FROM "${table}") AS cmd GROUP BY namespace, name)`);
         });
     }
 };
