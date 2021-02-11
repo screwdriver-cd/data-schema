@@ -11,7 +11,7 @@ module.exports = {
             await queryInterface.addColumn(table, 'latest', {
                 type: Sequelize.BOOLEAN }, { transaction });
 
-            const dialect = Sequelize.getDialect();
+            const dialect = queryInterface.sequelize.getDialect();
             // eslint-disable-next-line max-len
             let query = `UPDATE ${table} SET latest = true WHERE id in (SELECT max(id) FROM (SELECT * FROM ${table}) AS tmpl GROUP BY namespace, name)`;
 
