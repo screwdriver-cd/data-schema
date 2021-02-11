@@ -20,7 +20,7 @@ module.exports = {
                 query = `UPDATE "${table}" SET latest = true WHERE id in (SELECT max(id) FROM (SELECT * FROM "${table}") AS tmpl GROUP BY namespace, name)`;
             }
 
-            await queryInterface.sequelize.query(query);
+            await queryInterface.sequelize.query(query, { transaction });
         });
     }
 };
