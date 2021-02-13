@@ -44,12 +44,7 @@ const MODEL = {
     lines: Joi
         .number().integer()
         .description('Number of Step log lines')
-        .example(100),
-
-    locked: Joi
-        .boolean()
-        .description('Whether step is locked or not (template only)')
-        .example(true)
+        .example(100)
 };
 
 module.exports = {
@@ -79,7 +74,7 @@ module.exports = {
         'name'
     ], [
         // Make id and buildId optional for backwards compatibility
-        'command', 'id', 'buildId', 'code', 'startTime', 'endTime', 'lines', 'locked'
+        'command', 'id', 'buildId', 'code', 'startTime', 'endTime', 'lines'
     ])).label('Get Step metadata'),
 
     /**
@@ -89,7 +84,7 @@ module.exports = {
      * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [], [
-        'code', 'startTime', 'endTime', 'lines', 'locked'
+        'code', 'startTime', 'endTime', 'lines'
     ])).label('Update Step metadata'),
 
     /**
@@ -101,7 +96,7 @@ module.exports = {
     create: Joi.object(mutate(MODEL, [
         'buildId', 'name'
     ], [
-        'command', 'code', 'startTime', 'endTime', 'lines', 'locked'
+        'command', 'code', 'startTime', 'endTime', 'lines'
     ])).label('Create Step'),
 
     /**
