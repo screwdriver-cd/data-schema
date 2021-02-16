@@ -13,7 +13,9 @@ config:
   steps:
     - install: npm install
     - test: npm test
-    - echo: echo $FOO
+    - echo:
+        command: echo $FOO
+        locked: true
   environment:
     FOO: bar
   secrets:

@@ -69,7 +69,7 @@ const SCHEMA_TEMPLATE = Joi.object()
         version: TEMPLATE_VERSION.required(),
         description: TEMPLATE_DESCRIPTION.required(),
         maintainer: TEMPLATE_MAINTAINER.required(),
-        config: Job.job.required().with('image', 'steps').or('image').or('steps'),
+        config: Job.templateJob.required().with('image', 'steps').or('image').or('steps'),
         images: TEMPLATE_IMAGES
     });
 
@@ -86,7 +86,7 @@ module.exports = {
     exactVersion: TEMPLATE_EXACT_VERSION,
     description: TEMPLATE_DESCRIPTION,
     maintainer: TEMPLATE_MAINTAINER,
-    config: Job.job,
+    config: Job.templateJob,
     configNoDupSteps: Job.jobNoDupSteps,
     images: TEMPLATE_IMAGES
 };
