@@ -89,7 +89,7 @@ const SCHEMA_STEP_SUBOBJECT_BASE = Joi.object()
 const SCHEMA_STEP_COMMAND = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_SUBOBJECT_BASE);
 const SCHEMA_STEP_OBJECT = Joi.object()
     // Steps can only be named with A-Z,a-z,0-9,-,_
-    // Steps only contain strings (the command to execute)
+    // Steps only contain strings or object with the command to execute
     .pattern(Regex.STEP_NAME, SCHEMA_STEP_COMMAND)
     // All others are marked as invalid
     .unknown(false)
@@ -109,8 +109,8 @@ const SCHEMA_TEMPLATE_STEP_COMMAND = Joi.alternatives()
     .try(SCHEMA_STEP_STRING, SCHEMA_TEMPLATE_STEP_SUBOBJECT);
 const SCHEMA_TEMPLATE_STEP_OBJECT = Joi.object()
     // Steps can only be named with A-Z,a-z,0-9,-,_
-    // Steps only contain strings (the command to execute)
-    .pattern(Joi.string().regex(/^[\w-]+$/), SCHEMA_TEMPLATE_STEP_COMMAND)
+    // Steps only contain strings or object with the command to execute
+    .pattern(Regex.STEP_NAME, SCHEMA_TEMPLATE_STEP_COMMAND)
     // All others are marked as invalid
     .unknown(false)
     // And there can be only one command per step
