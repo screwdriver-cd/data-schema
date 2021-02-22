@@ -13,7 +13,7 @@ const SCHEMA_JOB_COMMAND = Joi.object()
         name: Joi.string(),
         command: Joi.string()
     })
-    .unknown(false)
+    .unknown(true) // allow other fields
     .label('Named command to execute');
 
 const SCHEMA_JOB_COMMANDS = Joi.array()
