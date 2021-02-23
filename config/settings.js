@@ -26,11 +26,14 @@ const SCHEMA_PIPELINE_SETTINGS = Joi.object()
         metricsDowntimeStatuses: SCHEMA_METRICS_DOWNTIME_STATUSES
     })
     .default({});
+
 const SCHEMA_USER_SETTINGS = Joi.object()
-    .keys({
-        displayJobNameLength: SCHEMA_DISPLAY_JOB_NAME_LENGTH
-    })
-    .default({});
+    .default({})
+    .pattern(/\d/, Joi.object().keys({
+        displayJobNameLength: SCHEMA_DISPLAY_JOB_NAME_LENGTH,
+        showPRJobs: Joi.boolean()
+    }))
+    .unknown();
 
 module.exports = {
     pipelineSettings: SCHEMA_PIPELINE_SETTINGS,
