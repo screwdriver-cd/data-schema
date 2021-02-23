@@ -11,7 +11,8 @@ const WorkflowGraph = require('../config/workflowGraph');
 const SCHEMA_JOB_COMMAND = Joi.object()
     .keys({
         name: Joi.string(),
-        command: Joi.string()
+        command: Joi.string(),
+        locked: Joi.boolean().optional()
     })
     .unknown(false)
     .label('Named command to execute');
