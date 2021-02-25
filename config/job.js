@@ -189,42 +189,14 @@ const SCHEMA_JOB = Joi.object()
         templateId: SCHEMA_TEMPLATEID
     })
     .default({});
-const SCHEMA_JOB_NO_DUP_STEPS = Joi.object()
+const SCHEMA_JOB_NO_DUP_STEPS = SCHEMA_JOB
     .keys({
-        annotations: Annotations.annotations,
-        blockedBy: SCHEMA_BLOCKEDBY,
-        cache: SCHEMA_CACHE,
-        description: SCHEMA_DESCRIPTION,
-        environment: SCHEMA_ENVIRONMENT,
-        freezeWindows: SCHEMA_FREEZEWINDOWS,
-        image: SCHEMA_IMAGE,
-        matrix: SCHEMA_MATRIX,
-        order: SCHEMA_ORDER,
-        requires: SCHEMA_REQUIRES,
-        secrets: SCHEMA_SECRETS,
-        settings: SCHEMA_SETTINGS,
-        sourcePaths: SCHEMA_SOURCEPATHS,
-        steps: SCHEMA_STEPS_NO_DUPS,
-        template: SCHEMA_TEMPLATE
+        steps: SCHEMA_STEPS_NO_DUPS
     })
     .default({});
-const SCHEMA_TEMPLATE_JOB = Joi.object()
+const SCHEMA_TEMPLATE_JOB = SCHEMA_JOB
     .keys({
-        annotations: Annotations.annotations,
-        blockedBy: SCHEMA_BLOCKEDBY,
-        cache: SCHEMA_CACHE,
-        description: SCHEMA_DESCRIPTION,
-        environment: SCHEMA_ENVIRONMENT,
-        freezeWindows: SCHEMA_FREEZEWINDOWS,
-        image: SCHEMA_IMAGE,
-        matrix: SCHEMA_MATRIX,
-        order: SCHEMA_ORDER,
-        requires: SCHEMA_REQUIRES,
-        secrets: SCHEMA_SECRETS,
-        settings: SCHEMA_SETTINGS,
-        sourcePaths: SCHEMA_SOURCEPATHS,
-        steps: SCHEMA_TEMPLATE_STEPS,
-        template: SCHEMA_TEMPLATE
+        steps: SCHEMA_TEMPLATE_STEPS
     })
     .default({});
 
