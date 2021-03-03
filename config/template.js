@@ -69,7 +69,7 @@ const SCHEMA_TEMPLATE = Joi.object()
         version: TEMPLATE_VERSION.required(),
         description: TEMPLATE_DESCRIPTION.required(),
         maintainer: TEMPLATE_MAINTAINER.required(),
-        config: Job.templateJob.required().with('image', 'steps').or('image').or('steps'),
+        config: Job.templateJob.required().or('image', 'template').or('steps', 'template'),
         images: TEMPLATE_IMAGES
     });
 
