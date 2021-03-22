@@ -23,7 +23,8 @@ module.exports = {
             await queryInterface.addConstraint(table, ['eventId', 'jobId'],
                 {
                     name: `${table}_eventId_jobId_key`,
-                    type: 'unique'
+                    type: 'unique',
+                    transaction
                 }
             );
         });
