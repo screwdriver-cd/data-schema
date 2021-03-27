@@ -1,4 +1,6 @@
 scmUrls:
     - git@github.com:org/repo.git
+    - git@github.com:org/repo.git#main
+    - git@github.com:org/repo.git#main:path/to/source/dir
     - https://git@github.com:org/repo2.git
 startAll: true
