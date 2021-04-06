@@ -79,8 +79,14 @@ module.exports = {
     // They cannot start with digits
     ENV_NAME: /^[A-Z_][A-Z0-9_]*$/,
     // Repo checkout url. For example: https://github.com/screwdriver-cd/data-schema.git#branchName or git@github.com:screwdriver-cd/data-schema.git
+    // or https://github.com/screwdriver-cd/data-schema.git#branchName:path/to/source/dir
+    // First group: SCM (e.g. github.com)
+    // Second group: org (e.g. screwdriver-cd)
+    // Third group: repo (e.g. data-schema)
+    // Fourth group: branch name (e.g. #branchName)
+    // Fifth group: root dir (e.g. :path/to/source/dir)
     // eslint-disable-next-line max-len
-    CHECKOUT_URL: /^(?:(?:https:\/\/(?:[^@/:\s]+@)?)|git@|org-\d+@)+([^/:\s]+)(?:\/|:)([^/:\s]+)\/([^\s]+?)(?:\.git)?(#[^\s]+)?$/,
+    CHECKOUT_URL: /^(?:(?:https:\/\/(?:[^@/:\s]+@)?)|git@|org-\d+@)+([^/:\s]+)(?:\/|:)([^/:\s]+)\/([^\s]+?)(?:\.git)(#[^:\s]+)?(:[^\s]+)?$/,
     // scmUri. For example: github.com:abc-123:master or bitbucket.org:{123}:master
     // Optionally, can have rootDir. For example: github.com:abc-123:master:src/app/component
     SCM_URI: /^([^:]+):([^:]+):([^:]+)(?::([^:]+))?$/,
