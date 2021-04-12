@@ -20,9 +20,10 @@ module.exports = {
 
             await queryInterface.sequelize.query(query, { transaction });
 
-            await queryInterface.addConstraint(table, ['eventId', 'jobId'],
+            await queryInterface.addConstraint(table,
                 {
                     name: `${table}_eventId_jobId_key`,
+                    fields: ['eventId', 'jobId'],
                     type: 'unique',
                     transaction
                 }
