@@ -192,7 +192,7 @@ const SCHEMA_HOOK = Joi.object().keys({
         .label('PR title'),
 
     scmContext: Joi
-        .string().max(128)
+        .string().regex(Regex.SCM_CONTEXT).max(128)
         .required()
         .description('The SCM in which the repository exists')
         .example('github:github.com'),

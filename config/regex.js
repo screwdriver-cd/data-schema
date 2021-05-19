@@ -90,6 +90,10 @@ module.exports = {
     // scmUri. For example: github.com:abc-123:master or bitbucket.org:{123}:master
     // Optionally, can have rootDir. For example: github.com:abc-123:master:src/app/component
     SCM_URI: /^([^:]+):([^:]+):([^:]+)(?::([^:]+))?$/,
+    // SCM context. For example: github:github.com, gitlab:gitlab.mycompany.com
+    // First group: SCM plugin name (e.g. github)
+    // Second group: SCM host name (e.g. github.com)
+    SCM_CONTEXT: /^([^:]+):([^:]+)$/,
     // Image aliases can only contain A-Z,a-z,0-9,-,_
     IMAGE_ALIAS: /^[\w-]+$/,
     // Valid Events for webhook
