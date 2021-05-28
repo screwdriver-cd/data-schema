@@ -46,7 +46,9 @@ const PARENT_CONFIG = Joi.object().keys({
     host: Joi.string().required(),
     org: Joi.string().required(),
     repo: Joi.string().required(),
-    sha: Joi.string().required()
+    sha: Joi.string().required(),
+    username: Joi.string().optional(),
+    accessToken: Joi.string().optional()
 });
 const GET_CHECKOUT_COMMAND = Joi.object().keys({
     branch: Joi.string().required(),
