@@ -9,3 +9,4 @@ settings:
     metricsDowntimeStatuses:
         - FAILURE
         - ABORTED
+    public: true
