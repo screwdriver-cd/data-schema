@@ -4,6 +4,5 @@ jobId: 567
 eventId: 666
 isPR: true
 pipelineId: 1
-scmContext: "github.com"
+scmContext: "github:github.com"
 prParentJobId: 456
-
