@@ -6,7 +6,6 @@ const models = require('../models');
 const Scm = require('../core/scm');
 const Regex = require('../config/regex');
 
-const buildStatus = models.build.base.extract('status').required();
 const checkoutUrl = models.pipeline.create.extract('checkoutUrl').required();
 const hook = core.scm.hook.required();
 const jobName = models.job.base.extract('name').optional();
@@ -20,6 +19,20 @@ const sha = models.build.base.extract('sha').required();
 const token = models.user.base.extract('token').required();
 const type = core.scm.hook.extract('type').required();
 const username = models.user.base.extract('username').required();
+
+const githubStatus = [
+    'PENDING',
+    'SUCCESS',
+    'FAILURE'
+];
+
+const gitlabStatus = [
+    'PENDING',
+    'RUNNING',
+    'SUCCESS',
+    'FAILED',
+    'CANCELED'
+];
 
 const ADD_WEBHOOK = Joi.object().keys({
     scmUri,
@@ -107,7 +120,7 @@ const UPDATE_COMMIT_STATUS = Joi.object().keys({
     scmUri,
     token,
     sha,
-    buildStatus,
+    buildStatus: Joi.string().valid(...githubStatus, ...gitlabStatus),
     jobName,
     url: Joi.string().uri().required(),
     pipelineId,
