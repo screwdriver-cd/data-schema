@@ -26,14 +26,6 @@ const githubStatus = [
     'FAILURE'
 ];
 
-const gitlabStatus = [
-    'PENDING',
-    'RUNNING',
-    'SUCCESS',
-    'FAILED',
-    'CANCELED'
-];
-
 const ADD_WEBHOOK = Joi.object().keys({
     scmUri,
     token,
@@ -120,7 +112,7 @@ const UPDATE_COMMIT_STATUS = Joi.object().keys({
     scmUri,
     token,
     sha,
-    buildStatus: Joi.string().valid(...githubStatus, ...gitlabStatus),
+    buildStatus: Joi.string().valid(...githubStatus),
     jobName,
     url: Joi.string().uri().required(),
     pipelineId,
