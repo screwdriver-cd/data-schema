@@ -2,3 +2,4 @@
 name: screwdriver-cd/screwdriver
 branch: master
 url: https://github.com/screwdriver-cd/screwdriver/tree/master
+private: true

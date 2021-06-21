@@ -8,6 +8,12 @@ labels:
     - test
     - beta
 config:
+  template: simple/template@1
+  order:
+    - install
+    - test
+    - other
+    - echo
   image: node:6
   steps:
     - install: npm install

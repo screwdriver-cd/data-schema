@@ -299,106 +299,158 @@ describe('config regex', () => {
     });
 
     describe('checkoutUrl', () => {
+        const github = 'github.com';
+        const bitbucket = 'bitbucket.org';
+        const org = 'screwdriver-cd';
+        const repo = 'data-schema';
+        const bitbucketRepo = 'data.schema';
+        const branchName = '#foobar';
+        const rootDir = ':path/to/source/dir';
+
         describe('checks good checkout Url', () => {
+            const githubHttps = `https://${github}/${org}/${repo}.git`;
             const tests = [
                 {
-                    url: 'https://github.com/screwdriver-cd/data-schema.git',
+                    url: githubHttps,
                     match: [
-                        'https://github.com/screwdriver-cd/data-schema.git',
-                        'github.com',
-                        'screwdriver-cd',
-                        'data-schema',
+                        githubHttps,
+                        github,
+                        org,
+                        repo,
+                        null,
                         null
                     ]
                 },
                 {
-                    url: 'https://github.com/screwdriver-cd/data-schema.git#foobar',
+                    url: `${githubHttps}${branchName}`,
                     match: [
-                        'https://github.com/screwdriver-cd/data-schema.git#foobar',
-                        'github.com',
-                        'screwdriver-cd',
-                        'data-schema',
-                        '#foobar'
-                    ]
-                },
-                {
-                    url: 'git@github.com:screwdriver-cd/data-schema.git',
-                    match: [
-                        'git@github.com:screwdriver-cd/data-schema.git',
-                        'github.com',
-                        'screwdriver-cd',
-                        'data-schema',
+                        `${githubHttps}${branchName}`,
+                        github,
+                        org,
+                        repo,
+                        branchName,
                         null
                     ]
                 },
                 {
-                    url: 'git@github.com:screwdriver-cd/data-schema.git#foobar',
+                    url: `${githubHttps}${branchName}${rootDir}`,
                     match: [
-                        'git@github.com:screwdriver-cd/data-schema.git#foobar',
-                        'github.com',
-                        'screwdriver-cd',
-                        'data-schema',
-                        '#foobar'
+                        `${githubHttps}${branchName}${rootDir}`,
+                        github,
+                        org,
+                        repo,
+                        branchName,
+                        rootDir
                     ]
                 },
                 {
-                    url: 'https://screwdriver-cd@bitbucket.org/screwdriver-cd/data-schema',
+                    url: `git@${github}:${org}/${repo}.git`,
                     match: [
-                        'https://screwdriver-cd@bitbucket.org/screwdriver-cd/data-schema',
-                        'bitbucket.org',
-                        'screwdriver-cd',
-                        'data-schema',
+                        `git@${github}:${org}/${repo}.git`,
+                        github,
+                        org,
+                        repo,
+                        null,
                         null
                     ]
                 },
                 {
-                    url: 'https://screwdriver-cd@bitbucket.org/screwdriver-cd/data-schema#banana',
+                    url: `git@${github}:${org}/${repo}.git${branchName}`,
                     match: [
-                        'https://screwdriver-cd@bitbucket.org/screwdriver-cd/data-schema#banana',
-                        'bitbucket.org',
-                        'screwdriver-cd',
-                        'data-schema',
-                        '#banana'
-                    ]
-                },
-                {
-                    url: 'git@bitbucket.org:screwdriver-cd/data-schema',
-                    match: [
-                        'git@bitbucket.org:screwdriver-cd/data-schema',
-                        'bitbucket.org',
-                        'screwdriver-cd',
-                        'data-schema',
+                        `git@${github}:${org}/${repo}.git${branchName}`,
+                        github,
+                        org,
+                        repo,
+                        branchName,
                         null
                     ]
                 },
                 {
-                    url: 'git@bitbucket.org:screwdriver-cd/data-schema#banana',
+                    url: `git@${github}:${org}/${repo}.git${branchName}${rootDir}`,
                     match: [
-                        'git@bitbucket.org:screwdriver-cd/data-schema#banana',
-                        'bitbucket.org',
-                        'screwdriver-cd',
-                        'data-schema',
-                        '#banana'
+                        `git@${github}:${org}/${repo}.git${branchName}${rootDir}`,
+                        github,
+                        org,
+                        repo,
+                        branchName,
+                        rootDir
                     ]
                 },
                 {
-                    url: 'git@bitbucket.org:screwdriver-cd/data.schema#banana',
+                    url: `https://screwdriver-cd@${bitbucket}/${org}/${repo}.git`,
                     match: [
-                        'git@bitbucket.org:screwdriver-cd/data.schema#banana',
-                        'bitbucket.org',
-                        'screwdriver-cd',
-                        'data.schema',
-                        '#banana'
+                        `https://screwdriver-cd@${bitbucket}/${org}/${repo}.git`,
+                        bitbucket,
+                        org,
+                        repo,
+                        null,
+                        null
                     ]
                 },
                 {
-                    url: 'org-1234@bitbucket.org:screwdriver-cd/data.schema#banana',
+                    url: `https://screwdriver-cd@${bitbucket}/${org}/${repo}.git${branchName}`,
                     match: [
-                        'org-1234@bitbucket.org:screwdriver-cd/data.schema#banana',
-                        'bitbucket.org',
-                        'screwdriver-cd',
-                        'data.schema',
-                        '#banana'
+                        `https://screwdriver-cd@${bitbucket}/${org}/${repo}.git${branchName}`,
+                        bitbucket,
+                        org,
+                        repo,
+                        branchName,
+                        null
+                    ]
+                },
+                {
+                    url: `https://user@${bitbucket}/${org}/${repo}.git${branchName}${rootDir}`,
+                    match: [
+                        `https://user@${bitbucket}/${org}/${repo}.git${branchName}${rootDir}`,
+                        bitbucket,
+                        org,
+                        repo,
+                        branchName,
+                        rootDir
+                    ]
+                },
+                {
+                    url: `git@${bitbucket}:${org}/${repo}.git`,
+                    match: [
+                        `git@${bitbucket}:${org}/${repo}.git`,
+                        bitbucket,
+                        org,
+                        repo,
+                        null,
+                        null
+                    ]
+                },
+                {
+                    url: `git@${bitbucket}:${org}/${repo}.git${branchName}`,
+                    match: [
+                        `git@${bitbucket}:${org}/${repo}.git${branchName}`,
+                        bitbucket,
+                        org,
+                        repo,
+                        branchName,
+                        null
+                    ]
+                },
+                {
+                    url: `git@${bitbucket}:${org}/${bitbucketRepo}.git${branchName}`,
+                    match: [
+                        `git@${bitbucket}:${org}/${bitbucketRepo}.git${branchName}`,
+                        bitbucket,
+                        org,
+                        bitbucketRepo,
+                        branchName,
+                        null
+                    ]
+                },
+                {
+                    url: `org-1234@${bitbucket}:${org}/${bitbucketRepo}.git${branchName}`,
+                    match: [
+                        `org-1234@${bitbucket}:${org}/${bitbucketRepo}.git${branchName}`,
+                        bitbucket,
+                        org,
+                        bitbucketRepo,
+                        branchName,
+                        null
                     ]
                 }
             ];
@@ -406,8 +458,8 @@ describe('config regex', () => {
             tests.forEach((test) => {
                 it(`correctly validates ${test.url}`, () => {
                     assert.deepEqual(
-                        JSON.stringify(test.match, null, 4),
-                        JSON.stringify(config.regex.CHECKOUT_URL.exec(test.url), null, 4)
+                        JSON.stringify(config.regex.CHECKOUT_URL.exec(test.url), null, 4),
+                        JSON.stringify(test.match, null, 4)
                     );
                 });
             });
@@ -415,7 +467,9 @@ describe('config regex', () => {
 
         it('fails on bad checkout Url', () => {
             assert.isFalse(config.regex.CHECKOUT_URL.test('https://github.com/screwdriver-cd/'));
-            assert.isFalse(config.regex.CHECKOUT_URL.test('git@screwdriver-cd/data-schema.git'));
+            assert.isFalse(config.regex.CHECKOUT_URL.test(`git@${org}/${repo}.git`));
+            assert.isFalse(config.regex.CHECKOUT_URL.test(`git@${org}/${repo}.git#${rootDir}`));
+            assert.isFalse(config.regex.CHECKOUT_URL.test(`git@${org}/${repo}.git${branchName}:`));
         });
     });
 

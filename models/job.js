@@ -115,14 +115,13 @@ module.exports = {
     ])).label('Get Job'),
 
     /**
-     * Properties for Job that will come back during a UPDATE request
+     * Properties for Job that will be passed during an UPDATE request
      *
      * @property update
      * @type {Joi}
      */
     update: Joi.object(mutate(MODEL, [], [
-        'state', 'stateChanger', 'stateChangeTime',
-        'stateChangeMessage'
+        'state', 'stateChangeMessage'
     ])).label('Update Job'),
 
     /**

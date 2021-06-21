@@ -2,6 +2,8 @@
 
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
+const pipelineBaseSchema = require('./pipeline').base;
+const scmContext = pipelineBaseSchema.extract('scmContext');
 const Settings = require('../config/settings');
 
 const MODEL = {
@@ -20,11 +22,7 @@ const MODEL = {
         .string()
         .description('Github token'),
 
-    scmContext: Joi
-        .string()
-        .max(128)
-        .description('The SCM to which the user belongs')
-        .example('github:github.com'),
+    scmContext,
 
     settings: Settings.userSettings
 };

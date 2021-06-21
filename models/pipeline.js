@@ -37,7 +37,7 @@ const MODEL = {
         .example('github.com:123456:master:src/app/component'),
 
     scmContext: Joi
-        .string().max(128)
+        .string().regex(Regex.SCM_CONTEXT).max(128)
         .description('The SCM in which the repository exists')
         .example('github:github.com'),
 

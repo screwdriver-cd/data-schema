@@ -24,7 +24,11 @@ const MODEL = {
 
     sortBy: Joi
         .string().max(100)
-        .description('Field to sort by')
+        .description('Field to sort by'),
+
+    getCount: Joi
+        .boolean()
+        .description('Return total count')
 };
 
 /**

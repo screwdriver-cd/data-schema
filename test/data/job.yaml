@@ -8,6 +8,7 @@ permutations:
       commands:
         - name: install
           command: npm install
+          locked: true
         - name: test
           command: npm test
         - name: build

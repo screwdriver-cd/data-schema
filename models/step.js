@@ -73,7 +73,8 @@ module.exports = {
     get: Joi.object(mutate(MODEL, [
         'name'
     ], [
-        'command', 'id', 'buildId', 'code', 'startTime', 'endTime', 'lines' // Make id and buildId optional for backwards compatibility
+        // Make id and buildId optional for backwards compatibility
+        'command', 'id', 'buildId', 'code', 'startTime', 'endTime', 'lines'
     ])).label('Get Step metadata'),
 
     /**

@@ -52,6 +52,10 @@ const SCHEMA_REPO = Joi.object().keys({
         .label('Link to Repository')
         .example('https://github.com/screwdriver-cd/screwdriver/tree/master'),
 
+    private: Joi.boolean()
+        .optional()
+        .label('Whether or not the pipeline is private'),
+
     rootDir: ROOT_DIR
 }).label('SCM Repository');
 
@@ -188,7 +192,7 @@ const SCHEMA_HOOK = Joi.object().keys({
         .label('PR title'),
 
     scmContext: Joi
-        .string().max(128)
+        .string().regex(Regex.SCM_CONTEXT).max(128)
         .required()
         .description('The SCM in which the repository exists')
         .example('github:github.com'),

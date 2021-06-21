@@ -23,14 +23,18 @@ const SCHEMA_METRICS_DOWNTIME_STATUSES = Joi.array().items(
 const SCHEMA_PIPELINE_SETTINGS = Joi.object()
     .keys({
         metricsDowntimeJobs: SCHEMA_METRICS_DOWNTIME_JOBS,
-        metricsDowntimeStatuses: SCHEMA_METRICS_DOWNTIME_STATUSES
+        metricsDowntimeStatuses: SCHEMA_METRICS_DOWNTIME_STATUSES,
+        public: Joi.boolean()
     })
     .default({});
+
 const SCHEMA_USER_SETTINGS = Joi.object()
-    .keys({
-        displayJobNameLength: SCHEMA_DISPLAY_JOB_NAME_LENGTH
-    })
-    .default({});
+    .default({})
+    .pattern(/\d/, Joi.object().keys({
+        displayJobNameLength: SCHEMA_DISPLAY_JOB_NAME_LENGTH,
+        showPRJobs: Joi.boolean()
+    }))
+    .unknown();
 
 module.exports = {
     pipelineSettings: SCHEMA_PIPELINE_SETTINGS,

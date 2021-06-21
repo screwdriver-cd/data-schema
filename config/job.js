@@ -77,31 +77,61 @@ const SCHEMA_ENVIRONMENT = Joi.object()
     + 'and underscore (cannot start with digit)'
     });
 const SCHEMA_JOBNAME = Joi.string().max(100).regex(Regex.JOB_NAME);
+// Step can be in the following formats:
+// npm install
+// { init: npm install }
+// { init: { command: npm install } }
 const SCHEMA_STEP_STRING = Joi.string();
+const SCHEMA_STEP_SUBOBJECT_BASE = Joi.object()
+    .keys({
+        command: SCHEMA_STEP_STRING.required()
+    });
+const SCHEMA_STEP_COMMAND = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_SUBOBJECT_BASE);
 const SCHEMA_STEP_OBJECT = Joi.object()
     // Steps can only be named with A-Z,a-z,0-9,-,_
-    // Steps only contain strings (the command to execute)
-    .pattern(Regex.STEP_NAME, Joi.string())
+    // Steps only contain strings or object with the command to execute
+    .pattern(Regex.STEP_NAME, SCHEMA_STEP_COMMAND)
     // All others are marked as invalid
     .unknown(false)
-    // And there can be only one command per step
+    // And there can be only one command per step or an object with command
     .length(1)
     // Add documentation
     .messages({ 'object.unknown': '{{#label}} only supports the following '
     + 'characters A-Z,a-z,0-9,-,_' });
-
-const SCHEMA_DESCRIPTION = Joi.string().max(100).optional();
-const SCHEMA_IMAGE = Joi.string().regex(Regex.IMAGE_NAME);
-const SCHEMA_SETTINGS = Joi.object().optional();
 const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJECT);
 const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
-const SCHEMA_STEPS_NO_DUPS = Joi.array().items(SCHEMA_STEP).min(1).unique((a, b) => {
+// Template steps
+const SCHEMA_TEMPLATE_STEP_SUBOBJECT = SCHEMA_STEP_SUBOBJECT_BASE
+    .keys({
+        locked: Joi.boolean()
+    });
+const SCHEMA_TEMPLATE_STEP_COMMAND = Joi.alternatives()
+    .try(SCHEMA_STEP_STRING, SCHEMA_TEMPLATE_STEP_SUBOBJECT);
+const SCHEMA_TEMPLATE_STEP_OBJECT = Joi.object()
+    // Steps can only be named with A-Z,a-z,0-9,-,_
+    // Steps only contain strings or object with the command to execute
+    .pattern(Regex.STEP_NAME, SCHEMA_TEMPLATE_STEP_COMMAND)
+    // All others are marked as invalid
+    .unknown(false)
+    // And there can be only one command per step
+    .length(1);
+const SCHEMA_TEMPLATE_STEP = Joi.alternatives()
+    .try(SCHEMA_STEP_STRING, SCHEMA_TEMPLATE_STEP_OBJECT);
+const SCHEMA_TEMPLATE_STEPS = Joi.array().items(SCHEMA_TEMPLATE_STEP).min(1);
+const SCHEMA_STEPS_NO_DUPS = Joi.array().items(SCHEMA_TEMPLATE_STEP).min(1).unique((a, b) => {
     if (typeof a === 'string' || typeof b === 'string') {
         return false;
     }
 
     return Object.keys(a).some(key => b[key]);
 });
+const SCHEMA_DESCRIPTION = Joi.string().max(100).optional();
+const SCHEMA_IMAGE = Joi.string().regex(Regex.IMAGE_NAME);
+const SCHEMA_ORDER = Joi.array()
+    .items(SCHEMA_STEP_STRING.regex(Regex.STEP_NAME))
+    .min(0);
+const SCHEMA_SETTINGS = Joi.object().optional();
+
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
 const SCHEMA_TEMPLATEID = Joi
     .number().integer().positive()
@@ -142,38 +172,31 @@ const SCHEMA_CACHE = Joi.boolean().optional();
 const SCHEMA_JOB = Joi.object()
     .keys({
         annotations: Annotations.annotations,
+        blockedBy: SCHEMA_BLOCKEDBY,
+        cache: SCHEMA_CACHE,
         description: SCHEMA_DESCRIPTION,
         environment: SCHEMA_ENVIRONMENT,
+        freezeWindows: SCHEMA_FREEZEWINDOWS,
         image: SCHEMA_IMAGE,
         matrix: SCHEMA_MATRIX,
+        order: SCHEMA_ORDER,
         requires: SCHEMA_REQUIRES,
-        blockedBy: SCHEMA_BLOCKEDBY,
-        freezeWindows: SCHEMA_FREEZEWINDOWS,
         secrets: SCHEMA_SECRETS,
         settings: SCHEMA_SETTINGS,
         sourcePaths: SCHEMA_SOURCEPATHS,
         steps: SCHEMA_STEPS,
         template: SCHEMA_TEMPLATE,
-        templateId: SCHEMA_TEMPLATEID,
-        cache: SCHEMA_CACHE
+        templateId: SCHEMA_TEMPLATEID
     })
     .default({});
-const SCHEMA_JOB_NO_DUP_STEPS = Joi.object()
+const SCHEMA_JOB_NO_DUP_STEPS = SCHEMA_JOB
     .keys({
-        annotations: Annotations.annotations,
-        description: SCHEMA_DESCRIPTION,
-        environment: SCHEMA_ENVIRONMENT,
-        image: SCHEMA_IMAGE,
-        matrix: SCHEMA_MATRIX,
-        requires: SCHEMA_REQUIRES,
-        blockedBy: SCHEMA_BLOCKEDBY,
-        freezeWindows: SCHEMA_FREEZEWINDOWS,
-        secrets: SCHEMA_SECRETS,
-        settings: SCHEMA_SETTINGS,
-        sourcePaths: SCHEMA_SOURCEPATHS,
-        steps: SCHEMA_STEPS_NO_DUPS,
-        template: SCHEMA_TEMPLATE,
-        cache: SCHEMA_CACHE
+        steps: SCHEMA_STEPS_NO_DUPS
+    })
+    .default({});
+const SCHEMA_TEMPLATE_JOB = SCHEMA_JOB
+    .keys({
+        steps: SCHEMA_TEMPLATE_STEPS
     })
     .default({});
 
@@ -183,15 +206,20 @@ const SCHEMA_JOB_NO_DUP_STEPS = Joi.object()
  */
 module.exports = {
     annotations: Annotations.annotations,
+    blockedBy: SCHEMA_BLOCKEDBY,
+    cache: SCHEMA_CACHE,
     description: SCHEMA_DESCRIPTION,
     environment: SCHEMA_ENVIRONMENT,
+    externalTrigger: SCHEMA_EXTERNAL_TRIGGER,
+    freezeWindows: SCHEMA_FREEZEWINDOWS,
     image: SCHEMA_IMAGE,
     job: SCHEMA_JOB,
+    jobName: SCHEMA_JOBNAME,
     jobNoDupSteps: SCHEMA_JOB_NO_DUP_STEPS,
     matrix: SCHEMA_MATRIX,
+    order: SCHEMA_ORDER,
     requires: SCHEMA_REQUIRES,
-    blockedBy: SCHEMA_BLOCKEDBY,
-    freezeWindows: SCHEMA_FREEZEWINDOWS,
+    requiresValue: SCHEMA_REQUIRES_VALUE,
     secret: SCHEMA_SECRET,
     secrets: SCHEMA_SECRETS,
     settings: SCHEMA_SETTINGS,
@@ -201,9 +229,6 @@ module.exports = {
     steps: SCHEMA_STEPS,
     template: SCHEMA_TEMPLATE,
     templateId: SCHEMA_TEMPLATEID,
-    requiresValue: SCHEMA_REQUIRES_VALUE,
-    jobName: SCHEMA_JOBNAME,
-    externalTrigger: SCHEMA_EXTERNAL_TRIGGER,
-    trigger: SCHEMA_TRIGGER,
-    cache: SCHEMA_CACHE
+    templateJob: SCHEMA_TEMPLATE_JOB,
+    trigger: SCHEMA_TRIGGER
 };

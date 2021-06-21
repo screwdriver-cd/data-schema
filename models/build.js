@@ -251,7 +251,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['jobId', 'number'],
+    keys: ['jobId', 'eventId'],
 
     /**
      * Primary column to sort queries by.

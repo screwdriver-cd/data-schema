@@ -22,7 +22,8 @@ const RESERVED_JOB_ANNOTATIONS = [
     'screwdriver.cd/coverageScope',
     'screwdriver.cd/terminationGracePeriodSeconds',
     'screwdriver.cd/displayName',
-    'screwdriver.cd/mergeSharedSteps'
+    'screwdriver.cd/mergeSharedSteps',
+    'screwdriver.cd/manualStartEnabled'
 ];
 const RESERVED_PIPELINE_ANNOTATIONS = [
     'screwdriver.cd/buildCluster',

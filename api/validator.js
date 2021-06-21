@@ -11,7 +11,8 @@ const WorkflowGraph = require('../config/workflowGraph');
 const SCHEMA_JOB_COMMAND = Joi.object()
     .keys({
         name: Joi.string(),
-        command: Joi.string()
+        command: Joi.string(),
+        locked: Joi.boolean().optional()
     })
     .unknown(false)
     .label('Named command to execute');
@@ -24,19 +25,20 @@ const SCHEMA_JOB_COMMANDS = Joi.array()
 const SCHEMA_JOB_PERMUTATION = Joi.object()
     .keys({
         annotations: Annotations.annotations,
+        blockedBy: Job.blockedBy,
         cache: Base.cachePerm,
         commands: SCHEMA_JOB_COMMANDS,
         description: Job.description,
         environment: Job.environment,
+        freezeWindows: Job.freezeWindows,
         image: Job.image,
+        order: Job.order,
         requires: Job.requires,
-        blockedBy: Job.blockedBy,
         secrets: Job.secrets,
         settings: Job.settings,
         sourcePaths: Job.sourcePaths,
-        freezeWindows: Job.freezeWindows,
-        templateId: Job.templateId,
-        subscribe: Base.subscribe
+        subscribe: Base.subscribe,
+        templateId: Job.templateId
     }).label('Job permutation');
 
 const SCHEMA_JOB_PERMUTATIONS = Joi.array().items(SCHEMA_JOB_PERMUTATION)
