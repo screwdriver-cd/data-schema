@@ -58,6 +58,7 @@ const SCHEMA_STATUS = Joi.object().keys({
     pipelineId,
     jobId
 }).required();
+const SCHEMA_VERIFY = Object.assign({}, SCHEMA_START);
 
 module.exports = {
     /**
@@ -67,6 +68,14 @@ module.exports = {
      * @type {Joi}
      */
     start: SCHEMA_START,
+
+    /**
+     * Properties for Executor that will be passed for the VERIFY method
+     *
+     * @property start
+     * @type {Joi}
+     */
+    verify: SCHEMA_VERIFY,
 
     /**
      * Properties for Executor that will be passed for the STOP method
