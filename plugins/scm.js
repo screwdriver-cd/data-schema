@@ -20,7 +20,7 @@ const token = models.user.base.extract('token').required();
 const type = core.scm.hook.extract('type').required();
 const username = models.user.base.extract('username').required();
 
-const githubStatus = [
+const scmStatus = [
     'PENDING',
     'SUCCESS',
     'FAILURE'
@@ -112,7 +112,7 @@ const UPDATE_COMMIT_STATUS = Joi.object().keys({
     scmUri,
     token,
     sha,
-    buildStatus: Joi.string().valid(...githubStatus),
+    buildStatus: Joi.string().required().valid(...scmStatus),
     jobName,
     url: Joi.string().uri().required(),
     pipelineId,
