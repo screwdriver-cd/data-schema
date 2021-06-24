@@ -7,6 +7,7 @@ const commandFormat = require('./commandFormat');
 const job = require('./job');
 const parameters = require('./parameters');
 const regex = require('./regex');
+const scmCommons = require('./scmCommons');
 const settings = require('./settings');
 const template = require('./template');
 const tokenConfig = require('./tokenConfig');
@@ -23,5 +24,6 @@ module.exports = {
     settings,
     template,
     tokenConfig,
-    workflowGraph
+    workflowGraph,
+    scmCommons
 };
