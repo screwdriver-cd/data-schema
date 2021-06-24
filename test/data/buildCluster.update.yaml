@@ -5,3 +5,4 @@ isActive: true
 managedByScrewdriver: false
 maintainer: foo@bar.com
 weightage: 50
+scmContext: gitlab:gitlab.com

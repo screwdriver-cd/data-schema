@@ -3,3 +3,4 @@ name: iOS
 scmOrganizations: [screwdriver-cd]
 managedByScrewdriver: false
 maintainer: foo@bar.com
+scmContext: gitlab:gitlab.com
