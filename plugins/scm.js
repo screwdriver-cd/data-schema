@@ -5,7 +5,7 @@ const Joi = require('joi');
 const models = require('../models');
 const Scm = require('../core/scm');
 const Regex = require('../config/regex');
-const ScmCommons = require('../config/scmCommons');
+const ScmCommons = require('../lib/scmCommons');
 
 const checkoutUrl = models.pipeline.create.extract('checkoutUrl').required();
 const hook = core.scm.hook.required();
