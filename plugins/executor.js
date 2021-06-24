@@ -17,7 +17,7 @@ const SCHEMA_PIPELINE = Joi.object().keys({
     scmContext: models.pipeline.base.extract('scmContext').required()
 }).unknown();
 const pipelineId = models.pipeline.base.extract('id');
-const SCHEMA_START = Joi.object().keys({
+const buildSchemaObj = {
     build: Joi.object(),
     causeMessage,
     jobId,
@@ -41,7 +41,8 @@ const SCHEMA_START = Joi.object().keys({
     enqueueTime: Joi.date().iso(),
     isPR: Joi.boolean().optional().default(true),
     prParentJobId: jobId.optional()
-}).required();
+};
+const SCHEMA_START = Joi.object().keys(buildSchemaObj).required();
 const SCHEMA_STOP = Joi.object().keys({
     annotations: Annotations.annotations,
     blockedBy: Joi.array().items(jobId),
@@ -58,7 +59,7 @@ const SCHEMA_STATUS = Joi.object().keys({
     pipelineId,
     jobId
 }).required();
-const SCHEMA_VERIFY = Object.assign({}, SCHEMA_START);
+const SCHEMA_VERIFY = Joi.object().keys(buildSchemaObj).required();
 
 module.exports = {
     /**
