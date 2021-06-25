@@ -89,7 +89,7 @@ module.exports = {
      */
     update: Joi.object(mutate(MODEL, [], [
         'description', 'isActive', 'scmOrganizations', 'managedByScrewdriver',
-        'maintainer', 'weightage'
+        'maintainer', 'weightage', 'scmContext'
     ])).label('Update BuildCluster'),
 
     /**
@@ -101,7 +101,7 @@ module.exports = {
     create: Joi.object(mutate(MODEL, [
         'name', 'scmOrganizations', 'managedByScrewdriver', 'maintainer'
     ], [
-        'description', 'isActive', 'weightage'
+        'description', 'isActive', 'weightage', 'scmContext'
     ])).label('Create Build'),
 
     /**
