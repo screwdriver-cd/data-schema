@@ -227,6 +227,7 @@ describe('scm test', () => {
         it('validates scm statuses mapping', () => {
             assert.strictEqual(scm.SCM_STATE_MAP.QUEUED, 'PENDING');
         });
+
         it('validates an invalid scm statuses mapping', () => {
             assert.notStrictEqual(scm.SCM_STATE_MAP.QUEUED, 'SUCCESS');
         });
@@ -236,6 +237,7 @@ describe('scm test', () => {
         it('check a valid scm status', () => {
             assert.isTrue(scm.SCM_STATUSES.includes('PENDING'));
         });
+
         it('check an invalid scm status', () => {
             assert.isFalse(scm.SCM_STATUSES.includes('QUEUED'));
         });
