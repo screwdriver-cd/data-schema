@@ -6,7 +6,6 @@ const models = require('../models');
 const Scm = require('../core/scm');
 const Regex = require('../config/regex');
 
-const buildStatus = models.build.base.extract('status').required();
 const checkoutUrl = models.pipeline.create.extract('checkoutUrl').required();
 const hook = core.scm.hook.required();
 const jobName = models.job.base.extract('name').optional();
@@ -20,6 +19,8 @@ const sha = models.build.base.extract('sha').required();
 const token = models.user.base.extract('token').required();
 const type = core.scm.hook.extract('type').required();
 const username = models.user.base.extract('username').required();
+
+const SCM_STATUSES = ['PENDING', 'SUCCESS', 'FAILURE'];
 
 const ADD_WEBHOOK = Joi.object().keys({
     scmUri,
@@ -107,7 +108,7 @@ const UPDATE_COMMIT_STATUS = Joi.object().keys({
     scmUri,
     token,
     sha,
-    buildStatus,
+    buildStatus: Joi.string().required().valid(...SCM_STATUSES),
     jobName,
     url: Joi.string().uri().required(),
     pipelineId,
@@ -342,5 +343,32 @@ module.exports = {
      * @property openPr
      * @type {Joi}
      */
-    openPr: OPEN_PR
+    openPr: OPEN_PR,
+
+    /**
+     * Properties for Scm Base that handles statuses
+     *
+     * @property SCM_STATUSES
+     * @type {Object}
+     */
+    SCM_STATUSES,
+
+    /**
+     * Properties for Scm Base that handles mapping from build status to scm statuses
+     *
+     * @property SCM_STATE_MAP
+     * @type {Object}
+     */
+    SCM_STATE_MAP: {
+        ABORTED: 'FAILURE',
+        CREATED: 'PENDING',
+        FAILURE: 'FAILURE',
+        QUEUED: 'PENDING',
+        RUNNING: 'PENDING',
+        SUCCESS: 'SUCCESS',
+        BLOCKED: 'PENDING',
+        UNSTABLE: 'PENDING',
+        COLLAPSED: '',
+        FROZEN: ''
+    }
 };
