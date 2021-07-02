@@ -11,7 +11,7 @@ module.exports = {
         await queryInterface.sequelize.transaction(async (transaction) => {
             const dialect = queryInterface.sequelize.getDialect();
             // eslint-disable-next-line max-len
-            let query = `DELETE a FROM "${table}" AS a, "${table}" AS b WHERE a.id > b.id AND a."eventId" = b."eventId" AND a."jobId" = b."jobId"`;
+            let query = `DELETE a FROM ${table} AS a, ${table} AS b WHERE a.id > b.id AND a.eventId = b.eventId AND a.jobId = b.jobId`;
 
             if (dialect === 'postgres') {
                 // eslint-disable-next-line max-len
