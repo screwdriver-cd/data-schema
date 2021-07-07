@@ -90,7 +90,7 @@ describe('model event', () => {
             const { indexes } = models.event;
 
             expected.forEach(indexName => {
-                assert.include(indexes, indexName, `Index name ${indexName} not included`);
+                assert.deepInclude(indexes, indexName, `Index name ${indexName} not included`);
             });
         });
     });
@@ -101,7 +101,7 @@ describe('model event', () => {
             const { rangeKeys } = models.event;
 
             expected.forEach(keyName => {
-                assert.include(rangeKeys, keyName, `RangeKey name ${keyName} not included`);
+                assert.deepInclude(rangeKeys, keyName, `RangeKey name ${keyName} not included`);
             });
         });
     });

@@ -90,7 +90,7 @@ describe('model job', () => {
             const { indexes } = models.job;
 
             expected.forEach(indexName => {
-                assert.include(indexes, indexName, `Index name ${indexName} not included`);
+                assert.deepInclude(indexes, indexName, `Index name ${indexName} not included`);
             });
         });
     });

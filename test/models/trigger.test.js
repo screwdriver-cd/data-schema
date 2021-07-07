@@ -46,7 +46,7 @@ describe('model trigger', () => {
             const { indexes } = models.trigger;
 
             expected.forEach(indexName => {
-                assert.include(indexes, indexName, `Index name ${indexName} not included`);
+                assert.deepInclude(indexes, indexName, `Index name ${indexName} not included`);
             });
         });
     });

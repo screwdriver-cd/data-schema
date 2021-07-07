@@ -61,7 +61,7 @@ describe('model buildCluster', () => {
             const { indexes } = models.buildCluster;
 
             expected.forEach(indexName => {
-                assert.include(indexes, indexName, `Index name ${indexName} not included`);
+                assert.deepInclude(indexes, indexName, `Index name ${indexName} not included`);
             });
         });
     });
