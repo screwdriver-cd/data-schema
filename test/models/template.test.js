@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const models = require('../../').models;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { models } = require('../..');
+const { validate } = require('../helper');
 
 describe('model template', () => {
     describe('base', () => {
@@ -17,8 +17,7 @@ describe('model template', () => {
         });
 
         it('validates the create with namespace', () => {
-            assert.isNull(validate('template.createWithNamespace.yaml',
-                models.template.create).error);
+            assert.isNull(validate('template.createWithNamespace.yaml', models.template.create).error);
         });
 
         it('fails the create', () => {
@@ -26,8 +25,7 @@ describe('model template', () => {
         });
 
         it('fails the create with duplicate steps', () => {
-            assert.isNotNull(validate('template.createWithDupSteps.yaml',
-                models.template.create).error);
+            assert.isNotNull(validate('template.createWithDupSteps.yaml', models.template.create).error);
         });
     });
 
@@ -59,8 +57,7 @@ describe('model template', () => {
         });
 
         it('fails the update with namespace', () => {
-            assert.isNotNull(validate('template.updateWithNamespace.yaml',
-                models.template.update).error);
+            assert.isNotNull(validate('template.updateWithNamespace.yaml', models.template.update).error);
         });
 
         it('fails the update', () => {

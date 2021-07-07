@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const models = require('../../').models;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { models } = require('../..');
+const { validate } = require('../helper');
 
 describe('collection template', () => {
     describe('base', () => {
@@ -37,24 +37,15 @@ describe('collection template', () => {
         });
 
         it('validates the create with a description', () => {
-            assert.isNull(validate(
-                'collection.createWithDescription.yaml',
-                models.collection.create).error
-            );
+            assert.isNull(validate('collection.createWithDescription.yaml', models.collection.create).error);
         });
 
         it('validates the create with a type', () => {
-            assert.isNull(validate(
-                'collection.createWithType.yaml',
-                models.collection.create).error
-            );
+            assert.isNull(validate('collection.createWithType.yaml', models.collection.create).error);
         });
 
         it('validates the create with pipeline ids', () => {
-            assert.isNull(validate(
-                'collection.createWithPipelineIds.yaml',
-                models.collection.create).error
-            );
+            assert.isNull(validate('collection.createWithPipelineIds.yaml', models.collection.create).error);
         });
 
         it('fails the create', () => {

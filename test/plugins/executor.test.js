@@ -1,15 +1,17 @@
 'use strict';
 
-const assert = require('chai').assert;
+const { assert } = require('chai');
 const executor = require('../../plugins/executor');
-const validate = require('../helper').validate;
+const { validate } = require('../helper');
 
 describe('executor test', () => {
     describe('start', () => {
         it('validates the start', () => {
-            assert.isNull(validate('executor.start.yaml', executor.start, {
-                tokenGen: () => {}
-            }).error);
+            assert.isNull(
+                validate('executor.start.yaml', executor.start, {
+                    tokenGen: () => {}
+                }).error
+            );
         });
 
         it('validates the start with no annotations', () => {

@@ -9,46 +9,39 @@ const HASH_LENGTH = 512;
 const HASH_BASE64_LENGTH = Math.ceil(HASH_LENGTH / 6);
 
 const MODEL = {
-    id: Joi
-        .number()
+    id: Joi.number()
         .integer()
         .positive(),
 
-    hash: Joi
-        .string()
+    hash: Joi.string()
         // Using https://www.npmjs.com/package/base64url
         .regex(/[a-zA-Z0-9_-]+/)
         .length(HASH_BASE64_LENGTH)
         .description('Hashed token value'),
 
-    userId: Joi
-        .number()
+    userId: Joi.number()
         .integer()
         .positive()
         .description('User ID'),
 
-    pipelineId: Joi
-        .number()
+    pipelineId: Joi.number()
         .integer()
         .positive()
         .description('Pipeline ID')
         .example(123345),
 
-    name: Joi
-        .string()
+    name: Joi.string()
         .max(128)
         .description('Token name')
         .example('Mobile token'),
 
-    description: Joi
-        .string()
+    description: Joi.string()
         .max(256)
         .allow('')
         .description('Token description')
         .example('Used to authenticate the mobile app'),
 
-    lastUsed: Joi
-        .string()
+    lastUsed: Joi.string()
         .isoDate()
         .allow('')
         .description('Last used')
@@ -61,7 +54,9 @@ module.exports = {
      * @property base
      * @type {Joi}
      */
-    base: Joi.object(MODEL).without('userId', 'pipelineId').label('Token'),
+    base: Joi.object(MODEL)
+        .without('userId', 'pipelineId')
+        .label('Token'),
 
     /**
      * All the available properties of Job
@@ -77,14 +72,7 @@ module.exports = {
      * @property get
      * @type {Joi}
      */
-    get: Joi
-        .object(mutate(MODEL, [
-            'id',
-            'name',
-            'lastUsed'
-        ], [
-            'description'
-        ])).label('Get tokens'),
+    get: Joi.object(mutate(MODEL, ['id', 'name', 'lastUsed'], ['description'])).label('Get tokens'),
 
     /**
      * Properties for Token that will be passed during a CREATE request
@@ -92,11 +80,7 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(mutate(MODEL, [
-        'name'
-    ], [
-        'description'
-    ])).label('Create token'),
+    create: Joi.object(mutate(MODEL, ['name'], ['description'])).label('Create token'),
 
     /**
      * Properties for token that will be passed during a UPDATE requeste
@@ -104,10 +88,7 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(MODEL, [], [
-        'name',
-        'description'
-    ])).label('Update token metadata'),
+    update: Joi.object(mutate(MODEL, [], ['name', 'description'])).label('Update token metadata'),
 
     /**
      * List of fields that determine a unique row

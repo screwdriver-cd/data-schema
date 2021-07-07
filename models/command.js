@@ -6,8 +6,9 @@ const Command = require('../config/command');
 const pipelineId = require('./pipeline').base.extract('id');
 
 const MODEL = {
-    id: Joi
-        .number().integer().positive()
+    id: Joi.number()
+        .integer()
+        .positive()
         .description('Identifier of this command')
         .example(123345),
     namespace: Command.namespace,
@@ -20,17 +21,14 @@ const MODEL = {
     binary: Command.binary,
     name: Command.name,
     pipelineId,
-    createTime: Joi
-        .string()
+    createTime: Joi.string()
         .isoDate()
         .max(32)
         .description('When this command was created')
         .example('2038-01-19T03:14:08.131Z'),
     usage: Command.usage,
-    trusted: Joi.boolean()
-        .description('Mark whether command is trusted'),
-    latest: Joi.boolean()
-        .description('Whether this is latest version')
+    trusted: Joi.boolean().description('Mark whether command is trusted'),
+    latest: Joi.boolean().description('Whether this is latest version')
 };
 
 module.exports = {
@@ -56,24 +54,13 @@ module.exports = {
      * @property get
      * @type {Joi}
      */
-    get: Joi.object(mutate(MODEL, [
-        'id',
-        'namespace',
-        'name',
-        'version',
-        'description',
-        'maintainer',
-        'format',
-        'pipelineId'
-    ], [
-        'habitat',
-        'docker',
-        'binary',
-        'createTime',
-        'usage',
-        'trusted',
-        'latest'
-    ])).label('Get Command'),
+    get: Joi.object(
+        mutate(
+            MODEL,
+            ['id', 'namespace', 'name', 'version', 'description', 'maintainer', 'format', 'pipelineId'],
+            ['habitat', 'docker', 'binary', 'createTime', 'usage', 'trusted', 'latest']
+        )
+    ).label('Get Command'),
 
     /**
      * Properties for command that will be passed during a CREATE request
@@ -81,19 +68,13 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(mutate(MODEL, [
-        'namespace',
-        'name',
-        'version',
-        'description',
-        'maintainer',
-        'format'
-    ], [
-        'habitat',
-        'docker',
-        'binary',
-        'usage'
-    ])).label('Create Command'),
+    create: Joi.object(
+        mutate(
+            MODEL,
+            ['namespace', 'name', 'version', 'description', 'maintainer', 'format'],
+            ['habitat', 'docker', 'binary', 'usage']
+        )
+    ).label('Create Command'),
 
     /**
      * List of fields that determine a unique row

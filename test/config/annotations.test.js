@@ -1,14 +1,13 @@
 'use strict';
 
-const assert = require('chai').assert;
-const config = require('../../').config;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { config } = require('../..');
+const { validate } = require('../helper');
 
 describe('config annotations', () => {
     describe('annotations', () => {
         it('validates safely', () => {
-            assert.isNull(validate('config.annotations.yaml', config.annotations.annotations)
-                .error);
+            assert.isNull(validate('config.annotations.yaml', config.annotations.annotations).error);
         });
     });
 });

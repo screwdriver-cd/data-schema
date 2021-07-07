@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
+const { assert } = require('chai');
 const queue = require('../../plugins/queue');
-const validate = require('../helper').validate;
+const { validate } = require('../helper');
 
 describe('executor test', () => {
     describe('start', () => {

@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const models = require('../../').models;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { models } = require('../..');
+const { validate } = require('../helper');
 
 describe('model trigger', () => {
     describe('base', () => {
@@ -18,7 +18,7 @@ describe('model trigger', () => {
         it('has the correct keys', () => {
             const expectedKeys = ['src', 'dest'];
 
-            expectedKeys.forEach((keyName) => {
+            expectedKeys.forEach(keyName => {
                 assert.include(models.trigger.keys, keyName, `Key name ${keyName} not included`);
             });
         });
@@ -26,13 +26,9 @@ describe('model trigger', () => {
 
     describe('allKeys', () => {
         it('lists all of the fields in the model', () => {
-            const expectedKeys = [
-                'id',
-                'src',
-                'dest'
-            ];
+            const expectedKeys = ['id', 'src', 'dest'];
 
-            expectedKeys.forEach((keyName) => {
+            expectedKeys.forEach(keyName => {
                 assert.include(models.trigger.allKeys, keyName, `Key name ${keyName} not included`);
             });
         });
@@ -47,9 +43,9 @@ describe('model trigger', () => {
     describe('indexes', () => {
         it('defines the correct indexes', () => {
             const expected = [{ fields: ['dest'] }, { fields: ['src'] }];
-            const indexes = models.trigger.indexes;
+            const { indexes } = models.trigger;
 
-            expected.forEach((indexName) => {
+            expected.forEach(indexName => {
                 assert.include(indexes, indexName, `Index name ${indexName} not included`);
             });
         });

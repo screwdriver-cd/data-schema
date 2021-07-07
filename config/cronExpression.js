@@ -20,7 +20,8 @@ const sdCron = Joi.extend(joi => ({
                         throw new Error(`${value} cannot contain both days of month and week`);
                     }
 
-                    const newCronExp = `${fields[0]} ${fields[1]} ` +
+                    const newCronExp =
+                        `${fields[0]} ${fields[1]} ` +
                         `${fields[2] === '?' ? '*' : fields[2]} ` +
                         `${fields[3]} ${fields[4] === '?' ? '*' : fields[4]}`;
 

@@ -7,20 +7,18 @@ const scmContext = pipelineBaseSchema.extract('scmContext');
 const Settings = require('../config/settings');
 
 const MODEL = {
-    id: Joi
-        .number().integer().positive()
+    id: Joi.number()
+        .integer()
+        .positive()
         .description('Identifier of this user')
         .example(123345),
 
-    username: Joi
-        .string()
+    username: Joi.string()
         .max(128)
         .description('Username')
         .example('batman123'),
 
-    token: Joi
-        .string()
-        .description('Github token'),
+    token: Joi.string().description('Github token'),
 
     scmContext,
 
@@ -50,9 +48,7 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(mutate(MODEL, [
-        'username', 'scmContext'
-    ], [])).label('Create User'),
+    create: Joi.object(mutate(MODEL, ['username', 'scmContext'], [])).label('Create User'),
 
     /**
      * Properties for User that will come back during a GET request
@@ -60,9 +56,7 @@ module.exports = {
      * @property get
      * @type {Joi}
      */
-    get: Joi.object(mutate(MODEL, [], [
-        'id', 'username', 'scmContext', 'settings'
-    ])).label('Get User'),
+    get: Joi.object(mutate(MODEL, [], ['id', 'username', 'scmContext', 'settings'])).label('Get User'),
 
     /**
      * Properties for User that will be passed during a UPDATE request
@@ -70,9 +64,7 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(MODEL, [], [
-        'settings'
-    ])).label('Update User'),
+    update: Joi.object(mutate(MODEL, [], ['settings'])).label('Update User'),
 
     /**
      * List of fields that determine a unique row

@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const api = require('../../').api;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { api } = require('../..');
+const { validate } = require('../helper');
 
 describe('api validator', () => {
     const inputSchema = api.templateValidator.input;
@@ -14,8 +14,7 @@ describe('api validator', () => {
         });
 
         it('accepts input with namespace', () => {
-            assert.isNull(validate('template-validator.inputWithNamespace.yaml',
-                inputSchema).error);
+            assert.isNull(validate('template-validator.inputWithNamespace.yaml', inputSchema).error);
         });
 
         it('fails', () => {
