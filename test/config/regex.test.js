@@ -1,7 +1,7 @@
 'use strict';
 
-const assert = require('chai').assert;
-const config = require('../../').config;
+const { assert } = require('chai');
+const { config } = require('../..');
 
 describe('config regex', () => {
     describe('internal trigger', () => {
@@ -312,58 +312,23 @@ describe('config regex', () => {
             const tests = [
                 {
                     url: githubHttps,
-                    match: [
-                        githubHttps,
-                        github,
-                        org,
-                        repo,
-                        null,
-                        null
-                    ]
+                    match: [githubHttps, github, org, repo, null, null]
                 },
                 {
                     url: `${githubHttps}${branchName}`,
-                    match: [
-                        `${githubHttps}${branchName}`,
-                        github,
-                        org,
-                        repo,
-                        branchName,
-                        null
-                    ]
+                    match: [`${githubHttps}${branchName}`, github, org, repo, branchName, null]
                 },
                 {
                     url: `${githubHttps}${branchName}${rootDir}`,
-                    match: [
-                        `${githubHttps}${branchName}${rootDir}`,
-                        github,
-                        org,
-                        repo,
-                        branchName,
-                        rootDir
-                    ]
+                    match: [`${githubHttps}${branchName}${rootDir}`, github, org, repo, branchName, rootDir]
                 },
                 {
                     url: `git@${github}:${org}/${repo}.git`,
-                    match: [
-                        `git@${github}:${org}/${repo}.git`,
-                        github,
-                        org,
-                        repo,
-                        null,
-                        null
-                    ]
+                    match: [`git@${github}:${org}/${repo}.git`, github, org, repo, null, null]
                 },
                 {
                     url: `git@${github}:${org}/${repo}.git${branchName}`,
-                    match: [
-                        `git@${github}:${org}/${repo}.git${branchName}`,
-                        github,
-                        org,
-                        repo,
-                        branchName,
-                        null
-                    ]
+                    match: [`git@${github}:${org}/${repo}.git${branchName}`, github, org, repo, branchName, null]
                 },
                 {
                     url: `git@${github}:${org}/${repo}.git${branchName}${rootDir}`,
@@ -378,14 +343,7 @@ describe('config regex', () => {
                 },
                 {
                     url: `https://screwdriver-cd@${bitbucket}/${org}/${repo}.git`,
-                    match: [
-                        `https://screwdriver-cd@${bitbucket}/${org}/${repo}.git`,
-                        bitbucket,
-                        org,
-                        repo,
-                        null,
-                        null
-                    ]
+                    match: [`https://screwdriver-cd@${bitbucket}/${org}/${repo}.git`, bitbucket, org, repo, null, null]
                 },
                 {
                     url: `https://screwdriver-cd@${bitbucket}/${org}/${repo}.git${branchName}`,
@@ -411,25 +369,11 @@ describe('config regex', () => {
                 },
                 {
                     url: `git@${bitbucket}:${org}/${repo}.git`,
-                    match: [
-                        `git@${bitbucket}:${org}/${repo}.git`,
-                        bitbucket,
-                        org,
-                        repo,
-                        null,
-                        null
-                    ]
+                    match: [`git@${bitbucket}:${org}/${repo}.git`, bitbucket, org, repo, null, null]
                 },
                 {
                     url: `git@${bitbucket}:${org}/${repo}.git${branchName}`,
-                    match: [
-                        `git@${bitbucket}:${org}/${repo}.git${branchName}`,
-                        bitbucket,
-                        org,
-                        repo,
-                        branchName,
-                        null
-                    ]
+                    match: [`git@${bitbucket}:${org}/${repo}.git${branchName}`, bitbucket, org, repo, branchName, null]
                 },
                 {
                     url: `git@${bitbucket}:${org}/${bitbucketRepo}.git${branchName}`,
@@ -455,7 +399,7 @@ describe('config regex', () => {
                 }
             ];
 
-            tests.forEach((test) => {
+            tests.forEach(test => {
                 it(`correctly validates ${test.url}`, () => {
                     assert.deepEqual(
                         JSON.stringify(config.regex.CHECKOUT_URL.exec(test.url), null, 4),

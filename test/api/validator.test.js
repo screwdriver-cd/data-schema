@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const api = require('../../').api;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { api } = require('../..');
+const { validate } = require('../helper');
 
 describe('api validator', () => {
     describe('input', () => {
@@ -11,8 +11,7 @@ describe('api validator', () => {
         });
 
         it('accepts input with requires keyword', () => {
-            assert.isNull(
-                validate('validator-with-requires.input.yaml', api.validator.input).error);
+            assert.isNull(validate('validator-with-requires.input.yaml', api.validator.input).error);
         });
     });
 
@@ -22,8 +21,7 @@ describe('api validator', () => {
         });
 
         it('validates output with requires keyword', () => {
-            assert.isNull(
-                validate('validator-with-requires.output.yaml', api.validator.output).error);
+            assert.isNull(validate('validator-with-requires.output.yaml', api.validator.output).error);
         });
 
         it('validates basic output with errors', () => {
@@ -35,8 +33,7 @@ describe('api validator', () => {
         });
 
         it('validates output with childPipelines', () => {
-            assert.isNull(
-                validate('validator-with-childPipelines.output.yaml', api.validator.output).error);
+            assert.isNull(validate('validator-with-childPipelines.output.yaml', api.validator.output).error);
         });
     });
 });

@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const models = require('../../').models;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { models } = require('../..');
+const { validate } = require('../helper');
 
 describe('model buildCluster', () => {
     describe('base', () => {
@@ -17,8 +17,7 @@ describe('model buildCluster', () => {
         });
 
         it('validates the create with optional fields', () => {
-            assert.isNull(validate('buildCluster.create.full.yaml',
-                models.buildCluster.create).error);
+            assert.isNull(validate('buildCluster.create.full.yaml', models.buildCluster.create).error);
         });
 
         it('fails the create', () => {
@@ -50,9 +49,8 @@ describe('model buildCluster', () => {
         it('has the correct keys', () => {
             const expectedKeys = ['name', 'scmContext'];
 
-            expectedKeys.forEach((keyName) => {
-                assert.include(models.buildCluster.keys, keyName,
-                    `Key name ${keyName} not included`);
+            expectedKeys.forEach(keyName => {
+                assert.include(models.buildCluster.keys, keyName, `Key name ${keyName} not included`);
             });
         });
     });
@@ -60,10 +58,10 @@ describe('model buildCluster', () => {
     describe('indexes', () => {
         it('defines the correct indexes', () => {
             const expected = [{ fields: ['name'] }];
-            const indexes = models.buildCluster.indexes;
+            const { indexes } = models.buildCluster;
 
-            expected.forEach((indexName) => {
-                assert.include(indexes, indexName, `Index name ${indexName} not included`);
+            expected.forEach(indexName => {
+                assert.deepInclude(indexes, indexName, `Index name ${indexName} not included`);
             });
         });
     });

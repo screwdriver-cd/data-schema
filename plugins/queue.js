@@ -2,14 +2,18 @@
 
 const Joi = require('joi');
 const executor = require('./executor');
-const SCHEMA_EXECUTOR_CONFIG = Joi.object().keys({
-    name: Joi.string().required(),
-    options: Joi.object().required()
-}).required();
-const SCHEMA_START = Joi.object().keys({
-    buildConfig: executor.start,
-    executor: SCHEMA_EXECUTOR_CONFIG
-}).required();
+const SCHEMA_EXECUTOR_CONFIG = Joi.object()
+    .keys({
+        name: Joi.string().required(),
+        options: Joi.object().required()
+    })
+    .required();
+const SCHEMA_START = Joi.object()
+    .keys({
+        buildConfig: executor.start,
+        executor: SCHEMA_EXECUTOR_CONFIG
+    })
+    .required();
 
 module.exports = {
     /**

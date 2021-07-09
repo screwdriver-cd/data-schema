@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
+const { assert } = require('chai');
 const scm = require('../../plugins/scm');
-const validate = require('../helper').validate;
+const { validate } = require('../helper');
 
 describe('scm test', () => {
     describe('getPermissions', () => {
@@ -69,8 +69,7 @@ describe('scm test', () => {
         });
 
         it('validates with extra optional params (context and description)', () => {
-            assert.isNull(validate('scm.updateCommitStatusFull.yaml',
-                scm.updateCommitStatus).error);
+            assert.isNull(validate('scm.updateCommitStatusFull.yaml', scm.updateCommitStatus).error);
         });
 
         it('fails', () => {
@@ -94,8 +93,7 @@ describe('scm test', () => {
 
     describe('getChangedFiles', () => {
         it('validates input', () => {
-            assert.isNull(validate('scm.getChangedFilesInput.yaml',
-                scm.getChangedFilesInput).error);
+            assert.isNull(validate('scm.getChangedFilesInput.yaml', scm.getChangedFilesInput).error);
         });
 
         it('fails empty input', () => {
@@ -103,13 +101,11 @@ describe('scm test', () => {
         });
 
         it('validates output', () => {
-            assert.isNull(validate('scm.getChangedFilesOutput.yaml',
-                scm.getChangedFilesOutput).error);
+            assert.isNull(validate('scm.getChangedFilesOutput.yaml', scm.getChangedFilesOutput).error);
         });
 
         it('validates empty array output', () => {
-            assert.isNull(validate('scm.getChangedFilesEmptyArrayOutput.yaml',
-                scm.getChangedFilesOutput).error);
+            assert.isNull(validate('scm.getChangedFilesEmptyArrayOutput.yaml', scm.getChangedFilesOutput).error);
         });
 
         it('validates empty output', () => {

@@ -7,10 +7,8 @@ const table = `${prefix}events`;
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.sequelize.transaction(async (transaction) => {
-            await queryInterface.changeColumn(table, 'startFrom', Sequelize.STRING(110),
-                { transaction }
-            );
+        await queryInterface.sequelize.transaction(async transaction => {
+            await queryInterface.changeColumn(table, 'startFrom', Sequelize.STRING(110), { transaction });
         });
     }
 };

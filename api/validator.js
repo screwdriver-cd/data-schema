@@ -39,9 +39,11 @@ const SCHEMA_JOB_PERMUTATION = Joi.object()
         sourcePaths: Job.sourcePaths,
         subscribe: Base.subscribe,
         templateId: Job.templateId
-    }).label('Job permutation');
+    })
+    .label('Job permutation');
 
-const SCHEMA_JOB_PERMUTATIONS = Joi.array().items(SCHEMA_JOB_PERMUTATION)
+const SCHEMA_JOB_PERMUTATIONS = Joi.array()
+    .items(SCHEMA_JOB_PERMUTATION)
     .label('List of job permutations');
 
 const SCHEMA_JOBS = Joi.object()
@@ -54,7 +56,9 @@ const SCHEMA_JOBS = Joi.object()
 const SCHEMA_OUTPUT = Joi.object()
     .keys({
         annotations: Annotations.annotations,
-        errors: Joi.array().items(Joi.string()).optional(),
+        errors: Joi.array()
+            .items(Joi.string())
+            .optional(),
         jobs: SCHEMA_JOBS,
         childPipelines: Base.childPipelines,
         workflowGraph: WorkflowGraph.workflowGraph,

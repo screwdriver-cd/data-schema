@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const api = require('../../').api;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { api } = require('../..');
+const { validate } = require('../helper');
 
 describe('api pagination', () => {
     describe('validates', () => {

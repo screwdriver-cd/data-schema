@@ -1,9 +1,9 @@
 'use strict';
 
 const Joi = require('joi');
-const assert = require('chai').assert;
+const { assert } = require('chai');
 const notifications = require('../../plugins/notifications');
-const validate = require('../helper').validate;
+const { validate } = require('../helper');
 
 describe('notifications test', () => {
     describe('schemaBuildData', () => {
@@ -12,9 +12,7 @@ describe('notifications test', () => {
                 ...notifications.schemaBuildData
             });
 
-            assert.isNull(
-                validate('notifications.schemaBuildData.yaml', schemaBuildData).error
-            );
+            assert.isNull(validate('notifications.schemaBuildData.yaml', schemaBuildData).error);
         });
 
         it('fails the schemaBuildData for empty yaml', () => {

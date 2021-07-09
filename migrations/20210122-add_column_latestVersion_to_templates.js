@@ -7,9 +7,15 @@ const table = `${prefix}templates`;
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.sequelize.transaction(async (transaction) => {
-            await queryInterface.addColumn(table, 'latest', {
-                type: Sequelize.BOOLEAN }, { transaction });
+        await queryInterface.sequelize.transaction(async transaction => {
+            await queryInterface.addColumn(
+                table,
+                'latest',
+                {
+                    type: Sequelize.BOOLEAN
+                },
+                { transaction }
+            );
 
             const dialect = queryInterface.sequelize.getDialect();
             // eslint-disable-next-line max-len

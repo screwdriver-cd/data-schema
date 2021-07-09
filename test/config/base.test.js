@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const config = require('../../').config;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { config } = require('../..');
+const { validate } = require('../helper');
 
 describe('config base', () => {
     describe('config', () => {
@@ -35,8 +35,7 @@ describe('config base', () => {
 
     describe('childPipelines', () => {
         it('validates the childPipelines object', () => {
-            assert.isNull(validate('config.base.childPipelines.yaml',
-                config.base.childPipelines).error);
+            assert.isNull(validate('config.base.childPipelines.yaml', config.base.childPipelines).error);
         });
     });
 });

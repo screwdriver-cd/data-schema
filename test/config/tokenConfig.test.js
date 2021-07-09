@@ -1,9 +1,9 @@
 'use strict';
 
-const assert = require('chai').assert;
-const config = require('../../').config;
-const validate = require('../helper').validate;
-const tokenConfig = config.tokenConfig;
+const { assert } = require('chai');
+const { config } = require('../..');
+const { validate } = require('../helper');
+const { tokenConfig } = config;
 
 describe('config tokenConfig', () => {
     describe('tokenConfig', () => {

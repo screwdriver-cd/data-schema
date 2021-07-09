@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const models = require('../../').models;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { models } = require('../..');
+const { validate } = require('../helper');
 
 describe('model build', () => {
     describe('base', () => {
@@ -80,13 +80,16 @@ describe('model build', () => {
 
     describe('indexes', () => {
         it('defines the correct indexes', () => {
-            const expected = [{ fields: ['eventId', 'createTime'] }, { fields: ['jobId'] },
+            const expected = [
+                { fields: ['eventId', 'createTime'] },
+                { fields: ['jobId'] },
                 { fields: [{ attribute: 'parentBuildId', length: 32 }] },
-                { fields: ['templateId'] }];
-            const indexes = models.build.indexes;
+                { fields: ['templateId'] }
+            ];
+            const { indexes } = models.build;
 
-            expected.forEach((indexName) => {
-                assert.include(indexes, indexName, `Index name ${indexName} not included`);
+            expected.forEach(indexName => {
+                assert.deepInclude(indexes, indexName, `Index name ${indexName} not included`);
             });
         });
     });

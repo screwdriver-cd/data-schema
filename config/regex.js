@@ -14,8 +14,7 @@ module.exports = {
     // Full name of command and version. Can be <COMMAND_NAMESPACE>/<COMMAND_NAME>@<VERSION> or <COMMAND_NAMESPACE>/<COMMAND_NAME>@<COMMAND_TAG_NAME>
     // Example: chefdk/knife@1.2.3 or chefdk/knife@stable
     // Only <COMMAND_NAMESPACE>/<COMMAND_NAME> or <COMMAND_NAMESPACE>/<COMMAND_NAME> is also acceptable
-    FULL_COMMAND_NAME:
-        /^([\w-]+)\/([\w-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-.]+)))?$/,
+    FULL_COMMAND_NAME: /^([\w-]+)\/([\w-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-.]+)))?$/,
     // Template namespaces can only be named with A-Z,a-z,0-9,-,_
     TEMPLATE_NAMESPACE: /^[\w-]+$/,
     // Templates can only be named with A-Z,a-z,0-9,-,_,/; can only contain one /

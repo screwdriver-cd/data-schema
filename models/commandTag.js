@@ -4,12 +4,12 @@ const Joi = require('joi');
 const Command = require('../config/command');
 
 const MODEL = {
-    id: Joi
-        .number().integer().positive()
+    id: Joi.number()
+        .integer()
+        .positive()
         .description('Identifier of this command tag')
         .example(123345),
-    createTime: Joi
-        .string()
+    createTime: Joi.string()
         .isoDate()
         .max(32)
         .description('When this command tag was created')

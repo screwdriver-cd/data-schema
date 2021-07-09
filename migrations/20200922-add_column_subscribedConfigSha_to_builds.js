@@ -7,9 +7,15 @@ const table = `${prefix}builds`;
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.sequelize.transaction(async (transaction) => {
-            await queryInterface.addColumn(table, 'subscribedConfigSha', {
-                type: Sequelize.TEXT }, { transaction });
+        await queryInterface.sequelize.transaction(async transaction => {
+            await queryInterface.addColumn(
+                table,
+                'subscribedConfigSha',
+                {
+                    type: Sequelize.TEXT
+                },
+                { transaction }
+            );
         });
     }
 };

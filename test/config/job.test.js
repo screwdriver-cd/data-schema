@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const config = require('../../').config;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { config } = require('../..');
+const { validate } = require('../helper');
 
 describe('config job', () => {
     describe('job', () => {
@@ -22,23 +22,26 @@ describe('config job', () => {
             const result = validate('config.job.jobv2.externalrequires.bad.yaml', config.job.job);
 
             assert.isNotNull(result.error);
-            assert.match(result.error,
+            assert.match(
+                result.error,
                 // eslint-disable-next-line no-useless-escape
-                /^.*\"requires" does not match any of the allowed types.*$/);
+                /^.*\"requires" does not match any of the allowed types.*$/
+            );
         });
 
         it('validates a job with incorrect pattern in require', () => {
             const result = validate('config.job.jobv2.externalrequires.bad1.yaml', config.job.job);
 
             assert.isNotNull(result.error);
-            assert.match(result.error,
+            assert.match(
+                result.error,
                 // eslint-disable-next-line no-useless-escape
-                /^.*\"requires" does not match any of the allowed types.*$/);
+                /^.*\"requires" does not match any of the allowed types.*$/
+            );
         });
 
         it('returns error for requires with bad commit branch regex', () => {
-            assert.isNotNull(
-                validate('config.job.jobv2.badCommitBrRegex.yaml', config.job.job).error);
+            assert.isNotNull(validate('config.job.jobv2.badCommitBrRegex.yaml', config.job.job).error);
         });
 
         it('validates a job with blockedBy', () => {
@@ -119,8 +122,7 @@ describe('config job', () => {
     describe('template', () => {
         it('validates good template', () => {
             assert.isNull(validate('config.job.template.good.yaml', config.job.job).error);
-            assert.isNull(validate('config.job.template-with-tag.good.yaml',
-                config.job.job).error);
+            assert.isNull(validate('config.job.template-with-tag.good.yaml', config.job.job).error);
         });
 
         it('returns error for bad template', () => {
@@ -130,8 +132,7 @@ describe('config job', () => {
 
     describe('annotations', () => {
         it('validates job annotations', () => {
-            assert.isNull(validate('config.job.annotations.yaml', config.annotations.annotations)
-                .error);
+            assert.isNull(validate('config.job.annotations.yaml', config.annotations.annotations).error);
         });
     });
 });

@@ -3,20 +3,19 @@
 const Joi = require('joi');
 
 // essentially a Joi.ValidationError.details object
-const COMMAND_ERROR = Joi.object()
-    .keys({
-        context: Joi.object()
-            .label('Functional context regarding the error'),
-        message: Joi.string()
-            .label('Description of a particular validation error').required(),
-        path: Joi.array()
-            .items(Joi.string())
-            .label('Dot-notation path to the field that caused the validation error')
-            .required(),
-        type: Joi.string()
-            .label('The the Joi-type that categorizes the error')
-            .required()
-    });
+const COMMAND_ERROR = Joi.object().keys({
+    context: Joi.object().label('Functional context regarding the error'),
+    message: Joi.string()
+        .label('Description of a particular validation error')
+        .required(),
+    path: Joi.array()
+        .items(Joi.string())
+        .label('Dot-notation path to the field that caused the validation error')
+        .required(),
+    type: Joi.string()
+        .label('The the Joi-type that categorizes the error')
+        .required()
+});
 
 const SCHEMA_OUTPUT = Joi.object()
     .keys({

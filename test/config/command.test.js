@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const config = require('../../').config;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { config } = require('../..');
+const { validate } = require('../helper');
 
 describe('config command', () => {
     describe('command', () => {
@@ -11,8 +11,7 @@ describe('config command', () => {
         });
 
         it('returns error when invalid format in command', () => {
-            assert.isNotNull(validate('config.command.bad.yaml',
-                config.command.schemaCommand).error);
+            assert.isNotNull(validate('config.command.bad.yaml', config.command.schemaCommand).error);
         });
     });
 });

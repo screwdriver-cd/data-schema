@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
+const { assert } = require('chai');
 const datastore = require('../../plugins/datastore');
-const validate = require('../helper').validate;
+const { validate } = require('../helper');
 
 describe('datastore test', () => {
     describe('get', () => {
