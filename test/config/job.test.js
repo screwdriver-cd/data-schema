@@ -135,4 +135,10 @@ describe('config job', () => {
             assert.isNull(validate('config.job.annotations.yaml', config.annotations.annotations).error);
         });
     });
+
+    describe('parameters', () => {
+        it('validates parameters', () => {
+            assert.isNull(validate('config.job.parameters.yaml', config.job.parameters).error);
+        });
+    });
 });
