@@ -185,7 +185,7 @@ const SCHEMA_JOB = Joi.object()
         steps: SCHEMA_STEPS,
         template: SCHEMA_TEMPLATE,
         templateId: SCHEMA_TEMPLATEID,
-        parameters: Parameters
+        parameters: Parameters.parameters
     })
     .default({});
 const SCHEMA_JOB_NO_DUP_STEPS = SCHEMA_JOB.keys({
@@ -226,5 +226,5 @@ module.exports = {
     templateId: SCHEMA_TEMPLATEID,
     templateJob: SCHEMA_TEMPLATE_JOB,
     trigger: SCHEMA_TRIGGER,
-    parameters: Parameters
+    parameters: Parameters.parameters
 };
