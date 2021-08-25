@@ -4,7 +4,6 @@ const Joi = require('joi');
 const Annotations = require('./annotations');
 const Regex = require('./regex');
 const sdCron = require('./cronExpression');
-const Parameters = require('./parameters');
 
 const SPECIFIC_BRANCH_POS = 4;
 
@@ -184,8 +183,7 @@ const SCHEMA_JOB = Joi.object()
         sourcePaths: SCHEMA_SOURCEPATHS,
         steps: SCHEMA_STEPS,
         template: SCHEMA_TEMPLATE,
-        templateId: SCHEMA_TEMPLATEID,
-        parameters: Parameters.parameters
+        templateId: SCHEMA_TEMPLATEID
     })
     .default({});
 const SCHEMA_JOB_NO_DUP_STEPS = SCHEMA_JOB.keys({
@@ -225,6 +223,5 @@ module.exports = {
     template: SCHEMA_TEMPLATE,
     templateId: SCHEMA_TEMPLATEID,
     templateJob: SCHEMA_TEMPLATE_JOB,
-    trigger: SCHEMA_TRIGGER,
-    parameters: Parameters.parameters
+    trigger: SCHEMA_TRIGGER
 };
