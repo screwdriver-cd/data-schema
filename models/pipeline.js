@@ -19,7 +19,9 @@ const CREATE_MODEL = {
         .required(),
 
     rootDir: Scm.rootDir,
-    autoKeysGeneration: Joi.boolean().optional()
+    autoKeysGeneration: Joi.boolean()
+        .optional()
+        .description('Flag to generate and add the public deploy key for a specific scm')
 };
 
 const MODEL = {
