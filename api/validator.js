@@ -33,6 +33,7 @@ const SCHEMA_JOB_PERMUTATION = Joi.object()
         freezeWindows: Job.freezeWindows,
         image: Job.image,
         order: Job.order,
+        parameters: Parameters.parametersOptional,
         requires: Job.requires,
         secrets: Job.secrets,
         settings: Job.settings,
