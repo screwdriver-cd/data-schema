@@ -167,6 +167,7 @@ const SCHEMA_SOURCEPATH = Joi.string()
     .optional();
 const SCHEMA_SOURCEPATHS = Joi.alternatives().try(Joi.array().items(SCHEMA_SOURCEPATH), SCHEMA_SOURCEPATH);
 const SCHEMA_CACHE = Joi.boolean().optional();
+const SCHEMA_JOB_PARAMETERS = Parameters.parameters.optional();
 const SCHEMA_JOB = Joi.object()
     .keys({
         annotations: Annotations.annotations,
@@ -185,7 +186,7 @@ const SCHEMA_JOB = Joi.object()
         steps: SCHEMA_STEPS,
         template: SCHEMA_TEMPLATE,
         templateId: SCHEMA_TEMPLATEID,
-        parameters: Parameters.parameters
+        parameters: SCHEMA_JOB_PARAMETERS
     })
     .default({});
 const SCHEMA_JOB_NO_DUP_STEPS = SCHEMA_JOB.keys({
@@ -226,5 +227,5 @@ module.exports = {
     templateId: SCHEMA_TEMPLATEID,
     templateJob: SCHEMA_TEMPLATE_JOB,
     trigger: SCHEMA_TRIGGER,
-    parameters: Parameters.parameters
+    parameters: SCHEMA_JOB_PARAMETERS
 };

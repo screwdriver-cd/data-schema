@@ -12,16 +12,14 @@ const SCHEMA_PARAMETERS_OBJECT = Joi.object({
     'object.unknown': 'only supports string or key: {{#label}} pair as values'
 });
 
-const SCHEMA_PARAMETERS = Joi.object()
-    .pattern(
-        Joi.any(),
-        Joi.alternatives().try(
-            SCHEMA_PARAMETERS_STRING,
-            Joi.array().items(SCHEMA_PARAMETERS_STRING),
-            SCHEMA_PARAMETERS_OBJECT
-        )
+const SCHEMA_PARAMETERS = Joi.object().pattern(
+    Joi.any(),
+    Joi.alternatives().try(
+        SCHEMA_PARAMETERS_STRING,
+        Joi.array().items(SCHEMA_PARAMETERS_STRING),
+        SCHEMA_PARAMETERS_OBJECT
     )
-    .optional();
+);
 
 module.exports = {
     parameters: SCHEMA_PARAMETERS
