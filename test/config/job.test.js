@@ -135,4 +135,10 @@ describe('config job', () => {
             assert.isNull(validate('config.job.annotations.yaml', config.annotations.annotations).error);
         });
     });
+
+    describe('provider', () => {
+        it('validates provider', () => {
+            assert.isNull(validate('config.job.provider.yaml', config.job.provider).error);
+        });
+    });
 });

@@ -1,4 +1,4 @@
-# Top Level Provider Example
+# Job Level Provider Example
 name: aws
 region: us-west-2
 accountId: 111111111111

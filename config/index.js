@@ -6,7 +6,6 @@ const command = require('./command');
 const commandFormat = require('./commandFormat');
 const job = require('./job');
 const parameters = require('./parameters');
-const provider = require('./provider');
 const regex = require('./regex');
 const settings = require('./settings');
 const template = require('./template');
@@ -20,7 +19,6 @@ module.exports = {
     commandFormat,
     job,
     parameters,
-    provider,
     regex,
     settings,
     template,
