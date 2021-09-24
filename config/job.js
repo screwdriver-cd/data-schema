@@ -179,14 +179,14 @@ const SCHEMA_JOB = Joi.object()
         image: SCHEMA_IMAGE,
         matrix: SCHEMA_MATRIX,
         order: SCHEMA_ORDER,
+        parameters: SCHEMA_JOB_PARAMETERS,
         requires: SCHEMA_REQUIRES,
         secrets: SCHEMA_SECRETS,
         settings: SCHEMA_SETTINGS,
         sourcePaths: SCHEMA_SOURCEPATHS,
         steps: SCHEMA_STEPS,
         template: SCHEMA_TEMPLATE,
-        templateId: SCHEMA_TEMPLATEID,
-        parameters: SCHEMA_JOB_PARAMETERS
+        templateId: SCHEMA_TEMPLATEID
     })
     .default({});
 const SCHEMA_JOB_NO_DUP_STEPS = SCHEMA_JOB.keys({
@@ -214,6 +214,7 @@ module.exports = {
     jobNoDupSteps: SCHEMA_JOB_NO_DUP_STEPS,
     matrix: SCHEMA_MATRIX,
     order: SCHEMA_ORDER,
+    parameters: SCHEMA_JOB_PARAMETERS,
     requires: SCHEMA_REQUIRES,
     requiresValue: SCHEMA_REQUIRES_VALUE,
     secret: SCHEMA_SECRET,
@@ -226,6 +227,5 @@ module.exports = {
     template: SCHEMA_TEMPLATE,
     templateId: SCHEMA_TEMPLATEID,
     templateJob: SCHEMA_TEMPLATE_JOB,
-    trigger: SCHEMA_TRIGGER,
-    parameters: SCHEMA_JOB_PARAMETERS
+    trigger: SCHEMA_TRIGGER
 };
