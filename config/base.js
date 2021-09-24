@@ -60,7 +60,7 @@ const SCHEMA_CONFIG = Joi.object()
         cache: SCHEMA_CACHE,
         childPipelines: SCHEMA_CHILD_PIPELINES,
         subscribe: SCHEMA_SUBSCRIBE,
-        parameters: Parameters.parameters
+        parameters: Parameters.parameters.default({})
     })
     .unknown(false);
 

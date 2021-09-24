@@ -81,7 +81,7 @@ const MODEL = {
     // in order to convert the `prChain` to `chainPR`.
     prChain: Base.prChain.description('Configuration of chainPR'),
 
-    parameters: Parameters.parameters,
+    parameters: Parameters.parameters.default({}),
 
     settings: Settings.pipelineSettings,
 
