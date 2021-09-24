@@ -4,6 +4,7 @@ const Joi = require('joi');
 const Annotations = require('./annotations');
 const Regex = require('./regex');
 const sdCron = require('./cronExpression');
+const Parameters = require('./parameters');
 const Provider = require('./provider');
 
 const SPECIFIC_BRANCH_POS = 4;
@@ -167,6 +168,7 @@ const SCHEMA_SOURCEPATH = Joi.string()
     .optional();
 const SCHEMA_SOURCEPATHS = Joi.alternatives().try(Joi.array().items(SCHEMA_SOURCEPATH), SCHEMA_SOURCEPATH);
 const SCHEMA_CACHE = Joi.boolean().optional();
+const SCHEMA_PARAMETERS = Parameters.parameters.optional();
 const SCHEMA_PROVIDER = Provider.provider.optional();
 const SCHEMA_JOB = Joi.object()
     .keys({
@@ -179,6 +181,7 @@ const SCHEMA_JOB = Joi.object()
         image: SCHEMA_IMAGE,
         matrix: SCHEMA_MATRIX,
         order: SCHEMA_ORDER,
+        parameters: SCHEMA_PARAMETERS,
         provider: SCHEMA_PROVIDER,
         requires: SCHEMA_REQUIRES,
         secrets: SCHEMA_SECRETS,
@@ -214,6 +217,7 @@ module.exports = {
     jobNoDupSteps: SCHEMA_JOB_NO_DUP_STEPS,
     matrix: SCHEMA_MATRIX,
     order: SCHEMA_ORDER,
+    parameters: SCHEMA_PARAMETERS,
     provider: SCHEMA_PROVIDER,
     requires: SCHEMA_REQUIRES,
     requiresValue: SCHEMA_REQUIRES_VALUE,

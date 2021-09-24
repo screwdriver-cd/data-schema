@@ -34,6 +34,7 @@ const SCHEMA_JOB_PERMUTATION = Joi.object()
         image: Job.image,
         order: Job.order,
         provider: Job.provider,
+        parameters: Job.parameters,
         requires: Job.requires,
         secrets: Job.secrets,
         settings: Job.settings,
@@ -63,7 +64,7 @@ const SCHEMA_OUTPUT = Joi.object()
         jobs: SCHEMA_JOBS,
         childPipelines: Base.childPipelines,
         workflowGraph: WorkflowGraph.workflowGraph,
-        parameters: Parameters.parameters,
+        parameters: Parameters.parameters.default({}),
         warnMessages: Joi.array().optional(),
         subscribe: Base.subscribe
     })
