@@ -58,7 +58,16 @@ const SCHEMA_PROVIDER = Joi.object().keys({
         .regex(Regex.ROLE_ARN)
         .max(512)
         .description('Role ARN')
-        .example('arn:aws:iam::123456789012:role/aws-service-role/amazonaws.com/AWSServiceRole')
+        .example('arn:aws:iam::123456789012:role/aws-service-role/amazonaws.com/AWSServiceRole'),
+    executor: Joi.string()
+        .valid('sls', 'eks')
+        .max(64)
+        .description('Executor name')
+        .example('eks'),
+    clusterName: Joi.string()
+        .max(128)
+        .description('Cluster name')
+        .example('sd-build-eks')
 });
 
 module.exports = {

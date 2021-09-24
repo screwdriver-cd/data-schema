@@ -11,3 +11,5 @@ vpc: # Optional VPC. But if you use VPC then both subproperties (securityGroupId
         - subnet-1234567
         - subnet-4567890
 role: arn:aws:iam::111111111111:role/role
+executor: eks
+clusterName: sd-build-eks
