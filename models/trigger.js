@@ -13,10 +13,10 @@ const MODEL = {
         .try(
             Joi.string()
                 .regex(Regex.EXTERNAL_TRIGGER)
-                .max(64),
+                .max(128),
             Joi.string()
                 .regex(Regex.EXTERNAL_TRIGGER_AND)
-                .max(64)
+                .max(128)
         )
         .example('~sd@1234:component'),
 
@@ -24,10 +24,10 @@ const MODEL = {
         .try(
             Joi.string()
                 .regex(Regex.EXTERNAL_TRIGGER)
-                .max(64),
+                .max(128),
             Joi.string()
                 .regex(Regex.EXTERNAL_TRIGGER_AND)
-                .max(64)
+                .max(128)
         )
         .example('~sd@5678:test')
 };
