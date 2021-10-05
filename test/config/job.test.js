@@ -141,4 +141,10 @@ describe('config job', () => {
             assert.isNull(validate('config.job.parameters.yaml', config.job.parameters).error);
         });
     });
+
+    describe('provider', () => {
+        it('validates provider', () => {
+            assert.isNull(validate('config.job.provider.yaml', config.job.provider).error);
+        });
+    });
 });

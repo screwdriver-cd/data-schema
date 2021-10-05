@@ -34,6 +34,7 @@ const SCHEMA_JOB_PERMUTATION = Joi.object()
         image: Job.image,
         order: Job.order,
         parameters: Job.parameters,
+        provider: Job.provider,
         requires: Job.requires,
         secrets: Job.secrets,
         settings: Job.settings,

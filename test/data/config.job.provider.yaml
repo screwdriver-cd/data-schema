@@ -1,0 +1,15 @@
+# Job Level Provider Example
+name: aws
+region: us-west-2
+accountId: 111111111111
+vpc: # Optional VPC. But if you use VPC then both subproperties (securityGroupIds and subnetIds) are required
+    vpcId: vpc-1a2b3c4d
+    securityGroupIds:
+        - sg-1234567
+        - sg-4567890
+    subnetIds:
+        - subnet-1234567
+        - subnet-4567890
+role: arn:aws:iam::111111111111:role/role
+executor: eks
+clusterName: sd-build-eks

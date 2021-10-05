@@ -96,5 +96,18 @@ module.exports = {
     // Image aliases can only contain A-Z,a-z,0-9,-,_
     IMAGE_ALIAS: /^[\w-]+$/,
     // Valid Events for webhook
-    WEBHOOK_EVENT: /^~([\w-]+)$/
+    WEBHOOK_EVENT: /^~([\w-]+)$/,
+    // Provider region. e.g. us-west-1, ap-northeast-2
+    REGION: /^(us(-gov)?|ap|ca|cn|eu|sa|me)-(central|(north|south)?(east|west)?)-\d$/,
+    // Provider account ID. Can be A-Z,a-z,0-9,_,-
+    // https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html
+    ACCOUNT_ID: /^[0-9]{12}$/,
+    // Provider VPC ID. Can be vpc-xxxxxx, with A-Z,a-z,0-9,_
+    VPC_ID: /^vpc-[\w]+$/,
+    // Provider Security group ID. Can be sg-xxxxxx, with A-Z,a-z,0-9,_
+    SECURITY_GROUP_ID: /^sg-[\w]+$/,
+    // Provider Subnet ID. Can be subnet-xxxxxx, with A-Z,a-z,0-9,_
+    SUBNET_ID: /^subnet-[\w]+$/,
+    // Provider Role. Can be arn:aws:iam::xxxxxx:role/some-role
+    ROLE_ARN: /^arn:aws:iam::\d{12}:role\/.+/
 };
