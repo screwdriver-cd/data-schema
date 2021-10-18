@@ -8,7 +8,8 @@ const SCHEMA_VPC_OBJECT = Joi.object({
         .regex(Regex.VPC_ID)
         .max(128)
         .description('VPC ID')
-        .example('vpc-1a2b3c4d'),
+        .example('vpc-1a2b3c4d')
+        .required(),
     securityGroupIds: Joi.array()
         .items(
             Joi.string()
@@ -18,7 +19,8 @@ const SCHEMA_VPC_OBJECT = Joi.object({
                 .example('sg-51530134')
         )
         .min(1)
-        .label('List of security group IDs'),
+        .label('List of security group IDs')
+        .required(),
     subnetIds: Joi.array()
         .items(
             Joi.string()
@@ -29,6 +31,7 @@ const SCHEMA_VPC_OBJECT = Joi.object({
         )
         .min(1)
         .label('List of subnet IDs')
+        .required()
 });
 
 const SCHEMA_PROVIDER = Joi.object().keys({

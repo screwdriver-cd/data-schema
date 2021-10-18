@@ -26,6 +26,7 @@ const buildSchemaObj = {
     jobName,
     jobState,
     jobArchived,
+    provider: Job.provider,
     annotations: Annotations.annotations,
     blockedBy: Joi.array().items(jobId),
     freezeWindows: Job.freezeWindows,
@@ -61,7 +62,8 @@ const SCHEMA_STOP = Joi.object()
         buildClusterName: models.buildCluster.base.extract('name'),
         jobId,
         token: Joi.string().label('Build JWT'),
-        pipelineId
+        pipelineId,
+        provider: Job.provider
     })
     .required();
 const SCHEMA_STATUS = Joi.object()
@@ -69,7 +71,8 @@ const SCHEMA_STATUS = Joi.object()
         buildId,
         token: Joi.string().label('Build JWT'),
         pipelineId,
-        jobId
+        jobId,
+        provider: Job.provider
     })
     .required();
 const SCHEMA_VERIFY = Joi.object()

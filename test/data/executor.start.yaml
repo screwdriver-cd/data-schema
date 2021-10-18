@@ -2,6 +2,13 @@ jobId: 1234
 jobName: component
 jobState: ENABLED
 jobArchived: false
+provider:
+    name: aws
+    region: us-west-2
+    accountId: 111111111111
+    role: arn:aws:iam::111111111111:role/role
+    executor: eks
+    clusterName: sd-build-eks
 annotations:
     beta.screwdriver.cd/executor: k8s
 causeMessage: '[force start] Push out hotfix'

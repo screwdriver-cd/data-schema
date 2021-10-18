@@ -9,3 +9,10 @@ blockedBy:
 freezeWindows:
   - "* * ? * 1"
   - "0-59 0-23 * 1 ?"
+provider:
+    name: aws
+    region: us-west-2
+    accountId: 111111111111
+    role: arn:aws:iam::111111111111:role/role
+    executor: eks
+    clusterName: sd-build-eks
