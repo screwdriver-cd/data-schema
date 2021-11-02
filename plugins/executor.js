@@ -52,6 +52,7 @@ const buildSchemaObj = {
 };
 const SCHEMA_START = Joi.object()
     .keys(buildSchemaObj)
+    .unknown(true) // allow other fields
     .required();
 const SCHEMA_STOP = Joi.object()
     .keys({
@@ -65,6 +66,7 @@ const SCHEMA_STOP = Joi.object()
         pipelineId,
         provider: Job.provider
     })
+    .unknown(true) // allow other fields
     .required();
 const SCHEMA_STATUS = Joi.object()
     .keys({
@@ -74,9 +76,11 @@ const SCHEMA_STATUS = Joi.object()
         jobId,
         provider: Job.provider
     })
+    .unknown(true) // allow other fields
     .required();
 const SCHEMA_VERIFY = Joi.object()
     .keys(buildSchemaObj)
+    .unknown(true) // allow other fields
     .required();
 
 module.exports = {
