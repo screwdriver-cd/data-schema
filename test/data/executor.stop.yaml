@@ -3,6 +3,8 @@ annotations:
 buildId: 453264
 buildClusterName: sd
 jobId: 1234
+jobName: main
+apiUri: 'http://screwdriver.cd'
 blockedBy:
   - 111
   - 222
