@@ -64,7 +64,12 @@ const SCHEMA_STOP = Joi.object()
         jobId,
         token: Joi.string().label('Build JWT'),
         pipelineId,
-        provider: Job.provider
+        provider: Job.provider,
+        apiUri: Joi.string()
+            .uri()
+            .required()
+            .label('API URI'),
+        jobName
     })
     .unknown(true) // allow other fields
     .required();
