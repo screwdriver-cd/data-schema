@@ -13,6 +13,8 @@ jobs:
     publish:
         requires: main
         template: screwdriver-cd/semantic-release
+        steps:
+            - publish: npm run semantic-release
         secrets:
             # Publishing to NPM
             - NPM_TOKEN
