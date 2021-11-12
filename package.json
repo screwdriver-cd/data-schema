@@ -33,7 +33,14 @@
     "Tiffany Kyi <tiffanykyi@gmail.com>"
   ],
   "release": {
-    "debug": false
+    "branches": ["+([0-9])?(.{+([0-9]),x}).x", "master"],
+    "debug": false,
+    "verifyConditions": [
+      "@semantic-release/npm"
+    ],
+    "publish": "@semantic-release/npm",
+    "fail": false,
+    "success": false
   },
   "devDependencies": {
     "chai": "^4.2.0",
