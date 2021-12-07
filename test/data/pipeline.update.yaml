@@ -10,3 +10,4 @@ settings:
         - FAILURE
         - ABORTED
     public: true
+    groupedEvents: false
