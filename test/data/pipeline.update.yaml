@@ -11,3 +11,4 @@ settings:
         - ABORTED
     public: true
     groupedEvents: false
+    showEventTriggers: false
