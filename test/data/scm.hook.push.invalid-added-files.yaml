@@ -1,4 +1,4 @@
-# SCM Hook example
+# # Invalid SCM Hook addedFiles
 action: push
 branch: master
 checkoutUrl: git@github.com:screwdriver-cd/data-model.git#master
@@ -9,6 +9,6 @@ type: repo
 username: stjohnjohnson
 ref: reference
 commitAuthors: ['john1', 'john2']
-addedFiles: ['README.md']
+addedFiles: 'README.md'
 modifiedFiles: ['README.md','package.json']
 removedFiles: ['screwdriver.yaml']

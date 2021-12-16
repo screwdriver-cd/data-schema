@@ -219,7 +219,22 @@ const SCHEMA_HOOK = Joi.object().keys({
     releaseAuthor: Joi.string()
         .allow('')
         .optional()
-        .label('Author of the event')
+        .label('Author of the event'),
+
+    addedFiles: Joi.array()
+        .items(Joi.string().allow(''))
+        .optional()
+        .label('Added files of head commit'),
+
+    modifiedFiles: Joi.array()
+        .items(Joi.string().allow(''))
+        .optional()
+        .label('Modified files of head commit'),
+
+    removedFiles: Joi.array()
+        .items(Joi.string().allow(''))
+        .optional()
+        .label('Removed files of head commit')
 
 }).label('SCM Hook');
 
