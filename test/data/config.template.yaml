@@ -3,11 +3,19 @@ version: "1.3"
 description: Template for testing
 maintainer: foo@bar.com
 config:
+  template: simple/template@1
+  order:
+    - install
+    - test
+    - other
+    - echo
   image: node:6
   steps:
-    - install: npm install 
+    - install: npm install
     - test: npm test
-    - echo: echo $FOO
+    - echo:
+        command: echo $FOO
+        locked: true
   environment:
     FOO: bar
   secrets:

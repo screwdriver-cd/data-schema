@@ -11,7 +11,8 @@ const WorkflowGraph = require('../config/workflowGraph');
 const SCHEMA_JOB_COMMAND = Joi.object()
     .keys({
         name: Joi.string(),
-        command: Joi.string()
+        command: Joi.string(),
+        locked: Joi.boolean().optional()
     })
     .unknown(false)
     .label('Named command to execute');
@@ -24,21 +25,27 @@ const SCHEMA_JOB_COMMANDS = Joi.array()
 const SCHEMA_JOB_PERMUTATION = Joi.object()
     .keys({
         annotations: Annotations.annotations,
+        blockedBy: Job.blockedBy,
         cache: Base.cachePerm,
         commands: SCHEMA_JOB_COMMANDS,
         description: Job.description,
         environment: Job.environment,
+        freezeWindows: Job.freezeWindows,
         image: Job.image,
+        order: Job.order,
+        parameters: Job.parameters,
+        provider: Job.provider,
         requires: Job.requires,
-        blockedBy: Job.blockedBy,
         secrets: Job.secrets,
         settings: Job.settings,
         sourcePaths: Job.sourcePaths,
-        freezeWindows: Job.freezeWindows,
+        subscribe: Base.subscribe,
         templateId: Job.templateId
-    }).label('Job permutation');
+    })
+    .label('Job permutation');
 
-const SCHEMA_JOB_PERMUTATIONS = Joi.array().items(SCHEMA_JOB_PERMUTATION)
+const SCHEMA_JOB_PERMUTATIONS = Joi.array()
+    .items(SCHEMA_JOB_PERMUTATION)
     .label('List of job permutations');
 
 const SCHEMA_JOBS = Joi.object()
@@ -51,11 +58,15 @@ const SCHEMA_JOBS = Joi.object()
 const SCHEMA_OUTPUT = Joi.object()
     .keys({
         annotations: Annotations.annotations,
-        errors: Joi.array().items(Joi.string()).optional(),
+        errors: Joi.array()
+            .items(Joi.string())
+            .optional(),
         jobs: SCHEMA_JOBS,
         childPipelines: Base.childPipelines,
         workflowGraph: WorkflowGraph.workflowGraph,
-        parameters: Parameters.parameters
+        parameters: Parameters.parameters.default({}),
+        warnMessages: Joi.array().optional(),
+        subscribe: Base.subscribe
     })
     .label('Execution information');
 

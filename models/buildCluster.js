@@ -3,26 +3,28 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Command = require('../config/command');
-const scmContext = Joi.reach(require('./pipeline').base, 'scmContext');
-const scmOrganization = Joi
-    .string().max(100)
+const pipelineBaseSchema = require('./pipeline').base;
+const scmContext = pipelineBaseSchema.extract('scmContext');
+const scmOrganization = Joi.string()
+    .max(100)
     .description('SCM organization name')
     .example('screwdriver-cd');
 
 const MODEL = {
-    id: Joi
-        .number().integer().positive()
+    id: Joi.number()
+        .integer()
+        .positive()
         .description('Identifier of this Job')
         .example(123345),
 
-    name: Joi
-        .string().regex(/^[\w-]+$/)
+    name: Joi.string()
+        .regex(/^[\w-]+$/)
         .max(50)
         .description('Name of the build cluster')
         .example('iOS'),
 
-    description: Joi
-        .string().max(100)
+    description: Joi.string()
+        .max(100)
         .description('Description of the build cluster')
         .example('Build cluster for iOS team'),
 
@@ -30,21 +32,18 @@ const MODEL = {
 
     scmOrganizations: Joi.array().items(scmOrganization),
 
-    isActive: Joi
-        .boolean()
+    isActive: Joi.boolean()
         .description('Flag if the the build cluster is active')
         .example(true),
 
-    managedByScrewdriver: Joi
-        .boolean()
+    managedByScrewdriver: Joi.boolean()
         .description('Flag if the cluster is managed by screwdriver team')
         .example(true),
 
     maintainer: Command.maintainer,
 
-    weightage: Joi
-        .number()
-        .min(1)
+    weightage: Joi.number()
+        .min(0)
         .max(100)
         .description('Weight percentage for build cluster')
         .example(20)
@@ -60,17 +59,35 @@ module.exports = {
     base: Joi.object(MODEL).label('BuildCluster'),
 
     /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
+
+    /**
      * Properties for BuildCluster that will come back during a GET request
      *
      * @property get
      * @type {Joi}
      */
-    get: Joi.object(mutate(MODEL, [
-        'id', 'name', 'scmContext', 'scmOrganizations', 'isActive',
-        'managedByScrewdriver', 'maintainer', 'weightage'
-    ], [
-        'description'
-    ])).label('Get BuildCluster'),
+    get: Joi.object(
+        mutate(
+            MODEL,
+            [
+                'id',
+                'name',
+                'scmContext',
+                'scmOrganizations',
+                'isActive',
+                'managedByScrewdriver',
+                'maintainer',
+                'weightage'
+            ],
+            ['description']
+        )
+    ).label('Get BuildCluster'),
 
     /**
      * Properties for BuildCluster that will be passed during a UPDATE request
@@ -78,10 +95,21 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(MODEL, [], [
-        'description', 'isActive', 'scmOrganizations', 'managedByScrewdriver',
-        'maintainer', 'weightage'
-    ])).label('Update BuildCluster'),
+    update: Joi.object(
+        mutate(
+            MODEL,
+            [],
+            [
+                'description',
+                'isActive',
+                'scmOrganizations',
+                'managedByScrewdriver',
+                'maintainer',
+                'weightage',
+                'scmContext'
+            ]
+        )
+    ).label('Update BuildCluster'),
 
     /**
      * Properties for BuildCluster that will be passed during a CREATE request
@@ -89,11 +117,13 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(mutate(MODEL, [
-        'name', 'scmOrganizations', 'managedByScrewdriver', 'maintainer'
-    ], [
-        'description', 'isActive', 'weightage'
-    ])).label('Create Build'),
+    create: Joi.object(
+        mutate(
+            MODEL,
+            ['name', 'scmOrganizations', 'managedByScrewdriver', 'maintainer'],
+            ['description', 'isActive', 'weightage', 'scmContext']
+        )
+    ).label('Create Build'),
 
     /**
      * List of fields that determine a unique row

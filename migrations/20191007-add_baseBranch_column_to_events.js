@@ -7,10 +7,14 @@ const table = `${prefix}events`;
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.sequelize.transaction(async (transaction) => {
-            await queryInterface.addColumn(table, 'baseBranch', {
-                type: Sequelize.TEXT
-            }, { transaction }
+        await queryInterface.sequelize.transaction(async transaction => {
+            await queryInterface.addColumn(
+                table,
+                'baseBranch',
+                {
+                    type: Sequelize.TEXT
+                },
+                { transaction }
             );
         });
     }

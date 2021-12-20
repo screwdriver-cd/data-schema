@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const core = require('../../').core;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { core } = require('../..');
+const { validate } = require('../helper');
 
 describe('scm core', () => {
     describe('command', () => {

@@ -9,12 +9,10 @@ module.exports = {
     // eslint-disable-next-line no-unused-vars
     up: async (queryInterface, Sequelize) => {
         try {
-            await queryInterface.addConstraint(table, ['namespace', 'name', 'tag'],
-                {
-                    name: `${table}_namespace_name_tag_key`,
-                    type: 'unique'
-                }
-            );
+            await queryInterface.addConstraint(table, ['namespace', 'name', 'tag'], {
+                name: `${table}_namespace_name_tag_key`,
+                type: 'unique'
+            });
             // eslint-disable-next-line no-empty
         } catch (e) {}
     }

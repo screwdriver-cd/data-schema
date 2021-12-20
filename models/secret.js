@@ -5,28 +5,25 @@ const mutate = require('../lib/mutate');
 const Job = require('../config/job');
 
 const MODEL = {
-    id: Joi
-        .number().integer().positive()
+    id: Joi.number()
+        .integer()
+        .positive()
         .description('Identifier of this secret')
         .example(123345),
 
-    pipelineId: Joi
-        .number().integer().positive()
+    pipelineId: Joi.number()
+        .integer()
+        .positive()
         .description('pipeline associated with the secret')
         .example(123345),
 
-    name: Job.secret
-        .description('Name of the secret')
-        .example('NPM_TOKEN'),
+    name: Job.secret.description('Name of the secret').example('NPM_TOKEN'),
 
-    value: Joi
-        .string()
+    value: Joi.string()
         .description('value of the secret')
         .example('2d991790bab1ac8576097ca87f170df73410b55c'),
 
-    allowInPR: Joi
-        .boolean()
-        .description('flag to denote if the secret can be shown in PR builds')
+    allowInPR: Joi.boolean().description('flag to denote if the secret can be shown in PR builds')
 };
 
 module.exports = {
@@ -39,14 +36,20 @@ module.exports = {
     base: Joi.object(MODEL).label('Secret'),
 
     /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
+
+    /**
      * Properties for secret that will come back during a GET request
      *
      * @property get
      * @type {Joi}
      */
-    get: Joi.object(mutate(MODEL, [
-        'id', 'pipelineId', 'name', 'allowInPR'
-    ], ['value'])).label('Get Secret'),
+    get: Joi.object(mutate(MODEL, ['id', 'pipelineId', 'name', 'allowInPR'], ['value'])).label('Get Secret'),
 
     /**
      * Properties for secret that will be passed during a CREATE request
@@ -54,9 +57,7 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(mutate(MODEL, [
-        'pipelineId', 'name', 'value', 'allowInPR'
-    ], [])).label('Create Secret'),
+    create: Joi.object(mutate(MODEL, ['pipelineId', 'name', 'value', 'allowInPR'], [])).label('Create Secret'),
 
     /**
      * Properties for secret that will be passed during a UPDATE request

@@ -3,9 +3,18 @@ annotations:
 buildId: 453264
 buildClusterName: sd
 jobId: 1234
+jobName: main
+apiUri: 'http://screwdriver.cd'
 blockedBy:
   - 111
   - 222
 freezeWindows:
   - "* * ? * 1"
   - "0-59 0-23 * 1 ?"
+provider:
+    name: aws
+    region: us-west-2
+    accountId: 111111111111
+    role: arn:aws:iam::111111111111:role/role
+    executor: eks
+    clusterName: sd-build-eks

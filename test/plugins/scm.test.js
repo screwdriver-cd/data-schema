@@ -1,9 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
+const { assert } = require('chai');
 const scm = require('../../plugins/scm');
-const Joi = require('joi');
-const validate = require('../helper').validate;
+const { validate } = require('../helper');
 
 describe('scm test', () => {
     describe('getPermissions', () => {
@@ -70,8 +69,7 @@ describe('scm test', () => {
         });
 
         it('validates with extra optional params (context and description)', () => {
-            assert.isNull(validate('scm.updateCommitStatusFull.yaml',
-                scm.updateCommitStatus).error);
+            assert.isNull(validate('scm.updateCommitStatusFull.yaml', scm.updateCommitStatus).error);
         });
 
         it('fails', () => {
@@ -95,8 +93,7 @@ describe('scm test', () => {
 
     describe('getChangedFiles', () => {
         it('validates input', () => {
-            assert.isNull(validate('scm.getChangedFilesInput.yaml',
-                scm.getChangedFilesInput).error);
+            assert.isNull(validate('scm.getChangedFilesInput.yaml', scm.getChangedFilesInput).error);
         });
 
         it('fails empty input', () => {
@@ -104,13 +101,11 @@ describe('scm test', () => {
         });
 
         it('validates output', () => {
-            assert.isNull(validate('scm.getChangedFilesOutput.yaml',
-                scm.getChangedFilesOutput).error);
+            assert.isNull(validate('scm.getChangedFilesOutput.yaml', scm.getChangedFilesOutput).error);
         });
 
         it('validates empty array output', () => {
-            assert.isNull(validate('scm.getChangedFilesEmptyArrayOutput.yaml',
-                scm.getChangedFilesOutput).error);
+            assert.isNull(validate('scm.getChangedFilesEmptyArrayOutput.yaml', scm.getChangedFilesOutput).error);
         });
 
         it('validates empty output', () => {
@@ -178,7 +173,9 @@ describe('scm test', () => {
         });
 
         it('validates null output', () => {
-            assert.isNull(Joi.validate(null, scm.parseHookOutput).error);
+            const res = scm.parseHookOutput.validate(null).error;
+
+            assert.equal(res, undefined);
         });
     });
 
@@ -189,6 +186,16 @@ describe('scm test', () => {
 
         it('fails', () => {
             assert.isNotNull(validate('empty.yaml', scm.addWebhook).error);
+        });
+    });
+
+    describe('addDeployKey', () => {
+        it('validates', () => {
+            assert.isNull(validate('scm.addDeployKey.yaml', scm.addDeployKey).error);
+        });
+
+        it('fails', () => {
+            assert.isNotNull(validate('empty.yaml', scm.addDeployKey).error);
         });
     });
 
@@ -209,6 +216,26 @@ describe('scm test', () => {
 
         it('fails', () => {
             assert.isNotNull(validate('empty.yaml', scm.openPr).error);
+        });
+    });
+
+    describe('scm to build map', () => {
+        it('validates scm statuses mapping', () => {
+            assert.strictEqual(scm.SCM_STATE_MAP.QUEUED, 'PENDING');
+        });
+
+        it('validates an invalid scm statuses mapping', () => {
+            assert.notStrictEqual(scm.SCM_STATE_MAP.QUEUED, 'SUCCESS');
+        });
+    });
+
+    describe('scm statuses', () => {
+        it('check a valid scm status', () => {
+            assert.isTrue(scm.SCM_STATUSES.includes('PENDING'));
+        });
+
+        it('check an invalid scm status', () => {
+            assert.isFalse(scm.SCM_STATUSES.includes('QUEUED'));
         });
     });
 });

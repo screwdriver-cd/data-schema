@@ -1,3 +1,5 @@
 - init: npm install
 - test: npm test
 - npm publish
+- done:
+    command: echo done

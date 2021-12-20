@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const models = require('../../').models;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { models } = require('../..');
+const { validate } = require('../helper');
 
 describe('token template', () => {
     describe('user token', () => {

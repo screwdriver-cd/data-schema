@@ -1,36 +1,47 @@
 'use strict';
 
-const core = require('../core');
 const Joi = require('joi');
+const core = require('../core');
 const models = require('../models');
 const Scm = require('../core/scm');
+const Regex = require('../config/regex');
 
-const buildStatus = Joi.reach(models.build.base, 'status').required();
-const checkoutUrl = Joi.reach(models.pipeline.create, 'checkoutUrl').required();
+const checkoutUrl = models.pipeline.create.extract('checkoutUrl').required();
 const hook = core.scm.hook.required();
-const jobName = Joi.reach(models.job.base, 'name').optional();
-const pipelineId = Joi.reach(models.pipeline.base, 'id').optional();
-const prNum = Joi.reach(core.scm.hook, 'prNum').allow(null).optional();
+const jobName = models.job.base.extract('name').optional();
+const pipelineId = models.pipeline.base.extract('id').optional();
+const prNum = core.scm.hook
+    .extract('prNum')
+    .allow(null)
+    .optional();
 const rootDir = Scm.rootDir.optional();
-const scmContext = Joi.reach(models.pipeline.base, 'scmContext').optional();
+const scmContext = models.pipeline.base.extract('scmContext').optional();
 const scmRepo = Scm.repo.optional();
-const scmUri = Joi.reach(models.pipeline.base, 'scmUri').required();
-const sha = Joi.reach(models.build.base, 'sha').required();
-const token = Joi.reach(models.user.base, 'token').required();
-const type = Joi.reach(core.scm.hook, 'type').required();
-const username = Joi.reach(models.user.base, 'username').required();
+const scmUri = models.pipeline.base.extract('scmUri').required();
+const sha = models.build.base.extract('sha').required();
+const token = models.user.base.extract('token').required();
+const type = core.scm.hook.extract('type').required();
+const username = models.user.base.extract('username').required();
 
-const ADD_WEBHOOK = Joi.object().keys({
-    scmUri,
+const SCM_STATUSES = ['PENDING', 'SUCCESS', 'FAILURE'];
+
+const ADD_WEBHOOK = Joi.object()
+    .keys({
+        scmUri,
+        token,
+        actions: Joi.array().items(Joi.string()),
+        webhookUrl: Joi.string().uri({
+            scheme: ['http', 'https']
+        }),
+        scmContext
+    })
+    .required();
+
+const ADD_DEPLOY_KEY = Joi.object().keys({
+    checkoutUrl: Joi.string().regex(Regex.CHECKOUT_URL),
     token,
-    webhookUrl: Joi.string().uri({
-        scheme: [
-            'http',
-            'https'
-        ]
-    }),
     scmContext
-}).required();
+});
 
 const PARENT_CONFIG = Joi.object().keys({
     branch: Joi.string().required(),
@@ -39,148 +50,190 @@ const PARENT_CONFIG = Joi.object().keys({
     repo: Joi.string().required(),
     sha: Joi.string().required()
 });
-const GET_CHECKOUT_COMMAND = Joi.object().keys({
-    branch: Joi.string().required(),
-    host: Joi.string().required(),
-    org: Joi.string().required(),
-    repo: Joi.string().required(),
-    sha: Joi.string().required(),
-    prRef: Joi.string().optional(),
-    prSource: Joi.string().optional(),
-    prBranchName: Joi.string().optional(),
-    commitBranch: Joi.string().optional(),
-    manifest: Joi.string().optional(),
-    parentConfig: PARENT_CONFIG.optional(),
-    scmContext,
-    rootDir
-}).required();
+const GET_CHECKOUT_COMMAND = Joi.object()
+    .keys({
+        branch: Joi.string().required(),
+        host: Joi.string().required(),
+        org: Joi.string().required(),
+        repo: Joi.string().required(),
+        sha: Joi.string().required(),
+        prRef: Joi.string().optional(),
+        prSource: Joi.string().optional(),
+        prBranchName: Joi.string().optional(),
+        commitBranch: Joi.string().optional(),
+        manifest: Joi.string().optional(),
+        parentConfig: PARENT_CONFIG.optional(),
+        scmContext,
+        rootDir
+    })
+    .required();
 
-const GET_PERMISSIONS = Joi.object().keys({
-    scmUri,
-    token,
-    scmContext,
-    scmRepo
-}).required();
+const GET_PERMISSIONS = Joi.object()
+    .keys({
+        scmUri,
+        token,
+        scmContext,
+        scmRepo
+    })
+    .required();
 
-const GET_ORG_PERMISSIONS = Joi.object().keys({
-    token,
-    scmContext,
-    organization: Joi.string().required(),
-    username
-}).required();
+const GET_ORG_PERMISSIONS = Joi.object()
+    .keys({
+        token,
+        scmContext,
+        organization: Joi.string().required(),
+        username
+    })
+    .required();
 
-const GET_COMMIT_SHA = Joi.object().keys({
-    scmUri,
-    token,
-    prNum,
-    scmContext,
-    scmRepo
-}).required();
+const GET_COMMIT_SHA = Joi.object()
+    .keys({
+        scmUri,
+        token,
+        prNum,
+        scmContext,
+        scmRepo
+    })
+    .required();
 
-const GET_COMMIT_REF_SHA = Joi.object().keys({
-    token,
-    owner: Joi.string().required(),
-    repo: Joi.string().required(),
-    ref: Joi.string().required(),
-    refType: Joi.string().required(),
-    scmContext
-}).required();
+const GET_COMMIT_REF_SHA = Joi.object()
+    .keys({
+        token,
+        owner: Joi.string().required(),
+        repo: Joi.string().required(),
+        ref: Joi.string().required(),
+        refType: Joi.string().required(),
+        scmContext
+    })
+    .required();
 
-const ADD_PR_COMMENT = Joi.object().keys({
-    scmUri,
-    token,
-    prNum: Joi.reach(core.scm.hook, 'prNum').required(),
-    comment: Joi.string().required(),
-    scmContext
-}).required();
+const ADD_PR_COMMENT = Joi.object()
+    .keys({
+        scmUri,
+        token,
+        prNum: core.scm.hook.extract('prNum').required(),
+        comment: Joi.string().required(),
+        scmContext
+    })
+    .required();
 
-const UPDATE_COMMIT_STATUS = Joi.object().keys({
-    scmUri,
-    token,
-    sha,
-    buildStatus,
-    jobName,
-    url: Joi.string().uri().required(),
-    pipelineId,
-    scmContext,
-    context: Joi.string().max(100).optional(),
-    description: Joi.string().max(200).optional()
-}).required();
+const UPDATE_COMMIT_STATUS = Joi.object()
+    .keys({
+        scmUri,
+        token,
+        sha,
+        buildStatus: Joi.string()
+            .required()
+            .valid(...SCM_STATUSES),
+        jobName,
+        url: Joi.string()
+            .uri()
+            .required(),
+        pipelineId,
+        scmContext,
+        context: Joi.string()
+            .max(100)
+            .optional(),
+        description: Joi.string()
+            .max(200)
+            .optional()
+    })
+    .required();
 
-const GET_FILE = Joi.object().keys({
-    scmUri,
-    token,
-    path: Joi.string().required(),
-    ref: Joi.string().optional(),
-    scmContext,
-    scmRepo
-}).required();
+const GET_FILE = Joi.object()
+    .keys({
+        scmUri,
+        token,
+        path: Joi.string().required(),
+        ref: Joi.string().optional(),
+        scmContext,
+        scmRepo
+    })
+    .required();
 
-const GET_CHANGED_FILES_INPUT = Joi.object().keys({
-    type,
-    webhookConfig: Joi.object().allow(null).required(),
-    token,
-    scmContext,
-    scmUri: scmUri.optional(),
-    prNum
-}).required();
+const GET_CHANGED_FILES_INPUT = Joi.object()
+    .keys({
+        type,
+        webhookConfig: Joi.object()
+            .allow(null)
+            .required(),
+        token,
+        scmContext,
+        scmUri: scmUri.optional(),
+        prNum
+    })
+    .required();
 
 const GET_CHANGED_FILES_OUTPUT = Joi.alternatives().try(
-    Joi.array().items(Joi.string()).required(),
+    Joi.array()
+        .items(Joi.string())
+        .required(),
     null
 );
 
-const PARSE_HOOK = Joi.alternatives().try(
-    hook,
-    null
-);
+const PARSE_HOOK = Joi.alternatives().try(hook, null);
 
-const DECORATE_URL = Joi.object().keys({
-    scmUri,
-    token,
-    scmContext,
-    scmRepo
-}).required();
+const DECORATE_URL = Joi.object()
+    .keys({
+        scmUri,
+        token,
+        scmContext,
+        scmRepo
+    })
+    .required();
 
-const DECORATE_COMMIT = Joi.object().keys({
-    scmUri,
-    sha,
-    token,
-    scmContext
-}).required();
+const DECORATE_COMMIT = Joi.object()
+    .keys({
+        scmUri,
+        sha,
+        token,
+        scmContext
+    })
+    .required();
 
-const DECORATE_AUTHOR = Joi.object().keys({
-    username,
-    token,
-    scmContext
-}).required();
+const DECORATE_AUTHOR = Joi.object()
+    .keys({
+        username,
+        token,
+        scmContext
+    })
+    .required();
 
-const PARSE_URL = Joi.object().keys({
-    checkoutUrl,
-    rootDir,
-    token,
-    scmContext
-}).required();
+const PARSE_URL = Joi.object()
+    .keys({
+        checkoutUrl,
+        rootDir,
+        token,
+        scmContext
+    })
+    .required();
 
-const GET_BRANCH_LIST = Joi.object().keys({
-    scmUri,
-    token,
-    scmContext
-}).required();
+const GET_BRANCH_LIST = Joi.object()
+    .keys({
+        scmUri,
+        token,
+        scmContext
+    })
+    .required();
 
-const OPEN_PR = Joi.object().keys({
-    checkoutUrl,
-    token,
-    files: Joi.array().items(
-        Joi.object().keys({
-            name: Joi.string().required(),
-            content: Joi.string().required()
-        })
-    ).min(1).required(),
-    scmContext,
-    title: Joi.string().required(),
-    message: Joi.string().required()
-}).required();
+const OPEN_PR = Joi.object()
+    .keys({
+        checkoutUrl,
+        token,
+        files: Joi.array()
+            .items(
+                Joi.object().keys({
+                    name: Joi.string().required(),
+                    content: Joi.string().required()
+                })
+            )
+            .min(1)
+            .required(),
+        scmContext,
+        title: Joi.string().required(),
+        message: Joi.string().required()
+    })
+    .required();
 
 module.exports = {
     /**
@@ -190,6 +243,14 @@ module.exports = {
      * @type {Joi}
      */
     addWebhook: ADD_WEBHOOK,
+
+    /**
+     * Properties for Scm Base that will be passed for the addDeployKey method
+     *
+     * @property addDeployKey
+     * @type {Joi}
+     */
+    addDeployKey: ADD_DEPLOY_KEY,
 
     /**
      * Properties for Scm Base that will be passed for the getPermissions method
@@ -325,5 +386,32 @@ module.exports = {
      * @property openPr
      * @type {Joi}
      */
-    openPr: OPEN_PR
+    openPr: OPEN_PR,
+
+    /**
+     * Properties for Scm Base that handles statuses
+     *
+     * @property SCM_STATUSES
+     * @type {Object}
+     */
+    SCM_STATUSES,
+
+    /**
+     * Properties for Scm Base that handles mapping from build status to scm statuses
+     *
+     * @property SCM_STATE_MAP
+     * @type {Object}
+     */
+    SCM_STATE_MAP: {
+        ABORTED: 'FAILURE',
+        CREATED: 'PENDING',
+        FAILURE: 'FAILURE',
+        QUEUED: 'PENDING',
+        RUNNING: 'PENDING',
+        SUCCESS: 'SUCCESS',
+        BLOCKED: 'PENDING',
+        UNSTABLE: 'PENDING',
+        COLLAPSED: '',
+        FROZEN: ''
+    }
 };

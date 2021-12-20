@@ -4,50 +4,83 @@ const Joi = require('joi');
 const table = Joi.string().required();
 const SCHEMA_ID = Joi.object().keys({
     table,
-    params: Joi.object().min(1).required()
+    params: Joi.object()
+        .min(1)
+        .required()
 });
 const SCHEMA_UPDATE = Joi.object().keys({
     table,
-    params: Joi.object().keys({
-        id: Joi.number().integer().positive().required()
-    }).unknown(true).min(2)
+    params: Joi.object()
+        .keys({
+            id: Joi.number()
+                .integer()
+                .positive()
+                .required()
+        })
+        .unknown(true)
+        .min(2)
         .required()
 });
 const SCHEMA_SAVE = Joi.object().keys({
     table,
-    params: Joi.object().unknown(true).min(1).required()
+    params: Joi.object()
+        .unknown(true)
+        .min(1)
+        .required()
 });
-const SCHEMA_SEARCH_FIELD = Joi.string().max(100).required();
+const SCHEMA_SEARCH_FIELD = Joi.string()
+    .max(100)
+    .required();
+const SCHEMA_SEARCH_KEYWORD = Joi.alternatives().try(
+    Joi.string()
+        .max(200)
+        .required(),
+    Joi.number().required()
+);
 const SCHEMA_SCAN = Joi.object().keys({
     table,
     params: Joi.object(),
     paginate: Joi.object().keys({
-        count: Joi.number().integer().positive().required(),
-        page: Joi.number().integer().positive().required()
+        count: Joi.number()
+            .integer()
+            .positive()
+            .required(),
+        page: Joi.number()
+            .integer()
+            .positive()
+            .required()
     }),
     search: Joi.object().keys({
-        field: Joi.alternatives().try(
-            Joi.array().items(SCHEMA_SEARCH_FIELD),
-            SCHEMA_SEARCH_FIELD
-        ),
-        keyword: Joi.string().max(200).required()
+        field: Joi.alternatives().try(Joi.array().items(SCHEMA_SEARCH_FIELD), SCHEMA_SEARCH_FIELD),
+        keyword: Joi.alternatives().try(Joi.array().items(SCHEMA_SEARCH_KEYWORD), SCHEMA_SEARCH_KEYWORD)
     }),
-    sort: Joi.string().lowercase().valid(['ascending', 'descending']).default('descending'),
+    sort: Joi.string()
+        .lowercase()
+        .valid('ascending', 'descending')
+        .default('descending'),
     sortBy: Joi.string().max(100),
-    exclude: Joi.array().items(Joi.string().max(100)).max(100),
-    groupBy: Joi.array().items(Joi.string().max(100)).max(100),
+    exclude: Joi.array()
+        .items(Joi.string().max(100))
+        .max(100),
+    groupBy: Joi.array()
+        .items(Joi.string().max(100))
+        .max(100),
     startTime: Joi.string().isoDate(),
     endTime: Joi.string().isoDate(),
     timeKey: Joi.string(),
-    aggregationField: Joi.string()
+    aggregationField: Joi.string(),
+    getCount: Joi.boolean()
 });
 const SCHEMA_QUERY = Joi.object().keys({
     table,
-    queries: Joi.array().items(
-        Joi.object().keys({
-            dbType: Joi.string().required(),
-            query: Joi.string().required()
-        })).required(),
+    queries: Joi.array()
+        .items(
+            Joi.object().keys({
+                dbType: Joi.string().required(),
+                query: Joi.string().required()
+            })
+        )
+        .required(),
     replacements: Joi.object(),
     rawResponse: Joi.boolean()
 });

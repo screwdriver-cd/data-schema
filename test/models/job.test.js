@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const models = require('../../').models;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { models } = require('../..');
+const { validate } = require('../helper');
 
 describe('model job', () => {
     describe('base', () => {
@@ -51,7 +51,7 @@ describe('model job', () => {
         it('has the correct keys', () => {
             const expectedKeys = ['pipelineId', 'name'];
 
-            expectedKeys.forEach((keyName) => {
+            expectedKeys.forEach(keyName => {
                 assert.include(models.job.keys, keyName, `Key name ${keyName} not included`);
             });
         });
@@ -72,7 +72,7 @@ describe('model job', () => {
                 'archived'
             ];
 
-            expectedKeys.forEach((keyName) => {
+            expectedKeys.forEach(keyName => {
                 assert.include(models.job.allKeys, keyName, `Key name ${keyName} not included`);
             });
         });
@@ -86,12 +86,11 @@ describe('model job', () => {
 
     describe('indexes', () => {
         it('defines the correct indexes', () => {
-            const expected = [{ fields: ['pipelineId', 'state'] }, { fields: ['state'] },
-                { fields: ['templateId'] }];
-            const indexes = models.job.indexes;
+            const expected = [{ fields: ['pipelineId', 'state'] }, { fields: ['state'] }, { fields: ['templateId'] }];
+            const { indexes } = models.job;
 
-            expected.forEach((indexName) => {
-                assert.include(indexes, indexName, `Index name ${indexName} not included`);
+            expected.forEach(indexName => {
+                assert.deepInclude(indexes, indexName, `Index name ${indexName} not included`);
             });
         });
     });

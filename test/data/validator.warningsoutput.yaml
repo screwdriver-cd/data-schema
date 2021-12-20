@@ -1,0 +1,71 @@
+jobs:
+  main:
+  - image: node:4
+    commands:
+      - name: install
+        command: npm install
+      - name: test
+        command: npm test
+      - name: build
+        command: npm run build
+    annotations:
+      beta.screwdriver.cd/auto_pr_builds: fork-only
+    description: "This is a description"
+    environment:
+      NODE_VERSION: 4
+    settings:
+      email: foo@bar.com
+    sourcePaths:
+      - src/A
+      - src/AConfig
+  - image: node:5
+    commands:
+    - name: install
+      command: npm install
+    - name: test
+      command: npm test
+    - name: build
+      command: npm run build
+    annotations:
+      beta.screwdriver.cd/auto_pr_builds: fork-only
+    description: "This is a description"
+    environment:
+      NODE_VERSION: 5
+    settings:
+      email: foo@bar.com
+    sourcePaths:
+      - src/A
+      - src/AConfig
+  - image: node:6
+    commands:
+    - name: install
+      command: npm install
+    - name: test
+      command: npm test
+    - name: build
+      command: npm run build
+    annotations:
+      beta.screwdriver.cd/auto_pr_builds: fork-only
+    description: "This is a description"
+    environment:
+      NODE_VERSION: 6
+    settings:
+      email: foo@bar.com
+    sourcePaths:
+      - src/A
+      - src/AConfig
+    secrets:
+      - ANOTHER_SECRET
+
+  publish:
+  - image: node:4
+    commands:
+    - name: install
+      command: npm publish
+    environment: {}
+    secrets:
+      - NPM_TOKEN
+
+warnMessages:
+- 'screwdriver.cd/chainPR'
+- 'screwdriver.cd/cpu'

@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const api = require('../../').api;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { api } = require('../..');
+const { validate } = require('../helper');
 
 describe('api log lines', () => {
     describe('input', () => {
@@ -22,6 +22,10 @@ describe('api log lines', () => {
     describe('output', () => {
         it('validates basic output', () => {
             assert.isNull(validate('loglines.output.yaml', api.loglines.output).error);
+        });
+
+        it('validates string output', () => {
+            assert.isNull(validate('loglines.output.string.yaml', api.loglines.output).error);
         });
     });
 });

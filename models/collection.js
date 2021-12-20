@@ -6,59 +6,62 @@ const mutate = require('../lib/mutate');
 const BUILD_MODEL = require('./build').get;
 const PIPELINE_MODEL = require('./pipeline').get;
 const PRS = {
-    open: Joi.number().integer().min(0),
-    failing: Joi.number().integer().min(0)
+    open: Joi.number()
+        .integer()
+        .min(0),
+    failing: Joi.number()
+        .integer()
+        .min(0)
 };
 const PIPELINE_OBJECT = PIPELINE_MODEL.keys({
-    lastBuilds: Joi.array().items(BUILD_MODEL).optional(),
+    lastBuilds: Joi.array()
+        .items(BUILD_MODEL)
+        .optional(),
     prs: Joi.object(PRS).optional()
 });
 const PIPELINES_MODEL = Joi.array().items(PIPELINE_OBJECT);
 const MODEL = {
-    id: Joi
-        .number()
+    id: Joi.number()
         .integer()
         .positive(),
 
-    userId: Joi
-        .number()
+    userId: Joi.number()
         .integer()
         .positive()
         .description('User ID'),
 
-    name: Joi
-        .string()
+    name: Joi.string()
         .max(128)
         .description('Collection name')
         .example('Favorites'),
 
-    description: Joi
-        .string()
+    description: Joi.string()
         .max(256)
         .allow('')
         .description('Collection description')
         .example('List of my favorite pipelines'),
 
-    pipelineIds: Joi
-        .array()
-        .items(Joi.number().integer().positive()),
+    pipelineIds: Joi.array().items(
+        Joi.number()
+            .integer()
+            .positive()
+    ),
 
-    type: Joi
-        .string()
+    type: Joi.string()
         .max(32)
-        .valid(['', 'default', 'normal'])
+        .valid('', 'default', 'normal')
         .description('Collection type')
         .example('default')
 };
-const GET_MODEL = Object.assign({}, MODEL, {
+const GET_MODEL = {
+    ...MODEL,
     pipelines: PIPELINES_MODEL,
-    type: Joi
-        .string()
+    type: Joi.string()
         .max(32)
-        .valid(['default', 'normal', 'shared'])
+        .valid('default', 'normal', 'shared')
         .description('Collection type')
         .example('default')
-});
+};
 
 module.exports = {
     /**
@@ -70,35 +73,30 @@ module.exports = {
     base: Joi.object(MODEL).label('Collection'),
 
     /**
+     * All the available properties of Job
+     *
+     * @property fields
+     * @type {Object}
+     */
+    fields: MODEL,
+
+    /**
      * Properties for collection that will come back during a GET request
      *
      * @property get
      * @type {Joi}
      */
-    get: Joi.object(mutate(GET_MODEL, [
-        'id',
-        'name',
-        'pipelineIds',
-        'pipelines'
-    ], [
-        'type',
-        'description',
-        'userId'
-    ])).label('Get collection'),
+    get: Joi.object(
+        mutate(GET_MODEL, ['id', 'name', 'pipelineIds', 'pipelines'], ['type', 'description', 'userId'])
+    ).label('Get collection'),
 
     /**
      * Properties for collections that will come back during a LIST request.
      * The LIST request will list all of the requesting user's collections.
      */
-    list: Joi.array().items(Joi.object(mutate(MODEL, [
-        'id',
-        'name',
-        'pipelineIds',
-        'userId'
-    ], [
-        'type',
-        'description'
-    ]))).label('List collections for requesting user'),
+    list: Joi.array()
+        .items(Joi.object(mutate(MODEL, ['id', 'name', 'pipelineIds', 'userId'], ['type', 'description'])))
+        .label('List collections for requesting user'),
 
     /**
      * Properties for Collection that will be passed during a CREATE request
@@ -106,13 +104,7 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(mutate(MODEL, [
-        'name'
-    ], [
-        'type',
-        'description',
-        'pipelineIds'
-    ])).label('Create collection'),
+    create: Joi.object(mutate(MODEL, ['name'], ['type', 'description', 'pipelineIds'])).label('Create collection'),
 
     /**
      * Properties for Collection that will be passed during a UPDATE request
@@ -120,12 +112,7 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(MODEL, [], [
-        'name',
-        'description',
-        'pipelineIds',
-        'type'
-    ])).label('Update collection'),
+    update: Joi.object(mutate(MODEL, [], ['name', 'description', 'pipelineIds', 'type'])).label('Update collection'),
 
     /**
      * List of fields that determine a unique row

@@ -11,6 +11,7 @@ scmRepo:
     branch: master
     url: https://github.com/screwdriver-cd/screwdriver/tree/master
     rootDir: src/app/component
+    private: true
 annotations:
     screwdriver.cd/executor.resource:
         - XCODE8
@@ -25,3 +26,12 @@ childPipelines:
         - git@github.com:org/repo.git
         - https://github.com:org/repo2.git
     startAll: true
+settings:
+    metricsDowntimeJobs:
+            - 123
+            - 456
+subscribedScmUrlsWithActions:
+    - scmUri: github.com:56781234:master
+      actions: [commit, tag, release]
+    - scmUri: github.com:34568912:master
+      actions: [commit, tag, release]

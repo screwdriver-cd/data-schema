@@ -1,0 +1,5 @@
+# User Example
+settings:
+    1:
+        displayJobNameLength: 35
+        showPRJobs: false

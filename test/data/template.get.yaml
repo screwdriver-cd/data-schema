@@ -21,3 +21,4 @@ config:
   secrets:
      - NPM_TOKEN
 trusted: true
+latest: true

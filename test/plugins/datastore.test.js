@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
+const { assert } = require('chai');
 const datastore = require('../../plugins/datastore');
-const validate = require('../helper').validate;
+const { validate } = require('../helper');
 
 describe('datastore test', () => {
     describe('get', () => {
@@ -52,6 +52,10 @@ describe('datastore test', () => {
 
         it('validates the update with multiple search fields', () => {
             assert.isNull(validate('datastore.search.multipleFields.yaml', datastore.scan).error);
+        });
+
+        it('validates the update with multiple search keywords', () => {
+            assert.isNull(validate('datastore.search.multipleKeywords.yaml', datastore.scan).error);
         });
 
         it('validates the update with all keys', () => {

@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('chai').assert;
-const models = require('../../').models;
-const validate = require('../helper').validate;
+const { assert } = require('chai');
+const { models } = require('../..');
+const { validate } = require('../helper');
 
 describe('model event', () => {
     describe('base', () => {
@@ -56,7 +56,7 @@ describe('model event', () => {
         it('has the correct keys', () => {
             const expectedKeys = ['createTime', 'sha'];
 
-            expectedKeys.forEach((keyName) => {
+            expectedKeys.forEach(keyName => {
                 assert.include(models.event.keys, keyName, `Key name ${keyName} not included`);
             });
         });
@@ -64,16 +64,9 @@ describe('model event', () => {
 
     describe('allKeys', () => {
         it('lists all of the fields in the model', () => {
-            const expectedKeys = [
-                'id',
-                'commit',
-                'createTime',
-                'creator',
-                'pipelineId',
-                'sha'
-            ];
+            const expectedKeys = ['id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha'];
 
-            expectedKeys.forEach((keyName) => {
+            expectedKeys.forEach(keyName => {
                 assert.include(models.event.allKeys, keyName, `Key name ${keyName} not included`);
             });
         });
@@ -88,25 +81,27 @@ describe('model event', () => {
     describe('indexes', () => {
         it('defines the correct indexes', () => {
             const expected = [
-                { fields: ['pipelineId'] }, { fields: ['type'] }, { fields: ['groupEventId'] }];
-            const indexes = models.event.indexes;
+                { fields: ['createTime', 'pipelineId'] },
+                { fields: ['pipelineId'] },
+                { fields: ['type'] },
+                { fields: ['groupEventId'] },
+                { fields: ['parentEventId'] }
+            ];
+            const { indexes } = models.event;
 
-            expected.forEach((indexName) => {
-                assert.include(indexes, indexName, `Index name ${indexName} not included`);
+            expected.forEach(indexName => {
+                assert.deepInclude(indexes, indexName, `Index name ${indexName} not included`);
             });
         });
     });
 
     describe('rangeKeys', () => {
         it('defines the correct rangeKeys', () => {
-            const expected = [
-                'createTime',
-                'createTime'
-            ];
-            const rangeKeys = models.event.rangeKeys;
+            const expected = ['createTime', 'createTime'];
+            const { rangeKeys } = models.event;
 
-            expected.forEach((keyName) => {
-                assert.include(rangeKeys, keyName, `RangeKey name ${keyName} not included`);
+            expected.forEach(keyName => {
+                assert.deepInclude(rangeKeys, keyName, `RangeKey name ${keyName} not included`);
             });
         });
     });
