@@ -1,0 +1,13 @@
+# Job Level Parameters Example
+auth_strategy: simple
+user:
+    value: sd-bot
+    description: User running build
+# multiple default value Example
+node_version: ["10.0.0", "12.0.0"]
+tag:
+    value:
+        - "latest"
+        - "stable"
+    description: Docker Image tag
+

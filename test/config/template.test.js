@@ -33,5 +33,11 @@ describe('config template', () => {
         it('returns error when template namespace exists and name has a slash', () => {
             assert.isNotNull(validate('config.template.badNameWithSlash.yaml', config.template.template).error);
         });
+
+        describe('parameters', () => {
+            it('validates parameters', () => {
+                assert.isNull(validate('config.template.parameters.yaml', config.job.parameters).error);
+            });
+        });
     });
 });
