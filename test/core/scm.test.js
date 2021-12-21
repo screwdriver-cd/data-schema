@@ -73,21 +73,15 @@ describe('scm core', () => {
         });
 
         it('fails the push hook because added files is not an array of string', () => {
-            assert.isNotNull(validate(
-                'scm.hook.push.invalid-added-files.yaml', core.scm.hook).error
-            );
+            assert.isNotNull(validate('scm.hook.push.invalid-added-files.yaml', core.scm.hook).error);
         });
 
         it('fails the push hook because modified files is not an array of string', () => {
-            assert.isNotNull(validate(
-                'scm.hook.push.invalid-modified-files.yaml', core.scm.hook).error
-            );
+            assert.isNotNull(validate('scm.hook.push.invalid-modified-files.yaml', core.scm.hook).error);
         });
 
         it('fails the push hook because removed files is not an array of string', () => {
-            assert.isNotNull(validate(
-                'scm.hook.push.invalid-removed-files.yaml', core.scm.hook).error
-            );
+            assert.isNotNull(validate('scm.hook.push.invalid-removed-files.yaml', core.scm.hook).error);
         });
 
         it('validates the ping hook', () => {

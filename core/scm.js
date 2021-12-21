@@ -257,12 +257,12 @@ const SCHEMA_HOOK = Joi.object()
             .items(Joi.string().allow(''))
             .optional()
             .label('Added files of head commit'),
-    
+
         modifiedFiles: Joi.array()
             .items(Joi.string().allow(''))
             .optional()
             .label('Modified files of head commit'),
-    
+
         removedFiles: Joi.array()
             .items(Joi.string().allow(''))
             .optional()
