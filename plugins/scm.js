@@ -154,7 +154,7 @@ const GET_FILE = Joi.object()
 const GET_CHANGED_FILES_INPUT = Joi.object()
     .keys({
         type,
-        payload: Joi.object()
+        webhookConfig: Joi.object()
             .allow(null)
             .required(),
         token,
