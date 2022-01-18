@@ -28,7 +28,9 @@ const SCHEMA_PIPELINE_SETTINGS = Joi.object()
     .keys({
         metricsDowntimeJobs: SCHEMA_METRICS_DOWNTIME_JOBS,
         metricsDowntimeStatuses: SCHEMA_METRICS_DOWNTIME_STATUSES,
-        public: Joi.boolean()
+        public: Joi.boolean(),
+        groupedEvents: Joi.boolean().default(false),
+        showEventTriggers: Joi.boolean().default(false)
     })
     .default({});
 
