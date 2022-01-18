@@ -142,9 +142,14 @@ describe('config job', () => {
         });
     });
 
-    describe('provider', () => {
+    describe('providersls', () => {
         it('validates provider', () => {
-            assert.isNull(validate('config.job.provider.yaml', config.job.provider).error);
+            assert.isNull(validate('config.job.providersls.yaml', config.job.provider).error);
+        });
+    });
+    describe('providereks', () => {
+        it('validates provider', () => {
+            assert.isNull(validate('config.job.providereks.yaml', config.job.provider).error);
         });
     });
 });

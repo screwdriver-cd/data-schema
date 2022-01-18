@@ -69,8 +69,20 @@ const SCHEMA_PROVIDER = Joi.object().keys({
         .example('eks'),
     clusterName: Joi.string()
         .max(128)
-        .description('Cluster name')
-        .example('sd-build-eks')
+        .description('Cluster name required if executor is eks')
+        .example('sd-build-eks'),
+    executorLogs: Joi.boolean()
+        .optional()
+        .description('Enable debug logs for executor codebuild'),
+    launcherImage: Joi.string()
+        .description('Screwdriver launcher image in user Registry')
+        .example('123456789012.dkr.ecr.us-east-2.amazonaws.com/screwdriver-hub:launcherv6.4'),
+    launcherVersion: Joi.string()
+        .description('Screwdriver launcher version')
+        .example('v6.4'),
+    privilegedMode: Joi.boolean()
+        .optional()
+        .description('Enable privileged mode for container')
 });
 
 module.exports = {
