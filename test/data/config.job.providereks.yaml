@@ -13,3 +13,5 @@ vpc: # Optional VPC. But if you use VPC then both subproperties (securityGroupId
 role: arn:aws:iam::111111111111:role/role
 executor: eks
 clusterName: sd-build-eks
+launcherImage: 123456789012.dkr.ecr.us-east-2.amazonaws.com/screwdriver-hub:launcherv6.4
+launcherVersion : v6.4
