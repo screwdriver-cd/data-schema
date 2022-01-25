@@ -3,6 +3,7 @@
 const Joi = require('joi');
 const Job = require('./job');
 const Regex = require('./regex');
+const Parameters = require('./parameters');
 
 const TEMPLATE_NAMESPACE = Joi.string()
     .regex(Regex.TEMPLATE_NAMESPACE)
@@ -61,6 +62,8 @@ const TEMPLATE_IMAGES = Joi.object()
     })
     .min(1);
 
+const SCHEMA_JOB_PARAMETERS = Parameters.parameters.optional();
+
 const SCHEMA_TEMPLATE = Joi.object().keys({
     namespace: TEMPLATE_NAMESPACE,
     name: TEMPLATE_NAME.required(),
@@ -71,7 +74,8 @@ const SCHEMA_TEMPLATE = Joi.object().keys({
         .required()
         .or('image', 'template')
         .or('steps', 'template'),
-    images: TEMPLATE_IMAGES
+    images: TEMPLATE_IMAGES,
+    parameters: SCHEMA_JOB_PARAMETERS
 });
 
 /**
@@ -89,5 +93,6 @@ module.exports = {
     maintainer: TEMPLATE_MAINTAINER,
     config: Job.templateJob,
     configNoDupSteps: Job.jobNoDupSteps,
-    images: TEMPLATE_IMAGES
+    images: TEMPLATE_IMAGES,
+    parameters: SCHEMA_JOB_PARAMETERS
 };
