@@ -29,7 +29,8 @@ const RESERVED_PIPELINE_ANNOTATIONS = [
     'screwdriver.cd/buildCluster',
     'screwdriver.cd/restrictPR',
     'screwdriver.cd/chainPR',
-    'screwdriver.cd/pipelineDescription'
+    'screwdriver.cd/pipelineDescription',
+    'screwdriver.cd/useDeployKey'
 ];
 
 /**

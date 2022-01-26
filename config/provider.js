@@ -73,6 +73,7 @@ const SCHEMA_PROVIDER = Joi.object().keys({
         .example('sd-build-eks'),
     executorLogs: Joi.boolean()
         .optional()
+        .default(false)
         .description('Enable debug logs for executor codebuild'),
     launcherImage: Joi.string()
         .description('Screwdriver launcher image in user Registry')
@@ -82,7 +83,27 @@ const SCHEMA_PROVIDER = Joi.object().keys({
         .example('v6.4'),
     privilegedMode: Joi.boolean()
         .optional()
-        .description('Enable privileged mode for container')
+        .default(false)
+        .description('Enable privileged mode for container'),
+    computeType: Joi.string()
+        .valid(
+            'BUILD_GENERAL1_SMALL',
+            'BUILD_GENERAL1_LARGE',
+            'BUILD_GENERAL1_MEDIUM',
+            'BUILD_GENERAL1_LARGE',
+            'BUILD_GENERAL1_2XLARGE',
+            'BUILD_GENERAL1_LARGE',
+            'BUILD_GENERAL1_MEDIUM',
+            'BUILD_GENERAL1_LARGE'
+        )
+        .optional()
+        .default('BUILD_GENERAL1_SMALL')
+        .description('CodeBuild compute type'),
+    environment: Joi.string()
+        .optional()
+        .valid('ARM_CONTAINER', 'LINUX_CONTAINER', 'LINUX_GPU_CONTAINER')
+        .default('LINUX_CONTAINER')
+        .description('CodeBuild environment type')
 });
 
 module.exports = {
