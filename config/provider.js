@@ -71,6 +71,14 @@ const SCHEMA_PROVIDER = Joi.object().keys({
         .max(128)
         .description('Cluster name required if executor is eks')
         .example('sd-build-eks'),
+    cpuLimit: Joi.string()
+        .max(4)
+        .description('CPU Limit for pod in EKS Cluster')
+        .example('2Gi'),
+    memoryLimit: Joi.string()
+        .max(4)
+        .description('Memory Limit for pod in EKS Cluster')
+        .example('4Gi'),
     executorLogs: Joi.boolean()
         .optional()
         .default(false)
@@ -103,7 +111,8 @@ const SCHEMA_PROVIDER = Joi.object().keys({
         .optional()
         .valid('ARM_CONTAINER', 'LINUX_CONTAINER', 'LINUX_GPU_CONTAINER')
         .default('LINUX_CONTAINER')
-        .description('CodeBuild environment type')
+        .description('CodeBuild environment type'),
+    prefix: Joi.string().description('Prefix name for build environment, suffixed with -')
 });
 
 module.exports = {
