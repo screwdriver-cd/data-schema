@@ -71,6 +71,14 @@ const SCHEMA_PROVIDER = Joi.object().keys({
         .max(128)
         .description('Cluster name required if executor is eks')
         .example('sd-build-eks'),
+    cpuLimit: Joi.string()
+        .max(4)
+        .description('CPU Limit for pod in EKS Cluster')
+        .example('2Gi'),
+    memoryLimit: Joi.string()
+        .max(4)
+        .description('Memory Limit for pod in EKS Cluster')
+        .example('4Gi'),
     executorLogs: Joi.boolean()
         .optional()
         .default(false)
