@@ -6,3 +6,6 @@ code: 0
 startTime: "2038-01-19T03:15:08.131Z"
 endTime: "2038-01-19T03:15:08.532Z"
 lines: 100
+retry:
+    max: 1
+    interval: 0

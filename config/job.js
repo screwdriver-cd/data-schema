@@ -81,13 +81,39 @@ const SCHEMA_ENVIRONMENT = Joi.object()
 const SCHEMA_JOBNAME = Joi.string()
     .max(100)
     .regex(Regex.JOB_NAME);
+const SCHEMA_STEP_RETRY_OBJECT = Joi.object().keys({
+    condition: Joi.string().description('Condition to retry on'),
+    max: Joi.number()
+        .min(1)
+        .integer()
+        .positive()
+        .default(1)
+        .description('Max number of retries for step'),
+    interval: Joi.number()
+        .min(0)
+        .integer()
+        .default(0)
+        .description('Interval (in seconds) between retries for step'),
+    environment: SCHEMA_ENVIRONMENT.optional()
+});
+// Retry can be in the following formats:
+// { retry: true }
+// { retry: {
+//     condition: '$GIT_SHALLOW_CLONE == true',
+//     max: 3,
+//     interval: 3,
+//     environment: { GIT_SHALLOW_CLONE: false }
+//   }
+// }
+const SCHEMA_STEP_RETRY = Joi.alternatives().try(Joi.boolean(), SCHEMA_STEP_RETRY_OBJECT);
 // Step can be in the following formats:
 // npm install
 // { init: npm install }
 // { init: { command: npm install } }
 const SCHEMA_STEP_STRING = Joi.string();
 const SCHEMA_STEP_SUBOBJECT_BASE = Joi.object().keys({
-    command: SCHEMA_STEP_STRING.required()
+    command: SCHEMA_STEP_STRING.required(),
+    retry: SCHEMA_STEP_RETRY.optional()
 });
 const SCHEMA_STEP_COMMAND = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_SUBOBJECT_BASE);
 const SCHEMA_STEP_OBJECT = Joi.object()
@@ -227,6 +253,7 @@ module.exports = {
     sourcePath: SCHEMA_SOURCEPATH,
     sourcePaths: SCHEMA_SOURCEPATHS,
     step: SCHEMA_STEP,
+    stepRetry: SCHEMA_STEP_RETRY_OBJECT,
     steps: SCHEMA_STEPS,
     template: SCHEMA_TEMPLATE,
     templateId: SCHEMA_TEMPLATEID,

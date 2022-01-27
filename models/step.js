@@ -1,6 +1,7 @@
 'use strict';
 
 const Joi = require('joi');
+const Job = require('../config/job');
 const mutate = require('../lib/mutate');
 
 const MODEL = {
@@ -24,6 +25,8 @@ const MODEL = {
     command: Joi.string()
         .description('Command of the Step to execute')
         .example('npm install'),
+
+    retry: Job.stepRetry,
 
     code: Joi.number()
         .integer()
@@ -81,7 +84,8 @@ module.exports = {
                 'code',
                 'startTime',
                 'endTime',
-                'lines'
+                'lines',
+                'retry'
             ]
         )
     ).label('Get Step metadata'),
@@ -100,9 +104,9 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(mutate(MODEL, ['buildId', 'name'], ['command', 'code', 'startTime', 'endTime', 'lines'])).label(
-        'Create Step'
-    ),
+    create: Joi.object(
+        mutate(MODEL, ['buildId', 'name'], ['command', 'code', 'startTime', 'endTime', 'lines', 'retry'])
+    ).label('Create Step'),
 
     /**
      * List of fields that determine a unique row
