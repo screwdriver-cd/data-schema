@@ -111,8 +111,7 @@ const SCHEMA_PROVIDER = Joi.object().keys({
         .optional()
         .valid('ARM_CONTAINER', 'LINUX_CONTAINER', 'LINUX_GPU_CONTAINER')
         .default('LINUX_CONTAINER')
-        .description('CodeBuild environment type'),
-    prefix: Joi.string().description('Prefix name for build environment, suffixed with -')
+        .description('CodeBuild environment type')
 });
 
 module.exports = {
