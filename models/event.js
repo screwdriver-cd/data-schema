@@ -166,7 +166,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['sha', 'createTime'],
+    keys: ['sha', 'createTime', 'pipelineId'],
 
     /**
      * Primary column to sort queries by.
