@@ -9,3 +9,4 @@ lines: 100
 retry:
     max: 1
     interval: 0
+    attempt: 0

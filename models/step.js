@@ -96,7 +96,9 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(MODEL, [], ['code', 'startTime', 'endTime', 'lines'])).label('Update Step metadata'),
+    update: Joi.object(mutate(MODEL, [], ['code', 'startTime', 'endTime', 'lines', 'retry'])).label(
+        'Update Step metadata'
+    ),
 
     /**
      * Properties for Step that will be passed during a CREATE request

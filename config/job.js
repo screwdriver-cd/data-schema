@@ -94,7 +94,12 @@ const SCHEMA_STEP_RETRY_OBJECT = Joi.object().keys({
         .integer()
         .default(0)
         .description('Interval (in seconds) between retries for step'),
-    environment: SCHEMA_ENVIRONMENT.optional()
+    environment: SCHEMA_ENVIRONMENT,
+    attempt: Joi.number()
+        .min(0)
+        .integer()
+        .default(0)
+        .description('Number of retries for step')
 });
 // Retry can be in the following formats:
 // { retry: true }
