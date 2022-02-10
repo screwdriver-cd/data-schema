@@ -11,7 +11,8 @@ module.exports = {
         await queryInterface.sequelize.transaction(async transaction => {
             await queryInterface.removeConstraint(table, `${table}_createTime_sha_key`, { transaction });
 
-            await queryInterface.addConstraint(table, ['sha', 'createTime', 'pipelineId'], {
+            await queryInterface.addConstraint(table, {
+                fields: ['sha', 'createTime', 'pipelineId'],
                 name: `${table}_createTime_sha_pid_key`,
                 type: 'unique',
                 transaction
