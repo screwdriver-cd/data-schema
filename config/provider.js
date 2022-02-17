@@ -45,6 +45,12 @@ const SCHEMA_PROVIDER = Joi.object().keys({
         .max(64)
         .description('Region')
         .example('us-west-2'),
+    buildRegion: Joi.string()
+        .regex(Regex.REGION)
+        .max(64)
+        .description('Region where builds will run if different from region')
+        .example('us-east-2')
+        .optional(),
     accountId: Joi.alternatives()
         .try(
             Joi.string()
