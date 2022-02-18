@@ -52,6 +52,7 @@ const SCHEMA_PROVIDER = Joi.object().keys({
         .description('Region where builds will run if different from service region')
         .default('')
         .example('us-east-2')
+        .allow('')
         .optional(),
     accountId: Joi.alternatives()
         .try(
