@@ -36,24 +36,28 @@ module.exports = {
                 { transaction }
             );
 
-            await queryInterface.addConstraint(table, ['name', 'tag', 'namespace'], {
+            await queryInterface.addConstraint(table, {
                 name: `${table}_namespace_name_tag_key`,
+                fields: ['name', 'tag', 'namespace'],
                 type: 'unique',
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['name'], {
+            await queryInterface.addIndex(table, {
                 name: `${prefix}template_tags_name`,
+                fields: ['name'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['namespace'], {
+            await queryInterface.addIndex(table, {
                 name: `${prefix}template_tags_namespace`,
+                fields: ['namespace'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['tag'], {
+            await queryInterface.addIndex(table, {
                 name: `${prefix}template_tags_tag`,
+                fields: ['tag'],
                 transaction
             });
         });

@@ -36,8 +36,9 @@ module.exports = {
                 { transaction }
             );
 
-            await queryInterface.addIndex(table, ['userId'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_user_id`,
+                fields: ['userId'],
                 transaction
             });
         });

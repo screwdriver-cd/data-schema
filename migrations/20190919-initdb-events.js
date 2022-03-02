@@ -63,24 +63,28 @@ module.exports = {
                 { transaction }
             );
 
-            await queryInterface.addConstraint(table, ['createTime', 'sha'], {
+            await queryInterface.addConstraint(table, {
                 name: `${table}_createTime_sha_key`,
+                fields: ['createTime', 'sha'],
                 type: 'unique',
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['createTime', 'pipelineId'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_create_time_pipeline_id`,
+                fields: ['createTime', 'pipelineId'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['pipelineId'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_pipeline_id`,
+                fields: ['pipelineId'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['type'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_type`,
+                fields: ['type'],
                 transaction
             });
         });

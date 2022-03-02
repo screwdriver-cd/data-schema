@@ -57,14 +57,16 @@ module.exports = {
                 { transaction }
             );
 
-            await queryInterface.addConstraint(table, ['scmUri'], {
+            await queryInterface.addConstraint(table, {
                 name: `${table}_scmUri_key`,
+                fields: ['scmUri'],
                 type: 'unique',
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['scmUri'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_scm_uri`,
+                fields: ['scmUri'],
                 transaction
             });
         });

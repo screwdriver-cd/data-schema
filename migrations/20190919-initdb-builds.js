@@ -78,24 +78,28 @@ module.exports = {
                 { transaction }
             );
 
-            await queryInterface.addConstraint(table, ['jobId', 'number'], {
+            await queryInterface.addConstraint(table, {
                 name: `${table}_jobId_number_key`,
+                fields: ['jobId', 'number'],
                 type: 'unique',
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['eventId', 'createTime'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_event_id_create_time`,
+                fields: ['eventId', 'createTime'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['jobId'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_job_id`,
+                fields: ['jobId'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, [{ attribute: 'parentBuildId', length: 32 }], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_parent_build_id`,
+                fields: [{ attribute: 'parentBuildId', length: 32 }],
                 transaction
             });
         });

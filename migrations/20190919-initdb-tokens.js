@@ -39,24 +39,28 @@ module.exports = {
                 { transaction }
             );
 
-            await queryInterface.addConstraint(table, ['hash'], {
+            await queryInterface.addConstraint(table, {
                 name: `${table}_hash_key`,
+                fields: ['hash'],
                 type: 'unique',
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['hash'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_hash`,
+                fields: ['hash'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['pipelineId'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_pipeline_id`,
+                fields: ['pipelineId'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['userId'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_user_id`,
+                fields: ['userId'],
                 transaction
             });
         });

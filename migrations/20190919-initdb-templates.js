@@ -54,19 +54,22 @@ module.exports = {
                 { transaction }
             );
 
-            await queryInterface.addConstraint(table, ['name', 'version', 'namespace'], {
+            await queryInterface.addConstraint(table, {
                 name: `${table}_namespace_name_version_key`,
+                fields: ['name', 'version', 'namespace'],
                 type: 'unique',
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['name'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_name`,
+                fields: ['name'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['namespace'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_namespace`,
+                fields: ['namespace'],
                 transaction
             });
         });

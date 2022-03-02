@@ -42,19 +42,22 @@ module.exports = {
                 { transaction }
             );
 
-            await queryInterface.addConstraint(table, ['buildId', 'name'], {
+            await queryInterface.addConstraint(table, {
                 name: `${table}_buildId_name_key`,
+                fields: ['buildId', 'name'],
                 type: 'unique',
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['buildId'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_build_id`,
+                fields: ['buildId'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['name'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_name`,
+                fields: ['name'],
                 transaction
             });
         });

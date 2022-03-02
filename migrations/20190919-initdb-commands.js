@@ -60,13 +60,15 @@ module.exports = {
                 { transaction }
             );
 
-            await queryInterface.addIndex(table, ['name'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_name`,
+                fields: ['name'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['namespace'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_namespace`,
+                fields: ['namespace'],
                 transaction
             });
         });
