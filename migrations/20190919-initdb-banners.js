@@ -37,8 +37,8 @@ module.exports = {
             );
 
             await queryInterface.addConstraint(table, {
-                fields: ['message', 'createTime', 'type'],
                 name: `${table}_message_createTime_type_key`,
+                fields: ['message', 'createTime', 'type'],
                 type: 'unique',
                 transaction
             });
