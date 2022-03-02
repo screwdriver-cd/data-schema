@@ -36,18 +36,21 @@ module.exports = {
                 { transaction }
             );
 
-            await queryInterface.addIndex(table, ['name'], {
+            await queryInterface.addIndex(table, {
                 name: `${prefix}command_tags_name`,
+                fields: ['name'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['namespace'], {
+            await queryInterface.addIndex(table, {
                 name: `${prefix}command_tags_namespace`,
+                fields: ['namespace'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['tag'], {
+            await queryInterface.addIndex(table, {
                 name: `${prefix}command_tags_tag`,
+                fields: ['tag'],
                 transaction
             });
         });

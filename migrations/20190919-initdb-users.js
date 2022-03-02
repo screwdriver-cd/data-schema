@@ -30,19 +30,22 @@ module.exports = {
                 { transaction }
             );
 
-            await queryInterface.addConstraint(table, ['username', 'scmContext'], {
+            await queryInterface.addConstraint(table, {
                 name: `${table}_username_scmContext_key`,
+                fields: ['username', 'scmContext'],
                 type: 'unique',
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['scmContext'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_scm_context`,
+                fields: ['scmContext'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['username'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_username`,
+                fields: ['username'],
                 transaction
             });
         });

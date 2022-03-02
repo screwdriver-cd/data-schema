@@ -27,19 +27,22 @@ module.exports = {
                 { transaction }
             );
 
-            await queryInterface.addConstraint(table, ['src', 'dest'], {
+            await queryInterface.addConstraint(table, {
                 name: `${table}_src_dest_key`,
+                fields: ['src', 'dest'],
                 type: 'unique',
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['src'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_src`,
+                fields: ['src'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['dest'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_dest`,
+                fields: ['dest'],
                 transaction
             });
         });

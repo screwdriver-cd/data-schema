@@ -45,14 +45,16 @@ module.exports = {
                 { transaction }
             );
 
-            await queryInterface.addConstraint(table, ['name'], {
+            await queryInterface.addConstraint(table, {
                 name: `${table}_name_key`,
+                fields: ['name'],
                 type: 'unique',
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['name'], {
+            await queryInterface.addIndex(table, {
                 name: `${prefix}build_clusters_name`,
+                fields: ['name'],
                 transaction
             });
         });

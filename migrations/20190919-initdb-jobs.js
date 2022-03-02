@@ -51,19 +51,22 @@ module.exports = {
                 { transaction }
             );
 
-            await queryInterface.addConstraint(table, ['name', 'pipelineId'], {
+            await queryInterface.addConstraint(table, {
                 name: `${table}_name_pipelineId_key`,
+                fields: ['name', 'pipelineId'],
                 type: 'unique',
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['pipelineId', 'state'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_pipeline_id_state`,
+                fields: ['pipelineId', 'state'],
                 transaction
             });
 
-            await queryInterface.addIndex(table, ['state'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_state`,
+                fields: ['state'],
                 transaction
             });
         });

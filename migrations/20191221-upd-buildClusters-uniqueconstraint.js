@@ -11,8 +11,9 @@ module.exports = {
         await queryInterface.sequelize.transaction(async transaction => {
             await queryInterface.removeConstraint(table, `${table}_name_key`, transaction);
 
-            await queryInterface.addConstraint(table, ['name', 'scmContext'], {
+            await queryInterface.addConstraint(table, {
                 name: `${table}_name_scmContext_key`,
+                fields: ['name', 'scmContext'],
                 type: 'unique',
                 transaction
             });
