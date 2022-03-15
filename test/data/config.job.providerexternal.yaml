@@ -1,0 +1,2 @@
+# Job Level External Provider Example
+git@github.com:tkyi/mytest.git#master:provider.yaml

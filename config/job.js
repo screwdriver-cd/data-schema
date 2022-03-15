@@ -169,7 +169,9 @@ const SCHEMA_SOURCEPATH = Joi.string()
 const SCHEMA_SOURCEPATHS = Joi.alternatives().try(Joi.array().items(SCHEMA_SOURCEPATH), SCHEMA_SOURCEPATH);
 const SCHEMA_CACHE = Joi.boolean().optional();
 const SCHEMA_PARAMETERS = Parameters.parameters.optional();
-const SCHEMA_PROVIDER = Provider.provider.optional();
+const SCHEMA_PROVIDER = Joi.alternatives()
+    .try(Provider.provider, Joi.string().regex(Regex.CHECKOUT_URL))
+    .optional();
 const SCHEMA_JOB = Joi.object()
     .keys({
         annotations: Annotations.annotations,
