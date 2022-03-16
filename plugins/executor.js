@@ -3,6 +3,7 @@
 const Joi = require('joi');
 const Annotations = require('../config/annotations');
 const Job = require('../config/job');
+const Provider = require('../config/provider');
 const models = require('../models');
 const buildId = models.build.base.extract('id').required();
 const eventId = models.event.base.extract('id');
@@ -26,7 +27,7 @@ const buildSchemaObj = {
     jobName,
     jobState,
     jobArchived,
-    provider: Job.provider,
+    provider: Provider.provider.optional(),
     annotations: Annotations.annotations,
     blockedBy: Joi.array().items(jobId),
     freezeWindows: Job.freezeWindows,
@@ -64,7 +65,7 @@ const SCHEMA_STOP = Joi.object()
         jobId,
         token: Joi.string().label('Build JWT'),
         pipelineId,
-        provider: Job.provider,
+        provider: Provider.provider.optional(),
         apiUri: Joi.string()
             .uri()
             .required()
@@ -79,7 +80,7 @@ const SCHEMA_STATUS = Joi.object()
         token: Joi.string().label('Build JWT'),
         pipelineId,
         jobId,
-        provider: Job.provider
+        provider: Provider.provider.optional()
     })
     .unknown(true) // allow other fields
     .required();

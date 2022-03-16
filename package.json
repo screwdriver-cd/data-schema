@@ -39,7 +39,7 @@
     "debug": false
   },
   "devDependencies": {
-    "chai": "^4.2.0",
+    "chai": "^4.3.6",
     "eslint": "^7.32.0",
     "eslint-config-screwdriver": "^5.0.1",
     "js-yaml": "^3.14.1",
@@ -47,15 +47,15 @@
     "mocha-multi-reporters": "^1.5.1",
     "mocha-sonarqube-reporter": "^1.0.2",
     "mysql2": "^1.7.0",
+    "npx": "^10.2.2",
     "nyc": "^15.0.0",
     "pg": "^7.18.2",
     "sequelize": "^6.6.5",
     "sequelize-cli": "^6.4.1",
-    "sqlite3": "^4.2.0",
-    "npx": "^10.2.2"
+    "sqlite3": "^4.2.0"
   },
   "dependencies": {
     "cron-parser": "^4.2.1",
-    "joi": "^17.5.0"
+    "joi": "^17.6.0"
   }
 }
