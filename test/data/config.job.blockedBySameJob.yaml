@@ -1,0 +1,6 @@
+image: node:6
+steps:
+    - publish: npm publish
+requires: ~commit
+blockedBySameJob: false
+blockedBySameJobWaitTime: 6

@@ -60,6 +60,14 @@ describe('config job', () => {
             assert.isNotNull(validate('config.job.freezeWindows.bad.yaml', config.job.job).error);
         });
 
+        it('validates a job with blockedBySameJob', () => {
+            assert.isNull(validate('config.job.blockedBySameJob.yaml', config.job.job).error);
+        });
+
+        it('returns error for bad blockedBySameJob format', () => {
+            assert.isNotNull(validate('config.job.blockedBySameJob.bad.yaml', config.job.job).error);
+        });
+
         it('validates a description', () => {
             assert.isNull(validate('config.job.description.yaml', config.job.job).error);
         });
