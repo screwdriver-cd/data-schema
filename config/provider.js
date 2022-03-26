@@ -116,7 +116,7 @@ const SCHEMA_PROVIDER = Joi.object().keys({
         .optional()
         .default('BUILD_GENERAL1_SMALL')
         .description('CodeBuild compute type'),
-    environment: Joi.string()
+    environmentType: Joi.string()
         .optional()
         .valid('ARM_CONTAINER', 'LINUX_CONTAINER', 'LINUX_GPU_CONTAINER')
         .default('LINUX_CONTAINER')
