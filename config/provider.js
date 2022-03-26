@@ -120,7 +120,11 @@ const SCHEMA_PROVIDER = Joi.object().keys({
         .optional()
         .valid('ARM_CONTAINER', 'LINUX_CONTAINER', 'LINUX_GPU_CONTAINER')
         .default('LINUX_CONTAINER')
-        .description('CodeBuild environment type')
+        .description('CodeBuild environment type'),
+    debugSession: Joi.boolean()
+        .optional()
+        .default(false)
+        .description('Enable debug session inside build container')
 });
 
 module.exports = {
