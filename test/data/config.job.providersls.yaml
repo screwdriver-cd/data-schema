@@ -15,4 +15,4 @@ executor: sls
 launcherImage: 123456789012.dkr.ecr.us-east-2.amazonaws.com/screwdriver-hub:launcherv6.4
 launcherVersion : v6.4
 computeType: BUILD_GENERAL1_LARGE
-environment: 'ARM_CONTAINER'
+environmentType: 'ARM_CONTAINER'
