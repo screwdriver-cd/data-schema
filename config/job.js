@@ -163,12 +163,6 @@ const SCHEMA_BLOCKEDBY_VALUE = Joi.alternatives().try(
 );
 const SCHEMA_BLOCKEDBY = Joi.alternatives().try(Joi.array().items(SCHEMA_BLOCKEDBY_VALUE), SCHEMA_BLOCKEDBY_VALUE);
 const SCHEMA_FREEZEWINDOWS = Joi.alternatives().try(Joi.array().items(SCHEMA_CRON_EXPRESSION), SCHEMA_CRON_EXPRESSION);
-const SCHEMA_BLOCKEDBYSAMEJOB = Joi.boolean().optional();
-const SCHEMA_BLOCKEDBYSAMEJOBWAITTIME = Joi.number()
-    .integer()
-    .positive()
-    .optional()
-    .allow(null);
 const SCHEMA_SOURCEPATH = Joi.string()
     .max(1024)
     .optional();
@@ -186,8 +180,6 @@ const SCHEMA_JOB = Joi.object()
         description: SCHEMA_DESCRIPTION,
         environment: SCHEMA_ENVIRONMENT,
         freezeWindows: SCHEMA_FREEZEWINDOWS,
-        blockedBySameJob: SCHEMA_BLOCKEDBYSAMEJOB,
-        blockedBySameJobWaitTime: SCHEMA_BLOCKEDBYSAMEJOBWAITTIME,
         image: SCHEMA_IMAGE,
         matrix: SCHEMA_MATRIX,
         order: SCHEMA_ORDER,
@@ -221,8 +213,6 @@ module.exports = {
     environment: SCHEMA_ENVIRONMENT,
     externalTrigger: SCHEMA_EXTERNAL_TRIGGER,
     freezeWindows: SCHEMA_FREEZEWINDOWS,
-    blockedBySameJob: SCHEMA_BLOCKEDBYSAMEJOB,
-    blockedBySameJobWaitTime: SCHEMA_BLOCKEDBYSAMEJOBWAITTIME,
     image: SCHEMA_IMAGE,
     job: SCHEMA_JOB,
     jobName: SCHEMA_JOBNAME,

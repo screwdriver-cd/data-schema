@@ -31,8 +31,6 @@ const SCHEMA_JOB_PERMUTATION = Joi.object()
         description: Job.description,
         environment: Job.environment,
         freezeWindows: Job.freezeWindows,
-        blockedBySameJob: Job.blockedBySameJob,
-        blockedBySameJobWaitTime: Job.blockedBySameJobWaitTime,
         image: Job.image,
         order: Job.order,
         parameters: Job.parameters,
