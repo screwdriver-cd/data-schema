@@ -25,7 +25,8 @@ const RESERVED_JOB_ANNOTATIONS = [
     'screwdriver.cd/mergeSharedSteps',
     'screwdriver.cd/manualStartEnabled',
     'screwdriver.cd/blockedBySameJob',
-    'screwdriver.cd/blockedBySameJobWaitTime'
+    'screwdriver.cd/blockedBySameJobWaitTime',
+    'screwdriver.cd/jobDisabledByDefault'
 ];
 const RESERVED_PIPELINE_ANNOTATIONS = [
     'screwdriver.cd/buildCluster',
