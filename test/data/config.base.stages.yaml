@@ -1,0 +1,12 @@
+- canary:
+    jobs:
+        - first
+        - second
+    description: "Canary jobs for testing"
+    color: '#FFFF00'
+- prod:
+    jobs:
+        - deploy-west
+        - deploy-east
+    description: "Prod deploy jobs"
+    color: '#00FFFF'

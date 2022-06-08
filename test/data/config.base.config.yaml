@@ -35,3 +35,15 @@ jobs:
             - NPM_TOKEN
         requires:
             - first
+
+stages:
+    - canary:
+        jobs:
+            - first
+        description: "Canary jobs for testing"
+        color: '#FFFF00'
+    - prod:
+        jobs:
+            - publish
+        description: "Prod deploy jobs"
+        color: '#00FFFF'

@@ -39,6 +39,7 @@ const SCHEMA_JOB_PERMUTATION = Joi.object()
         secrets: Job.secrets,
         settings: Job.settings,
         sourcePaths: Job.sourcePaths,
+        stages: Base.stages,
         subscribe: Base.subscribe,
         templateId: Job.templateId
     })
@@ -66,6 +67,7 @@ const SCHEMA_OUTPUT = Joi.object()
         workflowGraph: WorkflowGraph.workflowGraph,
         parameters: Parameters.parameters.default({}),
         warnMessages: Joi.array().optional(),
+        stages: Base.stages.optional(),
         subscribe: Base.subscribe
     })
     .label('Execution information');
