@@ -3,3 +3,5 @@ token: 'thisisatokenthingy'
 prNum: 5
 scmContext: github:github.com
 comment: 'my, what a fine PR'
+jobName: 'main'
+pipelineId: '123456'
