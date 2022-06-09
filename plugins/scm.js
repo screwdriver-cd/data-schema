@@ -113,6 +113,8 @@ const ADD_PR_COMMENT = Joi.object()
         token,
         prNum: core.scm.hook.extract('prNum').required(),
         comment: Joi.string().required(),
+        jobName,
+        pipelineId,
         scmContext
     })
     .required();
