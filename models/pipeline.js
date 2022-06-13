@@ -33,6 +33,11 @@ const MODEL = {
 
     name: Scm.repoName.optional(),
 
+    aliasName: Joi.string()
+        .max(26)
+        .description('A customizable alias for pipeline name')
+        .example('pipeline customized name'),
+
     scmUri: Joi.string()
         .regex(Regex.SCM_URI)
         .max(128)
@@ -135,7 +140,8 @@ module.exports = {
                 'prChain',
                 'parameters',
                 'subscribedScmUrlsWithActions',
-                'settings'
+                'settings',
+                'pipelineAliasName'
             ]
         )
     ).label('Get Pipeline'),
