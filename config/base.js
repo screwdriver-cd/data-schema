@@ -42,7 +42,7 @@ const SCHEMA_CHILD_PIPELINES = Joi.object()
     })
     .unknown(false);
 
-const SCHEMA_STAGE_VALUE = Joi.object()
+const SCHEMA_STAGE = Joi.object()
     .keys({
         description: Joi.string(),
         jobs: Joi.array()
@@ -52,17 +52,14 @@ const SCHEMA_STAGE_VALUE = Joi.object()
     })
     .unknown(false);
 
-const SCHEMA_STAGE = Joi.object()
+const SCHEMA_STAGES = Joi.object()
     // Stages can only be named with A-Z,a-z,0-9,-,_
     // Stages only contain an object with the stages
-    .pattern(Regex.STAGE_NAME, SCHEMA_STAGE_VALUE)
+    .pattern(Regex.STAGE_NAME, SCHEMA_STAGE)
     // All others are marked as invalid
     .unknown(false)
     // Add documentation
     .messages({ 'object.unknown': '{{#label}} only supports the following characters A-Z,a-z,0-9,-,_' });
-const SCHEMA_STAGES = Joi.array()
-    .items(SCHEMA_STAGE)
-    .min(1);
 
 const SCHEMA_SUBSCRIBE = Joi.object().keys({
     scmUrls: Joi.array().items(
