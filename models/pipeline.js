@@ -141,7 +141,7 @@ module.exports = {
                 'parameters',
                 'subscribedScmUrlsWithActions',
                 'settings',
-                'pipelineAliasName'
+                'aliasName'
             ]
         )
     ).label('Get Pipeline'),

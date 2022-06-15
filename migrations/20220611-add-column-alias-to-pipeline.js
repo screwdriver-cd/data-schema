@@ -12,7 +12,7 @@ module.exports = {
                 table,
                 'aliasName',
                 {
-                    type: Sequelize.TEXT('medium')
+                    type: Sequelize.STRING(26)
                 },
                 { transaction }
             );
