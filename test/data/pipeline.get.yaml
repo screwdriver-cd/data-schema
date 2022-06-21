@@ -12,6 +12,7 @@ scmRepo:
     url: https://github.com/screwdriver-cd/screwdriver/tree/master
     rootDir: src/app/component
     private: true
+    aliasName: scwdvr-cd
 annotations:
     screwdriver.cd/executor.resource:
         - XCODE8

@@ -36,7 +36,7 @@ const MODEL = {
     aliasName: Joi.string()
         .max(26)
         .description('A customizable alias for pipeline name')
-        .example('pipeline customized name'),
+        .example('scwdvr-cd'),
 
     scmUri: Joi.string()
         .regex(Regex.SCM_URI)
