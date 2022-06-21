@@ -1,0 +1,7 @@
+# Base Stage Example
+id: 123234135
+pipelineId: 123345
+name: deploy
+jobIds: [1, 2, 3, 4]
+state: ACTIVE
+description: 'Deploys canary jobs'

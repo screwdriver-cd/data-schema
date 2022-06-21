@@ -42,6 +42,25 @@ const SCHEMA_CHILD_PIPELINES = Joi.object()
     })
     .unknown(false);
 
+const SCHEMA_STAGE = Joi.object()
+    .keys({
+        description: Joi.string(),
+        jobs: Joi.array()
+            .items(Job.jobName)
+            .min(0),
+        color: Joi.string().regex(Regex.STAGE_COLOR)
+    })
+    .unknown(false);
+
+const SCHEMA_STAGES = Joi.object()
+    // Stages can only be named with A-Z,a-z,0-9,-,_
+    // Stages only contain an object with the stages
+    .pattern(Regex.STAGE_NAME, SCHEMA_STAGE)
+    // All others are marked as invalid
+    .unknown(false)
+    // Add documentation
+    .messages({ 'object.unknown': '{{#label}} only supports the following characters A-Z,a-z,0-9,-,_' });
+
 const SCHEMA_SUBSCRIBE = Joi.object().keys({
     scmUrls: Joi.array().items(
         Joi.object().pattern(Regex.CHECKOUT_URL, Joi.array().items(Joi.string().regex(Regex.WEBHOOK_EVENT)))
@@ -59,6 +78,7 @@ const SCHEMA_CONFIG = Joi.object()
         shared: SCHEMA_SHARED,
         cache: SCHEMA_CACHE,
         childPipelines: SCHEMA_CHILD_PIPELINES,
+        stages: SCHEMA_STAGES,
         subscribe: SCHEMA_SUBSCRIBE,
         parameters: Parameters.parameters.default({})
     })
@@ -76,5 +96,7 @@ module.exports = {
     cachePerm: SCHEMA_CACHE_PERMUTATION,
     childPipelines: SCHEMA_CHILD_PIPELINES,
     config: SCHEMA_CONFIG,
+    stage: SCHEMA_STAGE,
+    stages: SCHEMA_STAGES,
     subscribe: SCHEMA_SUBSCRIBE
 };

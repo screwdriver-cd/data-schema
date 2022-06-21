@@ -9,6 +9,7 @@ const job = require('./job');
 const pipeline = require('./pipeline');
 const user = require('./user');
 const secret = require('./secret');
+const stage = require('./stage');
 const template = require('./template');
 const templateTag = require('./templateTag');
 const token = require('./token');
@@ -27,6 +28,7 @@ module.exports = {
     pipeline,
     user,
     secret,
+    stage,
     template,
     templateTag,
     token,

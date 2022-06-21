@@ -21,3 +21,7 @@ yaml: |
           image: node:4
           steps:
               install: npm publish
+  stages:
+      canary:
+          description: "Canary jobs to be deployed"
+          jobs: [main, publish]
