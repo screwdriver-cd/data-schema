@@ -33,11 +33,6 @@ const MODEL = {
 
     name: Scm.repoName.optional(),
 
-    aliasName: Joi.string()
-        .max(26)
-        .description('A customizable alias for pipeline name')
-        .example('scwdvr-cd'),
-
     scmUri: Joi.string()
         .regex(Regex.SCM_URI)
         .max(128)
@@ -141,7 +136,6 @@ module.exports = {
                 'parameters',
                 'subscribedScmUrlsWithActions',
                 'settings',
-                'aliasName'
             ]
         )
     ).label('Get Pipeline'),
@@ -162,7 +156,7 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(UPDATE_MODEL, [], ['aliasName', 'checkoutUrl', 'rootDir', 'autoKeysGeneration', 'settings'])).label(
+    update: Joi.object(mutate(UPDATE_MODEL, [], ['checkoutUrl', 'rootDir', 'autoKeysGeneration', 'settings'])).label(
         'Update Pipeline'
     ),
 
