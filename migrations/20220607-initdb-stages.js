@@ -47,7 +47,7 @@ module.exports = {
             });
 
             await queryInterface.addIndex(table, {
-                name: `${prefix}_pipeline_id`,
+                name: `${table}_pipeline_id`,
                 fields: ['pipelineId'],
                 transaction
             });
