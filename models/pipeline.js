@@ -135,7 +135,7 @@ module.exports = {
                 'prChain',
                 'parameters',
                 'subscribedScmUrlsWithActions',
-                'settings',
+                'settings'
             ]
         )
     ).label('Get Pipeline'),
