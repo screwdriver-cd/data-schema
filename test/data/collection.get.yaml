@@ -15,7 +15,6 @@ pipelines:
         name: screwdriver-cd/screwdriver
         branch: master
         url: https://github.com/screwdriver-cd/screwdriver/tree/master
-        aliasName: scwdvr-cd
       annotations:
         screwdriver.cd/executor.resource:
           - XCODE8
@@ -47,7 +46,6 @@ pipelines:
         name: screwdriver-cd/config-parser
         branch: master
         url: https://github.com/screwdriver-cd/config-parser/tree/master
-        aliasName: scwdvr-cd
       annotations:
         screwdriver.cd/executor.resource:
           - XCODE8
