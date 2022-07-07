@@ -30,6 +30,7 @@ settings:
     metricsDowntimeJobs:
             - 123
             - 456
+    aliasName: scwdvr-cd
 subscribedScmUrlsWithActions:
     - scmUri: github.com:56781234:master
       actions: [commit, tag, release]
