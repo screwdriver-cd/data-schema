@@ -47,8 +47,7 @@ const SCHEMA_STAGE = Joi.object()
         description: Joi.string(),
         jobs: Joi.array()
             .items(Job.jobName)
-            .min(0),
-        color: Joi.string().regex(Regex.STAGE_COLOR)
+            .min(0)
     })
     .unknown(false);
 
