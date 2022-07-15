@@ -23,4 +23,22 @@ describe('notifications test', () => {
             assert.isNotNull(validate('empty.yaml', schemaBuildData).error);
         });
     });
+
+    describe('schemaJobData', () => {
+        it('validates the schemaJobData', () => {
+            const schemaJobData = Joi.object().keys({
+                ...notifications.schemaJobData
+            });
+
+            assert.isNull(validate('notifications.schemaJobData.yaml', schemaJobData).error);
+        });
+
+        it('fails the schemaJobData for empty yaml', () => {
+            const schemaJobData = Joi.object().keys({
+                ...notifications.schemaJobData
+            });
+
+            assert.isNotNull(validate('empty.yaml', schemaJobData).error);
+        });
+    });
 });
