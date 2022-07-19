@@ -23,15 +23,6 @@ module.exports = {
                     { transaction }
                 );
 
-                await queryInterface.addColumn(
-                    table,
-                    'createTime',
-                    {
-                        type: Sequelize.STRING(32)
-                    },
-                    { transaction }
-                );
-
                 await queryInterface.addConstraint(table, {
                     name: `${table}_pipeline_id_name_group_event_id_key`,
                     fields: ['pipelineId', 'name', 'groupEventId'],
@@ -41,7 +32,7 @@ module.exports = {
 
                 await queryInterface.addIndex(table, {
                     name: `${table}_group_event_id_create_time`,
-                    fields: ['groupEventId', 'createTime'],
+                    fields: ['groupEventId'],
                     transaction
                 });
                 // eslint-disable-next-line no-empty
