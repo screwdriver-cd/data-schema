@@ -33,23 +33,20 @@ const MODEL = {
         )
         .description('Job IDs in this Stage'),
 
-    state: Joi.string()
-        .valid('ARCHIVED', 'ACTIVE')
-        .max(10)
-        .description('Current state of the Stage')
-        .example('ARCHIVED')
-        .default('ACTIVE'),
-
     description: Joi.string()
         .max(256)
         .description('Description of the Stage')
         .example('Deploys canary jobs'),
 
-    color: Joi.string()
-        .regex(Regex.STAGE_COLOR)
-        .max(7)
-        .description('Color for the Stage')
-        .example('#FFFF00')
+    groupEventId: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier of the group event')
+        .example(123345),
+
+    createTime: Joi.string()
+        .isoDate()
+        .description('When this stage was created')
 };
 
 module.exports = {
@@ -75,7 +72,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['pipelineId', 'name'],
+    keys: ['pipelineId', 'name', 'groupEventId'],
 
     /**
      * List of all fields in the model
@@ -98,5 +95,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: [{ fields: ['pipelineId'] }]
+    indexes: [{ fields: ['pipelineId'] }, { fields: ['groupEventId', 'createTime'] }]
 };
