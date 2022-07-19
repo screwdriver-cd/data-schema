@@ -42,11 +42,7 @@ const MODEL = {
         .integer()
         .positive()
         .description('Identifier of the group event')
-        .example(123345),
-
-    createTime: Joi.string()
-        .isoDate()
-        .description('When this stage was created')
+        .example(123345)
 };
 
 module.exports = {
@@ -95,5 +91,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: [{ fields: ['pipelineId'] }, { fields: ['groupEventId', 'createTime'] }]
+    indexes: [{ fields: ['pipelineId'] }, { fields: ['groupEventId'] }]
 };

@@ -23,7 +23,7 @@ describe('model stage', () => {
 
     describe('allKeys', () => {
         it('lists all of the fields in the model', () => {
-            const expectedKeys = ['id', 'pipelineId', 'name', 'jobIds', 'description', 'groupEventId', 'createTime'];
+            const expectedKeys = ['id', 'pipelineId', 'name', 'jobIds', 'description', 'groupEventId'];
 
             expectedKeys.forEach(keyName => {
                 assert.include(models.stage.allKeys, keyName, `Key name ${keyName} not included`);
@@ -39,7 +39,7 @@ describe('model stage', () => {
 
     describe('indexes', () => {
         it('defines the correct indexes', () => {
-            const expected = [{ fields: ['pipelineId'] }, { fields: ['groupEventId', 'createTime'] }];
+            const expected = [{ fields: ['pipelineId'] }, { fields: ['groupEventId'] }];
             const { indexes } = models.stage;
 
             expected.forEach(indexName => {
