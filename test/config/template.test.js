@@ -36,7 +36,7 @@ describe('config template', () => {
 
         describe('parameters', () => {
             it('validates parameters', () => {
-                assert.isNull(validate('config.template.parameters.yaml', config.job.parameters).error);
+                assert.isNull(validate('config.template.parameters.yaml', config.template.template).error);
             });
         });
     });
