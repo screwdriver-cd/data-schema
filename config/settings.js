@@ -2,6 +2,11 @@
 
 const Joi = require('joi');
 
+const SCHEMA_TIMESTAMP_FORMAT = Joi.string()
+    .valid('UTC', 'LOCAL_TIMEZONE', 'HUMAN_READABLE')
+    .optional()
+    .default('HUMAN_READABLE')
+    .description('User preferred timestamp');
 const SCHEMA_DISPLAY_JOB_NAME_LENGTH = Joi.number()
     .integer()
     .min(20)
@@ -46,7 +51,8 @@ const SCHEMA_USER_SETTINGS = Joi.object()
         /\d/,
         Joi.object().keys({
             displayJobNameLength: SCHEMA_DISPLAY_JOB_NAME_LENGTH,
-            showPRJobs: Joi.boolean()
+            showPRJobs: Joi.boolean(),
+            timestampFormat: SCHEMA_TIMESTAMP_FORMAT
         })
     )
     .unknown();
