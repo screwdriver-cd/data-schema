@@ -4,3 +4,4 @@ username: batman
 scmContext: github:github.com
 settings:
     displayJobNameLength: 20
+    timestampFormat: 'HUMAN_READABLE'
