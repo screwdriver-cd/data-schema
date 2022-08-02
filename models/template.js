@@ -32,8 +32,7 @@ const MODEL = {
         .description('When this template was created')
         .example('2038-01-19T03:14:08.131Z'),
     trusted: Joi.boolean().description('Mark whether template is trusted'),
-    latest: Joi.boolean().description('Whether this is latest version'),
-    parameters: Template.parameters
+    latest: Joi.boolean().description('Whether this is latest version')
 };
 
 const CREATE_MODEL = { ...MODEL, config: Template.configNoDupSteps };
@@ -65,7 +64,7 @@ module.exports = {
         mutate(
             MODEL,
             ['id', 'labels', 'name', 'version', 'description', 'maintainer', 'pipelineId'],
-            ['config', 'namespace', 'images', 'createTime', 'trusted', 'latest', 'parameters']
+            ['config', 'namespace', 'images', 'createTime', 'trusted', 'latest']
         )
     ).label('Get Template'),
 
@@ -79,7 +78,7 @@ module.exports = {
         mutate(
             CREATE_MODEL,
             ['config', 'name', 'version', 'description', 'maintainer'],
-            ['labels', 'namespace', 'images', 'parameters']
+            ['labels', 'namespace', 'images']
         )
     ).label('Create Template'),
 
