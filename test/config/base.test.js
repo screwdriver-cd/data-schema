@@ -38,4 +38,10 @@ describe('config base', () => {
             assert.isNull(validate('config.base.childPipelines.yaml', config.base.childPipelines).error);
         });
     });
+
+    describe('stages', () => {
+        it('validates the stages object', () => {
+            assert.isNull(validate('config.base.stages.yaml', config.base.stages).error);
+        });
+    });
 });

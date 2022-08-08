@@ -10,6 +10,8 @@ const WorkflowGraph = require('../config/workflowGraph');
 const Parameters = require('../config/parameters');
 const mutate = require('../lib/mutate');
 
+const STATES = ['ACTIVE', 'INACTIVE'];
+
 const CREATE_MODEL = {
     checkoutUrl: Joi.string()
         .regex(Regex.CHECKOUT_URL)
@@ -85,6 +87,13 @@ const MODEL = {
 
     settings: Settings.pipelineSettings,
 
+    state: Joi.string()
+        .valid(...STATES)
+        .max(10)
+        .description('Current state of the pipeline')
+        .example('ACTIVE')
+        .default('ACTIVE'),
+
     subscribedScmUrlsWithActions: Joi.array()
         .items(
             Joi.object().keys({
@@ -123,7 +132,7 @@ module.exports = {
     get: Joi.object(
         mutate(
             MODEL,
-            ['id', 'scmUri', 'scmContext', 'createTime', 'admins'],
+            ['id', 'scmUri', 'scmContext', 'createTime', 'admins', 'state'],
             [
                 'workflowGraph',
                 'scmRepo',
@@ -174,6 +183,14 @@ module.exports = {
      * @type {Array}
      */
     allKeys: Object.keys(MODEL),
+
+    /**
+     * All the available states of Pipeline
+     *
+     * @property allStates
+     * @type {Array}
+     */
+    allStates: STATES,
 
     /**
      * Tablename to be used in the datastore

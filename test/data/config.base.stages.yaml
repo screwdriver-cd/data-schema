@@ -1,0 +1,10 @@
+canary:
+    jobs:
+        - first
+        - second
+    description: "Canary jobs for testing"
+prod:
+    jobs:
+        - deploy-west
+        - deploy-east
+    description: "Prod deploy jobs"

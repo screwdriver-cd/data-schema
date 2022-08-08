@@ -35,3 +35,13 @@ jobs:
             - NPM_TOKEN
         requires:
             - first
+
+stages:
+    canary:
+        jobs:
+            - first
+        description: "Canary jobs for testing"
+    prod:
+        jobs:
+            - publish
+        description: "Prod deploy jobs"

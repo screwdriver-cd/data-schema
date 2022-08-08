@@ -47,6 +47,8 @@ module.exports = {
     ALL_JOB_NAME: /^(PR-[0-9]+:)?[\w-@:]+$/,
     // Internal trigger like ~component or ~main
     INTERNAL_TRIGGER: /^~([\w-]+)$/,
+    // Stages can only be named with A-Z,a-z,0-9,-,_
+    STAGE_NAME: /^[\w-]+$/,
 
     // Don't combine EXTERNAL_TRIGGER and EXTERNAL_TRIGGER_AND for backward compatibility
     // BlockBy does not support EXTERNAL_TRIGGER_AND

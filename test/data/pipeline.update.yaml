@@ -3,6 +3,7 @@ checkoutUrl: git@github.com:screwdriver-cd/data-schema.git#branch
 rootDir: src/app/test
 autoKeysGeneration: false
 settings:
+    aliasName: scwdvr-cd
     metricsDowntimeJobs:
         - 222
         - 333

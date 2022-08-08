@@ -19,6 +19,12 @@ describe('model pipeline', () => {
         it('fails the create', () => {
             assert.isNotNull(validate('empty.yaml', models.pipeline.create).error);
         });
+
+        it('validates that state is not allowed', () => {
+            assert.isNotNull(
+                validate('pipeline.create.yaml', models.pipeline.create, { state: models.pipeline.allStates[0] }).error
+            );
+        });
     });
 
     describe('get', () => {
@@ -29,6 +35,20 @@ describe('model pipeline', () => {
         it('fails the get', () => {
             assert.isNotNull(validate('empty.yaml', models.pipeline.get).error);
         });
+
+        // valid states
+        models.pipeline.allStates.forEach(validState => {
+            it('validates the valid states', () => {
+                assert.isNull(validate('pipeline.get.yaml', models.pipeline.get, { state: validState }).error);
+            });
+        });
+
+        // invalid states
+        [null, '', 'some_invalid_state'].forEach(validState => {
+            it('validates the invalid states', () => {
+                assert.isNotNull(validate('pipeline.get.yaml', models.pipeline.get, { state: validState }).error);
+            });
+        });
     });
 
     describe('update', () => {
@@ -38,6 +58,12 @@ describe('model pipeline', () => {
 
         it('fails the update', () => {
             assert.isNotNull(validate('empty.yaml', models.pipeline.update).error);
+        });
+
+        it('validates that state is not allowed', () => {
+            assert.isNotNull(
+                validate('pipeline.update.yaml', models.pipeline.update, { state: models.pipeline.allStates[0] }).error
+            );
         });
     });
 });
