@@ -2,6 +2,11 @@
 
 const Joi = require('joi');
 
+const SCHEMA_TIMESTAMP_FORMAT = Joi.string()
+    .valid('UTC', 'LOCAL_TIMEZONE', 'HUMAN_READABLE')
+    .optional()
+    .default('HUMAN_READABLE')
+    .description('User preferred timestamp');
 const SCHEMA_DISPLAY_JOB_NAME_LENGTH = Joi.number()
     .integer()
     .min(20)
@@ -31,7 +36,13 @@ const SCHEMA_PIPELINE_SETTINGS = Joi.object()
         public: Joi.boolean(),
         groupedEvents: Joi.boolean().optional(),
         showEventTriggers: Joi.boolean().optional(),
-        filterEventsForNoBuilds: Joi.boolean().optional()
+        filterEventsForNoBuilds: Joi.boolean().optional(),
+        aliasName: Joi.string()
+            .allow('')
+            .max(32)
+            .description('A customizable alias for pipeline name')
+            .example('scwdvr-cd')
+            .optional()
     })
     .default({});
 
@@ -41,7 +52,8 @@ const SCHEMA_USER_SETTINGS = Joi.object()
         /\d/,
         Joi.object().keys({
             displayJobNameLength: SCHEMA_DISPLAY_JOB_NAME_LENGTH,
-            showPRJobs: Joi.boolean()
+            showPRJobs: Joi.boolean(),
+            timestampFormat: SCHEMA_TIMESTAMP_FORMAT
         })
     )
     .unknown();
