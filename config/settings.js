@@ -38,6 +38,7 @@ const SCHEMA_PIPELINE_SETTINGS = Joi.object()
         showEventTriggers: Joi.boolean().optional(),
         filterEventsForNoBuilds: Joi.boolean().optional(),
         aliasName: Joi.string()
+            .allow('')
             .max(32)
             .description('A customizable alias for pipeline name')
             .example('scwdvr-cd')
