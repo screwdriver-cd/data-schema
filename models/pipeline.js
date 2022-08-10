@@ -92,7 +92,8 @@ const MODEL = {
         .max(10)
         .description('Current state of the pipeline')
         .example('ACTIVE')
-        .default('ACTIVE'),
+        .default('ACTIVE')
+        .required(),
 
     subscribedScmUrlsWithActions: Joi.array()
         .items(
