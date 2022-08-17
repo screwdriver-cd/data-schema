@@ -3,4 +3,4 @@ settings:
     1:
         displayJobNameLength: 35
         showPRJobs: false
-        timestampFormat: 'HUMAN_READABLE'
+    timestampFormat: 'LOCAL_TIMEZONE'
