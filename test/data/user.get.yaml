@@ -5,10 +5,9 @@ scmContext: github:github.com
 settings:
     1:
         displayJobNameLength: 20
-        timestampFormat: 'HUMAN_READABLE'
     11:
         displayJobNameLength: 50
         showPRJobs: false
-        timestampFormat: 'HUMAN_READABLE'
+    timestampFormat: 'LOCAL_TIMEZONE'
     hello: world
     this: is-allowed

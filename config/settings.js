@@ -3,9 +3,9 @@
 const Joi = require('joi');
 
 const SCHEMA_TIMESTAMP_FORMAT = Joi.string()
-    .valid('UTC', 'LOCAL_TIMEZONE', 'HUMAN_READABLE')
+    .valid('UTC', 'LOCAL_TIMEZONE')
     .optional()
-    .default('HUMAN_READABLE')
+    .default('LOCAL_TIMEZONE')
     .description('User preferred timestamp');
 const SCHEMA_DISPLAY_JOB_NAME_LENGTH = Joi.number()
     .integer()
@@ -52,11 +52,14 @@ const SCHEMA_USER_SETTINGS = Joi.object()
         /\d/,
         Joi.object().keys({
             displayJobNameLength: SCHEMA_DISPLAY_JOB_NAME_LENGTH,
-            showPRJobs: Joi.boolean(),
-            timestampFormat: SCHEMA_TIMESTAMP_FORMAT
+            showPRJobs: Joi.boolean()
         })
     )
     .unknown();
+
+SCHEMA_USER_SETTINGS.append({
+    timestampFormat: SCHEMA_TIMESTAMP_FORMAT
+});
 
 module.exports = {
     pipelineSettings: SCHEMA_PIPELINE_SETTINGS,
