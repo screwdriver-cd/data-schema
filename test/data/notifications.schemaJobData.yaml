@@ -1,0 +1,11 @@
+settings:
+    email: 'foo'
+status: 'SUCCESS'
+pipeline:
+    id: '12'
+    scmRepo:
+        name: 'screwdriver-cd/notifications'
+        url: 'http://scmtest/master'
+jobName: 'publish'
+message: 'failed to scedule job publish'
+pipelineLink: "http://thisisaSDtest.com/pipelines/12"
