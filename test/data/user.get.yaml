@@ -3,11 +3,9 @@ id: 123
 username: batman
 scmContext: github:github.com
 settings:
-    1:
-        displayJobNameLength: 20
     11:
-        displayJobNameLength: 50
         showPRJobs: false
+    displayJobNameLength: 50
     timestampFormat: 'LOCAL_TIMEZONE'
     hello: world
     this: is-allowed
