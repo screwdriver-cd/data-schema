@@ -51,13 +51,13 @@ const SCHEMA_USER_SETTINGS = Joi.object()
     .pattern(
         /\d/,
         Joi.object().keys({
-            displayJobNameLength: SCHEMA_DISPLAY_JOB_NAME_LENGTH,
             showPRJobs: Joi.boolean()
         })
     )
     .unknown();
 
 SCHEMA_USER_SETTINGS.append({
+    displayJobNameLength: SCHEMA_DISPLAY_JOB_NAME_LENGTH,
     timestampFormat: SCHEMA_TIMESTAMP_FORMAT
 });
 
