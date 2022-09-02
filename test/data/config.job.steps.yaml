@@ -3,3 +3,14 @@
 - npm publish
 - done:
     command: echo done
+- retry-boolean:
+    command: echo done
+    retry: true
+- retry-object:
+    command: echo done
+    retry:
+      condition: $GIT_SHALLOW_CLONE == true
+      max: 3
+      interval: 3
+      environment:
+         GIT_SHALLOW_CLONE: false
