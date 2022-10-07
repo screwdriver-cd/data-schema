@@ -28,8 +28,6 @@ const MODEL = {
                 .positive()
                 .description('Identifier for this job')
                 .example(123345)
-                .optional()
-                .allow(null)
         )
         .description('Job IDs in this Stage'),
 
