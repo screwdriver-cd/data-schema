@@ -1,6 +1,6 @@
 {
   "name": "screwdriver-data-schema",
-  "version": "21.0.0",
+  "version": "22.0.0",
   "description": "Internal Data Schema of Screwdriver",
   "main": "index.js",
   "scripts": {
@@ -40,22 +40,22 @@
   },
   "devDependencies": {
     "chai": "^4.3.6",
-    "eslint": "^7.32.0",
-    "eslint-config-screwdriver": "^5.0.1",
-    "js-yaml": "^3.14.1",
-    "mocha": "^9.2.0",
+    "eslint": "^8.26.0",
+    "eslint-config-screwdriver": "^7.0.0",
+    "js-yaml": "^4.1.0",
+    "mocha": "^10.1.0",
     "mocha-multi-reporters": "^1.5.1",
     "mocha-sonarqube-reporter": "^1.0.2",
     "mysql2": "^1.7.0",
     "npx": "^10.2.2",
-    "nyc": "^15.0.0",
+    "nyc": "^15.1.0",
     "pg": "^7.18.2",
-    "sequelize": "^6.24.0",
-    "sequelize-cli": "^6.5.1",
-    "sqlite3": "^4.2.0"
+    "sequelize": "^6.25.3",
+    "sequelize-cli": "^6.5.2",
+    "sqlite3": "^5.1.2"
   },
   "dependencies": {
-    "cron-parser": "^4.5.0",
-    "joi": "^17.6.2"
+    "cron-parser": "^4.6.0",
+    "joi": "^17.6.4"
   }
 }

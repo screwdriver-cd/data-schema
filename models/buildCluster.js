@@ -5,17 +5,10 @@ const mutate = require('../lib/mutate');
 const Command = require('../config/command');
 const pipelineBaseSchema = require('./pipeline').base;
 const scmContext = pipelineBaseSchema.extract('scmContext');
-const scmOrganization = Joi.string()
-    .max(100)
-    .description('SCM organization name')
-    .example('screwdriver-cd');
+const scmOrganization = Joi.string().max(100).description('SCM organization name').example('screwdriver-cd');
 
 const MODEL = {
-    id: Joi.number()
-        .integer()
-        .positive()
-        .description('Identifier of this Job')
-        .example(123345),
+    id: Joi.number().integer().positive().description('Identifier of this Job').example(123345),
 
     name: Joi.string()
         .regex(/^[\w-]+$/)
@@ -32,21 +25,13 @@ const MODEL = {
 
     scmOrganizations: Joi.array().items(scmOrganization),
 
-    isActive: Joi.boolean()
-        .description('Flag if the the build cluster is active')
-        .example(true),
+    isActive: Joi.boolean().description('Flag if the the build cluster is active').example(true),
 
-    managedByScrewdriver: Joi.boolean()
-        .description('Flag if the cluster is managed by screwdriver team')
-        .example(true),
+    managedByScrewdriver: Joi.boolean().description('Flag if the cluster is managed by screwdriver team').example(true),
 
     maintainer: Command.maintainer,
 
-    weightage: Joi.number()
-        .min(0)
-        .max(100)
-        .description('Weight percentage for build cluster')
-        .example(20)
+    weightage: Joi.number().min(0).max(100).description('Weight percentage for build cluster').example(20)
 };
 
 module.exports = {

@@ -10,9 +10,7 @@ const SCHEMA_CACHE_VALUE = Joi.string().uri({
     relativeOnly: true
 });
 const SCHEMA_CACHE_LIST = Joi.array().items(SCHEMA_CACHE_VALUE);
-const SCHEMA_CACHE_JOBS = Joi.object()
-    .pattern(Job.jobName, SCHEMA_CACHE_LIST)
-    .unknown(false);
+const SCHEMA_CACHE_JOBS = Joi.object().pattern(Job.jobName, SCHEMA_CACHE_LIST).unknown(false);
 const SCHEMA_CACHE = Joi.object({
     event: SCHEMA_CACHE_LIST,
     pipeline: SCHEMA_CACHE_LIST,
@@ -32,9 +30,7 @@ const SCHEMA_JOBS = Joi.object()
     .unknown(false);
 const SCHEMA_SHARED = Job.job;
 const SCHEMA_SCM_URL = Joi.string().regex(Regex.CHECKOUT_URL);
-const SCHEMA_SCM_URLS = Joi.array()
-    .items(SCHEMA_SCM_URL)
-    .min(1);
+const SCHEMA_SCM_URLS = Joi.array().items(SCHEMA_SCM_URL).min(1);
 const SCHEMA_CHILD_PIPELINES = Joi.object()
     .keys({
         scmUrls: SCHEMA_SCM_URLS.required(),
@@ -45,9 +41,7 @@ const SCHEMA_CHILD_PIPELINES = Joi.object()
 const SCHEMA_STAGE = Joi.object()
     .keys({
         description: Joi.string(),
-        jobs: Joi.array()
-            .items(Job.jobName)
-            .min(0)
+        jobs: Joi.array().items(Job.jobName).min(0)
     })
     .unknown(false);
 
@@ -68,10 +62,7 @@ const SCHEMA_SUBSCRIBE = Joi.object().keys({
 
 const SCHEMA_CONFIG = Joi.object()
     .keys({
-        version: Joi.number()
-            .integer()
-            .min(1)
-            .max(50),
+        version: Joi.number().integer().min(1).max(50),
         annotations: Annotations.annotations,
         jobs: SCHEMA_JOBS.required(),
         shared: SCHEMA_SHARED,
