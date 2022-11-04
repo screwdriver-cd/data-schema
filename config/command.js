@@ -10,11 +10,7 @@ const COMMAND_NAMESPACE = Joi.string()
     .description('Namespace of the Command')
     .example('chefdk');
 
-const COMMAND_NAME = Joi.string()
-    .regex(Regex.COMMAND_NAME)
-    .max(64)
-    .description('Name of the Command')
-    .example('knife');
+const COMMAND_NAME = Joi.string().regex(Regex.COMMAND_NAME).max(64).description('Name of the Command').example('knife');
 
 const COMMAND_TAG_NAME = Joi.string()
     .regex(Regex.COMMAND_TAG_NAME)
@@ -22,11 +18,7 @@ const COMMAND_TAG_NAME = Joi.string()
     .description('Name of the Command Tag')
     .example('latest');
 
-const COMMAND_VERSION = Joi.string()
-    .regex(Regex.VERSION)
-    .max(16)
-    .description('Version of the Command')
-    .example('1.2');
+const COMMAND_VERSION = Joi.string().regex(Regex.VERSION).max(16).description('Version of the Command').example('1.2');
 
 const COMMAND_EXACT_VERSION = Joi.string()
     .regex(Regex.EXACT_VERSION)
@@ -45,11 +37,7 @@ const COMMAND_USAGE = Joi.string()
     .description('Usage and arguments of the command')
     .example('sd_cmd exec foo/bar@1 -h <host> -d <domain>');
 
-const COMMAND_MAINTAINER = Joi.string()
-    .email()
-    .max(64)
-    .description('Maintainer of the Command')
-    .example('foo@bar.com');
+const COMMAND_MAINTAINER = Joi.string().email().max(64).description('Maintainer of the Command').example('foo@bar.com');
 
 const COMMAND_FORMAT = Joi.string()
     .valid('habitat', 'docker', 'binary')

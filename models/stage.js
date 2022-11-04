@@ -4,43 +4,19 @@ const Joi = require('joi');
 const Regex = require('../config/regex');
 
 const MODEL = {
-    id: Joi.number()
-        .integer()
-        .positive()
-        .example(12345),
+    id: Joi.number().integer().positive().example(12345),
 
-    pipelineId: Joi.number()
-        .integer()
-        .positive()
-        .description('Pipeline associated with the Stage')
-        .example(123345),
+    pipelineId: Joi.number().integer().positive().description('Pipeline associated with the Stage').example(123345),
 
-    name: Joi.string()
-        .regex(Regex.STAGE_NAME)
-        .max(110)
-        .description('Name of the Stage')
-        .example('deploy'),
+    name: Joi.string().regex(Regex.STAGE_NAME).max(110).description('Name of the Stage').example('deploy'),
 
     jobIds: Joi.array()
-        .items(
-            Joi.number()
-                .integer()
-                .positive()
-                .description('Identifier for this job')
-                .example(123345)
-        )
+        .items(Joi.number().integer().positive().description('Identifier for this job').example(123345))
         .description('Job IDs in this Stage'),
 
-    description: Joi.string()
-        .max(256)
-        .description('Description of the Stage')
-        .example('Deploys canary jobs'),
+    description: Joi.string().max(256).description('Description of the Stage').example('Deploys canary jobs'),
 
-    groupEventId: Joi.number()
-        .integer()
-        .positive()
-        .description('Identifier of the group event')
-        .example(123345)
+    groupEventId: Joi.number().integer().positive().description('Identifier of the group event').example(123345)
 };
 
 module.exports = {

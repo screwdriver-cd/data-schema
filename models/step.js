@@ -4,46 +4,24 @@ const Joi = require('joi');
 const mutate = require('../lib/mutate');
 
 const MODEL = {
-    id: Joi.number()
-        .integer()
-        .positive()
-        .description('Identifier of this Step')
-        .example(123345),
+    id: Joi.number().integer().positive().description('Identifier of this Step').example(123345),
 
-    buildId: Joi.number()
-        .integer()
-        .positive()
-        .description('Identifier of the parent Build')
-        .example(123345),
+    buildId: Joi.number().integer().positive().description('Identifier of the parent Build').example(123345),
 
-    name: Joi.string()
-        .max(64)
-        .description('Name of the Step')
-        .example('install'),
+    name: Joi.string().max(64).description('Name of the Step').example('install'),
 
-    command: Joi.string()
-        .description('Command of the Step to execute')
-        .example('npm install'),
+    command: Joi.string().description('Command of the Step to execute').example('npm install'),
 
-    code: Joi.number()
-        .integer()
-        .description('Exit code')
-        .example(1),
+    code: Joi.number().integer().description('Exit code').example(1),
 
-    startTime: Joi.string()
-        .isoDate()
-        .description('When this Step started')
-        .example('2017-01-06T01:49:50.384359267Z'),
+    startTime: Joi.string().isoDate().description('When this Step started').example('2017-01-06T01:49:50.384359267Z'),
 
     endTime: Joi.string()
         .isoDate()
         .description('When this Step stopped running')
         .example('2017-01-06T01:49:51.676057192Z'),
 
-    lines: Joi.number()
-        .integer()
-        .description('Number of Step log lines')
-        .example(100)
+    lines: Joi.number().integer().description('Number of Step log lines').example(100)
 };
 
 module.exports = {

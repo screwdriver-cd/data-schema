@@ -15,12 +15,8 @@ const TEMPLATE_NAMESPACE = Joi.string()
 const TEMPLATE_NAME = Joi.alternatives()
     .conditional('namespace', {
         is: Joi.exist(),
-        then: Joi.string()
-            .regex(Regex.TEMPLATE_NAME_NO_SLASH)
-            .max(64),
-        otherwise: Joi.string()
-            .regex(Regex.TEMPLATE_NAME_ALLOW_SLASH)
-            .max(64)
+        then: Joi.string().regex(Regex.TEMPLATE_NAME_NO_SLASH).max(64),
+        otherwise: Joi.string().regex(Regex.TEMPLATE_NAME_ALLOW_SLASH).max(64)
     })
     .description('Name of the Template')
     .example('node/npm-install');
@@ -67,10 +63,7 @@ const SCHEMA_TEMPLATE = Joi.object().keys({
     version: TEMPLATE_VERSION.required(),
     description: TEMPLATE_DESCRIPTION.required(),
     maintainer: TEMPLATE_MAINTAINER.required(),
-    config: Job.templateJob
-        .required()
-        .or('image', 'template')
-        .or('steps', 'template'),
+    config: Job.templateJob.required().or('image', 'template').or('steps', 'template'),
     images: TEMPLATE_IMAGES
 });
 
