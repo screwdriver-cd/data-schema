@@ -38,7 +38,7 @@ const buildSchemaObj = {
     pipelineId,
     buildClusterName: models.buildCluster.base.extract('name'),
     container: models.build.base.extract('container').required(),
-    apiUri: Joi.string().uri().required().label('API URI'),
+    apiUri: Joi.string().uri().label('API URI'),
     token: Joi.string().required().label('Build JWT'),
     enqueueTime: Joi.date().iso(),
     isPR: Joi.boolean().optional().default(true),
@@ -59,7 +59,7 @@ const SCHEMA_STOP = Joi.object()
         token: Joi.string().label('Build JWT'),
         pipelineId,
         provider: Provider.provider.optional(),
-        apiUri: Joi.string().uri().required().label('API URI'),
+        apiUri: Joi.string().uri().label('API URI'),
         jobName
     })
     .unknown(true) // allow other fields
