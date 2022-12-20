@@ -132,7 +132,7 @@ module.exports = {
     allStatuses: STATUSES,
 
     /**
-     * All the available properties of Job
+     * All the available properties of Build
      *
      * @property fields
      * @type {Object}

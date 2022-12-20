@@ -5,3 +5,5 @@ name: deploy
 jobIds: [1, 2, 3, 4]
 description: 'Deploys canary jobs'
 groupEventId: 555
+setup: 222
+teardown: 333

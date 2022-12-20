@@ -25,3 +25,11 @@ yaml: |
       canary:
           description: "Canary jobs to be deployed"
           jobs: [main, publish]
+          setup:
+              image: node:{{NODE_VERSION}}
+              steps:
+                  announce: post banner
+          teardown:
+              image: node:{{NODE_VERSION}}
+              steps:
+                  publish: publish blog post

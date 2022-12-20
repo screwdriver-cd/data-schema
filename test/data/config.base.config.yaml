@@ -45,3 +45,11 @@ stages:
         jobs:
             - publish
         description: "Prod deploy jobs"
+        setup:
+            image: node:{{NODE_VERSION}}
+            steps:
+                - announce: post banner
+        teardown:
+            image: node:{{NODE_VERSION}}
+            steps:
+                - publish: publish blog post

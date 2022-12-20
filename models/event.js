@@ -80,7 +80,7 @@ module.exports = {
     base: Joi.object(MODEL).label('Event'),
 
     /**
-     * All the available properties of Job
+     * All the available properties of Event
      *
      * @property fields
      * @type {Object}

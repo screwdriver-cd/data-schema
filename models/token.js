@@ -42,7 +42,7 @@ module.exports = {
     base: Joi.object(MODEL).without('userId', 'pipelineId').label('Token'),
 
     /**
-     * All the available properties of Job
+     * All the available properties of Token
      *
      * @property fields
      * @type {Object}

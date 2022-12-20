@@ -2,6 +2,7 @@
 
 const Joi = require('joi');
 const Regex = require('../config/regex');
+const mutate = require('../lib/mutate');
 
 const MODEL = {
     id: Joi.number().integer().positive().example(12345),
@@ -9,6 +10,10 @@ const MODEL = {
     pipelineId: Joi.number().integer().positive().description('Pipeline associated with the Stage').example(123345),
 
     name: Joi.string().regex(Regex.STAGE_NAME).max(110).description('Name of the Stage').example('deploy'),
+
+    setup: Joi.number().integer().positive().description('Identifier for this Stage setup job').example(123345),
+
+    teardown: Joi.number().integer().positive().description('Identifier for this Stage teardown job').example(123345),
 
     jobIds: Joi.array()
         .items(Joi.number().integer().positive().description('Identifier for this job').example(123345))
@@ -35,6 +40,16 @@ module.exports = {
      * @type {Object}
      */
     fields: MODEL,
+
+    /**
+     * Properties for Stage that will come back during a GET request
+     *
+     * @property get
+     * @type {Joi}
+     */
+    get: Joi.object(
+        mutate(MODEL, ['id', 'pipelineId', 'name', 'groupEventId', 'jobIds'], ['description', 'setup', 'teardown'])
+    ).label('Get Stage metadata'),
 
     /**
      * List of fields that determine a unique row

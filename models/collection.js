@@ -47,7 +47,7 @@ module.exports = {
     base: Joi.object(MODEL).label('Collection'),
 
     /**
-     * All the available properties of Job
+     * All the available properties of Collection
      *
      * @property fields
      * @type {Object}
