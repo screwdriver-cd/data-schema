@@ -43,7 +43,9 @@ const SCHEMA_STAGE = Joi.object()
         description: Joi.string(),
         jobs: Joi.array().items(Job.jobName).min(0),
         setup: SCHEMA_SETUP_TEARDOWN_JOB,
-        teardown: SCHEMA_SETUP_TEARDOWN_JOB
+        teardown: SCHEMA_SETUP_TEARDOWN_JOB,
+        requires: Job.requires,
+        startFrom: Job.jobName
     })
     .unknown(false);
 

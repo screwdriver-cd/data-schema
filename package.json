@@ -47,7 +47,7 @@
     "mocha-multi-reporters": "^1.5.1",
     "mocha-sonarqube-reporter": "^1.0.2",
     "mysql2": "^1.7.0",
-    "npx": "^10.2.2",
+    "npx": "^3.0.0",
     "nyc": "^15.1.0",
     "pg": "^7.18.2",
     "sequelize": "^6.25.8",

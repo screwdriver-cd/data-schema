@@ -10,6 +10,7 @@ const pipeline = require('./pipeline');
 const user = require('./user');
 const secret = require('./secret');
 const stage = require('./stage');
+const stageBuild = require('./stageBuild');
 const template = require('./template');
 const templateTag = require('./templateTag');
 const token = require('./token');
@@ -29,6 +30,7 @@ module.exports = {
     user,
     secret,
     stage,
+    stageBuild,
     template,
     templateTag,
     token,

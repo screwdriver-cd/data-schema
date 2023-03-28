@@ -3,6 +3,7 @@
 const Joi = require('joi');
 const Regex = require('../config/regex');
 const mutate = require('../lib/mutate');
+const jobName = require('./job').base.extract('name');
 
 const MODEL = {
     id: Joi.number().integer().positive().example(12345),
@@ -11,9 +12,13 @@ const MODEL = {
 
     name: Joi.string().regex(Regex.STAGE_NAME).max(110).description('Name of the Stage').example('deploy'),
 
-    setup: Joi.number().integer().positive().description('Identifier for this Stage setup job').example(123345),
+    setup: Joi.array()
+        .items(Joi.number().integer().positive().description('Identifier for this job').example(123345))
+        .description('Job IDs in this Stage'),
 
-    teardown: Joi.number().integer().positive().description('Identifier for this Stage teardown job').example(123345),
+    teardown: Joi.array()
+        .items(Joi.number().integer().positive().description('Identifier for this job').example(123345))
+        .description('Job IDs in this Stage'),
 
     jobIds: Joi.array()
         .items(Joi.number().integer().positive().description('Identifier for this job').example(123345))
@@ -21,7 +26,7 @@ const MODEL = {
 
     description: Joi.string().max(256).description('Description of the Stage').example('Deploys canary jobs'),
 
-    groupEventId: Joi.number().integer().positive().description('Identifier of the group event').example(123345)
+    startFrom: jobName.description('Stage start point - a job name').example('main')
 };
 
 module.exports = {
@@ -48,7 +53,7 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(
-        mutate(MODEL, ['id', 'pipelineId', 'name', 'groupEventId', 'jobIds'], ['description', 'setup', 'teardown'])
+        mutate(MODEL, ['id', 'pipelineId', 'name', 'jobIds'], ['description', 'setup', 'teardown', 'startFrom'])
     ).label('Get Stage metadata'),
 
     /**
@@ -57,7 +62,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['pipelineId', 'name', 'groupEventId'],
+    keys: ['pipelineId', 'name'],
 
     /**
      * List of all fields in the model
@@ -80,5 +85,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: [{ fields: ['pipelineId'] }, { fields: ['groupEventId'] }]
+    indexes: [{ fields: ['pipelineId'] }]
 };

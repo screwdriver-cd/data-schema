@@ -138,8 +138,14 @@ const SCHEMA_TEMPLATEID = Joi.number()
 const SCHEMA_TRIGGER = sdJoi.string().branchFilter();
 const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne
 const SCHEMA_EXTERNAL_TRIGGER = Joi.string().regex(Regex.EXTERNAL_TRIGGER_ALL).example('~sd@1234:component'); // ~sd@123:main or sd@123:main
+const SCHEMA_STAGE_TRIGGER = Joi.string().regex(Regex.STAGE_TRIGGER); // ~stage@deploy, ~stage@deploy:main
 const SCHEMA_CRON_EXPRESSION = sdCron.string().cron();
-const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(SCHEMA_INTERNAL_TRIGGER, SCHEMA_JOBNAME, SCHEMA_TRIGGER);
+const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(
+    SCHEMA_INTERNAL_TRIGGER,
+    SCHEMA_JOBNAME,
+    SCHEMA_TRIGGER,
+    SCHEMA_STAGE_TRIGGER
+);
 const SCHEMA_REQUIRES = Joi.alternatives().try(Joi.array().items(SCHEMA_REQUIRES_VALUE), SCHEMA_REQUIRES_VALUE);
 const SCHEMA_BLOCKEDBY_VALUE = Joi.alternatives().try(
     SCHEMA_INTERNAL_TRIGGER,
@@ -152,6 +158,10 @@ const SCHEMA_SOURCEPATHS = Joi.alternatives().try(Joi.array().items(SCHEMA_SOURC
 const SCHEMA_CACHE = Joi.boolean().optional();
 const SCHEMA_PARAMETERS = Parameters.parameters.optional();
 const SCHEMA_PROVIDER = Joi.alternatives().try(Provider.provider, Joi.string().regex(Regex.CHECKOUT_URL)).optional();
+const SCHEMA_STAGE = Joi.object().keys({
+    name: Joi.string().regex(Regex.STAGE_NAME), // like a job name
+    startFrom: Joi.boolean().optional()
+});
 const SCHEMA_JOB = Joi.object()
     .keys({
         annotations: Annotations.annotations,
@@ -168,6 +178,7 @@ const SCHEMA_JOB = Joi.object()
         requires: SCHEMA_REQUIRES,
         secrets: SCHEMA_SECRETS,
         settings: SCHEMA_SETTINGS,
+        stage: SCHEMA_STAGE,
         sourcePaths: SCHEMA_SOURCEPATHS,
         steps: SCHEMA_STEPS,
         template: SCHEMA_TEMPLATE,
@@ -208,6 +219,7 @@ module.exports = {
     settings: SCHEMA_SETTINGS,
     sourcePath: SCHEMA_SOURCEPATH,
     sourcePaths: SCHEMA_SOURCEPATHS,
+    stage: SCHEMA_STAGE,
     step: SCHEMA_STEP,
     steps: SCHEMA_STEPS,
     template: SCHEMA_TEMPLATE,
