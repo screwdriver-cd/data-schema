@@ -11,7 +11,7 @@ const MODEL = {
     id: Joi.number().integer().positive().description('Identifier of this Job').example(123345),
 
     name: Joi.string()
-        .regex(/^[\w\.-]+$/)
+        .regex(/^[\w.-]+$/)
         .max(50)
         .description('Name of the build cluster')
         .example('iOS'),
