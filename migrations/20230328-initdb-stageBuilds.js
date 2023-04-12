@@ -28,7 +28,7 @@ module.exports = {
                     },
                     workflowGraph: {
                         type: Sequelize.TEXT
-                    },
+                    }
                 },
                 { transaction }
             );

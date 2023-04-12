@@ -5,6 +5,7 @@ const Annotations = require('./annotations');
 const Job = require('./job');
 const Regex = require('./regex');
 const Parameters = require('./parameters');
+const WorkflowGraph = require('./workflowGraph');
 
 const SCHEMA_CACHE_VALUE = Joi.string().uri({
     relativeOnly: true
@@ -45,7 +46,8 @@ const SCHEMA_STAGE = Joi.object()
         setup: SCHEMA_SETUP_TEARDOWN_JOB,
         teardown: SCHEMA_SETUP_TEARDOWN_JOB,
         requires: Job.requires,
-        startFrom: Job.jobName
+        startFrom: Job.jobName,
+        workflowGraph: WorkflowGraph.workflowGraph
     })
     .unknown(false);
 

@@ -37,7 +37,9 @@ module.exports = {
                     },
                     { transaction }
                 );
-                await queryInterface.removeConstraint(table, `${table}_pipeline_id_name_group_event_id_key`, { transaction });
+                await queryInterface.removeConstraint(table, `${table}_pipeline_id_name_group_event_id_key`, {
+                    transaction
+                });
 
                 await queryInterface.addConstraint(table, {
                     fields: ['pipelineId', 'name'],
