@@ -31,6 +31,7 @@ const SCHEMA_PIPELINE_SETTINGS = Joi.object()
         groupedEvents: Joi.boolean().optional(),
         showEventTriggers: Joi.boolean().optional(),
         filterEventsForNoBuilds: Joi.boolean().optional(),
+        filterSchedulerEvents: Joi.boolean().optional(),
         aliasName: Joi.string()
             .allow('')
             .max(32)
