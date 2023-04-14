@@ -57,6 +57,16 @@ module.exports = {
     ).label('Get Stage metadata'),
 
     /**
+     * Properties for Stage that will be passed during an UPDATE request
+     *
+     * @property update
+     * @type {Joi}
+     */
+    update: Joi.object(mutate(MODEL, [], ['jobIds', 'description', 'setup', 'teardown', 'startFrom'])).label(
+        'Update Stage'
+    ),
+
+    /**
      * List of fields that determine a unique row
      *
      * @property keys
