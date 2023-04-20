@@ -23,7 +23,7 @@ module.exports = {
                     status: {
                         type: Sequelize.TEXT
                     },
-                    groupEventId: {
+                    eventId: {
                         type: Sequelize.DOUBLE
                     },
                     workflowGraph: {
