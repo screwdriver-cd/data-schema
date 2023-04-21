@@ -37,6 +37,14 @@ module.exports = {
                     },
                     { transaction }
                 );
+                await queryInterface.addColumn(
+                    table,
+                    'archived',
+                    {
+                        type: Sequelize.BOOLEAN
+                    },
+                    { transaction }
+                );
                 await queryInterface.removeConstraint(table, `${table}_pipeline_id_name_group_event_id_key`, {
                     transaction
                 });

@@ -26,7 +26,9 @@ const MODEL = {
 
     description: Joi.string().max(256).description('Description of the Stage').example('Deploys canary jobs'),
 
-    startFrom: jobName.description('Stage start point - a job name').example('main')
+    startFrom: jobName.description('Stage start point - a job name').example('main'),
+
+    archived: Joi.boolean().description('Flag if the stage is archived').example(true).default(false)
 };
 
 module.exports = {
@@ -53,7 +55,11 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(
-        mutate(MODEL, ['id', 'pipelineId', 'name', 'jobIds'], ['description', 'setup', 'teardown', 'startFrom'])
+        mutate(
+            MODEL,
+            ['id', 'pipelineId', 'name', 'jobIds'],
+            ['description', 'setup', 'teardown', 'startFrom', 'archived']
+        )
     ).label('Get Stage metadata'),
 
     /**
