@@ -239,6 +239,7 @@ describe('config regex', () => {
     describe('images', () => {
         it('checks good image names', () => {
             assert.isTrue(config.regex.IMAGE_NAME.test('10-13_931-9E501_20180531234344_platform'));
+            assert.isTrue(config.regex.IMAGE_NAME.test('xcode:14.2'));
         });
 
         it('fails on bad image names', () => {
