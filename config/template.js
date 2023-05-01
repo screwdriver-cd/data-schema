@@ -53,7 +53,7 @@ const TEMPLATE_MAINTAINER = Joi.string()
 const TEMPLATE_IMAGES = Joi.object()
     .pattern(Regex.IMAGE_ALIAS, Job.image)
     .messages({
-        'object.unknown': '{{#label}} only supports the following characters A-Z,a-z,0-9,-,_'
+        'object.unknown': '{{#label}} only supports the following characters A-Z,a-z,0-9,-,_,.,:'
     })
     .min(1);
 
