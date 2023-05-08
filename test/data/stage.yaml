@@ -6,4 +6,3 @@ jobIds: [1, 2, 3, 4]
 description: 'Deploys canary jobs'
 setup: [222]
 teardown: [333]
-startFrom: main

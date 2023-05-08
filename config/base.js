@@ -46,7 +46,6 @@ const SCHEMA_STAGE = Joi.object()
         setup: SCHEMA_SETUP_TEARDOWN_JOB,
         teardown: SCHEMA_SETUP_TEARDOWN_JOB,
         requires: Job.requires,
-        startFrom: Job.jobName,
         workflowGraph: WorkflowGraph.workflowGraph
     })
     .unknown(false);

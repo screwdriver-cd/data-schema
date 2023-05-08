@@ -3,7 +3,6 @@
 const Joi = require('joi');
 const Regex = require('../config/regex');
 const mutate = require('../lib/mutate');
-const jobName = require('./job').base.extract('name');
 
 const MODEL = {
     id: Joi.number().integer().positive().example(12345),
@@ -25,8 +24,6 @@ const MODEL = {
         .description('Job IDs in this Stage'),
 
     description: Joi.string().max(256).description('Description of the Stage').example('Deploys canary jobs'),
-
-    startFrom: jobName.description('Stage start point - a job name').example('main'),
 
     archived: Joi.boolean().description('Flag if the stage is archived').example(true).default(false)
 };
@@ -55,11 +52,7 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(
-        mutate(
-            MODEL,
-            ['id', 'pipelineId', 'name', 'jobIds'],
-            ['description', 'setup', 'teardown', 'startFrom', 'archived']
-        )
+        mutate(MODEL, ['id', 'pipelineId', 'name', 'jobIds'], ['description', 'setup', 'teardown', 'archived'])
     ).label('Get Stage metadata'),
 
     /**
@@ -68,9 +61,7 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(MODEL, [], ['jobIds', 'description', 'setup', 'teardown', 'startFrom'])).label(
-        'Update Stage'
-    ),
+    update: Joi.object(mutate(MODEL, [], ['jobIds', 'description', 'setup', 'teardown'])).label('Update Stage'),
 
     /**
      * List of fields that determine a unique row

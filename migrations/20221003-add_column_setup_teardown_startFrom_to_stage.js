@@ -19,21 +19,11 @@ module.exports = {
                     },
                     { transaction }
                 );
-
                 await queryInterface.addColumn(
                     table,
                     'teardown',
                     {
                         type: Sequelize.INTEGER
-                    },
-                    { transaction }
-                );
-
-                await queryInterface.addColumn(
-                    table,
-                    'startFrom',
-                    {
-                        type: Sequelize.STRING(110)
                     },
                     { transaction }
                 );
