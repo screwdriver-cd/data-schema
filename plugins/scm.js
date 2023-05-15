@@ -113,7 +113,7 @@ const ADD_PR_COMMENT = Joi.object()
             .items(
                 Joi.object().keys({
                     text: Joi.string().required(),
-                    keyWord: Joi.string().optional()
+                    keyword: Joi.string().optional()
                 })
             )
             .required(),
