@@ -1,6 +1,3 @@
-# BuildCluster get example
-id: 1
-name: iOS
 description: 'Build cluster for iOS team'
 scmContext: 'github:github.com'
 scmOrganizations: [screwdriver-cd]

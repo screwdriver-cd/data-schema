@@ -33,6 +33,10 @@ describe('model buildCluster', () => {
         it('fails the update', () => {
             assert.isNotNull(validate('empty.yaml', models.buildCluster.update).error);
         });
+
+        it('validates the update with group', () => {
+            assert.isNull(validate('buildCluster.group.yaml', models.buildCluster.update).error);
+        });
     });
 
     describe('get', () => {
