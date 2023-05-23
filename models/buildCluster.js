@@ -34,10 +34,9 @@ const MODEL = {
     weightage: Joi.number().min(0).max(100).description('Weight percentage for build cluster').example(20),
 
     group: Joi.string()
-        .valid('on-prem', 'aws', 'gcp')
-        .default('on-prem')
+        .default('default')
         .description('Group of the build cluster')
-        .example('aws')
+        .example(('aws', 'gcp', 'on-prem', 'default'))
 };
 
 module.exports = {
