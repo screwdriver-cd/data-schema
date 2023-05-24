@@ -12,9 +12,7 @@ module.exports = {
                 table,
                 'group',
                 {
-                    type: Sequelize.TEXT('medium'),
-                    defaultValue: 'on-prem',
-                    allowNull: false
+                    type: Sequelize.TEXT('medium')
                 },
                 { transaction }
             );
