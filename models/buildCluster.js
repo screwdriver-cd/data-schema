@@ -73,10 +73,12 @@ module.exports = {
                 'isActive',
                 'managedByScrewdriver',
                 'maintainer',
-                'weightage',
-                'group'
+                'weightage'
             ],
-            ['description']
+            [
+                'description',
+                'group'
+            ]
         )
     ).label('Get BuildCluster'),
 
@@ -113,7 +115,7 @@ module.exports = {
         mutate(
             MODEL,
             ['name', 'scmOrganizations', 'managedByScrewdriver', 'maintainer'],
-            ['description', 'isActive', 'weightage', 'scmContext']
+            ['description', 'isActive', 'weightage', 'scmContext', 'group']
         )
     ).label('Create Build'),
 
