@@ -75,10 +75,7 @@ module.exports = {
                 'maintainer',
                 'weightage'
             ],
-            [
-                'description',
-                'group'
-            ]
+            ['description', 'group']
         )
     ).label('Get BuildCluster'),
 
