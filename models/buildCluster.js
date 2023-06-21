@@ -31,7 +31,12 @@ const MODEL = {
 
     maintainer: Command.maintainer,
 
-    weightage: Joi.number().min(0).max(100).description('Weight percentage for build cluster').example(20)
+    weightage: Joi.number().min(0).max(100).description('Weight percentage for build cluster').example(20),
+
+    group: Joi.string()
+        .default('default')
+        .description('Group of the build cluster')
+        .example(('aws', 'gcp', 'on-prem', 'default'))
 };
 
 module.exports = {
@@ -70,7 +75,7 @@ module.exports = {
                 'maintainer',
                 'weightage'
             ],
-            ['description']
+            ['description', 'group']
         )
     ).label('Get BuildCluster'),
 
@@ -91,7 +96,8 @@ module.exports = {
                 'managedByScrewdriver',
                 'maintainer',
                 'weightage',
-                'scmContext'
+                'scmContext',
+                'group'
             ]
         )
     ).label('Update BuildCluster'),
@@ -106,7 +112,7 @@ module.exports = {
         mutate(
             MODEL,
             ['name', 'scmOrganizations', 'managedByScrewdriver', 'maintainer'],
-            ['description', 'isActive', 'weightage', 'scmContext']
+            ['description', 'isActive', 'weightage', 'scmContext', 'group']
         )
     ).label('Create Build'),
 

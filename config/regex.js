@@ -98,8 +98,8 @@ module.exports = {
     // First group: SCM plugin name (e.g. github)
     // Second group: SCM host name (e.g. github.com)
     SCM_CONTEXT: /^([^:]+):([^:]+)$/,
-    // Image aliases can only contain A-Z,a-z,0-9,-,_
-    IMAGE_ALIAS: /^[\w-]+$/,
+    // Image aliases can only contain A-Z,a-z,0-9,-,_,.,:
+    IMAGE_ALIAS: /^[\w-.:]+$/,
     // Valid Events for webhook
     WEBHOOK_EVENT: /^~([\w-]+)$/,
     // Provider region. e.g. us-west-1, ap-northeast-2
