@@ -5,7 +5,7 @@ const Regex = require('../config/regex');
 
 const SCHEMA_USER = Joi.object()
     .keys({
-        id: Joi.alternatives(Joi.string(), Joi.number().integer().positive()).allow('').optional(),
+        id: Joi.string().allow('').optional(),
 
         url: Joi.string()
             .uri()
