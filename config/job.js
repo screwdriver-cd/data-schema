@@ -158,10 +158,6 @@ const SCHEMA_SOURCEPATHS = Joi.alternatives().try(Joi.array().items(SCHEMA_SOURC
 const SCHEMA_CACHE = Joi.boolean().optional();
 const SCHEMA_PARAMETERS = Parameters.parameters.optional();
 const SCHEMA_PROVIDER = Joi.alternatives().try(Provider.provider, Joi.string().regex(Regex.CHECKOUT_URL)).optional();
-const SCHEMA_STAGE = Joi.object().keys({
-    name: Joi.string().regex(Regex.STAGE_NAME), // like a job name
-    startFrom: Joi.boolean().optional()
-});
 const SCHEMA_JOB = Joi.object()
     .keys({
         annotations: Annotations.annotations,
@@ -178,7 +174,6 @@ const SCHEMA_JOB = Joi.object()
         requires: SCHEMA_REQUIRES,
         secrets: SCHEMA_SECRETS,
         settings: SCHEMA_SETTINGS,
-        stage: SCHEMA_STAGE,
         sourcePaths: SCHEMA_SOURCEPATHS,
         steps: SCHEMA_STEPS,
         template: SCHEMA_TEMPLATE,
@@ -219,7 +214,6 @@ module.exports = {
     settings: SCHEMA_SETTINGS,
     sourcePath: SCHEMA_SOURCEPATH,
     sourcePaths: SCHEMA_SOURCEPATHS,
-    stage: SCHEMA_STAGE,
     step: SCHEMA_STEP,
     steps: SCHEMA_STEPS,
     template: SCHEMA_TEMPLATE,
