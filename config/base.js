@@ -37,11 +37,14 @@ const SCHEMA_CHILD_PIPELINES = Joi.object()
         startAll: Joi.boolean()
     })
     .unknown(false);
-
+const SCHEMA_SETUP_TEARDOWN_JOB = Job.job.keys({ requires: Joi.forbidden() });
 const SCHEMA_STAGE = Joi.object()
     .keys({
         description: Joi.string(),
-        jobs: Joi.array().items(Job.jobName).min(0)
+        jobs: Joi.array().items(Job.jobName).min(0),
+        setup: SCHEMA_SETUP_TEARDOWN_JOB,
+        teardown: SCHEMA_SETUP_TEARDOWN_JOB,
+        requires: Job.requires
     })
     .unknown(false);
 
@@ -86,6 +89,7 @@ module.exports = {
     cachePerm: SCHEMA_CACHE_PERMUTATION,
     childPipelines: SCHEMA_CHILD_PIPELINES,
     config: SCHEMA_CONFIG,
+    stageSetupTeardownJob: SCHEMA_SETUP_TEARDOWN_JOB,
     stage: SCHEMA_STAGE,
     stages: SCHEMA_STAGES,
     subscribe: SCHEMA_SUBSCRIBE

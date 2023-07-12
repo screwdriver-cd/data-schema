@@ -26,7 +26,7 @@ const MODEL = {
 
 module.exports = {
     /**
-     * All the available properties of Banners
+     * All the available properties of Banner
      *
      * @property base
      * @type {Joi}
@@ -34,7 +34,7 @@ module.exports = {
     base: Joi.object(MODEL).label('Banner'),
 
     /**
-     * All the available properties of Job
+     * All the available properties of Banner
      *
      * @property fields
      * @type {Object}

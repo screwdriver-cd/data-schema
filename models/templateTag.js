@@ -26,7 +26,7 @@ module.exports = {
     base: Joi.object(MODEL).label('TemplateTag'),
 
     /**
-     * All the available properties of Job
+     * All the available properties of Template Tag
      *
      * @property fields
      * @type {Object}

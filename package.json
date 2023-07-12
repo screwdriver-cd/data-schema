@@ -13,7 +13,7 @@
     "url": "git+https://github.com/screwdriver-cd/data-schema.git"
   },
   "homepage": "https://github.com/screwdriver-cd/data-schema",
-  "bugs": "https://github.com/screwdriver-cd/data-schema/issues",
+  "bugs": "https://github.com/screwdriver-cd/screwdriver/issues",
   "keywords": [
     "screwdriver",
     "yahoo"
@@ -39,23 +39,23 @@
     "debug": false
   },
   "devDependencies": {
-    "chai": "^4.3.6",
-    "eslint": "^8.27.0",
+    "chai": "^4.3.7",
+    "eslint": "^8.28.0",
     "eslint-config-screwdriver": "^7.0.0",
     "js-yaml": "^4.1.0",
     "mocha": "^10.1.0",
     "mocha-multi-reporters": "^1.5.1",
     "mocha-sonarqube-reporter": "^1.0.2",
     "mysql2": "^1.7.0",
-    "npx": "^10.2.2",
+    "npx": "^3.0.0",
     "nyc": "^15.1.0",
     "pg": "^7.18.2",
-    "sequelize": "^6.25.3",
+    "sequelize": "^6.25.8",
     "sequelize-cli": "^6.5.2",
     "sqlite3": "^5.1.2"
   },
   "dependencies": {
-    "cron-parser": "^4.6.0",
+    "cron-parser": "^4.7.0",
     "joi": "^17.7.0"
   }
 }

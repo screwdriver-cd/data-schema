@@ -49,7 +49,7 @@ module.exports = {
     base: Joi.object(MODEL).label('BuildCluster'),
 
     /**
-     * All the available properties of Job
+     * All the available properties of BuildCluster
      *
      * @property fields
      * @type {Object}

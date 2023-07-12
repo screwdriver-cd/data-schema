@@ -34,7 +34,7 @@ module.exports = {
     base: Joi.object(MODEL).label('Step'),
 
     /**
-     * All the available properties of Job
+     * All the available properties of Step
      *
      * @property fields
      * @type {Object}

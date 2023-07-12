@@ -105,7 +105,7 @@ module.exports = {
     base: Joi.object(MODEL).label('Pipeline'),
 
     /**
-     * All the available properties of Job
+     * All the available properties of Pipeline
      *
      * @property fields
      * @type {Object}

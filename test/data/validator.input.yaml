@@ -1,5 +1,9 @@
 yaml: |
   jobs:
+      first:
+          image: node:4
+          steps:
+              install: npm publish
       main:
           annotations:
               beta.screwdriver.cd/auto_pr_builds: fork-only
@@ -15,7 +19,6 @@ yaml: |
               test: npm test
               build: npm run build
 
-
       publish:
           sourcePaths: src/A
           image: node:4
@@ -23,5 +26,14 @@ yaml: |
               install: npm publish
   stages:
       canary:
+          requires: [first]
           description: "Canary jobs to be deployed"
           jobs: [main, publish]
+          setup:
+              image: node:{{NODE_VERSION}}
+              steps:
+                  announce: post banner
+          teardown:
+              image: node:{{NODE_VERSION}}
+              steps:
+                  publish: publish blog post

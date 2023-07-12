@@ -26,7 +26,7 @@ module.exports = {
     base: Joi.object(MODEL).label('Secret'),
 
     /**
-     * All the available properties of Job
+     * All the available properties of Secret
      *
      * @property fields
      * @type {Object}
