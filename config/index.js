@@ -6,6 +6,7 @@ const command = require('./command');
 const commandFormat = require('./commandFormat');
 const job = require('./job');
 const parameters = require('./parameters');
+const pipelineTemplate = require('./pipelineTemplate');
 const regex = require('./regex');
 const settings = require('./settings');
 const template = require('./template');
@@ -19,6 +20,7 @@ module.exports = {
     commandFormat,
     job,
     parameters,
+    pipelineTemplate,
     regex,
     settings,
     template,

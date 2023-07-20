@@ -13,7 +13,8 @@ const MODEL = {
     namespace: Template.namespace,
     name: Joi.string().max(64).description('Template name').example('nodejs/lib'),
     tag: Template.templateTag,
-    version: Template.exactVersion
+    version: Template.exactVersion,
+    templateType: Joi.string().max(16).description('Template Type').example('PIPELINE')
 };
 
 module.exports = {
@@ -26,7 +27,7 @@ module.exports = {
     base: Joi.object(MODEL).label('TemplateTag'),
 
     /**
-     * All the available properties of Template Tag
+     * All the available properties of Job
      *
      * @property fields
      * @type {Object}

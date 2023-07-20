@@ -2,8 +2,9 @@
 
 'use strict';
 
+/** @type {import('sequelize-cli').Migration} */
 const prefix = process.env.DATASTORE_SEQUELIZE_PREFIX || '';
-const table = `${prefix}templateTags`;
+const table = `${prefix}pipelineTemplateVersions`;
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
@@ -17,50 +18,29 @@ module.exports = {
                         primaryKey: true,
                         type: Sequelize.INTEGER.UNSIGNED
                     },
-                    name: {
-                        type: Sequelize.STRING(64)
+                    templateId: {
+                        type: Sequelize.DOUBLE
                     },
-                    tag: {
-                        type: Sequelize.STRING(30)
+                    description: {
+                        type: Sequelize.STRING(256)
                     },
                     version: {
                         type: Sequelize.STRING(16)
                     },
-                    namespace: {
-                        type: Sequelize.STRING(64)
+                    config: {
+                        type: Sequelize.TEXT
                     },
                     createTime: {
                         type: Sequelize.STRING(32)
-                    },
-                    templateType: {
-                        type: Sequelize.STRING(16)
                     }
                 },
                 { transaction }
             );
 
             await queryInterface.addConstraint(table, {
-                name: `${table}_namespace_name_tag_key`,
-                fields: ['name', 'tag', 'namespace'],
+                name: `${table}_templateId_version_key`,
+                fields: ['templateId', 'version'],
                 type: 'unique',
-                transaction
-            });
-
-            await queryInterface.addIndex(table, {
-                name: `${prefix}template_tags_name`,
-                fields: ['name'],
-                transaction
-            });
-
-            await queryInterface.addIndex(table, {
-                name: `${prefix}template_tags_namespace`,
-                fields: ['namespace'],
-                transaction
-            });
-
-            await queryInterface.addIndex(table, {
-                name: `${prefix}template_tags_tag`,
-                fields: ['tag'],
                 transaction
             });
         });
