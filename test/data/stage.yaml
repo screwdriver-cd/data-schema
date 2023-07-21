@@ -6,3 +6,13 @@ jobIds: [1, 2, 3, 4]
 description: 'Deploys canary jobs'
 setup: [222]
 teardown: [333]
+workflowGraph:
+    nodes:
+        - name: '~commit'
+        - name: 'main'
+        - name: 'publish'
+    edges:
+        - src: '~commit'
+          dest: 'main'
+        - src: 'main'
+          dest: 'publish'
