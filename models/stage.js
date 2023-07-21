@@ -61,7 +61,9 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(MODEL, [], ['jobIds', 'description', 'setup', 'teardown'])).label('Update Stage'),
+    update: Joi.object(mutate(MODEL, [], ['jobIds', 'description', 'setup', 'teardown', 'archived'])).label(
+        'Update Stage'
+    ),
 
     /**
      * List of fields that determine a unique row
