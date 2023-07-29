@@ -3,22 +3,22 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const pipelineTemplateVersions = require('../config/pipelineTemplate');
+const JobTemplateConfig = require('../config/template');
 const templateId = require('./templateMeta').base.extract('id');
 
 const MODEL = {
-    id: Joi.number().integer().positive().description('Identifier of this template').example(123345),
+    id: Joi.number().integer().positive().description('Identifier of this template').example(123345).required(),
     templateId,
-    description: pipelineTemplateVersions.description,
-    version: pipelineTemplateVersions.version,
+    description: pipelineTemplateVersions.template.extract('description'),
+    version: JobTemplateConfig.exactVersion.description('Exact version of the template').required(),
     config: pipelineTemplateVersions.config,
     createTime: Joi.string()
         .isoDate()
         .max(32)
         .description('When this template was created')
         .example('2038-01-19T03:14:08.131Z')
+        .required()
 };
-
-const CREATE_MODEL = { ...MODEL, config: pipelineTemplateVersions.configNoDupSteps };
 
 module.exports = {
     /**
@@ -43,28 +43,9 @@ module.exports = {
      * @property get
      * @type {Joi}
      */
-    get: Joi.object(
-        // eslint-disable-next-line no-sparse-arrays
-        mutate(MODEL, ['id', 'templateId', 'description', 'version', 'config', 'createTime'], [])
-    ).label('Get Template'),
-
-    /**
-     * Properties for template that will be passed during a CREATE request
-     *
-     * @property create
-     * @type {Joi}
-     */
-    create: Joi.object(
-        mutate(CREATE_MODEL, ['id', 'templateId', 'description', 'version', 'config', 'createTime'], [])
-    ).label('Create Template'),
-
-    /**
-     * Properties for template that will be passed during a UPDATE request
-     *
-     * @property update
-     * @type {Joi}
-     */
-    update: Joi.object(mutate(MODEL, [], [])).label('Update Template'),
+    get: Joi.object(mutate(MODEL, ['id', 'templateId', 'version'], ['description', 'config', 'createTime'])).label(
+        'Get Template'
+    ),
 
     /**
      * List of fields that determine a unique row
@@ -89,7 +70,7 @@ module.exports = {
      * @property rangeKeys
      * @type {Array}
      */
-    rangeKeys: ['id', 'id'],
+    rangeKeys: ['templateId', 'version'],
 
     /**
      * Tablename to be used in the datastore
@@ -97,12 +78,12 @@ module.exports = {
      * @property tableName
      * @type {String}
      */
-    tableName: 'pipelineTemplateVersions'
-    // /**
-    //  * List of indexes to create in the datastore
-    //  *
-    //  * @property indexes
-    //  * @type {Array}
-    //  */
-    // indexes: [{ fields: ['templateId'] }, { fields: ['version'] }]
+    tableName: 'pipelineTemplateVersions',
+    /**
+     * List of indexes to create in the datastore
+     *
+     * @property indexes
+     * @type {Array}
+     */
+    indexes: [{ fields: ['templateId'] }, { fields: ['version'] }]
 };

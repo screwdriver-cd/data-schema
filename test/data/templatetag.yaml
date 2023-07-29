@@ -3,3 +3,4 @@ id: 123234135
 name: test/template
 tag: stable
 version: '1.2.0'
+templateType: 'JOB'

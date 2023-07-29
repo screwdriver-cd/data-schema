@@ -19,16 +19,20 @@ module.exports = {
                         type: Sequelize.INTEGER.UNSIGNED
                     },
                     pipelineId: {
-                        type: Sequelize.DOUBLE
+                        type: Sequelize.DOUBLE,
+                        allowNull: false
                     },
                     namespace: {
-                        type: Sequelize.STRING(64)
+                        type: Sequelize.STRING(64),
+                        allowNull: false
                     },
                     name: {
-                        type: Sequelize.STRING(64)
+                        type: Sequelize.STRING(64),
+                        allowNull: false
                     },
                     maintainer: {
-                        type: Sequelize.STRING(64)
+                        type: Sequelize.STRING(64),
+                        allowNull: false
                     },
                     trustedSinceVersion: {
                         type: Sequelize.STRING(16)
@@ -37,10 +41,16 @@ module.exports = {
                         type: Sequelize.STRING(16)
                     },
                     createTime: {
-                        type: Sequelize.STRING(32)
+                        type: Sequelize.STRING(32),
+                        allowNull: false
                     },
                     updateTime: {
-                        type: Sequelize.STRING(32)
+                        type: Sequelize.STRING(32),
+                        allowNull: false
+                    },
+                    templateType: {
+                        type: Sequelize.STRING(16),
+                        allowNull: false
                     }
                 },
                 { transaction }
@@ -48,7 +58,7 @@ module.exports = {
 
             await queryInterface.addConstraint(table, {
                 name: `${table}_namespace_name_key`,
-                fields: ['name', 'namespace'],
+                fields: ['name', 'namespace', 'templateType'],
                 type: 'unique',
                 transaction
             });

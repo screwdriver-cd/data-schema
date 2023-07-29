@@ -4,3 +4,4 @@ namespace: test
 name: template
 tag: stable
 version: '1.2.0'
+templateType: 'JOB'

@@ -31,9 +31,6 @@ module.exports = {
                     },
                     createTime: {
                         type: Sequelize.STRING(32)
-                    },
-                    templateType: {
-                        type: Sequelize.STRING(16)
                     }
                 },
                 { transaction }

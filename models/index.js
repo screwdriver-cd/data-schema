@@ -11,6 +11,7 @@ const pipelineTemplateVersions = require('./pipelineTemplateVersions');
 const user = require('./user');
 const secret = require('./secret');
 const stage = require('./stage');
+const stageBuild = require('./stageBuild');
 const template = require('./template');
 const templateMeta = require('./templateMeta');
 const templateTag = require('./templateTag');
@@ -32,6 +33,7 @@ module.exports = {
     user,
     secret,
     stage,
+    stageBuild,
     template,
     templateMeta,
     templateTag,

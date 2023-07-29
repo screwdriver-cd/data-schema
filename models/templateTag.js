@@ -3,6 +3,8 @@
 const Joi = require('joi');
 const Template = require('../config/template');
 
+const TEMPLATE_TYPES = ['JOB', 'PIPELINE'];
+
 const MODEL = {
     id: Joi.number().integer().positive().description('Identifier of this template tag').example(123345),
     createTime: Joi.string()
@@ -14,7 +16,13 @@ const MODEL = {
     name: Joi.string().max(64).description('Template name').example('nodejs/lib'),
     tag: Template.templateTag,
     version: Template.exactVersion,
-    templateType: Joi.string().max(16).description('Template Type').example('PIPELINE')
+    templateType: Joi.string()
+        .valid(...TEMPLATE_TYPES)
+        .max(16)
+        .description('Template Type')
+        .example('PIPELINE')
+        .required()
+        .default('JOB')
 };
 
 module.exports = {
@@ -40,7 +48,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['namespace', 'name', 'tag'],
+    keys: ['namespace', 'name', 'tag', 'templateType'],
 
     /**
      * List of all fields in the model

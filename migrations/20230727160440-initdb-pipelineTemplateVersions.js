@@ -19,19 +19,23 @@ module.exports = {
                         type: Sequelize.INTEGER.UNSIGNED
                     },
                     templateId: {
-                        type: Sequelize.DOUBLE
+                        type: Sequelize.DOUBLE,
+                        allowNull: false
                     },
                     description: {
                         type: Sequelize.STRING(256)
                     },
                     version: {
-                        type: Sequelize.STRING(16)
+                        type: Sequelize.STRING(16),
+                        allowNull: false
                     },
                     config: {
-                        type: Sequelize.TEXT
+                        type: Sequelize.TEXT,
+                        allowNull: false
                     },
                     createTime: {
-                        type: Sequelize.STRING(32)
+                        type: Sequelize.STRING(32),
+                        allowNull: false
                     }
                 },
                 { transaction }
@@ -41,6 +45,18 @@ module.exports = {
                 name: `${table}_templateId_version_key`,
                 fields: ['templateId', 'version'],
                 type: 'unique',
+                transaction
+            });
+
+            await queryInterface.addIndex(table, {
+                name: `${table}_templateId`,
+                fields: ['templateId'],
+                transaction
+            });
+
+            await queryInterface.addIndex(table, {
+                name: `${table}_version`,
+                fields: ['version'],
                 transaction
             });
         });

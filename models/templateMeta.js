@@ -2,30 +2,42 @@
 
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
-const pipelineTemplate = require('../config/pipelineTemplate');
+const pipelineTemplateConfig = require('../config/pipelineTemplate');
 const pipelineId = require('./pipeline').base.extract('id');
+const JobTemplateConfig = require('../config/template');
+
+const TEMPLATE_TYPES = ['JOB', 'PIPELINE'];
 
 const MODEL = {
-    id: Joi.number().integer().positive().description('Identifier of this template').example(123345),
+    id: Joi.number().integer().positive().description('Identifier of this template').example(123345).required(),
     pipelineId,
-    namespace: pipelineTemplate.namespace,
-    name: Joi.string().max(64).description('Template name').example('nodejs/lib'),
-    maintainer: pipelineTemplate.maintainer,
-    trustedSinceVersion: Joi.string().max(32).description('Latest version that was marked trusted').example('1.2.3'),
-    latest: Joi.boolean().description('Whether this is latest version'),
+    namespace: pipelineTemplateConfig.template.extract('namespace'),
+    name: pipelineTemplateConfig.template.extract('name'),
+    maintainer: pipelineTemplateConfig.template.extract('maintainer'),
+    trustedSinceVersion: JobTemplateConfig.exactVersion
+        .description('The version since the template is marked as trusted')
+        .example('1.2.3'),
+    latestVersion: JobTemplateConfig.exactVersion.description('Latest version of the template'),
     createTime: Joi.string()
         .isoDate()
         .max(32)
         .description('When this template was created')
-        .example('2038-01-19T03:14:08.131Z'),
+        .example('2038-01-19T03:14:08.131Z')
+        .required(),
     updateTime: Joi.string()
         .isoDate()
         .max(32)
         .description('When this template was updated')
         .example('2038-01-19T03:14:08.131Z')
+        .required(),
+    templateType: Joi.string()
+        .valid(...TEMPLATE_TYPES)
+        .max(16)
+        .description('Template Type')
+        .example('PIPELINE')
+        .required()
+        .default('JOB')
 };
-
-const CREATE_MODEL = { ...MODEL, config: pipelineTemplate.configNoDupSteps };
 
 module.exports = {
     /**
@@ -54,52 +66,10 @@ module.exports = {
         // eslint-disable-next-line no-sparse-arrays
         mutate(
             MODEL,
-            [
-                'id',
-                'pipelineId',
-                'namespace',
-                'name',
-                'maintainer',
-                'trustedSinceVersion',
-                'latest',
-                'createTime',
-                'updateTime'
-            ],
-            []
+            ['id', 'pipelineId', 'namespace', 'name', 'maintainer', 'templateType'],
+            ['trustedSinceVersion', 'latestVersion', 'createTime', 'updateTime']
         )
     ).label('Get Template'),
-
-    /**
-     * Properties for template that will be passed during a CREATE request
-     *
-     * @property create
-     * @type {Joi}
-     */
-    create: Joi.object(
-        mutate(
-            CREATE_MODEL,
-            [
-                'id',
-                'pipelineId',
-                'namespace',
-                'name',
-                'maintainer',
-                'trustedSinceVersion',
-                'latest',
-                'createTime',
-                'updateTime'
-            ],
-            []
-        )
-    ).label('Create Template'),
-
-    /**
-     * Properties for template that will be passed during a UPDATE request
-     *
-     * @property update
-     * @type {Joi}
-     */
-    update: Joi.object(mutate(MODEL, [], [])).label('Update Template'),
 
     /**
      * List of fields that determine a unique row
@@ -107,7 +77,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['namespace', 'name'],
+    keys: ['namespace', 'name', 'templateType'],
 
     /**
      * List of all fields in the model
@@ -124,7 +94,7 @@ module.exports = {
      * @property rangeKeys
      * @type {Array}
      */
-    rangeKeys: ['id', 'id'],
+    rangeKeys: ['namespace', 'name'],
 
     /**
      * Tablename to be used in the datastore

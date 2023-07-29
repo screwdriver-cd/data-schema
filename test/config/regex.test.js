@@ -3,6 +3,7 @@
 const { assert } = require('chai');
 const { config } = require('../..');
 
+/* eslint-disable max-lines-per-function */
 describe('config regex', () => {
     describe('internal trigger', () => {
         it('checks good internal trigger', () => {

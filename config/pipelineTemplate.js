@@ -5,6 +5,7 @@ const JobsSchema = require('./base').jobs;
 const Shared = require('./base').shared;
 const Parameters = require('./parameters');
 const Template = require('./template');
+const Regex = require('./regex');
 
 const SCHEMA_CONFIG = Joi.object()
     .keys({
@@ -14,14 +15,21 @@ const SCHEMA_CONFIG = Joi.object()
     })
     .unknown(false);
 
-const SCHEMA_TEMPLATE = Joi.object().keys({
-    namespace: Template.namespace,
-    name: Template.name.required(),
-    version: Template.version.required(),
-    description: Template.description.required(),
-    maintainer: Template.maintainer.required(),
-    config: SCHEMA_CONFIG
-});
+const SCHEMA_TEMPLATE = Joi.object()
+    .keys({
+        namespace: Template.namespace.required(),
+        name: Joi.string()
+            .regex(Regex.TEMPLATE_NAME_NO_SLASH)
+            .max(64)
+            .description('Name of the template')
+            .example('nodePipeline')
+            .required(),
+        version: Template.version.required(),
+        description: Template.description.required(),
+        maintainer: Template.maintainer.required(),
+        config: SCHEMA_CONFIG.required()
+    })
+    .unknown(false);
 
 /**
  * The definition of the Template pieces
@@ -29,13 +37,5 @@ const SCHEMA_TEMPLATE = Joi.object().keys({
  */
 module.exports = {
     template: SCHEMA_TEMPLATE,
-    namespace: Template.namespace,
-    name: Template.name,
-    templateTag: Template.templateTag,
-    version: Template.version,
-    exactVersion: Template.exactVersion,
-    description: Template.description,
-    maintainer: Template.maintainer,
-    config: JobsSchema.templateJob,
-    configNoDupSteps: JobsSchema.jobNoDupSteps
+    config: SCHEMA_CONFIG
 };
