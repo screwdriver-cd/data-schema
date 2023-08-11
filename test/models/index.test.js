@@ -1,7 +1,7 @@
 'use strict';
 
-const { assert } = require('chai');
 const fs = require('fs');
+const { assert } = require('chai');
 const { models } = require('../..');
 
 describe('model commmons', () => {
