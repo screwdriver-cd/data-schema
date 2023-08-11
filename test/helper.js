@@ -1,8 +1,8 @@
 'use strict';
 
-const yaml = require('js-yaml');
 const fs = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
 const DATA_DIR = path.join(__dirname, 'data');
 
 module.exports = {
