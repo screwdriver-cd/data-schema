@@ -9,3 +9,9 @@ describe('api status', () => {
         assert.isNull(validate('status.yaml', api.status).error);
     });
 });
+
+describe('api status', () => {
+    it('status', () => {
+        assert.isNull(validate('status-exhaustive.yaml', api.status).error);
+    });
+});
