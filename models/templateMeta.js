@@ -49,7 +49,7 @@ module.exports = {
     base: Joi.object(MODEL).label('templateMeta'),
 
     /**
-     * All the available properties of Job
+     * All the available properties of TemplateMeta
      *
      * @property fields
      * @type {Object}

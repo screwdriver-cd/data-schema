@@ -30,7 +30,7 @@ module.exports = {
     base: Joi.object(MODEL).label('pipelineTemplateVersions'),
 
     /**
-     * All the available properties of Job
+     * All the available properties of pipelineTemplateVersions
      *
      * @property fields
      * @type {Object}
