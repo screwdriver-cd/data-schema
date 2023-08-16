@@ -1,0 +1,9 @@
+# Template GET Example
+id: 123234135
+pipelineId: 8765
+namespace: test
+name: template
+maintainer: foo@bar.com
+createTime: "2038-01-19T03:14:08.131Z"
+updateTime: "2038-01-19T03:14:08.131Z"
+templateType: "PIPELINE"

@@ -1,0 +1,12 @@
+# Template CREATE Example
+id: 123234
+templateId: 123234135
+description: Pipeline template Versions for testing
+version: "1.2.3"
+config:
+    jobs:
+        main:
+            steps:
+                -   init: npm install
+                -   test: npm test
+createTime: "2038-01-19T03:14:08.131Z"
