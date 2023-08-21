@@ -9,12 +9,14 @@ const status = require('./status');
 const templateValidator = require('./templateValidator');
 const validator = require('./validator');
 const versions = require('./versions');
+const pipelineUsage = require('./pipelineUsage');
 
 module.exports = {
     auth,
     commandValidator,
     loglines,
     pagination,
+    pipelineUsage,
     stats,
     status,
     templateValidator,
