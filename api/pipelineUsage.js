@@ -1,7 +1,8 @@
 'use strict';
 
 const Joi = require('joi');
-const pipelineId = require('../models/pipeline').base.extract('id');
+const pipelineSchema = require('../models/pipeline').base;
+const eventSchema = require('../models/event').base;
 const Scm = require('../core/scm');
 
 module.exports = {
