@@ -6,13 +6,13 @@ const eventSchema = require('../models/event').base;
 const Scm = require('../core/scm');
 
 module.exports = {
-    get: Joi.array().items(
+    output: Joi.array().items(
         Joi.object({
-            id: pipelineId,
-            name: Joi.string().required(),
-            scmRepo: Scm.repo,
-            lastRun: Joi.alternatives().try(Joi.string().isoDate(), Joi.allow(null)),
-            admins: Joi.object().pattern(Joi.string(), Joi.boolean()).required()
+            id: pipelineSchema.extract('id').required(),
+            name: pipelineSchema.extract('name').required(),
+            scmRepo: pipelineSchema.extract('scmRepo').required(),
+            lastRun: Joi.alternatives().try(eventSchema.extract('createTime'), Joi.allow(null)),
+            admins: pipelineSchema.extract('admins').required()
         })
     )
 };
