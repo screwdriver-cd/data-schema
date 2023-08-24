@@ -3,10 +3,9 @@
 const Joi = require('joi');
 const pipelineSchema = require('../models/pipeline').base;
 const eventSchema = require('../models/event').base;
-const Scm = require('../core/scm');
 
 module.exports = {
-    output: Joi.array().items(
+    get: Joi.array().items(
         Joi.object({
             id: pipelineSchema.extract('id').required(),
             name: pipelineSchema.extract('name').required(),
