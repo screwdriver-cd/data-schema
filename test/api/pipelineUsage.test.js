@@ -5,7 +5,7 @@ const { api } = require('../..');
 const { validate } = require('../helper');
 
 describe('api get pipelineUsage', () => {
-    const inputSchema = api.pipelineUsage.get;
+    const schema = api.pipelineUsage.get;
 
     describe('basic', () => {
         it('accepts response', () => {
