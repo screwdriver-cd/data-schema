@@ -1,0 +1,11 @@
+- id: 4
+  name: nathom/sd-uses-template
+  scmRepo:
+    branch: main
+    name: nathom/sd-uses-template
+    url: https://github.com/nathom/sd-uses-template/tree/main/pipe2
+    rootDir: pipe2
+    private: false
+  lastRun: null
+  admins:
+    nathom: true
