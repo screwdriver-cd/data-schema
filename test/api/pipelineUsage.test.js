@@ -18,4 +18,8 @@ describe('api get pipelineUsage', () => {
     it('rejects null name', () => {
         assert.isOk(validate('api.pipelineUsage.null-name.yaml', schema).error);
     });
+
+    it('accepts empty array', () => {
+        assert.isNull(validate('api.pipelineUsage.empty-array.yaml', schema).error);
+    });
 });
