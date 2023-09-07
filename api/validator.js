@@ -36,7 +36,7 @@ const SCHEMA_JOB_PERMUTATION = Joi.object()
         secrets: Job.secrets,
         settings: Job.settings,
         sourcePaths: Job.sourcePaths,
-        stages: Base.stages,
+        stage: Base.stage,
         subscribe: Base.subscribe,
         templateId: Job.templateId
     })
