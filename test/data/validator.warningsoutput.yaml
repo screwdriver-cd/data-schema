@@ -18,6 +18,8 @@ jobs:
     sourcePaths:
       - src/A
       - src/AConfig
+    stage:
+      name: canary
   - image: node:5
     commands:
     - name: install
@@ -36,6 +38,8 @@ jobs:
     sourcePaths:
       - src/A
       - src/AConfig
+    stage:
+      name: canary
   - image: node:6
     commands:
     - name: install
@@ -54,6 +58,8 @@ jobs:
     sourcePaths:
       - src/A
       - src/AConfig
+    stage:
+      name: canary
     secrets:
       - ANOTHER_SECRET
 
