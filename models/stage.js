@@ -2,7 +2,6 @@
 
 const Joi = require('joi');
 const Regex = require('../config/regex');
-const WorkflowGraph = require('../config/workflowGraph');
 const mutate = require('../lib/mutate');
 
 const MODEL = {
@@ -26,15 +25,7 @@ const MODEL = {
 
     description: Joi.string().max(256).description('Description of the Stage').example('Deploys canary jobs'),
 
-    archived: Joi.boolean().description('Flag if the stage is archived').example(true).default(false),
-
-    workflowGraph: WorkflowGraph.workflowGraph.description('Graph representation of the workflow').example({
-        nodes: [{ name: '~commit' }, { name: 'main' }, { name: 'publish' }],
-        edges: [
-            { src: '~commit', dest: 'main' },
-            { src: 'main', dest: 'publish' }
-        ]
-    })
+    archived: Joi.boolean().description('Flag if the stage is archived').example(true).default(false)
 };
 
 module.exports = {
@@ -61,11 +52,7 @@ module.exports = {
      * @type {Joi}
      */
     get: Joi.object(
-        mutate(
-            MODEL,
-            ['id', 'pipelineId', 'name', 'jobIds'],
-            ['description', 'setup', 'teardown', 'archived', 'workflowGraph']
-        )
+        mutate(MODEL, ['id', 'pipelineId', 'name', 'jobIds'], ['description', 'setup', 'teardown', 'archived'])
     ).label('Get Stage metadata'),
 
     /**
@@ -74,9 +61,9 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(
-        mutate(MODEL, [], ['jobIds', 'description', 'setup', 'teardown', 'archived', 'workflowGraph'])
-    ).label('Update Stage'),
+    update: Joi.object(mutate(MODEL, [], ['jobIds', 'description', 'setup', 'teardown', 'archived'])).label(
+        'Update Stage'
+    ),
 
     /**
      * List of fields that determine a unique row

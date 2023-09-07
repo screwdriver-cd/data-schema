@@ -23,7 +23,7 @@ describe('model stage build', () => {
 
     describe('allKeys', () => {
         it('lists all of the fields in the model', () => {
-            const expectedKeys = ['id', 'stageId', 'eventId', 'workflowGraph', 'status'];
+            const expectedKeys = ['id', 'stageId', 'eventId', 'status'];
 
             expectedKeys.forEach(keyName => {
                 assert.include(models.stageBuild.allKeys, keyName, `Key name ${keyName} not included`);
