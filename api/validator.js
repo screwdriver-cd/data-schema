@@ -38,7 +38,7 @@ const SCHEMA_JOB_PERMUTATION = Joi.object()
         sourcePaths: Job.sourcePaths,
         stage: Joi.object()
             .keys({
-                name: Joi.string().regex(Regex.STAGE_NAME).optional()
+                name: Joi.string().regex(Regex.STAGE_NAME).required()
             })
             .unknown(false),
         subscribe: Base.subscribe,
