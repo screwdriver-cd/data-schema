@@ -36,7 +36,11 @@ const SCHEMA_JOB_PERMUTATION = Joi.object()
         secrets: Job.secrets,
         settings: Job.settings,
         sourcePaths: Job.sourcePaths,
-        stages: Base.stages,
+        stage: Joi.object()
+            .keys({
+                name: Joi.string().regex(Regex.STAGE_NAME).required()
+            })
+            .unknown(false),
         subscribe: Base.subscribe,
         templateId: Job.templateId
     })

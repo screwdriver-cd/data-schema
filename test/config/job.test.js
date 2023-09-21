@@ -68,7 +68,7 @@ describe('config job', () => {
             assert.isNull(validate('config.job.cache.yaml', config.job.job).error);
         });
 
-        it('returns error for bad blockedBy format', () => {
+        it('returns error for bad cache format', () => {
             assert.isNotNull(validate('config.job.cache.bad.yaml', config.job.job).error);
         });
     });

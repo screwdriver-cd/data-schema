@@ -2,14 +2,4 @@
 id: 123234135
 stageId: 1
 eventId: 555
-workflowGraph:
-    nodes:
-        - name: '~commit'
-        - name: 'main'
-        - name: 'publish'
-    edges:
-        - src: '~commit'
-          dest: 'main'
-        - src: 'main'
-          dest: 'publish'
 status: SUCCESS
