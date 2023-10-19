@@ -23,6 +23,10 @@ const MODEL = {
         .example('2038-01-19T03:14:08.131Z'),
     trusted: Joi.boolean().description('Mark whether template is trusted'),
     latest: Joi.boolean().description('Whether this is latest version')
+    clouds: Joi.array().items(Joi.string())
+        .description('A list of cloud that template supports')
+        .example(['aws', 'gcp', 'azure'])
+        .optional()
 };
 
 const CREATE_MODEL = { ...MODEL, config: Template.configNoDupSteps };
