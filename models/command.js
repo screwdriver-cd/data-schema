@@ -58,7 +58,7 @@ module.exports = {
         mutate(
             MODEL,
             ['id', 'namespace', 'name', 'version', 'description', 'maintainer', 'format', 'pipelineId'],
-            ['habitat', 'docker', 'binary', 'createTime', 'usage', 'trusted', 'latest']
+            ['habitat', 'docker', 'binary', 'createTime', 'usage', 'trusted', 'latest', 'compatibilities']
         )
     ).label('Get Command'),
 
