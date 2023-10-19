@@ -6,10 +6,20 @@ const Template = require('../config/template');
 const pipelineId = require('./pipeline').base.extract('id');
 
 const MODEL = {
-    id: Joi.number().integer().positive().description('Identifier of this template').example(123345),
-    labels: Joi.array().items(Joi.string()).description('Labels for template').example(['stable', 'latest', 'beta']),
+    id: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier of this template')
+        .example(123345),
+    labels: Joi.array()
+        .items(Joi.string())
+        .description('Labels for template')
+        .example(['stable', 'latest', 'beta']),
     config: Template.config,
-    name: Joi.string().max(64).description('Template name').example('nodejs/lib'),
+    name: Joi.string()
+        .max(64)
+        .description('Template name')
+        .example('nodejs/lib'),
     version: Template.version,
     description: Template.description,
     maintainer: Template.maintainer,

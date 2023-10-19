@@ -9,7 +9,9 @@ const HASH_LENGTH = 512;
 const HASH_BASE64_LENGTH = Math.ceil(HASH_LENGTH / 6);
 
 const MODEL = {
-    id: Joi.number().integer().positive(),
+    id: Joi.number()
+        .integer()
+        .positive(),
 
     hash: Joi.string()
         // Using https://www.npmjs.com/package/base64url
@@ -17,11 +19,21 @@ const MODEL = {
         .length(HASH_BASE64_LENGTH)
         .description('Hashed token value'),
 
-    userId: Joi.number().integer().positive().description('User ID'),
+    userId: Joi.number()
+        .integer()
+        .positive()
+        .description('User ID'),
 
-    pipelineId: Joi.number().integer().positive().description('Pipeline ID').example(123345),
+    pipelineId: Joi.number()
+        .integer()
+        .positive()
+        .description('Pipeline ID')
+        .example(123345),
 
-    name: Joi.string().max(128).description('Token name').example('Mobile token'),
+    name: Joi.string()
+        .max(128)
+        .description('Token name')
+        .example('Mobile token'),
 
     description: Joi.string()
         .max(256)
@@ -29,7 +41,10 @@ const MODEL = {
         .description('Token description')
         .example('Used to authenticate the mobile app'),
 
-    lastUsed: Joi.string().isoDate().allow('').description('Last used')
+    lastUsed: Joi.string()
+        .isoDate()
+        .allow('')
+        .description('Last used')
 };
 
 module.exports = {
@@ -39,7 +54,9 @@ module.exports = {
      * @property base
      * @type {Joi}
      */
-    base: Joi.object(MODEL).without('userId', 'pipelineId').label('Token'),
+    base: Joi.object(MODEL)
+        .without('userId', 'pipelineId')
+        .label('Token'),
 
     /**
      * All the available properties of Token

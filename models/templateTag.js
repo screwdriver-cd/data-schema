@@ -6,14 +6,21 @@ const Template = require('../config/template');
 const TEMPLATE_TYPES = ['JOB', 'PIPELINE'];
 
 const MODEL = {
-    id: Joi.number().integer().positive().description('Identifier of this template tag').example(123345),
+    id: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier of this template tag')
+        .example(123345),
     createTime: Joi.string()
         .isoDate()
         .max(32)
         .description('When this template tag was created')
         .example('2038-01-19T03:14:08.131Z'),
     namespace: Template.namespace,
-    name: Joi.string().max(64).description('Template name').example('nodejs/lib'),
+    name: Joi.string()
+        .max(64)
+        .description('Template name')
+        .example('nodejs/lib'),
     tag: Template.templateTag,
     version: Template.exactVersion,
     templateType: Joi.string()

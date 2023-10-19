@@ -12,13 +12,21 @@ const buildId = require('./build').get.extract('id');
 const prNum = Scm.hook.extract('prNum');
 
 const MODEL = {
-    id: Joi.number().integer().positive().description('Identifier of this event').example(123345),
+    id: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier of this event')
+        .example(123345),
     parentEventId: Joi.number()
         .integer()
         .positive()
         .description('Identifier of the direct parent event')
         .example(123344),
-    groupEventId: Joi.number().integer().positive().description('Identifier of the group parent event').example(123344),
+    groupEventId: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier of the group parent event')
+        .example(123344),
     causeMessage: Joi.string()
         .max(512)
         .truncate()
@@ -32,8 +40,14 @@ const MODEL = {
         .description('When this event was created')
         .example('2038-01-19T03:14:08.131Z'),
     creator: Scm.user.description('Creator of the event'),
-    meta: Joi.object().default({}).description('Key=>Value information from the event itself'),
-    pipelineId: Joi.number().integer().positive().description('Identifier of this pipeline').example(123345),
+    meta: Joi.object()
+        .default({})
+        .description('Key=>Value information from the event itself'),
+    pipelineId: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier of this pipeline')
+        .example(123345),
     sha: Joi.string()
         .hex()
         .length(40)
@@ -48,7 +62,11 @@ const MODEL = {
         .try(trigger, jobName)
         .description('Event start point - a job name or trigger name (~commit/~pr)')
         .example('~commit'),
-    type: Joi.string().valid('pr', 'pipeline').max(10).description('Type of the event').example('pr'),
+    type: Joi.string()
+        .valid('pr', 'pipeline')
+        .max(10)
+        .description('Type of the event')
+        .example('pr'),
     workflowGraph: WorkflowGraph.workflowGraph.description('Graph representation of the workflow').example({
         nodes: [{ name: '~commit' }, { name: 'main' }, { name: 'publish' }],
         edges: [
@@ -58,7 +76,9 @@ const MODEL = {
     }),
     pr: Scm.pr.description('Pull request object that holds information about the pull request'),
     prNum: prNum.description('Pull request number if it is a PR event'),
-    baseBranch: Joi.string().description('build base branch').example('develop')
+    baseBranch: Joi.string()
+        .description('build base branch')
+        .example('develop')
 };
 
 const CREATE_MODEL = { ...MODEL, buildId, parentBuildId, parentBuilds, prNum };

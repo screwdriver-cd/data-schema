@@ -7,7 +7,12 @@ const JobTemplateConfig = require('../config/template');
 const templateId = require('./templateMeta').base.extract('id');
 
 const MODEL = {
-    id: Joi.number().integer().positive().description('Identifier of this template').example(123345).required(),
+    id: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier of this template')
+        .example(123345)
+        .required(),
     templateId,
     description: pipelineTemplateVersions.template.extract('description'),
     version: JobTemplateConfig.exactVersion.description('Exact version of the template').required(),

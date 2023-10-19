@@ -5,13 +5,23 @@ const mutate = require('../lib/mutate');
 const Job = require('../config/job');
 
 const MODEL = {
-    id: Joi.number().integer().positive().description('Identifier of this secret').example(123345),
+    id: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier of this secret')
+        .example(123345),
 
-    pipelineId: Joi.number().integer().positive().description('pipeline associated with the secret').example(123345),
+    pipelineId: Joi.number()
+        .integer()
+        .positive()
+        .description('pipeline associated with the secret')
+        .example(123345),
 
     name: Job.secret.description('Name of the secret').example('NPM_TOKEN'),
 
-    value: Joi.string().description('value of the secret').example('2d991790bab1ac8576097ca87f170df73410b55c'),
+    value: Joi.string()
+        .description('value of the secret')
+        .example('2d991790bab1ac8576097ca87f170df73410b55c'),
 
     allowInPR: Joi.boolean().description('flag to denote if the secret can be shown in PR builds')
 };

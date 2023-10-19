@@ -16,7 +16,13 @@ const SCHEMA_DISPLAY_JOB_NAME_LENGTH = Joi.number()
     .example(20);
 const SCHEMA_METRICS_DOWNTIME_JOBS = Joi.array()
     .items(
-        Joi.number().integer().positive().description('Identifier for this job').example(123345).optional().allow(null)
+        Joi.number()
+            .integer()
+            .positive()
+            .description('Identifier for this job')
+            .example(123345)
+            .optional()
+            .allow(null)
     )
     .description('Job IDs to watch for downtime');
 const SCHEMA_METRICS_DOWNTIME_STATUSES = Joi.array()

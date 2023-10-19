@@ -6,7 +6,11 @@ const Command = require('../config/command');
 const pipelineId = require('./pipeline').base.extract('id');
 
 const MODEL = {
-    id: Joi.number().integer().positive().description('Identifier of this command').example(123345),
+    id: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier of this command')
+        .example(123345),
     namespace: Command.namespace,
     version: Command.version,
     description: Command.description,

@@ -7,9 +7,16 @@ const scmContext = pipelineBaseSchema.extract('scmContext');
 const Settings = require('../config/settings');
 
 const MODEL = {
-    id: Joi.number().integer().positive().description('Identifier of this user').example(123345),
+    id: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier of this user')
+        .example(123345),
 
-    username: Joi.string().max(128).description('Username').example('batman123'),
+    username: Joi.string()
+        .max(128)
+        .description('Username')
+        .example('batman123'),
 
     token: Joi.string().description('Github token'),
 

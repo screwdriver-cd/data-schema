@@ -6,7 +6,9 @@ const Scm = require('../core/scm');
 const Regex = require('../config/regex');
 const Job = require('../config/job');
 const Step = require('./step');
-const ID = Joi.number().integer().positive();
+const ID = Joi.number()
+    .integer()
+    .positive();
 const PARENT_BUILD_ID = ID;
 const PARENT_BUILDS_ID = Joi.alternatives().try(ID, Joi.valid(null));
 const buildClusterSchema = require('./buildCluster');
@@ -25,13 +27,25 @@ const STATUSES = [
 ];
 
 const MODEL = {
-    id: Joi.number().integer().positive().description('Identifier of this build').example(123345),
+    id: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier of this build')
+        .example(123345),
 
     environment: Job.environment,
 
-    eventId: Joi.number().integer().positive().description('Identifier of the parent event').example(123345),
+    eventId: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier of the parent event')
+        .example(123345),
 
-    jobId: Joi.number().integer().positive().description('Identifier of the parent job').example(123345),
+    jobId: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier of the parent job')
+        .example(123345),
 
     parentBuildId: Joi.array()
         .items(PARENT_BUILD_ID)
@@ -51,11 +65,18 @@ const MODEL = {
             222: { eventId: 3, jobs: { jobC: 555 } }
         }),
 
-    number: Joi.number().positive().description('Timestamp of create time').example(1473900790309),
+    number: Joi.number()
+        .positive()
+        .description('Timestamp of create time')
+        .example(1473900790309),
 
-    container: Joi.string().description('Container this build is running in').example('node:4'),
+    container: Joi.string()
+        .description('Container this build is running in')
+        .example('node:4'),
 
-    cause: Joi.string().description('Reason why this build started').example('pull request opened'),
+    cause: Joi.string()
+        .description('Reason why this build started')
+        .example('pull request opened'),
 
     sha: Joi.string()
         .hex()
@@ -69,15 +90,24 @@ const MODEL = {
 
     commit: Scm.commit,
 
-    createTime: Joi.string().isoDate().max(32).description('When this build was created'),
+    createTime: Joi.string()
+        .isoDate()
+        .max(32)
+        .description('When this build was created'),
 
-    startTime: Joi.string().isoDate().description('When this build started on a build machine'),
+    startTime: Joi.string()
+        .isoDate()
+        .description('When this build started on a build machine'),
 
-    endTime: Joi.string().isoDate().description('When this build stopped running'),
+    endTime: Joi.string()
+        .isoDate()
+        .description('When this build stopped running'),
 
     parameters: Joi.object().description('Input parameters that defined this build'),
 
-    meta: Joi.object().default({}).description('Key=>Value information from the build itself'),
+    meta: Joi.object()
+        .default({})
+        .description('Key=>Value information from the build itself'),
 
     status: Joi.string()
         .valid(...STATUSES)
@@ -90,15 +120,25 @@ const MODEL = {
 
     stats: Joi.object()
         .keys({
-            queueEnterTime: Joi.string().isoDate().description('When this build enters queue'),
-            blockedStartTime: Joi.string().isoDate().description('When this build is blocked'),
-            imagePullStartTime: Joi.string().isoDate().description('When this build starts pulling image'),
+            queueEnterTime: Joi.string()
+                .isoDate()
+                .description('When this build enters queue'),
+            blockedStartTime: Joi.string()
+                .isoDate()
+                .description('When this build is blocked'),
+            imagePullStartTime: Joi.string()
+                .isoDate()
+                .description('When this build starts pulling image'),
             hostname: Joi.string().description('Where this build is run')
         })
         .unknown(true) // allow other fields
         .description('Stats for this build'),
 
-    templateId: Joi.number().integer().positive().description("Identifier for this job's template").example(123345),
+    templateId: Joi.number()
+        .integer()
+        .positive()
+        .description("Identifier for this job's template")
+        .example(123345),
 
     buildClusterName
 };
@@ -110,7 +150,9 @@ const parentBuildIdSchema = Joi.alternatives()
 
 const environmentSchema = Joi.alternatives().try(Joi.array().items(Job.environment), Job.environment);
 
-const stepsSchema = Joi.array().items(Step.get).description('List of steps');
+const stepsSchema = Joi.array()
+    .items(Step.get)
+    .description('List of steps');
 
 const GET_MODEL = { ...MODEL, parentBuildId: parentBuildIdSchema, environment: environmentSchema, steps: stepsSchema };
 

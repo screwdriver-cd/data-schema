@@ -4,14 +4,18 @@ const Joi = require('joi');
 const mutate = require('../lib/mutate');
 
 const MODEL = {
-    id: Joi.number().integer().positive(),
+    id: Joi.number()
+        .integer()
+        .positive(),
 
     message: Joi.string()
         .max(512)
         .description('Body of banner to display')
         .example('Due to planned upgrade of Kubernetes, Screwdriver will be down'),
 
-    isActive: Joi.boolean().description('Flag if the banner is active').example(true),
+    isActive: Joi.boolean()
+        .description('Flag if the banner is active')
+        .example(true),
 
     createTime: Joi.string()
         .max(32)
@@ -19,9 +23,16 @@ const MODEL = {
         .description('When this banner was created')
         .example('2017-01-06T01:49:50.384359267Z'),
 
-    createdBy: Joi.string().max(128).description('Username of user creating the banner').example('batman123'),
+    createdBy: Joi.string()
+        .max(128)
+        .description('Username of user creating the banner')
+        .example('batman123'),
 
-    type: Joi.string().valid('info', 'warn').max(32).description('Type/Severity of the banner message').example('info')
+    type: Joi.string()
+        .valid('info', 'warn')
+        .max(32)
+        .description('Type/Severity of the banner message')
+        .example('info')
 };
 
 module.exports = {

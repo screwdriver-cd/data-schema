@@ -34,8 +34,7 @@ module.exports = {
     FULL_TEMPLATE_NAME: /^([\w/-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-.]+)))?$/,
     // Full name of template and version with grouping for the namespace
     // eslint-disable-next-line max-len
-    FULL_TEMPLATE_NAME_WITH_NAMESPACE:
-        /^([\w-]+)\/([\w/-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-]+)))?$/,
+    FULL_TEMPLATE_NAME_WITH_NAMESPACE: /^([\w-]+)\/([\w/-]+)(?:@((?:(?:\d+)(?:\.\d+)?(?:\.\d+)?)|(?:[a-zA-Z][\w-]+)))?$/,
     // Images cannot contain dangerous shell metacharacters '";&|><*?`$()[]!# or space; {} is allowed for matrix mode
     IMAGE_NAME: /^[^;&|><*?`$()!#'" ]+$/,
     // Steps can only be named with A-Z,a-z,0-9,-,_
@@ -89,8 +88,7 @@ module.exports = {
     // Fourth group: branch name (e.g. #branchName)
     // Fifth group: root dir (e.g. :path/to/source/dir)
     // eslint-disable-next-line max-len
-    CHECKOUT_URL:
-        /^(?:(?:https:\/\/(?:[^@/:\s]+@)?)|git@|org-\d+@)+([^/:\s]+)(?:\/|:)([^/:\s]+)\/([^\s]+?)(?:\.git)(#[^:\s]+)?(:[^\s]+)?$/,
+    CHECKOUT_URL: /^(?:(?:https:\/\/(?:[^@/:\s]+@)?)|git@|org-\d+@)+([^/:\s]+)(?:\/|:)([^/:\s]+)\/([^\s]+?)(?:\.git)(#[^:\s]+)?(:[^\s]+)?$/,
     // scmUri. For example: github.com:abc-123:master or bitbucket.org:{123}:master
     // Optionally, can have rootDir. For example: github.com:abc-123:master:src/app/component
     SCM_URI: /^([^:]+):([^:]+):([^:]+)(?::([^:]+))?$/,
