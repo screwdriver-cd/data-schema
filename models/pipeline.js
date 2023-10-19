@@ -11,6 +11,16 @@ const Parameters = require('../config/parameters');
 const mutate = require('../lib/mutate');
 
 const STATES = ['ACTIVE', 'INACTIVE'];
+const BADGE = Joi.object({
+    name: Joi.string()
+        .max(128)
+        .description('The dashboard name for a badge')
+        .example('screwdriver/ui'),
+    uri: Joi.string()
+        .max(500)
+        .description('Unique identifier for the badge application dashboard')
+        .example('https://sonar.screwdriver.cd/dashboard?id=112233')
+});
 
 const CREATE_MODEL = {
     checkoutUrl: Joi.string()
@@ -92,16 +102,11 @@ const MODEL = {
         )
         .description('List of subscribed scm urls paired with actions'),
 
-    sonarDashboardName: Joi.string()
-        .max(128)
-        .description('The sonar dashboard name')
-        .example('screwdriver/ui')
-        .optional(),
-
-    sonarDashboardUri: Joi.string()
-        .max(500)
-        .description('Unique identifier for the sonar application dashboard')
-        .example('https://sonar.screwdriver.cd/dashboard?id=112233')
+    badges: Joi.object({
+            sonar: BADGE
+        })
+        .description('A list of badges that pipline has')
+        .example(`sonar: { name: 'dashboard', uri: 'http://sonar.com/sample1'}`)
         .optional()
 };
 
