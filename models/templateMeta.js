@@ -9,12 +9,7 @@ const JobTemplateConfig = require('../config/template');
 const TEMPLATE_TYPES = ['JOB', 'PIPELINE'];
 
 const MODEL = {
-    id: Joi.number()
-        .integer()
-        .positive()
-        .description('Identifier of this template')
-        .example(123345)
-        .required(),
+    id: Joi.number().integer().positive().description('Identifier of this template').example(123345).required(),
     pipelineId,
     namespace: pipelineTemplateConfig.template.extract('namespace'),
     name: pipelineTemplateConfig.template.extract('name'),

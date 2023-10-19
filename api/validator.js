@@ -17,10 +17,7 @@ const SCHEMA_JOB_COMMAND = Joi.object()
     .unknown(false)
     .label('Named command to execute');
 
-const SCHEMA_JOB_COMMANDS = Joi.array()
-    .items(SCHEMA_JOB_COMMAND)
-    .min(1)
-    .label('List of named commands to execute');
+const SCHEMA_JOB_COMMANDS = Joi.array().items(SCHEMA_JOB_COMMAND).min(1).label('List of named commands to execute');
 
 const SCHEMA_JOB_PERMUTATION = Joi.object()
     .keys({
@@ -41,9 +38,7 @@ const SCHEMA_JOB_PERMUTATION = Joi.object()
         sourcePaths: Job.sourcePaths,
         stage: Joi.object()
             .keys({
-                name: Joi.string()
-                    .regex(Regex.STAGE_NAME)
-                    .required()
+                name: Joi.string().regex(Regex.STAGE_NAME).required()
             })
             .unknown(false),
         subscribe: Base.subscribe,
@@ -51,9 +46,7 @@ const SCHEMA_JOB_PERMUTATION = Joi.object()
     })
     .label('Job permutation');
 
-const SCHEMA_JOB_PERMUTATIONS = Joi.array()
-    .items(SCHEMA_JOB_PERMUTATION)
-    .label('List of job permutations');
+const SCHEMA_JOB_PERMUTATIONS = Joi.array().items(SCHEMA_JOB_PERMUTATION).label('List of job permutations');
 
 const SCHEMA_JOBS = Joi.object()
     // Jobs can only be named with A-Z,a-z,0-9,-,_
@@ -65,9 +58,7 @@ const SCHEMA_JOBS = Joi.object()
 const SCHEMA_OUTPUT = Joi.object()
     .keys({
         annotations: Annotations.annotations,
-        errors: Joi.array()
-            .items(Joi.string())
-            .optional(),
+        errors: Joi.array().items(Joi.string()).optional(),
         jobs: SCHEMA_JOBS,
         childPipelines: Base.childPipelines,
         workflowGraph: WorkflowGraph.workflowGraph,

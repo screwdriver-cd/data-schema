@@ -5,9 +5,7 @@ const Regex = require('../config/regex');
 
 const SCHEMA_USER = Joi.object()
     .keys({
-        id: Joi.string()
-            .allow('')
-            .optional(),
+        id: Joi.string().allow('').optional(),
 
         url: Joi.string()
             .uri()
@@ -16,15 +14,9 @@ const SCHEMA_USER = Joi.object()
             .label('Link to Profile')
             .example('https://github.com/stjohnjohnson'),
 
-        name: Joi.string()
-            .required()
-            .label('Display Name')
-            .example('Dao Lam'),
+        name: Joi.string().required().label('Display Name').example('Dao Lam'),
 
-        username: Joi.string()
-            .required()
-            .label('Username')
-            .example('d2lam'),
+        username: Joi.string().required().label('Username').example('d2lam'),
 
         avatar: Joi.string()
             .uri()
@@ -51,10 +43,7 @@ const SCHEMA_REPO = Joi.object()
     .keys({
         name: REPO_NAME,
 
-        branch: Joi.string()
-            .required()
-            .label('Branch of the repository')
-            .example('master'),
+        branch: Joi.string().required().label('Branch of the repository').example('master'),
 
         url: Joi.string()
             .uri()
@@ -62,9 +51,7 @@ const SCHEMA_REPO = Joi.object()
             .label('Link to Repository')
             .example('https://github.com/screwdriver-cd/screwdriver/tree/master'),
 
-        private: Joi.boolean()
-            .optional()
-            .label('Whether or not the pipeline is private'),
+        private: Joi.boolean().optional().label('Whether or not the pipeline is private'),
 
         rootDir: ROOT_DIR
     })
@@ -72,23 +59,15 @@ const SCHEMA_REPO = Joi.object()
 
 const SCHEMA_COMMAND = Joi.object()
     .keys({
-        name: Joi.equal('sd-checkout-code')
-            .required()
-            .label('Command name')
-            .example('sd-checkout-code'),
+        name: Joi.equal('sd-checkout-code').required().label('Command name').example('sd-checkout-code'),
 
-        command: Joi.string()
-            .required()
-            .label('Checkout command to run')
+        command: Joi.string().required().label('Checkout command to run')
     })
     .label('SCM Command');
 
 const SCHEMA_COMMIT = Joi.object()
     .keys({
-        message: Joi.string()
-            .required()
-            .label('Commit message')
-            .example('Fixing a bug with signing'),
+        message: Joi.string().required().label('Commit message').example('Fixing a bug with signing'),
 
         author: SCHEMA_USER.required().label('Author of the commit'),
 
@@ -104,39 +83,15 @@ const SCHEMA_COMMIT = Joi.object()
 
 const SCHEMA_PR = Joi.object()
     .keys({
-        url: Joi.string()
-            .uri()
-            .label('Link to PR')
-            .example('https://github.com/screwdriver-cd/screwdriver/pull/1'),
-        title: Joi.string()
-            .max(512)
-            .label('Title of the pull request'),
-        ref: Joi.string()
-            .allow('')
-            .optional()
-            .label('Ref of the pull request'),
-        prSource: Joi.string()
-            .allow('')
-            .optional()
-            .label('Origin of the pull request'),
-        prBranchName: Joi.string()
-            .allow('')
-            .optional()
-            .label('Branch name of the pull request'),
-        createTime: Joi.date()
-            .iso()
-            .label('Creation Time of the pull request')
-            .example('2018-10-10T21:35:31Z'),
-        username: Joi.string()
-            .label('Username')
-            .example('d2lam'),
-        userProfile: Joi.string()
-            .uri()
-            .label('Link to Profile')
-            .example('https://github.com/anonymous'),
-        baseBranch: Joi.string()
-            .label('Base branch of the pull request')
-            .example('master')
+        url: Joi.string().uri().label('Link to PR').example('https://github.com/screwdriver-cd/screwdriver/pull/1'),
+        title: Joi.string().max(512).label('Title of the pull request'),
+        ref: Joi.string().allow('').optional().label('Ref of the pull request'),
+        prSource: Joi.string().allow('').optional().label('Origin of the pull request'),
+        prBranchName: Joi.string().allow('').optional().label('Branch name of the pull request'),
+        createTime: Joi.date().iso().label('Creation Time of the pull request').example('2018-10-10T21:35:31Z'),
+        username: Joi.string().label('Username').example('d2lam'),
+        userProfile: Joi.string().uri().label('Link to Profile').example('https://github.com/anonymous'),
+        baseBranch: Joi.string().label('Base branch of the pull request').example('master')
     })
     .label('SCM Pull Request');
 
@@ -162,26 +117,13 @@ const SCHEMA_HOOK = Joi.object()
             .example('git@github.com:screwdriver-cd/data-schema.git#master')
             .example('https://github.com/screwdriver-cd/data-schema.git#master'),
 
-        hookId: Joi.string()
-            .allow('')
-            .optional()
-            .label('Uuid of the event'),
+        hookId: Joi.string().allow('').optional().label('Uuid of the event'),
 
-        lastCommitMessage: Joi.string()
-            .allow('')
-            .optional()
-            .label('Last commit message'),
+        lastCommitMessage: Joi.string().allow('').optional().label('Last commit message'),
 
-        prNum: Joi.number()
-            .integer()
-            .positive()
-            .optional()
-            .label('PR number'),
+        prNum: Joi.number().integer().positive().optional().label('PR number'),
 
-        prRef: Joi.string()
-            .allow('')
-            .optional()
-            .label('PR reference of the repository'),
+        prRef: Joi.string().allow('').optional().label('PR reference of the repository'),
 
         ref: Joi.string()
             .when('action', {
@@ -200,10 +142,7 @@ const SCHEMA_HOOK = Joi.object()
             .optional()
             .label('PR original source'),
 
-        prTitle: Joi.string()
-            .allow('')
-            .optional()
-            .label('PR title'),
+        prTitle: Joi.string().allow('').optional().label('PR title'),
 
         scmContext: Joi.string()
             .regex(Regex.SCM_CONTEXT)
@@ -230,47 +169,23 @@ const SCHEMA_HOOK = Joi.object()
             .label('Commit SHA')
             .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
 
-        type: Joi.string()
-            .valid('pr', 'repo', 'ping')
-            .required()
-            .label('Type of the event'),
+        type: Joi.string().valid('pr', 'repo', 'ping').required().label('Type of the event'),
 
         username: SCHEMA_USER.extract('username'),
 
-        commitAuthors: Joi.array()
-            .items(Joi.string().allow(''))
-            .optional()
-            .label('Commit authors'),
+        commitAuthors: Joi.array().items(Joi.string().allow('')).optional().label('Commit authors'),
 
-        releaseId: Joi.string()
-            .allow('')
-            .optional()
-            .label('Release id'),
+        releaseId: Joi.string().allow('').optional().label('Release id'),
 
-        releaseName: Joi.string()
-            .allow('')
-            .optional()
-            .label('Name of the event'),
+        releaseName: Joi.string().allow('').optional().label('Name of the event'),
 
-        releaseAuthor: Joi.string()
-            .allow('')
-            .optional()
-            .label('Author of the event'),
+        releaseAuthor: Joi.string().allow('').optional().label('Author of the event'),
 
-        addedFiles: Joi.array()
-            .items(Joi.string().allow(''))
-            .optional()
-            .label('Added files of head commit'),
+        addedFiles: Joi.array().items(Joi.string().allow('')).optional().label('Added files of head commit'),
 
-        modifiedFiles: Joi.array()
-            .items(Joi.string().allow(''))
-            .optional()
-            .label('Modified files of head commit'),
+        modifiedFiles: Joi.array().items(Joi.string().allow('')).optional().label('Modified files of head commit'),
 
-        removedFiles: Joi.array()
-            .items(Joi.string().allow(''))
-            .optional()
-            .label('Removed files of head commit')
+        removedFiles: Joi.array().items(Joi.string().allow('')).optional().label('Removed files of head commit')
     })
     .label('SCM Hook');
 

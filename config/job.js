@@ -61,12 +61,8 @@ const SCHEMA_MATRIX = Joi.object()
         'object.unknown': '{{#label}} only supports uppercase letters, digits, and underscore (cannot start with digit)'
     });
 // Secrets must be all uppercase
-const SCHEMA_SECRET = Joi.string()
-    .regex(Regex.ENV_NAME)
-    .max(64);
-const SCHEMA_SECRETS = Joi.array()
-    .items(SCHEMA_SECRET)
-    .min(0);
+const SCHEMA_SECRET = Joi.string().regex(Regex.ENV_NAME).max(64);
+const SCHEMA_SECRETS = Joi.array().items(SCHEMA_SECRET).min(0);
 const SCHEMA_ENVIRONMENT = Joi.object()
     // IEEE Std 1003.1-2001
     // Environment names contain uppercase letters, digits, and underscore
@@ -78,9 +74,7 @@ const SCHEMA_ENVIRONMENT = Joi.object()
     .messages({
         'object.unknown': '{{#label}} only supports uppercase letters, digits, and underscore (cannot start with digit)'
     });
-const SCHEMA_JOBNAME = Joi.string()
-    .max(100)
-    .regex(Regex.JOB_NAME);
+const SCHEMA_JOBNAME = Joi.string().max(100).regex(Regex.JOB_NAME);
 // Step can be in the following formats:
 // npm install
 // { init: npm install }
@@ -101,9 +95,7 @@ const SCHEMA_STEP_OBJECT = Joi.object()
     // Add documentation
     .messages({ 'object.unknown': '{{#label}} only supports the following characters A-Z,a-z,0-9,-,_' });
 const SCHEMA_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_STEP_OBJECT);
-const SCHEMA_STEPS = Joi.array()
-    .items(SCHEMA_STEP)
-    .min(1);
+const SCHEMA_STEPS = Joi.array().items(SCHEMA_STEP).min(1);
 // Template steps
 const SCHEMA_TEMPLATE_STEP_SUBOBJECT = SCHEMA_STEP_SUBOBJECT_BASE.keys({
     locked: Joi.boolean()
@@ -118,9 +110,7 @@ const SCHEMA_TEMPLATE_STEP_OBJECT = Joi.object()
     // And there can be only one command per step
     .length(1);
 const SCHEMA_TEMPLATE_STEP = Joi.alternatives().try(SCHEMA_STEP_STRING, SCHEMA_TEMPLATE_STEP_OBJECT);
-const SCHEMA_TEMPLATE_STEPS = Joi.array()
-    .items(SCHEMA_TEMPLATE_STEP)
-    .min(1);
+const SCHEMA_TEMPLATE_STEPS = Joi.array().items(SCHEMA_TEMPLATE_STEP).min(1);
 const SCHEMA_STEPS_NO_DUPS = Joi.array()
     .items(SCHEMA_TEMPLATE_STEP)
     .min(1)
@@ -131,13 +121,9 @@ const SCHEMA_STEPS_NO_DUPS = Joi.array()
 
         return Object.keys(a).some(key => b[key]);
     });
-const SCHEMA_DESCRIPTION = Joi.string()
-    .max(100)
-    .optional();
+const SCHEMA_DESCRIPTION = Joi.string().max(100).optional();
 const SCHEMA_IMAGE = Joi.string().regex(Regex.IMAGE_NAME);
-const SCHEMA_ORDER = Joi.array()
-    .items(SCHEMA_STEP_STRING.regex(Regex.STEP_NAME))
-    .min(0);
+const SCHEMA_ORDER = Joi.array().items(SCHEMA_STEP_STRING.regex(Regex.STEP_NAME)).min(0);
 const SCHEMA_SETTINGS = Joi.object().optional();
 
 const SCHEMA_TEMPLATE = Joi.string().regex(Regex.FULL_TEMPLATE_NAME);
@@ -151,9 +137,7 @@ const SCHEMA_TEMPLATEID = Joi.number()
 // ~commit, ~commit:staging, ~commit:/^user-.*$/, ~pr, etc.
 const SCHEMA_TRIGGER = sdJoi.string().branchFilter();
 const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne
-const SCHEMA_EXTERNAL_TRIGGER = Joi.string()
-    .regex(Regex.EXTERNAL_TRIGGER_ALL)
-    .example('~sd@1234:component'); // ~sd@123:main or sd@123:main
+const SCHEMA_EXTERNAL_TRIGGER = Joi.string().regex(Regex.EXTERNAL_TRIGGER_ALL).example('~sd@1234:component'); // ~sd@123:main or sd@123:main
 const SCHEMA_STAGE_TRIGGER = Joi.string().regex(Regex.STAGE_TRIGGER); // ~stage@deploy, ~stage@deploy:main
 const SCHEMA_CRON_EXPRESSION = sdCron.string().cron();
 const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(
@@ -169,15 +153,11 @@ const SCHEMA_BLOCKEDBY_VALUE = Joi.alternatives().try(
 );
 const SCHEMA_BLOCKEDBY = Joi.alternatives().try(Joi.array().items(SCHEMA_BLOCKEDBY_VALUE), SCHEMA_BLOCKEDBY_VALUE);
 const SCHEMA_FREEZEWINDOWS = Joi.alternatives().try(Joi.array().items(SCHEMA_CRON_EXPRESSION), SCHEMA_CRON_EXPRESSION);
-const SCHEMA_SOURCEPATH = Joi.string()
-    .max(1024)
-    .optional();
+const SCHEMA_SOURCEPATH = Joi.string().max(1024).optional();
 const SCHEMA_SOURCEPATHS = Joi.alternatives().try(Joi.array().items(SCHEMA_SOURCEPATH), SCHEMA_SOURCEPATH);
 const SCHEMA_CACHE = Joi.boolean().optional();
 const SCHEMA_PARAMETERS = Parameters.parameters.optional();
-const SCHEMA_PROVIDER = Joi.alternatives()
-    .try(Provider.provider, Joi.string().regex(Regex.CHECKOUT_URL))
-    .optional();
+const SCHEMA_PROVIDER = Joi.alternatives().try(Provider.provider, Joi.string().regex(Regex.CHECKOUT_URL)).optional();
 const SCHEMA_JOB = Joi.object()
     .keys({
         annotations: Annotations.annotations,

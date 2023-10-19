@@ -38,17 +38,10 @@ const buildSchemaObj = {
     pipelineId,
     buildClusterName: models.buildCluster.base.extract('name'),
     container: models.build.base.extract('container').required(),
-    apiUri: Joi.string()
-        .uri()
-        .required()
-        .label('API URI'),
-    token: Joi.string()
-        .required()
-        .label('Build JWT'),
+    apiUri: Joi.string().uri().required().label('API URI'),
+    token: Joi.string().required().label('Build JWT'),
     enqueueTime: Joi.date().iso(),
-    isPR: Joi.boolean()
-        .optional()
-        .default(true),
+    isPR: Joi.boolean().optional().default(true),
     prParentJobId: jobId.optional()
 };
 const SCHEMA_START = Joi.object()
@@ -66,10 +59,7 @@ const SCHEMA_STOP = Joi.object()
         token: Joi.string().label('Build JWT'),
         pipelineId,
         provider: Provider.provider.optional(),
-        apiUri: Joi.string()
-            .uri()
-            .required()
-            .label('API URI'),
+        apiUri: Joi.string().uri().required().label('API URI'),
         jobName
     })
     .unknown(true) // allow other fields

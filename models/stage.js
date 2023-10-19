@@ -5,62 +5,27 @@ const Regex = require('../config/regex');
 const mutate = require('../lib/mutate');
 
 const MODEL = {
-    id: Joi.number()
-        .integer()
-        .positive()
-        .example(12345),
+    id: Joi.number().integer().positive().example(12345),
 
-    pipelineId: Joi.number()
-        .integer()
-        .positive()
-        .description('Pipeline associated with the Stage')
-        .example(123345),
+    pipelineId: Joi.number().integer().positive().description('Pipeline associated with the Stage').example(123345),
 
-    name: Joi.string()
-        .regex(Regex.STAGE_NAME)
-        .max(110)
-        .description('Name of the Stage')
-        .example('deploy'),
+    name: Joi.string().regex(Regex.STAGE_NAME).max(110).description('Name of the Stage').example('deploy'),
 
     setup: Joi.array()
-        .items(
-            Joi.number()
-                .integer()
-                .positive()
-                .description('Identifier for this job')
-                .example(123345)
-        )
+        .items(Joi.number().integer().positive().description('Identifier for this job').example(123345))
         .description('Job IDs in this Stage'),
 
     teardown: Joi.array()
-        .items(
-            Joi.number()
-                .integer()
-                .positive()
-                .description('Identifier for this job')
-                .example(123345)
-        )
+        .items(Joi.number().integer().positive().description('Identifier for this job').example(123345))
         .description('Job IDs in this Stage'),
 
     jobIds: Joi.array()
-        .items(
-            Joi.number()
-                .integer()
-                .positive()
-                .description('Identifier for this job')
-                .example(123345)
-        )
+        .items(Joi.number().integer().positive().description('Identifier for this job').example(123345))
         .description('Job IDs in this Stage'),
 
-    description: Joi.string()
-        .max(256)
-        .description('Description of the Stage')
-        .example('Deploys canary jobs'),
+    description: Joi.string().max(256).description('Description of the Stage').example('Deploys canary jobs'),
 
-    archived: Joi.boolean()
-        .description('Flag if the stage is archived')
-        .example(true)
-        .default(false)
+    archived: Joi.boolean().description('Flag if the stage is archived').example(true).default(false)
 };
 
 module.exports = {

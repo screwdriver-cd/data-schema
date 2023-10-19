@@ -4,30 +4,19 @@ const Joi = require('joi');
 const Regex = require('../config/regex');
 
 const MODEL = {
-    id: Joi.number()
-        .integer()
-        .positive()
-        .example(12345),
+    id: Joi.number().integer().positive().example(12345),
 
     src: Joi.alternatives()
         .try(
-            Joi.string()
-                .regex(Regex.EXTERNAL_TRIGGER)
-                .max(128),
-            Joi.string()
-                .regex(Regex.EXTERNAL_TRIGGER_AND)
-                .max(128)
+            Joi.string().regex(Regex.EXTERNAL_TRIGGER).max(128),
+            Joi.string().regex(Regex.EXTERNAL_TRIGGER_AND).max(128)
         )
         .example('~sd@1234:component'),
 
     dest: Joi.alternatives()
         .try(
-            Joi.string()
-                .regex(Regex.EXTERNAL_TRIGGER)
-                .max(128),
-            Joi.string()
-                .regex(Regex.EXTERNAL_TRIGGER_AND)
-                .max(128)
+            Joi.string().regex(Regex.EXTERNAL_TRIGGER).max(128),
+            Joi.string().regex(Regex.EXTERNAL_TRIGGER_AND).max(128)
         )
         .example('~sd@5678:test')
 };

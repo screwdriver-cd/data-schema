@@ -12,10 +12,7 @@ const mutate = require('../lib/mutate');
 
 const STATES = ['ACTIVE', 'INACTIVE'];
 const BADGE = Joi.object({
-    name: Joi.string()
-        .max(128)
-        .description('The dashboard name for a badge')
-        .example('screwdriver/ui'),
+    name: Joi.string().max(128).description('The dashboard name for a badge').example('screwdriver/ui'),
     uri: Joi.string()
         .max(500)
         .description('Unique identifier for the badge application dashboard')
@@ -37,11 +34,7 @@ const CREATE_MODEL = {
 };
 
 const MODEL = {
-    id: Joi.number()
-        .integer()
-        .positive()
-        .description('Identifier of this pipeline')
-        .example(123345),
+    id: Joi.number().integer().positive().description('Identifier of this pipeline').example(123345),
 
     name: Scm.repoName.optional(),
 
@@ -60,23 +53,15 @@ const MODEL = {
 
     scmRepo: Scm.repo,
 
-    createTime: Joi.string()
-        .isoDate()
-        .description('When this pipeline was created'),
+    createTime: Joi.string().isoDate().description('When this pipeline was created'),
 
-    admins: Joi.object()
-        .description('Admins of this Pipeline')
-        .example({ myself: true }),
+    admins: Joi.object().description('Admins of this Pipeline').example({ myself: true }),
 
     workflowGraph: WorkflowGraph.workflowGraph.description('Graph representation of the workflow'),
 
     annotations: Annotations.annotations.description('Pipeline-level annotations'),
 
-    lastEventId: Joi.number()
-        .integer()
-        .positive()
-        .description('Identifier of last event')
-        .example(123345),
+    lastEventId: Joi.number().integer().positive().description('Identifier of last event').example(123345),
 
     configPipelineId: Joi.number()
         .integer()

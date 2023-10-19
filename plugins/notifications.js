@@ -3,9 +3,7 @@
 const Joi = require('joi');
 const STATUSES = require('../models/build').allStatuses;
 const SCHEMA_STATUS = Joi.string().valid(...STATUSES);
-const SCHEMA_BUILD_SETTINGS = Joi.object()
-    .keys({})
-    .unknown(true);
+const SCHEMA_BUILD_SETTINGS = Joi.object().keys({}).unknown(true);
 const SCHEMA_SCM_REPO = Joi.object()
     .keys({
         name: Joi.string().required()
@@ -23,9 +21,7 @@ const SCHEMA_BUILD_DATA = {
     jobName: Joi.string(),
     build: Joi.object()
         .keys({
-            id: Joi.number()
-                .integer()
-                .required()
+            id: Joi.number().integer().required()
         })
         .unknown(true),
     event: Joi.object(),

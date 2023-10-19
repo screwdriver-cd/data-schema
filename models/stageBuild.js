@@ -5,22 +5,11 @@ const mutate = require('../lib/mutate');
 const status = require('./build').base.extract('status');
 
 const MODEL = {
-    id: Joi.number()
-        .integer()
-        .positive()
-        .example(12345),
+    id: Joi.number().integer().positive().example(12345),
 
-    stageId: Joi.number()
-        .integer()
-        .positive()
-        .description('Stage associated with the Stage build')
-        .example(123345),
+    stageId: Joi.number().integer().positive().description('Stage associated with the Stage build').example(123345),
 
-    eventId: Joi.number()
-        .integer()
-        .positive()
-        .description('Identifier of the event')
-        .example(123345),
+    eventId: Joi.number().integer().positive().description('Identifier of the event').example(123345),
 
     status
 };

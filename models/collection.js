@@ -6,34 +6,20 @@ const mutate = require('../lib/mutate');
 const BUILD_MODEL = require('./build').get;
 const PIPELINE_MODEL = require('./pipeline').get;
 const PRS = {
-    open: Joi.number()
-        .integer()
-        .min(0),
-    failing: Joi.number()
-        .integer()
-        .min(0)
+    open: Joi.number().integer().min(0),
+    failing: Joi.number().integer().min(0)
 };
 const PIPELINE_OBJECT = PIPELINE_MODEL.keys({
-    lastBuilds: Joi.array()
-        .items(BUILD_MODEL)
-        .optional(),
+    lastBuilds: Joi.array().items(BUILD_MODEL).optional(),
     prs: Joi.object(PRS).optional()
 });
 const PIPELINES_MODEL = Joi.array().items(PIPELINE_OBJECT);
 const MODEL = {
-    id: Joi.number()
-        .integer()
-        .positive(),
+    id: Joi.number().integer().positive(),
 
-    userId: Joi.number()
-        .integer()
-        .positive()
-        .description('User ID'),
+    userId: Joi.number().integer().positive().description('User ID'),
 
-    name: Joi.string()
-        .max(128)
-        .description('Collection name')
-        .example('Favorites'),
+    name: Joi.string().max(128).description('Collection name').example('Favorites'),
 
     description: Joi.string()
         .max(256)
@@ -41,26 +27,14 @@ const MODEL = {
         .description('Collection description')
         .example('List of my favorite pipelines'),
 
-    pipelineIds: Joi.array().items(
-        Joi.number()
-            .integer()
-            .positive()
-    ),
+    pipelineIds: Joi.array().items(Joi.number().integer().positive()),
 
-    type: Joi.string()
-        .max(32)
-        .valid('', 'default', 'normal')
-        .description('Collection type')
-        .example('default')
+    type: Joi.string().max(32).valid('', 'default', 'normal').description('Collection type').example('default')
 };
 const GET_MODEL = {
     ...MODEL,
     pipelines: PIPELINES_MODEL,
-    type: Joi.string()
-        .max(32)
-        .valid('default', 'normal', 'shared')
-        .description('Collection type')
-        .example('default')
+    type: Joi.string().max(32).valid('default', 'normal', 'shared').description('Collection type').example('default')
 };
 
 module.exports = {

@@ -6,11 +6,7 @@ const validator = require('../api/validator');
 const SCM_PR_SCHEMA = require('../core/scm').pr;
 
 const MODEL = {
-    id: Joi.number()
-        .integer()
-        .positive()
-        .description('Identifier of this Job')
-        .example(123345),
+    id: Joi.number().integer().positive().description('Identifier of this Job').example(123345),
 
     name: Joi.string()
         .regex(/^(PR-[0-9]+:)?[\w-]+$/)
@@ -26,16 +22,9 @@ const MODEL = {
 
     permutations: validator.jobPermutations,
 
-    description: Joi.string()
-        .max(100)
-        .description('Description of the Job')
-        .example('builds and tests the code'),
+    description: Joi.string().max(100).description('Description of the Job').example('builds and tests the code'),
 
-    pipelineId: Joi.number()
-        .integer()
-        .positive()
-        .description('Identifier of this Pipeline')
-        .example(123345),
+    pipelineId: Joi.number().integer().positive().description('Identifier of this Pipeline').example(123345),
 
     state: Joi.string()
         .valid('ENABLED', 'DISABLED')
@@ -44,29 +33,18 @@ const MODEL = {
         .example('ENABLED')
         .default('ENABLED'),
 
-    stateChanger: Joi.string()
-        .max(128)
-        .description('Username for who changed the state'),
+    stateChanger: Joi.string().max(128).description('Username for who changed the state'),
 
-    stateChangeTime: Joi.string()
-        .isoDate()
-        .description('When the state of the job was changed'),
+    stateChangeTime: Joi.string().isoDate().description('When the state of the job was changed'),
 
     stateChangeMessage: Joi.string()
         .max(512)
         .description('Reason why disabling or enabling job')
         .example('Testing out new feature change in beta only'),
 
-    archived: Joi.boolean()
-        .description('Flag if the job is archived')
-        .example(true)
-        .default(false),
+    archived: Joi.boolean().description('Flag if the job is archived').example(true).default(false),
 
-    templateId: Joi.number()
-        .integer()
-        .positive()
-        .description("Identifier for this job's template")
-        .example(123345)
+    templateId: Joi.number().integer().positive().description("Identifier for this job's template").example(123345)
 };
 
 const EXTENDED_MODEL = {

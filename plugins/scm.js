@@ -10,10 +10,7 @@ const checkoutUrl = models.pipeline.create.extract('checkoutUrl').required();
 const hook = core.scm.hook.required();
 const jobName = models.job.base.extract('name').optional();
 const pipelineId = models.pipeline.base.extract('id').optional();
-const prNum = core.scm.hook
-    .extract('prNum')
-    .allow(null)
-    .optional();
+const prNum = core.scm.hook.extract('prNum').allow(null).optional();
 const rootDir = Scm.rootDir.optional();
 const scmContext = models.pipeline.base.extract('scmContext').optional();
 const scmRepo = Scm.repo.optional();
@@ -135,17 +132,11 @@ const UPDATE_COMMIT_STATUS = Joi.object()
             .required()
             .valid(...SCM_STATUSES),
         jobName,
-        url: Joi.string()
-            .uri()
-            .required(),
+        url: Joi.string().uri().required(),
         pipelineId,
         scmContext,
-        context: Joi.string()
-            .max(100)
-            .optional(),
-        description: Joi.string()
-            .max(200)
-            .optional()
+        context: Joi.string().max(100).optional(),
+        description: Joi.string().max(200).optional()
     })
     .required();
 
@@ -163,9 +154,7 @@ const GET_FILE = Joi.object()
 const GET_CHANGED_FILES_INPUT = Joi.object()
     .keys({
         type,
-        webhookConfig: Joi.object()
-            .allow(null)
-            .required(),
+        webhookConfig: Joi.object().allow(null).required(),
         token,
         scmContext,
         scmUri: scmUri.optional(),
@@ -173,12 +162,7 @@ const GET_CHANGED_FILES_INPUT = Joi.object()
     })
     .required();
 
-const GET_CHANGED_FILES_OUTPUT = Joi.alternatives().try(
-    Joi.array()
-        .items(Joi.string())
-        .required(),
-    null
-);
+const GET_CHANGED_FILES_OUTPUT = Joi.alternatives().try(Joi.array().items(Joi.string()).required(), null);
 
 const PARSE_HOOK = Joi.alternatives().try(hook, null);
 
