@@ -37,7 +37,11 @@ const CREATE_MODEL = {
 };
 
 const MODEL = {
-    id: Joi.number().integer().positive().description('Identifier of this pipeline').example(123345),
+    id: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier of this pipeline')
+        .example(123345),
 
     name: Scm.repoName.optional(),
 
@@ -56,15 +60,23 @@ const MODEL = {
 
     scmRepo: Scm.repo,
 
-    createTime: Joi.string().isoDate().description('When this pipeline was created'),
+    createTime: Joi.string()
+        .isoDate()
+        .description('When this pipeline was created'),
 
-    admins: Joi.object().description('Admins of this Pipeline').example({ myself: true }),
+    admins: Joi.object()
+        .description('Admins of this Pipeline')
+        .example({ myself: true }),
 
     workflowGraph: WorkflowGraph.workflowGraph.description('Graph representation of the workflow'),
 
     annotations: Annotations.annotations.description('Pipeline-level annotations'),
 
-    lastEventId: Joi.number().integer().positive().description('Identifier of last event').example(123345),
+    lastEventId: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier of last event')
+        .example(123345),
 
     configPipelineId: Joi.number()
         .integer()
@@ -103,8 +115,8 @@ const MODEL = {
         .description('List of subscribed scm urls paired with actions'),
 
     badges: Joi.object({
-            sonar: BADGE
-        })
+        sonar: BADGE
+    })
         .description('A list of badges that pipline has')
         .example(`sonar: { name: 'dashboard', uri: 'http://sonar.com/sample1'}`)
         .optional()
