@@ -90,13 +90,13 @@ const MODEL = {
                 actions: Joi.array().items(Joi.string())
             })
         )
-        .description('List of subscribed scm urls paired with actions')
+        .description('List of subscribed scm urls paired with actions'),
 
     sonarDashboardName: Joi.string()
         .max(128)
         .description('The sonar dashboard name')
         .example('screwdriver/ui')
-        .optional()
+        .optional(),
 
     sonarDashboardUri: Joi.string()
         .max(500)
