@@ -17,5 +17,6 @@ docker:
 binary:
     file: ./foobar.sh
 pipelineId: 8765
-clouds: [aws, gcp]
-architectures: [arm64]
+compatibilities:
+    clouds: [aws, gcp]
+    architectures: [arm64]
