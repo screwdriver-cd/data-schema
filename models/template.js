@@ -4,6 +4,9 @@ const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Template = require('../config/template');
 const pipelineId = require('./pipeline').base.extract('id');
+const Compatibilities = require('Compatibilities');
+
+const { compatibilities } = Compatibilities;
 
 const MODEL = {
     id: Joi.number().integer().positive().description('Identifier of this template').example(123345),
@@ -23,18 +26,7 @@ const MODEL = {
         .example('2038-01-19T03:14:08.131Z'),
     trusted: Joi.boolean().description('Mark whether template is trusted'),
     latest: Joi.boolean().description('Whether this is latest version'),
-    compatibilities: Joi.object({
-        clouds: Joi.array()
-            .items(Joi.string())
-            .description('A list of cloud that template supports')
-            .example(['aws', 'gcp', 'azure'])
-            .optional(),
-        architectures: Joi.array()
-            .items(Joi.string())
-            .description('A list of architectures that template supports')
-            .example(['x86', 'x86_64', 'arm64'])
-            .optional()
-    })
+    compatibilities
 };
 
 const CREATE_MODEL = { ...MODEL, config: Template.configNoDupSteps };
