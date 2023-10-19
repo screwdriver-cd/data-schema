@@ -8,3 +8,5 @@ scmRepo:
     branch: master
     url: https://github.com/screwdriver-cd/screwdriver/tree/master
 state: ACTIVE
+sonarDashboardName: screwdriver-cd/screwdriver
+sonarDashboardUri:  https://sonar.screwdriver.cd/dashboard?id=123123

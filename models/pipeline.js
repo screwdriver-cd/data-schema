@@ -91,6 +91,18 @@ const MODEL = {
             })
         )
         .description('List of subscribed scm urls paired with actions')
+
+    sonarDashboardName: Joi.string()
+        .max(128)
+        .description('The sonar dashboard name')
+        .example('screwdriver/ui')
+        .optional()
+
+    sonarDashboardUri: Joi.string()
+        .max(500)
+        .description('Unique identifier for the sonar application dashboard')
+        .example('https://sonar.screwdriver.cd/dashboard?id=112233')
+        .optional()
 };
 
 const UPDATE_MODEL = { ...CREATE_MODEL, settings: MODEL.settings };
