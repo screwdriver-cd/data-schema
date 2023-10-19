@@ -4,7 +4,7 @@ const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Command = require('../config/command');
 const pipelineId = require('./pipeline').base.extract('id');
-const Compatibilities = require('Compatibilities');
+const Compatibilities = require('../config/compatibilities');
 
 const { compatibilities } = Compatibilities;
 
