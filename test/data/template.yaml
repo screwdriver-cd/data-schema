@@ -22,3 +22,6 @@ config:
     FOO: bar
   secrets:
      - NPM_TOKEN
+compatibilities:
+    clouds: [aws, gcp]
+    architectures: [arm64]
