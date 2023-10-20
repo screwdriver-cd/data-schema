@@ -103,7 +103,7 @@ const MODEL = {
         sonar: BADGE
     })
         .description('A list of badges that pipline has')
-        .example(`sonar: { name: 'dashboard', uri: 'http://sonar.com/sample1'}`)
+        .example(`{ sonar: { name: 'dashboard', uri: 'http://sonar.com/sample1' } }`)
         .optional()
 };
 
