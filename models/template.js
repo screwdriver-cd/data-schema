@@ -4,6 +4,9 @@ const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const Template = require('../config/template');
 const pipelineId = require('./pipeline').base.extract('id');
+const Compatibilities = require('../config/compatibilities');
+
+const { compatibilities } = Compatibilities;
 
 const MODEL = {
     id: Joi.number().integer().positive().description('Identifier of this template').example(123345),
@@ -22,7 +25,8 @@ const MODEL = {
         .description('When this template was created')
         .example('2038-01-19T03:14:08.131Z'),
     trusted: Joi.boolean().description('Mark whether template is trusted'),
-    latest: Joi.boolean().description('Whether this is latest version')
+    latest: Joi.boolean().description('Whether this is latest version'),
+    compatibilities
 };
 
 const CREATE_MODEL = { ...MODEL, config: Template.configNoDupSteps };
@@ -54,7 +58,7 @@ module.exports = {
         mutate(
             MODEL,
             ['id', 'labels', 'name', 'version', 'description', 'maintainer', 'pipelineId'],
-            ['config', 'namespace', 'images', 'createTime', 'trusted', 'latest']
+            ['config', 'namespace', 'images', 'createTime', 'trusted', 'latest', 'compatibilities']
         )
     ).label('Get Template'),
 
