@@ -107,7 +107,7 @@ const MODEL = {
         .optional()
 };
 
-const UPDATE_MODEL = { ...CREATE_MODEL, settings: MODEL.settings };
+const UPDATE_MODEL = { ...CREATE_MODEL, settings: MODEL.settings, badges: MODEL.badges };
 
 module.exports = {
     /**
