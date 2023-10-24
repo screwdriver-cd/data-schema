@@ -147,7 +147,8 @@ module.exports = {
                 'prChain',
                 'parameters',
                 'subscribedScmUrlsWithActions',
-                'settings'
+                'settings',
+                'badges'
             ]
         )
     ).label('Get Pipeline'),
@@ -168,9 +169,9 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(UPDATE_MODEL, [], ['checkoutUrl', 'rootDir', 'autoKeysGeneration', 'settings'])).label(
-        'Update Pipeline'
-    ),
+    update: Joi.object(
+        mutate(UPDATE_MODEL, [], ['checkoutUrl', 'rootDir', 'autoKeysGeneration', 'settings', 'badges'])
+    ).label('Update Pipeline'),
 
     /**
      * List of fields that determine a unique row
