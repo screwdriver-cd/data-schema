@@ -4,6 +4,7 @@ const Joi = require('joi');
 const Annotations = require('../config/annotations');
 const Job = require('../config/job');
 const Provider = require('../config/provider');
+const Template = require('../config/template');
 const models = require('../models');
 const buildId = models.build.base.extract('id').required();
 const eventId = models.event.base.extract('id');
@@ -12,14 +13,25 @@ const jobId = models.job.base.extract('id');
 const jobName = models.job.base.extract('name');
 const jobState = models.job.base.extract('state');
 const jobArchived = models.job.base.extract('archived');
+const pipelineId = models.pipeline.base.extract('id');
 
 const SCHEMA_PIPELINE = Joi.object()
     .keys({
-        id: models.pipeline.base.extract('id').required(),
-        scmContext: models.pipeline.base.extract('scmContext').required()
+        id: pipelineId.required(),
+        name: models.pipeline.base.extract('name').optional(),
+        scmContext: models.pipeline.base.extract('scmContext').required(),
+        configPipelineId: models.pipeline.base.extract('configPipelineId').required()
     })
     .unknown();
-const pipelineId = models.pipeline.base.extract('id');
+const SCHEMA_TEMPLATE = Joi.object()
+    .keys({
+        id: models.template.base.extract('id'),
+        fullName: Template.fullName,
+        name: models.template.base.extract('name'),
+        namespace: models.template.base.extract('namespace'),
+        version: models.template.base.extract('version')
+    })
+    .unknown();
 const buildSchemaObj = {
     build: Joi.object(),
     causeMessage,
@@ -36,12 +48,14 @@ const buildSchemaObj = {
     tokenGen: Joi.func(),
     pipeline: SCHEMA_PIPELINE,
     pipelineId,
+    template: SCHEMA_TEMPLATE,
     buildClusterName: models.buildCluster.base.extract('name'),
     container: models.build.base.extract('container').required(),
     apiUri: Joi.string().uri().required().label('API URI'),
     token: Joi.string().required().label('Build JWT'),
     enqueueTime: Joi.date().iso(),
     isPR: Joi.boolean().optional().default(true),
+    prNum: models.event.base.extract('prNum'),
     prParentJobId: jobId.optional()
 };
 const SCHEMA_START = Joi.object()

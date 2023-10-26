@@ -32,5 +32,13 @@ pipeline:
     scmContext: http://mock
     admin: admin
     token: asdf
+    name: d2lam/test
+template:
+    id: 888
+    name: docker
+    namespace: sd
+    fullName: sd/docker
+    version: '1.0.0'
 isPR: true
+prNum: 567
 prParentJobId: 457
