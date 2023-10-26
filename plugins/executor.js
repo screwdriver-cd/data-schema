@@ -20,7 +20,7 @@ const SCHEMA_PIPELINE = Joi.object()
         id: pipelineId.required(),
         name: models.pipeline.base.extract('name').optional(),
         scmContext: models.pipeline.base.extract('scmContext').required(),
-        configPipelineId: models.pipeline.base.extract('configPipelineId').required()
+        configPipelineId: models.pipeline.base.extract('configPipelineId').optional().allow(null)
     })
     .unknown();
 const SCHEMA_TEMPLATE = Joi.object()
