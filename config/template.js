@@ -21,6 +21,12 @@ const TEMPLATE_NAME = Joi.alternatives()
     .description('Name of the Template')
     .example('node/npm-install');
 
+const TEMPLATE_FULL_NAME = Joi.string()
+    .regex(Regex.TEMPLATE_NAME_ALLOW_SLASH)
+    .max(64)
+    .description('Full name including namespace of the Template')
+    .example('node/npm-install');
+
 const TEMPLATE_TAG_NAME = Joi.string()
     .regex(Regex.TEMPLATE_TAG_NAME)
     .max(30)
@@ -75,6 +81,7 @@ module.exports = {
     template: SCHEMA_TEMPLATE,
     namespace: TEMPLATE_NAMESPACE,
     name: TEMPLATE_NAME,
+    fullName: TEMPLATE_FULL_NAME,
     templateTag: TEMPLATE_TAG_NAME,
     version: TEMPLATE_VERSION,
     exactVersion: TEMPLATE_EXACT_VERSION,
