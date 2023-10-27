@@ -18,18 +18,18 @@ const pipelineId = models.pipeline.base.extract('id');
 const SCHEMA_PIPELINE = Joi.object()
     .keys({
         id: pipelineId.required(),
-        name: models.pipeline.base.extract('name').optional(),
+        name: models.pipeline.base.extract('name').optional().allow(null),
         scmContext: models.pipeline.base.extract('scmContext').required(),
         configPipelineId: models.pipeline.base.extract('configPipelineId').optional().allow(null)
     })
     .unknown();
 const SCHEMA_TEMPLATE = Joi.object()
     .keys({
-        id: models.template.base.extract('id'),
-        fullName: Template.fullName,
-        name: models.template.base.extract('name'),
-        namespace: models.template.base.extract('namespace'),
-        version: models.template.base.extract('version')
+        id: models.template.base.extract('id').optional(),
+        fullName: Template.fullName.optional(),
+        name: models.template.base.extract('name').optional(),
+        namespace: models.template.base.extract('namespace').optional(),
+        version: models.template.base.extract('version').optional()
     })
     .unknown();
 const buildSchemaObj = {
@@ -55,7 +55,7 @@ const buildSchemaObj = {
     token: Joi.string().required().label('Build JWT'),
     enqueueTime: Joi.date().iso(),
     isPR: Joi.boolean().optional().default(true),
-    prNum: models.event.base.extract('prNum'),
+    prNum: models.event.base.extract('prNum').optional(),
     prParentJobId: jobId.optional()
 };
 const SCHEMA_START = Joi.object()
