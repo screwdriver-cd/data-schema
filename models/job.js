@@ -9,7 +9,7 @@ const MODEL = {
     id: Joi.number().integer().positive().description('Identifier of this Job').example(123345),
 
     name: Joi.string()
-        .regex(/^(PR-[0-9]+:)?[\w-]+$/)
+        .regex(/^(PR-[0-9]+:)?(([\w-]+)|(?:stage@([\w-]+):(setup|teardown)))$/)
         .max(110)
         .description('Name of the Job')
         .example('main'),

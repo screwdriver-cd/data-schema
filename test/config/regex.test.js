@@ -261,10 +261,15 @@ describe('config regex', () => {
     describe('jobs', () => {
         it('checks good job names', () => {
             assert.isTrue(config.regex.JOB_NAME.test('foo-BAR_15'));
+            assert.isTrue(config.regex.JOB_NAME.test('stage@integration:setup'));
+            assert.isTrue(config.regex.JOB_NAME.test('stage@production-blue:teardown'));
         });
 
         it('fails on bad job names', () => {
             assert.isFalse(config.regex.JOB_NAME.test('run all the things'));
+            assert.isFalse(config.regex.JOB_NAME.test('stage@integration'));
+            assert.isFalse(config.regex.JOB_NAME.test('stage@integration:deploy'));
+            assert.isFalse(config.regex.JOB_NAME.test('integration:deploy'));
         });
 
         it('checks good PR job names', () => {
