@@ -12,11 +12,16 @@ const mutate = require('../lib/mutate');
 
 const STATES = ['ACTIVE', 'INACTIVE'];
 const BADGE = Joi.object({
-    name: Joi.string().max(128).description('The dashboard name for a badge').example('screwdriver/ui'),
+    defaultName: Joi.string().max(128).description('Auto populated dashboard name for a badge').example('screwdriver/ui'),
+    defaultUri: Joi.string()
+        .max(500)
+        .description('Auto populated url for the badge application dashboard')
+        .example('https://sonar.screwdriver.cd/dashboard?id=112233')
+    name: Joi.string().max(128).description('The dashboard name for a badge').example('my-screwdriver/ui'),
     uri: Joi.string()
         .max(500)
-        .description('Unique identifier for the badge application dashboard')
-        .example('https://sonar.screwdriver.cd/dashboard?id=112233')
+        .description('The url the badge application dashboard')
+        .example('https://my-sonar.screwdriver.cd/dashboard?id=112233')
 });
 
 const CREATE_MODEL = {
