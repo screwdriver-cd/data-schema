@@ -16,7 +16,7 @@ const BADGE = Joi.object({
     defaultUri: Joi.string()
         .max(500)
         .description('Auto populated url for the badge application dashboard')
-        .example('https://sonar.screwdriver.cd/dashboard?id=112233')
+        .example('https://sonar.screwdriver.cd/dashboard?id=112233'),
     name: Joi.string().max(128).description('The dashboard name for a badge').example('my-screwdriver/ui'),
     uri: Joi.string()
         .max(500)
