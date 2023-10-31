@@ -12,6 +12,6 @@ badges:
     sonar: 
         name: my-screwdriver-cd/screwdriver
         uri:  https://beta.sonar.screwdriver.cd/dashboard?id=123123
-        defeaultName: screwdriver-cd/screwdriver
+        defaultName: screwdriver-cd/screwdriver
         defaultUri:  https://sonar.screwdriver.cd/dashboard?id=123123
         
