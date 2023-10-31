@@ -42,7 +42,7 @@ module.exports = {
     STEP_NAME: /^[\w-]+$/,
     // Jobs can only be named with A-Z,a-z,0-9,-,_
     // Also allow stage setup/teardown like stage@stage-name:setup
-    JOB_NAME: /^(([\w-]+)|(stage@[\w-]+:(setup|teardown)))$/,
+    JOB_NAME: /^(([\w-]+)|(?:stage@([\w-]+):(setup|teardown)))$/,
     // PR JOB Name can only be PR-1 or PR-1:main, group1: PR-prNum, group2: jobName
     PR_JOB_NAME: /^(PR-\d+)(?::([\w-]+))?$/,
     // Match all possible job name
