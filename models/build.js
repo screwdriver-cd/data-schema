@@ -246,6 +246,6 @@ module.exports = {
         { fields: ['eventId', 'createTime'] },
         { fields: ['jobId'] },
         { fields: [{ attribute: 'parentBuildId', length: 32 }] },
-        { fields: ['templateId'] }
+        { fields: ['templateId', { name: 'startTime', length: 32 }, { name: 'endTime', length: 32 }] }
     ]
 };
