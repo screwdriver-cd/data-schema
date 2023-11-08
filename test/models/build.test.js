@@ -84,7 +84,7 @@ describe('model build', () => {
                 { fields: ['eventId', 'createTime'] },
                 { fields: ['jobId'] },
                 { fields: [{ attribute: 'parentBuildId', length: 32 }] },
-                { fields: ['templateId'] }
+                { fields: ['templateId', 'createTime'] }
             ];
             const { indexes } = models.build;
 
