@@ -91,7 +91,7 @@ module.exports = {
     // Fifth group: root dir (e.g. :path/to/source/dir)
     // eslint-disable-next-line max-len
     CHECKOUT_URL:
-        /^(?:(?:https:\/\/(?:[^@/:\s]+@)?)|git@|org-\d+@)+([^/:\s]+)(?:\/|:)([^/:\s]+)\/([^\s]+?)(?:\.git)(#[^:\s]+)?(:[^\s]+)?$/,
+        /^(?:(?:https:\/\/(?:[^@/:\s]+@)?)|git@|org-\d+@)+([^/:\s]+)(?:\/|:)([^/:\s]+)\/([^\s]+?)(?:\.git)(#([^:\s]|(　))+)?(:[^\s]+)?$/,
     // scmUri. For example: github.com:abc-123:master or bitbucket.org:{123}:master
     // Optionally, can have rootDir. For example: github.com:abc-123:master:src/app/component
     SCM_URI: /^([^:]+):([^:]+):([^:]+)(?::([^:]+))?$/,
