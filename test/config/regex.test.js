@@ -311,116 +311,140 @@ describe('config regex', () => {
         const org = 'screwdriver-cd';
         const repo = 'data-schema';
         const bitbucketRepo = 'data.schema';
-        const branchName = '#foobar';
-        const rootDir = ':path/to/source/dir';
+        const generalBranchName = '#foobar';
+        const generalRootDir = ':path/to/source/dir';
+        const specialBranchName = '#!"#$%&\'()-=|@`{;+]},<.>/　a';
+        const specialRootDir = ':!"#$%&\'()-=|@`{;+]},<.>/　b';
 
         describe('checks good checkout Url', () => {
             const githubHttps = `https://${github}/${org}/${repo}.git`;
-            const tests = [
-                {
-                    url: githubHttps,
-                    match: [githubHttps, github, org, repo, null, null]
-                },
-                {
-                    url: `${githubHttps}${branchName}`,
-                    match: [`${githubHttps}${branchName}`, github, org, repo, branchName, null]
-                },
-                {
-                    url: `${githubHttps}${branchName}${rootDir}`,
-                    match: [`${githubHttps}${branchName}${rootDir}`, github, org, repo, branchName, rootDir]
-                },
-                {
-                    url: `git@${github}:${org}/${repo}.git`,
-                    match: [`git@${github}:${org}/${repo}.git`, github, org, repo, null, null]
-                },
-                {
-                    url: `git@${github}:${org}/${repo}.git${branchName}`,
-                    match: [`git@${github}:${org}/${repo}.git${branchName}`, github, org, repo, branchName, null]
-                },
-                {
-                    url: `git@${github}:${org}/${repo}.git${branchName}${rootDir}`,
-                    match: [
-                        `git@${github}:${org}/${repo}.git${branchName}${rootDir}`,
-                        github,
-                        org,
-                        repo,
-                        branchName,
-                        rootDir
-                    ]
-                },
-                {
-                    url: `https://screwdriver-cd@${bitbucket}/${org}/${repo}.git`,
-                    match: [`https://screwdriver-cd@${bitbucket}/${org}/${repo}.git`, bitbucket, org, repo, null, null]
-                },
-                {
-                    url: `https://screwdriver-cd@${bitbucket}/${org}/${repo}.git${branchName}`,
-                    match: [
-                        `https://screwdriver-cd@${bitbucket}/${org}/${repo}.git${branchName}`,
-                        bitbucket,
-                        org,
-                        repo,
-                        branchName,
-                        null
-                    ]
-                },
-                {
-                    url: `https://user@${bitbucket}/${org}/${repo}.git${branchName}${rootDir}`,
-                    match: [
-                        `https://user@${bitbucket}/${org}/${repo}.git${branchName}${rootDir}`,
-                        bitbucket,
-                        org,
-                        repo,
-                        branchName,
-                        rootDir
-                    ]
-                },
-                {
-                    url: `git@${bitbucket}:${org}/${repo}.git`,
-                    match: [`git@${bitbucket}:${org}/${repo}.git`, bitbucket, org, repo, null, null]
-                },
-                {
-                    url: `git@${bitbucket}:${org}/${repo}.git${branchName}`,
-                    match: [`git@${bitbucket}:${org}/${repo}.git${branchName}`, bitbucket, org, repo, branchName, null]
-                },
-                {
-                    url: `git@${bitbucket}:${org}/${bitbucketRepo}.git${branchName}`,
-                    match: [
-                        `git@${bitbucket}:${org}/${bitbucketRepo}.git${branchName}`,
-                        bitbucket,
-                        org,
-                        bitbucketRepo,
-                        branchName,
-                        null
-                    ]
-                },
-                {
-                    url: `org-1234@${bitbucket}:${org}/${bitbucketRepo}.git${branchName}`,
-                    match: [
-                        `org-1234@${bitbucket}:${org}/${bitbucketRepo}.git${branchName}`,
-                        bitbucket,
-                        org,
-                        bitbucketRepo,
-                        branchName,
-                        null
-                    ]
-                }
-            ];
+            const createTests = (branchName, rootDir) => {
+                return [
+                    {
+                        url: githubHttps,
+                        match: [githubHttps, github, org, repo, null, null]
+                    },
+                    {
+                        url: `${githubHttps}${branchName}`,
+                        match: [`${githubHttps}${branchName}`, github, org, repo, branchName, null]
+                    },
+                    {
+                        url: `${githubHttps}${branchName}${rootDir}`,
+                        match: [`${githubHttps}${branchName}${rootDir}`, github, org, repo, branchName, rootDir]
+                    },
+                    {
+                        url: `git@${github}:${org}/${repo}.git`,
+                        match: [`git@${github}:${org}/${repo}.git`, github, org, repo, null, null]
+                    },
+                    {
+                        url: `git@${github}:${org}/${repo}.git${branchName}`,
+                        match: [`git@${github}:${org}/${repo}.git${branchName}`, github, org, repo, branchName, null]
+                    },
+                    {
+                        url: `git@${github}:${org}/${repo}.git${branchName}${rootDir}`,
+                        match: [
+                            `git@${github}:${org}/${repo}.git${branchName}${rootDir}`,
+                            github,
+                            org,
+                            repo,
+                            branchName,
+                            rootDir
+                        ]
+                    },
+                    {
+                        url: `https://screwdriver-cd@${bitbucket}/${org}/${repo}.git`,
+                        match: [
+                            `https://screwdriver-cd@${bitbucket}/${org}/${repo}.git`,
+                            bitbucket,
+                            org,
+                            repo,
+                            null,
+                            null
+                        ]
+                    },
+                    {
+                        url: `https://screwdriver-cd@${bitbucket}/${org}/${repo}.git${branchName}`,
+                        match: [
+                            `https://screwdriver-cd@${bitbucket}/${org}/${repo}.git${branchName}`,
+                            bitbucket,
+                            org,
+                            repo,
+                            branchName,
+                            null
+                        ]
+                    },
+                    {
+                        url: `https://user@${bitbucket}/${org}/${repo}.git${branchName}${rootDir}`,
+                        match: [
+                            `https://user@${bitbucket}/${org}/${repo}.git${branchName}${rootDir}`,
+                            bitbucket,
+                            org,
+                            repo,
+                            branchName,
+                            rootDir
+                        ]
+                    },
+                    {
+                        url: `git@${bitbucket}:${org}/${repo}.git`,
+                        match: [`git@${bitbucket}:${org}/${repo}.git`, bitbucket, org, repo, null, null]
+                    },
+                    {
+                        url: `git@${bitbucket}:${org}/${repo}.git${branchName}`,
+                        match: [
+                            `git@${bitbucket}:${org}/${repo}.git${branchName}`,
+                            bitbucket,
+                            org,
+                            repo,
+                            branchName,
+                            null
+                        ]
+                    },
+                    {
+                        url: `git@${bitbucket}:${org}/${bitbucketRepo}.git${branchName}`,
+                        match: [
+                            `git@${bitbucket}:${org}/${bitbucketRepo}.git${branchName}`,
+                            bitbucket,
+                            org,
+                            bitbucketRepo,
+                            branchName,
+                            null
+                        ]
+                    },
+                    {
+                        url: `org-1234@${bitbucket}:${org}/${bitbucketRepo}.git${branchName}`,
+                        match: [
+                            `org-1234@${bitbucket}:${org}/${bitbucketRepo}.git${branchName}`,
+                            bitbucket,
+                            org,
+                            bitbucketRepo,
+                            branchName,
+                            null
+                        ]
+                    }
+                ];
+            };
 
-            tests.forEach(test => {
-                it(`correctly validates ${test.url}`, () => {
-                    assert.deepEqual(
-                        JSON.stringify(config.regex.CHECKOUT_URL.exec(test.url), null, 4),
-                        JSON.stringify(test.match, null, 4)
-                    );
-                });
-            });
+            [createTests(generalBranchName, generalRootDir), createTests(specialBranchName, specialRootDir)].forEach(
+                tests => {
+                    tests.forEach(test => {
+                        it(`correctly validates ${test.url}`, () => {
+                            assert.deepEqual(
+                                JSON.stringify(config.regex.CHECKOUT_URL.exec(test.url), null, 4),
+                                JSON.stringify(test.match, null, 4)
+                            );
+                        });
+                    });
+                }
+            );
         });
 
         it('fails on bad checkout Url', () => {
             assert.isFalse(config.regex.CHECKOUT_URL.test('https://github.com/screwdriver-cd/'));
             assert.isFalse(config.regex.CHECKOUT_URL.test(`git@${org}/${repo}.git`));
-            assert.isFalse(config.regex.CHECKOUT_URL.test(`git@${org}/${repo}.git#${rootDir}`));
-            assert.isFalse(config.regex.CHECKOUT_URL.test(`git@${org}/${repo}.git${branchName}:`));
+            assert.isFalse(config.regex.CHECKOUT_URL.test(`git@${org}/${repo}.git#${generalRootDir}`));
+            assert.isFalse(config.regex.CHECKOUT_URL.test(`git@${org}/${repo}.git${generalBranchName}:`));
+            assert.isFalse(config.regex.CHECKOUT_URL.test(`git@${org}/${repo}.git#${specialRootDir}`));
+            assert.isFalse(config.regex.CHECKOUT_URL.test(`git@${org}/${repo}.git${specialBranchName}:`));
         });
     });
 
