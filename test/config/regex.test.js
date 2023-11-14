@@ -313,8 +313,8 @@ describe('config regex', () => {
         const bitbucketRepo = 'data.schema';
         const generalBranchName = '#foobar';
         const generalRootDir = ':path/to/source/dir';
-        const specialBranchName = '#!"#$%&\'()-=|@`{;+]},<.>/　a';
-        const specialRootDir = ':!"#$%&\'()-=|@`{;+]},<.>/　b';
+        const specialBranchName = '#!"#$%&\'()-=|@`{;+]},<.>/　🚗';
+        const specialRootDir = ':!"#$%&\'()-=|@`{;+]},<.>/　🚗';
 
         describe('checks good checkout Url', () => {
             const githubHttps = `https://${github}/${org}/${repo}.git`;
