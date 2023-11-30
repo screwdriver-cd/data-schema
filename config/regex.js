@@ -94,7 +94,7 @@ module.exports = {
         /^(?:(?:https:\/\/(?:[^@/:\s]+@)?)|git@|org-\d+@)+([^/:\s]+)(?:\/|:)([^/:\s]+)\/([^\s]+?)(?:\.git)(#[^:　\s]*　[^:　\s]*|#[^:　\s]+)?(:[^:　\s]*　[^:　\s]*|:[^:　\s]+)?$/,
     // scmUri. For example: github.com:abc-123:master or bitbucket.org:{123}:master
     // Optionally, can have rootDir. For example: github.com:abc-123:master:src/app/component
-    SCM_URI: /^([^:]+):([^:]+):([^:]+)(?::([^:]+))?$/,
+    SCM_URI: /^([^:]+):([^:]+):([^:]+)(?::(.*))?$/,
     // SCM context. For example: github:github.com, gitlab:gitlab.mycompany.com
     // First group: SCM plugin name (e.g. github)
     // Second group: SCM host name (e.g. github.com)
