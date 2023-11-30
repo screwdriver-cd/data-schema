@@ -452,12 +452,12 @@ describe('config regex', () => {
         it('checks good scmUri', () => {
             assert.isTrue(config.regex.SCM_URI.test('github.com:abc-123:master'));
             assert.isTrue(config.regex.SCM_URI.test('github.com:abc-123:master:src/app/component'));
+            assert.isTrue(config.regex.SCM_URI.test('github.com:abc-123:master:a:b:c'));
             assert.isTrue(config.regex.SCM_URI.test('bitbucket.org:d2lam/{123}:master'));
         });
 
         it('fails on bad scmUri', () => {
             assert.isFalse(config.regex.SCM_URI.test('github.com:master'));
-            assert.isFalse(config.regex.SCM_URI.test('github.com:master:a:b:c'));
             assert.isFalse(config.regex.SCM_URI.test('bitbucket.org:{123}'));
         });
     });
