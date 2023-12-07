@@ -3,6 +3,8 @@
 const Joi = require('joi');
 const Job = require('./job');
 const Regex = require('./regex');
+const Compatibilities = require('./compatibilities');
+const { compatibilities } = Compatibilities;
 
 const TEMPLATE_NAMESPACE = Joi.string()
     .regex(Regex.TEMPLATE_NAMESPACE)
@@ -70,7 +72,8 @@ const SCHEMA_TEMPLATE = Joi.object().keys({
     description: TEMPLATE_DESCRIPTION.required(),
     maintainer: TEMPLATE_MAINTAINER.required(),
     config: Job.templateJob.required().or('image', 'template').or('steps', 'template'),
-    images: TEMPLATE_IMAGES
+    images: TEMPLATE_IMAGES,
+    compatibilities
 });
 
 /**

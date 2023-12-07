@@ -3,6 +3,8 @@
 const Joi = require('joi');
 const Regex = require('./regex');
 const CommandFormat = require('./commandFormat');
+const Compatibilities = require('./compatibilities');
+const { compatibilities } = Compatibilities;
 
 const COMMAND_NAMESPACE = Joi.string()
     .regex(Regex.COMMAND_NAMESPACE)
@@ -56,7 +58,8 @@ const SCHEMA_COMMAND = Joi.object()
         format: COMMAND_FORMAT.required(),
         habitat: CommandFormat.habitat.when('format', { is: 'habitat', then: Joi.required() }),
         docker: CommandFormat.docker.when('format', { is: 'docker', then: Joi.required() }),
-        binary: CommandFormat.binary.when('format', { is: 'binary', then: Joi.required() })
+        binary: CommandFormat.binary.when('format', { is: 'binary', then: Joi.required() }),
+        compatibilities
     })
     // any one of them
     .or('habitat', 'docker', 'binary')

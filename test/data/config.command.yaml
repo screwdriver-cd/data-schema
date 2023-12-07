@@ -16,3 +16,6 @@ habitat:
 #format: binary
 #binary:
 #    file: ./foobar.sh
+compatibilities:
+    clouds: [aws, gcp]
+    architectures: [arm64]
