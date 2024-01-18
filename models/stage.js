@@ -11,13 +11,9 @@ const MODEL = {
 
     name: Joi.string().regex(Regex.STAGE_NAME).max(110).description('Name of the Stage').example('deploy'),
 
-    setup: Joi.array()
-        .items(Joi.number().integer().positive().description('Identifier for this job').example(123345))
-        .description('Job IDs in this Stage'),
+    setup: Joi.number().integer().positive().description('Job ID for Stage setup').example(123345),
 
-    teardown: Joi.array()
-        .items(Joi.number().integer().positive().description('Identifier for this job').example(123345))
-        .description('Job IDs in this Stage'),
+    teardown: Joi.number().integer().positive().description('Job ID for Stage teardown').example(123345),
 
     jobIds: Joi.array()
         .items(Joi.number().integer().positive().description('Identifier for this job').example(123345))

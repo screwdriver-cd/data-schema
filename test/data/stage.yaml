@@ -4,5 +4,5 @@ pipelineId: 123345
 name: deploy
 jobIds: [1, 2, 3, 4]
 description: 'Deploys canary jobs'
-setup: [222]
-teardown: [333]
+setup: 222
+teardown: 333
