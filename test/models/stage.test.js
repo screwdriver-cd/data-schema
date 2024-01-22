@@ -9,6 +9,36 @@ describe('model stage', () => {
         it('validates the base', () => {
             assert.isNull(validate('stage.yaml', models.stage.base).error);
         });
+
+        describe('validates setup and teardown', () => {
+            ['setup', 'teardown'].forEach(fieldName => {
+                [null, 0, -1].forEach(validType => {
+                    it(`validates the invalid ${fieldName} job id`, () => {
+                        assert.isNotNull(validate('stage.yaml', models.stage.base, { [fieldName]: validType }).error);
+                    });
+                });
+
+                [22, 33].forEach(validType => {
+                    it(`validates the valid ${fieldName} job id`, () => {
+                        assert.isNull(validate('stage.yaml', models.stage.base, { [fieldName]: validType }).error);
+                    });
+                });
+            });
+        });
+
+        describe('validates jobIds', () => {
+            [null, [], [0], [-1], [1, -1]].forEach(validType => {
+                it(`validates the invalid jobIds`, () => {
+                    assert.isNotNull(validate('stage.yaml', models.stage.base, { jobIds: validType }).error);
+                });
+            });
+
+            [[1], [1, 2]].forEach(validType => {
+                it(`validates the valid jobIds`, () => {
+                    assert.isNull(validate('stage.yaml', models.stage.base, { jobIds: validType }).error);
+                });
+            });
+        });
     });
 
     describe('keys', () => {
