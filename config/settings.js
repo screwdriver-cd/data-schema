@@ -14,6 +14,7 @@ const SCHEMA_DISPLAY_JOB_NAME_LENGTH = Joi.number()
     .default(20)
     .description('Job name length to display on workflowGraph')
     .example(20);
+const SCHEMA_ALLOW_NOTIFICATION = Joi.boolean().optional().default(false).description('Allow Browser Notification');
 const SCHEMA_METRICS_DOWNTIME_JOBS = Joi.array()
     .items(
         Joi.number().integer().positive().description('Identifier for this job').example(123345).optional().allow(null)
@@ -53,7 +54,8 @@ const SCHEMA_USER_SETTINGS = Joi.object()
 
 SCHEMA_USER_SETTINGS.append({
     displayJobNameLength: SCHEMA_DISPLAY_JOB_NAME_LENGTH,
-    timestampFormat: SCHEMA_TIMESTAMP_FORMAT
+    timestampFormat: SCHEMA_TIMESTAMP_FORMAT,
+    allowNotification: SCHEMA_ALLOW_NOTIFICATION
 });
 
 module.exports = {
