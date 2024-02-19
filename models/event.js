@@ -50,7 +50,7 @@ const MODEL = {
         .example('~commit'),
     type: Joi.string().valid('pr', 'pipeline').max(10).description('Type of the event').example('pr'),
     workflowGraph: WorkflowGraph.workflowGraph.description('Graph representation of the workflow').example({
-        nodes: [{ name: '~commit' }, { name: 'main' }, { name: 'publish' }],
+        nodes: [{ name: '~commit' }, { name: 'main', id: 12345678 }, { name: 'publish', id: 23456789 }],
         edges: [
             { src: '~commit', dest: 'main' },
             { src: 'main', dest: 'publish' }
