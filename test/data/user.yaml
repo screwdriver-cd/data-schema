@@ -5,3 +5,4 @@ scmContext: github:github.com
 settings:
     displayJobNameLength: 20
     timestampFormat: 'LOCAL_TIMEZONE'
+    allowNotification: false
