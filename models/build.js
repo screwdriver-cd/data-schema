@@ -36,7 +36,7 @@ const MODEL = {
     parentBuildId: Joi.array()
         .items(PARENT_BUILD_ID)
         .description('Identifier(s) of this parent build(s)')
-        .example([123, 234]),
+        .example([111, 222]),
 
     parentBuilds: Joi.object()
         .pattern(
@@ -104,9 +104,8 @@ const MODEL = {
 };
 
 const parentBuildIdSchema = Joi.alternatives()
-    .try(Joi.array().items(PARENT_BUILD_ID), PARENT_BUILD_ID)
-    .description('Identifier(s) of this parent build')
-    .example([123, 234]);
+    .try(MODEL.parentBuildId, PARENT_BUILD_ID)
+    .description('Identifier(s) of this parent build');
 
 const environmentSchema = Joi.alternatives().try(Joi.array().items(Job.environment), Job.environment);
 
