@@ -1,0 +1,13 @@
+template: foo/bar@1.0.0
+shared:
+  image: node:20
+  environment:
+      FOO: user overwrite
+  settings:
+      email: foo@example.com
+jobs:
+  main:
+    required: [ ~commit ]
+    steps:
+        - init: npm install
+        - test: npm test
