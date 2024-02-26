@@ -27,7 +27,7 @@ const RESERVED_JOB_ANNOTATIONS = [
     'screwdriver.cd/blockedBySameJob',
     'screwdriver.cd/blockedBySameJobWaitTime',
     'screwdriver.cd/jobDisabledByDefault',
-    'screwdriver.cd/virtual'
+    'screwdriver.cd/virtualTrigger'
 ];
 const RESERVED_PIPELINE_ANNOTATIONS = [
     'screwdriver.cd/buildCluster',
