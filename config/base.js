@@ -65,15 +65,24 @@ const SCHEMA_SUBSCRIBE = Joi.object().keys({
 
 const SCHEMA_CONFIG = Joi.object()
     .keys({
+        template: Joi.string().regex(Regex.FULL_TEMPLATE_NAME_WITH_NAMESPACE),
         version: Joi.number().integer().min(1).max(50),
-        annotations: Annotations.annotations,
-        jobs: SCHEMA_JOBS.required(),
-        shared: SCHEMA_SHARED,
-        cache: SCHEMA_CACHE,
-        childPipelines: SCHEMA_CHILD_PIPELINES,
-        stages: SCHEMA_STAGES,
-        subscribe: SCHEMA_SUBSCRIBE,
-        parameters: Parameters.parameters.default({})
+        annotations: Annotations.annotations.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
+        jobs: SCHEMA_JOBS.when('template', { is: Joi.exist(), then: Joi.forbidden(), otherwise: Joi.required() }),
+        shared: Joi.when('template', {
+            is: Joi.exist(),
+            then: Joi.object().keys({
+                image: Job.image,
+                environment: Job.environment,
+                settings: Job.settings
+            }),
+            otherwise: SCHEMA_SHARED
+        }),
+        cache: SCHEMA_CACHE.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
+        childPipelines: SCHEMA_CHILD_PIPELINES.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
+        stages: SCHEMA_STAGES.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
+        subscribe: SCHEMA_SUBSCRIBE.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
+        parameters: Parameters.parameters.default({}).when('template', { is: Joi.exist(), then: Joi.forbidden() })
     })
     .unknown(false);
 
