@@ -112,7 +112,9 @@ const MODEL = {
     })
         .description('A list of badges that pipline has')
         .example(`{ sonar: { name: 'dashboard', uri: 'http://sonar.com/sample1' } }`)
-        .optional()
+        .optional(),
+
+    templateVersionId: Joi.number().integer().positive().description("Identifier for this pipeline's template").example(123345)
 };
 
 const UPDATE_MODEL = { ...CREATE_MODEL, settings: MODEL.settings, badges: MODEL.badges };
@@ -156,7 +158,8 @@ module.exports = {
                 'parameters',
                 'subscribedScmUrlsWithActions',
                 'settings',
-                'badges'
+                'badges',
+                'templateVersionId'
             ]
         )
     ).label('Get Pipeline'),

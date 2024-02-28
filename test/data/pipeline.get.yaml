@@ -37,3 +37,4 @@ subscribedScmUrlsWithActions:
     - scmUri: github.com:34568912:master
       actions: [commit, tag, release]
 state: ACTIVE
+templateVersionId: 1234567
