@@ -114,7 +114,11 @@ const MODEL = {
         .example(`{ sonar: { name: 'dashboard', uri: 'http://sonar.com/sample1' } }`)
         .optional(),
 
-    templateVersionId: Joi.number().integer().positive().description("Identifier for this pipeline's template").example(123345)
+    templateVersionId: Joi.number()
+        .integer()
+        .positive()
+        .description("Identifier for this pipeline's template")
+        .example(123345)
 };
 
 const UPDATE_MODEL = { ...CREATE_MODEL, settings: MODEL.settings, badges: MODEL.badges };

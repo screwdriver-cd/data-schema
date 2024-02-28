@@ -82,7 +82,8 @@ const SCHEMA_CONFIG = Joi.object()
         childPipelines: SCHEMA_CHILD_PIPELINES.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
         stages: SCHEMA_STAGES.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
         subscribe: SCHEMA_SUBSCRIBE.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
-        parameters: Parameters.parameters.default({}).when('template', { is: Joi.exist(), then: Joi.forbidden() })
+        parameters: Parameters.parameters.default({}).when('template', { is: Joi.exist(), then: Joi.forbidden() }),
+        templateVersionId: Joi.number().integer().positive()
     })
     .unknown(false);
 
