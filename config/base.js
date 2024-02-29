@@ -63,7 +63,7 @@ const SCHEMA_SUBSCRIBE = Joi.object().keys({
     )
 });
 
-const SCHEMA_CONFIG = Joi.object()
+const SCHEMA_MERGE_CONFIG = Joi.object()
     .keys({
         template: Joi.string().regex(Regex.FULL_TEMPLATE_NAME_WITH_NAMESPACE),
         version: Joi.number().integer().min(1).max(50),
@@ -82,7 +82,22 @@ const SCHEMA_CONFIG = Joi.object()
         childPipelines: SCHEMA_CHILD_PIPELINES.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
         stages: SCHEMA_STAGES.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
         subscribe: SCHEMA_SUBSCRIBE.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
-        parameters: Parameters.parameters.default({}).when('template', { is: Joi.exist(), then: Joi.forbidden() }),
+        parameters: Parameters.parameters.default({}).when('template', { is: Joi.exist(), then: Joi.forbidden() })
+    })
+    .unknown(false);
+
+const SCHEMA_CONFIG = Joi.object()
+    .keys({
+        template: Joi.string().regex(Regex.FULL_TEMPLATE_NAME_WITH_NAMESPACE),
+        version: Joi.number().integer().min(1).max(50),
+        annotations: Annotations.annotations,
+        jobs: SCHEMA_JOBS.required(),
+        shared: SCHEMA_SHARED,
+        cache: SCHEMA_CACHE,
+        childPipelines: SCHEMA_CHILD_PIPELINES,
+        stages: SCHEMA_STAGES,
+        subscribe: SCHEMA_SUBSCRIBE,
+        parameters: Parameters.parameters.default({}),
         templateVersionId: Joi.number().integer().positive().optional().allow(null)
     })
     .unknown(false);
@@ -98,6 +113,7 @@ module.exports = {
     cache: SCHEMA_CACHE,
     cachePerm: SCHEMA_CACHE_PERMUTATION,
     childPipelines: SCHEMA_CHILD_PIPELINES,
+    mergeConfig: SCHEMA_MERGE_CONFIG,
     config: SCHEMA_CONFIG,
     stageSetupTeardownJob: SCHEMA_SETUP_TEARDOWN_JOB,
     stage: SCHEMA_STAGE,
