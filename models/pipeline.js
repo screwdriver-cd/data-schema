@@ -119,6 +119,8 @@ const MODEL = {
         .positive()
         .description("Identifier for this pipeline's template")
         .example(123345)
+        .optional()
+        .allow(null)
 };
 
 const UPDATE_MODEL = { ...CREATE_MODEL, settings: MODEL.settings, badges: MODEL.badges };
