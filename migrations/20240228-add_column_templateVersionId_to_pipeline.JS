@@ -12,13 +12,14 @@ module.exports = {
                 table,
                 'templateVersionId',
                 {
-                    type: Sequelize.INTEGER
+                    type: Sequelize.INTEGER.UNSIGNED
                 },
                 { transaction }
             );
 
-            await queryInterface.addIndex(table, ['templateVersionId'], {
+            await queryInterface.addIndex(table, {
                 name: `${table}_template_version_id`,
+                fields: ['templateVersionId'],
                 transaction
             });
         });
