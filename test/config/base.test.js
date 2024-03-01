@@ -7,7 +7,7 @@ const { validate } = require('../helper');
 describe('config base', () => {
     describe('config', () => {
         it('validates a screwdriver config', () => {
-            assert.isNull(validate('config.base.config.yaml', config.base.config).error);
+            assert.isNull(validate('config.base.config.yaml', config.base.configAfterMergingTemplate).error);
         });
     });
 
@@ -47,15 +47,19 @@ describe('config base', () => {
 
     describe('pipeline template', () => {
         it('validates the basic pipeline template usage', () => {
-            assert.isNull(validate('config.base.pipelineTemplate.yaml', config.base.config).error);
+            assert.isNull(validate('config.base.pipelineTemplate.yaml', config.base.configBeforeMergingTemplate).error);
         });
 
         it('if template is provided then unsupported fields are foridden', () => {
-            assert.isNotNull(validate('config.base.pipelineTemplate-forbidden.yaml', config.base.config).error);
+            assert.isNotNull(
+                validate('config.base.pipelineTemplate-forbidden.yaml', config.base.configBeforeMergingTemplate).error
+            );
         });
 
         it('if template is not provided then job is required', () => {
-            assert.isNotNull(validate('config.base.pipelineTemplate-invalid.yaml', config.base.config).error);
+            assert.isNotNull(
+                validate('config.base.pipelineTemplate-invalid.yaml', config.base.configBeforeMergingTemplate).error
+            );
         });
     });
 });
