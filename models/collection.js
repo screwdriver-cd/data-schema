@@ -3,12 +3,7 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 
-const BUILD_MODEL = require('./build').get;
 const PIPELINE_MODEL = require('./pipeline').get;
-const PRS = {
-    open: Joi.number().integer().min(0),
-    failing: Joi.number().integer().min(0)
-};
 const PIPELINES_MODEL = Joi.array().items(PIPELINE_MODEL);
 const MODEL = {
     id: Joi.number().integer().positive(),
