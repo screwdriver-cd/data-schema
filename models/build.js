@@ -158,7 +158,6 @@ module.exports = {
                 'meta',
                 'parameters',
                 'steps',
-                'commit',
                 'eventId',
                 'environment',
                 'statusMessage',
