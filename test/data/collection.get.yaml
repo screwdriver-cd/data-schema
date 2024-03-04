@@ -22,21 +22,6 @@ pipelines:
           - OSX-SIERRA
         screwdriver.cd/notify.email: foo@example.com
         beta.screwdriver.cd/auto_pr_builds: fork-only
-      lastBuilds:
-        - id: 123345
-          eventId: 12351523
-          jobId: 123415
-          number: 1473900790309
-          cause: Commit ccc493 was pushed to master
-          status: SUCCESS
-          createTime: "2017-08-21"
-        - id: 123346
-          eventId: 12351523
-          jobId: 123416
-          number: 1473900790309
-          cause: Commit ccc493 was pushed to master
-          status: SUCCESS
-          createTime: "2017-08-21"
     - id: 12576
       scmUri: github.com:87654321:master
       scmContext: github:github.com
@@ -54,6 +39,3 @@ pipelines:
           - OSX-SIERRA
         screwdriver.cd/notify.email: foo@example.com
         beta.screwdriver.cd/auto_pr_builds: fork-only
-      prs:
-        open: 1
-        failing: 0
