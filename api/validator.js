@@ -7,6 +7,7 @@ const Job = require('../config/job');
 const Parameters = require('../config/parameters');
 const Regex = require('../config/regex');
 const WorkflowGraph = require('../config/workflowGraph');
+const Pipeline = require('../models/pipeline');
 
 const SCHEMA_JOB_COMMAND = Joi.object()
     .keys({
@@ -65,7 +66,8 @@ const SCHEMA_OUTPUT = Joi.object()
         parameters: Parameters.parameters.default({}),
         warnMessages: Joi.array().optional(),
         stages: Base.stages.optional(),
-        subscribe: Base.subscribe
+        subscribe: Base.subscribe,
+        templateVersionId: Pipeline.fields.templateVersionId
     })
     .label('Execution information');
 
