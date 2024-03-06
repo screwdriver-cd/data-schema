@@ -2,7 +2,6 @@
 
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
-const Scm = require('../core/scm');
 const Regex = require('../config/regex');
 const Job = require('../config/job');
 const Step = require('./step');
@@ -66,8 +65,6 @@ const MODEL = {
         .hex()
         .description('SHA this project was built on')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
-
-    commit: Scm.commit,
 
     createTime: Joi.string().isoDate().max(32).description('When this build was created'),
 
