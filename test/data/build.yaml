@@ -8,14 +8,6 @@ cause: Because I clicked it
 environment:
     DOCKER_REPO: screwdrivercd/screwdriver
 sha: 46f1a0bd5592a2f9244ca321b129902a06b53e03
-commit:
-    message: Fixing a bug with signing
-    author:
-        url: https://github.com/stjohnjohnson
-        name: St. John Johnson
-        username: stjohnjohnson
-        avatar: https://avatars.githubusercontent.com/u/622065?v=3
-    url: https://github.com/scredriver-cd/screwdriver/commit/46f1a0bd5592a2f9244ca321b129902a06b53e03
 createTime: "2038-01-19T03:14:08.131Z"
 startTime: "2038-01-19T03:15:08.131Z"
 endTime: "2038-01-19T03:16:10.131Z"
