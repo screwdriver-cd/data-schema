@@ -7,7 +7,11 @@ const SCHEMA_WORKFLOW_GRAPH = Joi.object().keys({
     nodes: Joi.array().items(
         Joi.object()
             .keys({
-                name: requiresValue
+                name: requiresValue,
+                virtual: Joi.boolean()
+                    .description('Flag to indicate if the node is a virtual job')
+                    .example(true)
+                    .optional()
             })
             .unknown()
     ),

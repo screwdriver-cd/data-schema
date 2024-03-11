@@ -2,6 +2,14 @@ nodes:
     - name: ~commit
     - name: main
     - name: publish
+    - name: stage@integration:setup
+      stageName: integration
+      virtual: true
+    - name: ci-deploy
+      stageName: integration
+    - name: stage@integration:teardown
+      stageName: integration
+      virtual: false
     - name: sd@123:publish
     - name: sd@333:E
     - name: G
@@ -10,6 +18,12 @@ edges:
       dest: main
     - src: main
       dest: publish
+    - src: publish
+      dest: stage@integration:setup
+    - src: stage@integration:setup
+      dest: ci-deploy
+    - src: ci-deploy
+      dest: stage@integration:teardown
     - src: sd@123:publish
       dest: sd@333:E
     - src: sd@333:E
