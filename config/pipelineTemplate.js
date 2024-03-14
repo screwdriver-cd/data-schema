@@ -1,17 +1,20 @@
 'use strict';
 
 const Joi = require('joi');
-const JobsSchema = require('./base').jobs;
-const Shared = require('./base').shared;
+const BaseSchema = require('./base');
+const Annotations = require('./annotations');
 const Parameters = require('./parameters');
 const Template = require('./template');
 const Regex = require('./regex');
 
 const SCHEMA_CONFIG = Joi.object()
     .keys({
-        jobs: JobsSchema.required(),
-        shared: Shared,
-        parameters: Parameters.parameters.default({})
+        jobs: BaseSchema.jobs.required(),
+        shared: BaseSchema.shared,
+        parameters: Parameters.parameters.default({}),
+        annotations: Annotations.annotations,
+        cache: BaseSchema.cache,
+        subscribe: BaseSchema.subscribe
     })
     .unknown(false);
 

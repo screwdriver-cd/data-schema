@@ -1,7 +1,27 @@
 template: foo/bar@1.0.0
 shared:
-  image: node:20
-  environment:
-      FOO: user overwrite
-  settings:
-      email: foo@example.com
+    image: node:20
+    environment:
+        FOO: user overwrite
+    settings:
+        email: foo@example.com
+cache:
+    pipeline: ["node_modules/", "~/.sbt"]
+    event: ["target/generated-intermediate-resouce/*"]
+    job:
+        build: ["target/some-artifact.zip"]
+        publish-preview: ["target/some-artifact.zip"]
+        test: []
+subscribe: 
+    scmUrls:
+        - git@github.com:foo/bar.git#master: [~commit, ~tags, ~release]
+annotations:
+    foo: a
+    bar: b
+parameters:
+    color: [red, blue]
+childPipelines:
+    scmUrls:
+        - git@github.com:org/repo.git
+        - https://github.com:org/repo2.git
+    startAll: true

@@ -67,7 +67,7 @@ const SCHEMA_CONFIG_PRE_TEMPLATE_MERGE = Joi.object()
     .keys({
         template: Joi.string().regex(Regex.FULL_TEMPLATE_NAME_WITH_NAMESPACE),
         version: Joi.number().integer().min(1).max(50),
-        annotations: Annotations.annotations.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
+        annotations: Annotations.annotations,
         jobs: SCHEMA_JOBS.when('template', { is: Joi.exist(), then: Joi.forbidden(), otherwise: Joi.required() }),
         shared: Joi.when('template', {
             is: Joi.exist(),
@@ -78,11 +78,11 @@ const SCHEMA_CONFIG_PRE_TEMPLATE_MERGE = Joi.object()
             }),
             otherwise: SCHEMA_SHARED
         }),
-        cache: SCHEMA_CACHE.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
-        childPipelines: SCHEMA_CHILD_PIPELINES.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
+        cache: SCHEMA_CACHE,
+        childPipelines: SCHEMA_CHILD_PIPELINES,
         stages: SCHEMA_STAGES.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
-        subscribe: SCHEMA_SUBSCRIBE.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
-        parameters: Parameters.parameters.default({}).when('template', { is: Joi.exist(), then: Joi.forbidden() })
+        subscribe: SCHEMA_SUBSCRIBE,
+        parameters: Parameters.parameters.default({})
     })
     .unknown(false);
 
