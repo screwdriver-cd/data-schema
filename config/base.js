@@ -71,9 +71,10 @@ const SCHEMA_CONFIG_PRE_TEMPLATE_MERGE = Joi.object()
         jobs: SCHEMA_JOBS.when('template', { is: Joi.exist(), then: Joi.forbidden(), otherwise: Joi.required() }),
         shared: Joi.when('template', {
             is: Joi.exist(),
-            then: SCHEMA_SHARED.append({
-                order: Joi.forbidden(),
-                steps: Joi.forbidden()
+            then: Joi.object().keys({
+                image: Job.image,
+                environment: Job.environment,
+                settings: Job.settings
             }),
             otherwise: SCHEMA_SHARED
         }),
