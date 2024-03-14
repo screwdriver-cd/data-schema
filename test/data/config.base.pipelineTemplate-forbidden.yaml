@@ -5,6 +5,15 @@ shared:
       FOO: user overwrite
   settings:
       email: foo@example.com
+  order:
+    - install
+    - test
+    - other
+    - echo
+  steps:
+    - install: npm install
+    - test: npm test
+    - echo: echo $FOO
 jobs:
   main:
     required: [ ~commit ]

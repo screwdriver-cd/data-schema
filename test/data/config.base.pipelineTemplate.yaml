@@ -1,7 +1,56 @@
 template: foo/bar@1.0.0
 shared:
-  image: node:20
-  environment:
-      FOO: user overwrite
-  settings:
-      email: foo@example.com
+    image: node:20
+    environment:
+        FOO: user overwrite
+    settings:
+        email: foo@example.com
+    blockedBy: [~main]
+    cache: true
+    description: 'This is a description!'
+    annotations:
+        foo: a
+        bar: b
+    freezeWindows:
+        - "* * ? * 1"
+        - "0-59 0-23 * 1 ?"
+    matrix:
+        NODE_VERSION:
+            - 18
+            - 20
+    parameters:
+        color: [red, blue]
+    provider:
+        name: aws
+        region: us-west-2
+        accountId: 111111111111
+        role: arn:aws:iam::111111111111:role/role
+        executor: eks
+        clusterName: sd-build-eks
+    requires: ~commit
+    secrets:
+        - NPM_TOKEN
+    sourcePaths:
+        - src/A
+        - src/AConfig
+    template: foo/bar@1.0.0
+cache:
+    pipeline: ["node_modules/", "~/.sbt"]
+    event: ["target/generated-intermediate-resouce/*"]
+    job:
+        build: ["target/some-artifact.zip"]
+        publish-preview: ["target/some-artifact.zip"]
+        test: []
+subscribe: 
+    scmUrls:
+        - git@github.com:foo/bar.git#master: [~commit, ~tags, ~release]
+annotations:
+    foo: a
+    bar: b
+parameters:
+    color: [red, blue]
+childPipelines:
+    scmUrls:
+        - git@github.com:org/repo.git
+        - https://github.com:org/repo2.git
+    startAll: true
