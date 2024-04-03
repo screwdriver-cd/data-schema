@@ -35,7 +35,7 @@ const MODEL = {
     meta: Joi.object()
         .default({})
         .description('Key=>Value information from the event itself')
-        .example({parameters: { nameA: 'value1', jobA: { nameB: 'value2'}}}),
+        .example({ parameters: { nameA: 'value1', jobA: { nameB: 'value2' } } }),
     pipelineId: Joi.number().integer().positive().description('Identifier of this pipeline').example(123345),
     sha: Joi.string()
         .hex()
