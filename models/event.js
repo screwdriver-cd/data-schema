@@ -32,7 +32,10 @@ const MODEL = {
         .description('When this event was created')
         .example('2038-01-19T03:14:08.131Z'),
     creator: Scm.user.description('Creator of the event'),
-    meta: Joi.object().default({}).description('Key=>Value information from the event itself'),
+    meta: Joi.object()
+        .default({})
+        .description('Key=>Value information from the event itself')
+        .example({ parameters: { nameA: 'value1', jobA: { nameB: 'value2' } } }),
     pipelineId: Joi.number().integer().positive().description('Identifier of this pipeline').example(123345),
     sha: Joi.string()
         .hex()
