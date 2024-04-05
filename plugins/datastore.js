@@ -31,7 +31,8 @@ const SCHEMA_SCAN = Joi.object().keys({
     }),
     search: Joi.object().keys({
         field: Joi.alternatives().try(Joi.array().items(SCHEMA_SEARCH_FIELD), SCHEMA_SEARCH_FIELD),
-        keyword: Joi.alternatives().try(Joi.array().items(SCHEMA_SEARCH_KEYWORD), SCHEMA_SEARCH_KEYWORD)
+        keyword: Joi.alternatives().try(Joi.array().items(SCHEMA_SEARCH_KEYWORD), SCHEMA_SEARCH_KEYWORD),
+        inverse: Joi.boolean().default(false).optional()
     }),
     sort: Joi.string().lowercase().valid('ascending', 'descending').default('descending'),
     sortBy: Joi.string().max(100),
