@@ -63,7 +63,7 @@ config:
             build: ["target/some-artifact.zip"]
             publish-preview: ["target/some-artifact.zip"]
             test: []
-    subscribe: 
+    subscribe:
         scmUrls:
             - git@github.com:foo/bar.git#master: [~commit, ~tags, ~release]
     annotations:
@@ -71,4 +71,14 @@ config:
         bar: b
     parameters:
         color: [red, blue]
-
+    stages:
+        canary:
+            jobs:
+                - first
+                - second
+            description: "Canary jobs for testing"
+        prod:
+            jobs:
+                - deploy-west
+                - deploy-east
+            description: "Prod deploy jobs"
