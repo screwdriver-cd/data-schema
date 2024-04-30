@@ -14,7 +14,8 @@ const SCHEMA_CONFIG = Joi.object()
         parameters: Parameters.parameters.default({}),
         annotations: Annotations.annotations,
         cache: BaseSchema.cache,
-        subscribe: BaseSchema.subscribe
+        subscribe: BaseSchema.subscribe,
+        stages: BaseSchema.stages
     })
     .unknown(false);
 
