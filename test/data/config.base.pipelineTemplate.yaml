@@ -12,7 +12,7 @@ cache:
         build: ["target/some-artifact.zip"]
         publish-preview: ["target/some-artifact.zip"]
         test: []
-subscribe: 
+subscribe:
     scmUrls:
         - git@github.com:foo/bar.git#master: [~commit, ~tags, ~release]
 annotations:
@@ -25,3 +25,14 @@ childPipelines:
         - git@github.com:org/repo.git
         - https://github.com:org/repo2.git
     startAll: true
+stages:
+    canary:
+        jobs:
+            - first
+            - second
+        description: "Canary jobs for testing"
+    prod:
+        jobs:
+            - deploy-west
+            - deploy-east
+        description: "Prod deploy jobs"
