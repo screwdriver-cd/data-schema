@@ -80,7 +80,7 @@ const SCHEMA_CONFIG_PRE_TEMPLATE_MERGE = Joi.object()
         }),
         cache: SCHEMA_CACHE,
         childPipelines: SCHEMA_CHILD_PIPELINES,
-        stages: SCHEMA_STAGES.when('template', { is: Joi.exist(), then: Joi.forbidden() }),
+        stages: SCHEMA_STAGES,
         subscribe: SCHEMA_SUBSCRIBE,
         parameters: Parameters.parameters.default({})
     })
