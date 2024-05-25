@@ -50,9 +50,15 @@ describe('config base', () => {
             assert.isNull(validate('config.base.pipelineTemplate.yaml', config.base.configBeforeMergingTemplate).error);
         });
 
-        it('if template is provided then unsupported fields are foridden', () => {
+        it('if template is provided then unsupported fields are forbidden', () => {
             assert.isNotNull(
                 validate('config.base.pipelineTemplate-forbidden.yaml', config.base.configBeforeMergingTemplate).error
+            );
+        });
+
+        it('if template is provided then allow user yaml to customize image, settings, environment, and requires', () => {
+            assert.isNull(
+                validate('config.base.pipelineTemplate-customized.yaml', config.base.configBeforeMergingTemplate).error
             );
         });
 

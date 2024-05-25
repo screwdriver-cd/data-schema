@@ -5,6 +5,7 @@ shared:
         FOO: user overwrite
     settings:
         email: foo@example.com
+    requires: ~commit
 cache:
     pipeline: ["node_modules/", "~/.sbt"]
     event: ["target/generated-intermediate-resouce/*"]
