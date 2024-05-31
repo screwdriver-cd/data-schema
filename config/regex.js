@@ -51,8 +51,8 @@ module.exports = {
     INTERNAL_TRIGGER: /^~([\w-]+)$/,
     // Stages can only be named with A-Z,a-z,0-9,-,_
     STAGE_NAME: /^[\w-]+$/,
-    // Stage trigger like ~stage@deploy or ~stage@stageName:jobName
-    STAGE_TRIGGER: /^~stage@([\w-]+)(?::([\w-]+))?$/,
+    // Stage trigger like ~stage@deploy or ~stage@stageName:jobName or stage@deploy or stage@stageName:jobName
+    STAGE_TRIGGER: /^~?stage@([\w-]+)(?::([\w-]+))?$/,
     // Don't combine EXTERNAL_TRIGGER and EXTERNAL_TRIGGER_AND for backward compatibility
     // BlockBy does not support EXTERNAL_TRIGGER_AND
     // External trigger like ~sd@123:component (OR case)
