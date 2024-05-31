@@ -74,7 +74,8 @@ const SCHEMA_CONFIG_PRE_TEMPLATE_MERGE = Joi.object()
             then: Joi.object().keys({
                 image: Job.image,
                 environment: Job.environment,
-                settings: Job.settings
+                settings: Job.settings,
+                requires: Job.requires
             }),
             otherwise: SCHEMA_SHARED
         }),
