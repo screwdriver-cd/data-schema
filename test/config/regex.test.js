@@ -461,4 +461,21 @@ describe('config regex', () => {
             assert.isFalse(config.regex.SCM_URI.test('bitbucket.org:{123}'));
         });
     });
+
+    describe('stageTrigger', () => {
+        const stageTriggerRegex = config.regex.STAGE_TRIGGER;
+
+        it('matches valid stage triggers', () => {
+            assert.isTrue(stageTriggerRegex.test('stage@build'));
+            assert.isTrue(stageTriggerRegex.test('stage@build:setup'));
+            assert.isTrue(stageTriggerRegex.test('~stage@test'));
+            assert.isTrue(stageTriggerRegex.test('~stage@test:tearDown'));
+        });
+
+        it('does not match invalid stage triggers', () => {
+            assert.isFalse(stageTriggerRegex.test('stage:'));
+            assert.isFalse(stageTriggerRegex.test('stage:build:test'));
+            assert.isFalse(stageTriggerRegex.test('build'));
+        });
+    });
 });
