@@ -6,3 +6,13 @@ shared:
     settings:
         email: foo@example.com
     requires: ~commit
+
+jobs:
+    main:
+        requires: [~commit]
+        image: node:20
+        settings:
+            email: [test@email.com, test3@email.com]
+        environment:
+            VAR3: "three"
+            VAR1: "empty"
