@@ -63,20 +63,26 @@ const SCHEMA_SUBSCRIBE = Joi.object().keys({
     )
 });
 
+const ALLOWED_JOB_FIELDS_WITH_PIPELINE_TEMPLATE = Joi.object().keys({
+    image: Job.image,
+    environment: Job.environment,
+    settings: Job.settings,
+    requires: Job.requires
+});
+
 const SCHEMA_CONFIG_PRE_TEMPLATE_MERGE = Joi.object()
     .keys({
         template: Joi.string().regex(Regex.FULL_TEMPLATE_NAME_WITH_NAMESPACE),
         version: Joi.number().integer().min(1).max(50),
         annotations: Annotations.annotations,
-        jobs: SCHEMA_JOBS.when('template', { is: Joi.exist(), then: Joi.forbidden(), otherwise: Joi.required() }),
+        jobs: Joi.when('template', {
+            is: Joi.exist(),
+            then: Joi.object().pattern(Job.jobName, ALLOWED_JOB_FIELDS_WITH_PIPELINE_TEMPLATE).unknown(false),
+            otherwise: SCHEMA_JOBS.required()
+        }),
         shared: Joi.when('template', {
             is: Joi.exist(),
-            then: Joi.object().keys({
-                image: Job.image,
-                environment: Job.environment,
-                settings: Job.settings,
-                requires: Job.requires
-            }),
+            then: ALLOWED_JOB_FIELDS_WITH_PIPELINE_TEMPLATE,
             otherwise: SCHEMA_SHARED
         }),
         cache: SCHEMA_CACHE,
