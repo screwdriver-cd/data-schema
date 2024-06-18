@@ -77,7 +77,7 @@ const SCHEMA_CONFIG_PRE_TEMPLATE_MERGE = Joi.object()
         annotations: Annotations.annotations,
         jobs: Joi.when('template', {
             is: Joi.exist(),
-            then: Joi.object().pattern(Job.jobName, ALLOWED_JOB_FIELDS_WITH_PIPELINE_TEMPLATE).unknown(false),
+            then: SCHEMA_JOBS.optional(),
             otherwise: SCHEMA_JOBS.required()
         }),
         shared: Joi.when('template', {
@@ -113,6 +113,7 @@ const SCHEMA_CONFIG_POST_TEMPLATE_MERGE = Joi.object()
  * @type {Object}
  */
 module.exports = {
+    allowedJobFieldsWithPipelineTemplate: ALLOWED_JOB_FIELDS_WITH_PIPELINE_TEMPLATE,
     jobs: SCHEMA_JOBS,
     shared: SCHEMA_SHARED,
     prChain: SCHEMA_PR_CHAIN, // This is still used by pipeline schema.
