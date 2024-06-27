@@ -16,3 +16,7 @@ jobs:
         environment:
             VAR3: "three"
             VAR1: "empty"
+    anewjob:
+        requires: [main]
+        steps:
+            - echo: echo hi
