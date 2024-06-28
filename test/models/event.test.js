@@ -6,8 +6,37 @@ const { validate } = require('../helper');
 
 describe('model event', () => {
     describe('base', () => {
+        const schema = models.event.base;
+        const baseYamlFile = 'event.yaml';
+
         it('validates the base', () => {
-            assert.isNull(validate('event.yaml', models.event.base).error);
+            assert.isNull(validate(baseYamlFile, schema).error);
+        });
+
+        describe('tests for startFrom', () => {
+            [null, '', '~some-internal-job-name', '~stage@integration', '~stage@integration:setup'].forEach(
+                startFrom => {
+                    it('validates the invalid startFrom', () => {
+                        assert.isNotNull(validate(baseYamlFile, schema, { startFrom }).error);
+                    });
+                }
+            );
+
+            [
+                '~commit',
+                '~pr',
+                '~tag',
+                '~release',
+                'some-internal-job-name',
+                'stage@integration',
+                'stage@integration:setup',
+                'sd@123:some-external-job-name',
+                '~sd@123:some-external-job-name'
+            ].forEach(startFrom => {
+                it('validates the valid startFrom', () => {
+                    assert.isNull(validate(baseYamlFile, schema, { startFrom }).error);
+                });
+            });
         });
     });
 

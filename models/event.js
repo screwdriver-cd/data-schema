@@ -10,6 +10,7 @@ const parentBuildId = require('./build').get.extract('parentBuildId');
 const parentBuilds = require('./build').get.extract('parentBuilds');
 const buildId = require('./build').get.extract('id');
 const prNum = Scm.hook.extract('prNum');
+const { QUALIFIED_STAGE_NAME } = require('../config/regex');
 
 const MODEL = {
     id: Joi.number().integer().positive().description('Identifier of this event').example(123345),
@@ -48,7 +49,7 @@ const MODEL = {
         .description('SHA of the configuration pipeline this project depends on')
         .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f'),
     startFrom: Joi.alternatives()
-        .try(trigger, jobName)
+        .try(trigger, jobName, QUALIFIED_STAGE_NAME)
         .description('Event start point - a job name or trigger name (~commit/~pr)')
         .example('~commit'),
     type: Joi.string().valid('pr', 'pipeline').max(10).description('Type of the event').example('pr'),
