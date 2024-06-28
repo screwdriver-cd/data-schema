@@ -11,7 +11,7 @@ describe('model template tag', () => {
         });
 
         [null, '', 'some_invalid_type', 'JOBS', 'PIPELINES'].forEach(validType => {
-            it('validates the invalid states', () => {
+            it('validates the invalid types', () => {
                 assert.isNotNull(
                     validate('templatetag.yaml', models.templateTag.base, { templateType: validType }).error
                 );
@@ -19,7 +19,7 @@ describe('model template tag', () => {
         });
 
         ['JOB', 'PIPELINE'].forEach(validType => {
-            it('validates the valid states', () => {
+            it('validates the valid types', () => {
                 assert.isNull(validate('templatetag.yaml', models.templateTag.base, { templateType: validType }).error);
             });
         });
