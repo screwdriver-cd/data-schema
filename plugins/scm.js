@@ -26,6 +26,7 @@ const ADD_WEBHOOK = Joi.object()
     .keys({
         scmUri,
         token,
+        scmRepo,
         actions: Joi.array().items(Joi.string()),
         webhookUrl: Joi.string().uri({
             scheme: ['http', 'https']
@@ -127,6 +128,7 @@ const UPDATE_COMMIT_STATUS = Joi.object()
     .keys({
         scmUri,
         token,
+        scmRepo,
         sha,
         buildStatus: Joi.string()
             .required()
@@ -156,6 +158,7 @@ const GET_CHANGED_FILES_INPUT = Joi.object()
         type,
         webhookConfig: Joi.object().allow(null).required(),
         token,
+        scmRepo,
         scmContext,
         scmUri: scmUri.optional(),
         prNum
@@ -180,6 +183,7 @@ const DECORATE_COMMIT = Joi.object()
         scmUri,
         sha,
         token,
+        scmRepo,
         scmContext
     })
     .required();
@@ -205,6 +209,7 @@ const GET_BRANCH_LIST = Joi.object()
     .keys({
         scmUri,
         token,
+        scmRepo,
         scmContext
     })
     .required();
