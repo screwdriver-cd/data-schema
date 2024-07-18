@@ -58,6 +58,10 @@ describe('scm test', () => {
             assert.isNull(validate('scm.addPrComment.yaml', scm.addPrComment).error);
         });
 
+        it('validates with optional scmRepo', () => {
+            assert.isNull(validate('scm.addPrCommentWithScmRepo.yaml', scm.addPrComment).error);
+        });
+
         it('fails', () => {
             assert.isNotNull(validate('empty.yaml', scm.addPrComment).error);
         });

@@ -1,0 +1,11 @@
+scmUri: github.com:12345678:master
+token: 'thisisatokenthingy'
+prNum: 5
+scmContext: github:github.com
+comments: [ { text: 'my, what a fine PR' } ]
+jobName: 'main'
+pipelineId: '123456'
+scmRepo:
+    branch: master
+    url: https://github.com/org/name/tree/master
+    name: org/name

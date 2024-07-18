@@ -109,6 +109,7 @@ const ADD_PR_COMMENT = Joi.object()
     .keys({
         scmUri,
         token,
+        scmRepo,
         prNum: core.scm.hook.extract('prNum').required(),
         comments: Joi.array()
             .items(
