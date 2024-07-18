@@ -1,0 +1,8 @@
+scmUri: github.com:12345678:master
+sha: 46f1a0bd5592a2f9244ca321b129902a06b53e03
+token: 'thisisatokenthingy'
+scmContext: github:github.com
+scmRepo:
+    branch: master
+    url: https://github.com/org/name/tree/master
+    name: org/name

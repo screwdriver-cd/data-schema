@@ -58,6 +58,10 @@ describe('scm test', () => {
             assert.isNull(validate('scm.addPrComment.yaml', scm.addPrComment).error);
         });
 
+        it('validates with optional scmRepo', () => {
+            assert.isNull(validate('scm.addPrCommentWithScmRepo.yaml', scm.addPrComment).error);
+        });
+
         it('fails', () => {
             assert.isNotNull(validate('empty.yaml', scm.addPrComment).error);
         });
@@ -66,6 +70,10 @@ describe('scm test', () => {
     describe('updateCommitStatus', () => {
         it('validates', () => {
             assert.isNull(validate('scm.updateCommitStatus.yaml', scm.updateCommitStatus).error);
+        });
+
+        it('validates with optional scmRepo', () => {
+            assert.isNull(validate('scm.updateCommitStatusWithScmRepo.yaml', scm.updateCommitStatus).error);
         });
 
         it('validates with extra optional params (context and description)', () => {
@@ -94,6 +102,10 @@ describe('scm test', () => {
     describe('getChangedFiles', () => {
         it('validates input', () => {
             assert.isNull(validate('scm.getChangedFilesInput.yaml', scm.getChangedFilesInput).error);
+        });
+
+        it('validates with optional scmRepo', () => {
+            assert.isNull(validate('scm.getChangedFilesInputWithScmRepo.yaml', scm.getChangedFilesInput).error);
         });
 
         it('fails empty input', () => {
@@ -130,6 +142,10 @@ describe('scm test', () => {
     describe('decorateCommit', () => {
         it('validates', () => {
             assert.isNull(validate('scm.decorateCommit.yaml', scm.decorateCommit).error);
+        });
+
+        it('validates with optional scmRepo', () => {
+            assert.isNull(validate('scm.decorateCommitWithScmRepo.yaml', scm.decorateCommit).error);
         });
 
         it('fails', () => {
@@ -184,6 +200,10 @@ describe('scm test', () => {
             assert.isNull(validate('scm.addWebhook.yaml', scm.addWebhook).error);
         });
 
+        it('validates with optional scmRepo', () => {
+            assert.isNull(validate('scm.addWebhookWithScmRepo.yaml', scm.addWebhook).error);
+        });
+
         it('fails', () => {
             assert.isNotNull(validate('empty.yaml', scm.addWebhook).error);
         });
@@ -202,6 +222,10 @@ describe('scm test', () => {
     describe('getBranchList', () => {
         it('validates', () => {
             assert.isNull(validate('scm.getBranchList.yaml', scm.getBranchList).error);
+        });
+
+        it('validates with optional scmRepo', () => {
+            assert.isNull(validate('scm.getBranchListWithScmRepo.yaml', scm.getBranchList).error);
         });
 
         it('fails', () => {

@@ -1,0 +1,7 @@
+---
+scmUri: github.com:126987453:master
+token: thisisashinytoken
+scmRepo:
+    branch: master
+    url: https://github.com/org/name/tree/master
+    name: org/name
