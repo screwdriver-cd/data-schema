@@ -9,6 +9,9 @@ config:
             steps:
                 -   init: npm install
                 -   test: npm test
+        publish:
+            steps:
+                -   publish: npm publish
 
     shared:
         environment:
@@ -18,5 +21,15 @@ config:
         user:
             value: sd-bot
             description: User running build
+    workflowGraph:
+        nodes:
+            - name: ~commit
+            - name: main
+            - name: publish
+        edges:
+            - src: ~commit
+              dest: main
+            - src: main
+              dest: publish
 
 createTime: "2038-01-19T03:14:08.131Z"
