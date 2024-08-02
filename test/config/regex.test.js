@@ -478,4 +478,34 @@ describe('config regex', () => {
             assert.isFalse(stageTriggerRegex.test('build'));
         });
     });
+
+    describe('stageExternalTrigger', () => {
+        const stageExternalTriggerRegex = config.regex.EXTERNAL_STAGE_TRIGGER;
+
+        it('matches valid stage external triggers', () => {
+            [
+                'sd@26:stage@alpha:setup',
+                '~sd@26:stage@alpha:setup',
+                'sd@26:stage@alpha:teardown',
+                '~sd@26:stage@alpha:teardown',
+                'sd@26:stage@alpha:deploy',
+                '~sd@26:stage@alpha:deploy'
+            ].forEach(trigger => {
+                assert.isTrue(stageExternalTriggerRegex.test(trigger));
+            });
+        });
+
+        it('does not match invalid stage external triggers', () => {
+            [
+                'sd@26:stage@alpha',
+                'sd@26:stage@',
+                'sd@26:stage:',
+                'stage@alpha:setup',
+                'stage:build:test',
+                'build'
+            ].forEach(trigger => {
+                assert.isFalse(stageExternalTriggerRegex.test(trigger));
+            });
+        });
+    });
 });

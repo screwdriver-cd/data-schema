@@ -13,6 +13,8 @@ nodes:
     - name: sd@123:publish
     - name: sd@333:E
     - name: G
+    - name: triggers-external-stage
+    - name: sd@26:stage@alpha-in-remote-pipeline:setup
 edges:
     - src: ~commit
       dest: main
@@ -28,4 +30,7 @@ edges:
       dest: sd@333:E
     - src: sd@333:E
       dest: G
+      join: true
+    - src: triggers-external-stage
+      dest: sd@26:stage@alpha-in-remote-pipeline:setup
       join: true
