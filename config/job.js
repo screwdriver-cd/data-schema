@@ -139,12 +139,14 @@ const SCHEMA_TRIGGER = sdJoi.string().branchFilter();
 const SCHEMA_INTERNAL_TRIGGER = Joi.string().regex(Regex.INTERNAL_TRIGGER); // ~main, ~jobOne
 const SCHEMA_EXTERNAL_TRIGGER = Joi.string().regex(Regex.EXTERNAL_TRIGGER_ALL).example('~sd@1234:component'); // ~sd@123:main or sd@123:main
 const SCHEMA_STAGE_TRIGGER = Joi.string().regex(Regex.STAGE_TRIGGER); // ~stage@deploy, ~stage@deploy:main
+const SCHEMA_EXTERNAL_STAGE_TRIGGER = Joi.string().regex(Regex.EXTERNAL_STAGE_TRIGGER); // ~sd@26:stage@alpha:setup, sd@26:stage@alpha:deploy
 const SCHEMA_CRON_EXPRESSION = sdCron.string().cron();
 const SCHEMA_REQUIRES_VALUE = Joi.alternatives().try(
     SCHEMA_INTERNAL_TRIGGER,
     SCHEMA_JOBNAME,
     SCHEMA_TRIGGER,
-    SCHEMA_STAGE_TRIGGER
+    SCHEMA_STAGE_TRIGGER,
+    SCHEMA_EXTERNAL_STAGE_TRIGGER
 );
 const SCHEMA_REQUIRES = Joi.alternatives().try(Joi.array().items(SCHEMA_REQUIRES_VALUE), SCHEMA_REQUIRES_VALUE);
 const SCHEMA_BLOCKEDBY_VALUE = Joi.alternatives().try(
