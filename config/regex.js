@@ -55,17 +55,17 @@ module.exports = {
     QUALIFIED_STAGE_NAME: /^stage@([\w-]+)$/,
     // Stage trigger like ~stage@deploy or ~stage@stageName:jobName or stage@deploy or stage@stageName:jobName
     STAGE_TRIGGER: /^~?stage@([\w-]+)(?::([\w-]+))?$/,
-    // Stage trigger like ~sd@26:stage@alpha:setup, sd@26:stage@alpha:deploy
-    EXTERNAL_STAGE_TRIGGER: /^~?sd@\d+:(([\w-]+)|(stage@([\w-]+):([\w-]+)))$/,
+    // External Stage trigger like ~sd@26:stage@alpha:setup
+    EXTERNAL_STAGE_TRIGGER: /^~?sd@\d+:(?:([\w-]+)|(stage@([\w-]+):(setup|teardown)))$/,
     // Don't combine EXTERNAL_TRIGGER and EXTERNAL_TRIGGER_AND for backward compatibility
     // BlockBy does not support EXTERNAL_TRIGGER_AND
     // External trigger like ~sd@123:component, ~sd@26:stage@alpha:setup (OR case)
-    EXTERNAL_TRIGGER: /^~sd@(\d+):(([\w-]+)|(stage@([\w-]+):setup))$/,
+    EXTERNAL_TRIGGER: /^~sd@(\d+):(?:([\w-]+)|(stage@([\w-]+):setup))$/,
     // External trigger like sd@123:component, sd@26:stage@alpha:setup (AND case)
-    EXTERNAL_TRIGGER_AND: /^sd@(\d+):(([\w-]+)|(stage@([\w-]+):setup))$/,
+    EXTERNAL_TRIGGER_AND: /^sd@(\d+):(?:([\w-]+)|(stage@([\w-]+):setup))$/,
     // External trigger (OR and AND case)
     // Can be ~sd@123:component or sd@123:component
-    EXTERNAL_TRIGGER_ALL: /^~?sd@(\d+):(([\w-]+)|(stage@([\w-]+):setup))$/,
+    EXTERNAL_TRIGGER_ALL: /^~?sd@(\d+):(?:([\w-]+)|(stage@([\w-]+):setup))$/,
 
     // Can be ~pr, ~commit, ~release, ~tag or ~commit:branchName, or ~sd@123:component
     // Note: if you modify this regex, you must modify `sdJoi` definition in the `config/job.js`

@@ -487,9 +487,7 @@ describe('config regex', () => {
                 'sd@26:stage@alpha:setup',
                 '~sd@26:stage@alpha:setup',
                 'sd@26:stage@alpha:teardown',
-                '~sd@26:stage@alpha:teardown',
-                'sd@26:stage@alpha:deploy',
-                '~sd@26:stage@alpha:deploy'
+                '~sd@26:stage@alpha:teardown'
             ].forEach(trigger => {
                 assert.isTrue(stageExternalTriggerRegex.test(trigger));
             });
@@ -497,6 +495,8 @@ describe('config regex', () => {
 
         it('does not match invalid stage external triggers', () => {
             [
+                'sd@26:stage@alpha:deploy',
+                '~sd@26:stage@alpha:deploy',
                 'sd@26:stage@alpha',
                 'sd@26:stage@',
                 'sd@26:stage:',
