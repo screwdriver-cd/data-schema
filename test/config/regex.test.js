@@ -508,4 +508,20 @@ describe('config regex', () => {
             });
         });
     });
+
+    describe('stageSetup', () => {
+        const stageSetupRegex = config.regex.STAGE_SETUP_PATTERN;
+
+        it('matches valid stage setup jobs', () => {
+            ['stage@alpha:setup'].forEach(trigger => {
+                assert.isTrue(stageSetupRegex.test(trigger));
+            });
+        });
+
+        it('does not match invalid stage setup jobs', () => {
+            ['stage@alpha:teardown', 'alpha-deploy', 'alpha:setup', 'stage@setup'].forEach(trigger => {
+                assert.isFalse(stageSetupRegex.test(trigger));
+            });
+        });
+    });
 });
