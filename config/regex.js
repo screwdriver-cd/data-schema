@@ -119,5 +119,7 @@ module.exports = {
     // Provider Subnet ID. Can be subnet-xxxxxx, with A-Z,a-z,0-9,_
     SUBNET_ID: /^subnet-[\w]+$/,
     // Provider Role. Can be arn:aws:iam::xxxxxx:role/some-role
-    ROLE_ARN: /^arn:aws:iam::\d{12}:role\/.+/
+    ROLE_ARN: /^arn:aws:iam::\d{12}:role\/.+/,
+    // Stage setup pattern. Can be stage@stage-name:setup
+    STAGE_SETUP_PATTERN: /^stage@([\w-]+):setup$/
 };
