@@ -45,7 +45,7 @@ module.exports = {
     JOB_NAME: /^(([\w-]+)|(?:stage@([\w-]+):(setup|teardown)))$/,
     // PR JOB Name can only be PR-1 or PR-1:main, group1: PR-prNum, group2: jobName
     PR_JOB_NAME: /^(PR-\d+)(?::([\w-]+))?$/,
-    // Stage setup pattern. Can be stage@stage-name:setup or stage@stage-name:teardown
+    // Stage setup or teardown job name. Can be stage@stage-name:setup or stage@stage-name:teardown
     STAGE_SETUP_TEARDOWN_JOB_NAME: /^stage@([\w-]+):(setup|teardown)$/,
     // Match all possible job name
     ALL_JOB_NAME: /^(PR-[0-9]+:)?[\w-@:]+$/,
