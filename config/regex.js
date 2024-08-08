@@ -121,5 +121,7 @@ module.exports = {
     // Provider Role. Can be arn:aws:iam::xxxxxx:role/some-role
     ROLE_ARN: /^arn:aws:iam::\d{12}:role\/.+/,
     // Stage setup pattern. Can be stage@stage-name:setup
-    STAGE_SETUP_PATTERN: /^stage@([\w-]+):setup$/
+    STAGE_SETUP_PATTERN: /^stage@([\w-]+):setup$/,
+    // Stage setup pattern. Can be stage@stage-name:setup or stage@stage-name:teardown
+    STAGE_SETUP_TEARDOWN_PATTERN: /^stage@([\w-]+):(setup|teardown)$/
 };

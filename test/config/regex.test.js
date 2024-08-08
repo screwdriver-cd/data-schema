@@ -524,4 +524,20 @@ describe('config regex', () => {
             });
         });
     });
+
+    describe('stageSetupTeardown', () => {
+        const stageSetupTeardownRegex = config.regex.STAGE_SETUP_TEARDOWN_PATTERN;
+
+        it('matches valid stage setup or teardown jobs', () => {
+            ['stage@alpha:setup', 'stage@alpha:teardown'].forEach(trigger => {
+                assert.isTrue(stageSetupTeardownRegex.test(trigger));
+            });
+        });
+
+        it('does not match invalid stage setup or teardown jobs', () => {
+            ['stage@alpha', 'alpha-deploy', 'alpha:setup', 'stage@setup'].forEach(trigger => {
+                assert.isFalse(stageSetupTeardownRegex.test(trigger));
+            });
+        });
+    });
 });
