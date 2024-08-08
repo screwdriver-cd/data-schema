@@ -526,7 +526,7 @@ describe('config regex', () => {
     });
 
     describe('stageSetupTeardown', () => {
-        const stageSetupTeardownRegex = config.regex.STAGE_SETUP_TEARDOWN_PATTERN;
+        const stageSetupTeardownRegex = config.regex.STAGE_SETUP_TEARDOWN_JOB_NAME;
 
         it('matches valid stage setup or teardown jobs', () => {
             ['stage@alpha:setup', 'stage@alpha:teardown'].forEach(trigger => {
@@ -535,7 +535,16 @@ describe('config regex', () => {
         });
 
         it('does not match invalid stage setup or teardown jobs', () => {
-            ['stage@alpha', 'alpha-deploy', 'alpha:setup', 'stage@setup'].forEach(trigger => {
+            [
+                'stage@alpha',
+                'alpha-deploy',
+                'alpha:setup',
+                'stage@setup',
+                'stage@alpha:deploy',
+                'stage@teardown',
+                'sd@1234:stage@alpha:setup',
+                'sd@1234:stage@alpha:teardown'
+            ].forEach(trigger => {
                 assert.isFalse(stageSetupTeardownRegex.test(trigger));
             });
         });

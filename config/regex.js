@@ -45,6 +45,8 @@ module.exports = {
     JOB_NAME: /^(([\w-]+)|(?:stage@([\w-]+):(setup|teardown)))$/,
     // PR JOB Name can only be PR-1 or PR-1:main, group1: PR-prNum, group2: jobName
     PR_JOB_NAME: /^(PR-\d+)(?::([\w-]+))?$/,
+    // Stage setup pattern. Can be stage@stage-name:setup or stage@stage-name:teardown
+    STAGE_SETUP_TEARDOWN_JOB_NAME: /^stage@([\w-]+):(setup|teardown)$/,
     // Match all possible job name
     ALL_JOB_NAME: /^(PR-[0-9]+:)?[\w-@:]+$/,
     // Internal trigger like ~component or ~main
@@ -121,7 +123,5 @@ module.exports = {
     // Provider Role. Can be arn:aws:iam::xxxxxx:role/some-role
     ROLE_ARN: /^arn:aws:iam::\d{12}:role\/.+/,
     // Stage setup pattern. Can be stage@stage-name:setup
-    STAGE_SETUP_PATTERN: /^stage@([\w-]+):setup$/,
-    // Stage setup pattern. Can be stage@stage-name:setup or stage@stage-name:teardown
-    STAGE_SETUP_TEARDOWN_PATTERN: /^stage@([\w-]+):(setup|teardown)$/
+    STAGE_SETUP_PATTERN: /^stage@([\w-]+):setup$/
 };
