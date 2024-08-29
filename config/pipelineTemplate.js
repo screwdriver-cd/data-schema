@@ -6,6 +6,7 @@ const Annotations = require('./annotations');
 const Parameters = require('./parameters');
 const Template = require('./template');
 const Regex = require('./regex');
+const WorkflowGraph = require('./workflowGraph');
 
 const SCHEMA_CONFIG = Joi.object()
     .keys({
@@ -15,7 +16,8 @@ const SCHEMA_CONFIG = Joi.object()
         annotations: Annotations.annotations,
         cache: BaseSchema.cache,
         subscribe: BaseSchema.subscribe,
-        stages: BaseSchema.stages
+        stages: BaseSchema.stages,
+        workflowGraph: WorkflowGraph.workflowGraph
     })
     .unknown(false);
 
