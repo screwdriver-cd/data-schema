@@ -12,8 +12,8 @@ module.exports = {
                 table,
                 'state',
                 {
-                    type: Sequelize.TEXT,
-                    defaultValue: '{}',
+                    type: Sequelize.STRING(10),
+                    defaultValue: 'ACTIVE',
                     allowNull: false
                 },
                 { transaction }
