@@ -9,4 +9,15 @@ config:
             steps:
                 -   init: npm install
                 -   test: npm test
+        publish:
+            steps:
+                -   init: npm install
+                -   publish: npm publish
+workflowGraph:
+    nodes:
+        - name: main
+        - name: publish
+    edges:
+        - src: main
+          dest: publish
 createTime: "2038-01-19T03:14:08.131Z"
