@@ -4,7 +4,6 @@ const Joi = require('joi');
 const mutate = require('../lib/mutate');
 const pipelineTemplateVersions = require('../config/pipelineTemplate');
 const JobTemplateConfig = require('../config/template');
-const WorkflowGraph = require('../config/workflowGraph');
 const templateId = require('./templateMeta').base.extract('id');
 
 const MODEL = {
@@ -18,10 +17,6 @@ const MODEL = {
         .max(32)
         .description('When this template was created')
         .example('2038-01-19T03:14:08.131Z')
-        .required(),
-    workflowGraph: WorkflowGraph.workflowGraph
-        .description('Graph representation of the workflow')
-        .default('{"nodes": [],"edges":[]}')
         .required()
 };
 
@@ -48,9 +43,9 @@ module.exports = {
      * @property get
      * @type {Joi}
      */
-    get: Joi.object(
-        mutate(MODEL, ['id', 'templateId', 'version'], ['description', 'config', 'createTime', 'workflowGraph'])
-    ).label('Get Template'),
+    get: Joi.object(mutate(MODEL, ['id', 'templateId', 'version'], ['description', 'config', 'createTime'])).label(
+        'Get Template'
+    ),
 
     /**
      * List of fields that determine a unique row
