@@ -17,17 +17,5 @@ module.exports = {
                 transaction
             });
         });
-    },
-    // eslint-disable-next-line no-unused-vars
-    down: async (queryInterface, Sequelize) => {
-        await queryInterface.sequelize.transaction(async transaction => {
-            await queryInterface.removeIndex(table, `${table}_templateId_archived`, { transaction });
-
-            await queryInterface.addIndex(table, {
-                name: `${table}_templateId`,
-                fields: ['templateId'],
-                transaction
-            });
-        });
     }
 };
