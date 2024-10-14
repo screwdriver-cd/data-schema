@@ -22,6 +22,7 @@ const STATUSES = [
     'COLLAPSED', // when the build is collapsed
     'FROZEN' // when the build is frozen due to freeze window
 ];
+const STATUS_MESSAGE_TYPES = ['ERROR', 'WARN', 'INFO'];
 
 const MODEL = {
     id: Joi.number().integer().positive().description('Identifier of this build').example(123345),
@@ -84,6 +85,12 @@ const MODEL = {
     statusMessage: Joi.string()
         .description('Status message to describe status of the build')
         .example('Build failed due to infrastructure error'),
+
+    statusMessageType: Joi.string()
+        .valid(...STATUS_MESSAGE_TYPES)
+        .max(10)
+        .description('Severity of the status message')
+        .example('WARN'),
 
     stats: Joi.object()
         .keys({
@@ -158,6 +165,7 @@ module.exports = {
                 'eventId',
                 'environment',
                 'statusMessage',
+                'statusMessageType',
                 'stats',
                 'buildClusterName',
                 'templateId',
@@ -172,7 +180,9 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(MODEL, [], ['status', 'meta', 'statusMessage', 'stats'])).label('Update Build'),
+    update: Joi.object(mutate(MODEL, [], ['status', 'meta', 'statusMessage', 'statusMessageType', 'stats'])).label(
+        'Update Build'
+    ),
 
     /**
      * Properties for Build that will be passed during a CREATE request
@@ -222,6 +232,14 @@ module.exports = {
      * @type {Array}
      */
     allKeys: Object.keys(MODEL),
+
+    /**
+     * All the available status message type
+     *
+     * @property allStatusMessageTypes
+     * @type {Array}
+     */
+    allStatusMessageTypes: STATUS_MESSAGE_TYPES,
 
     /**
      * Tablename to be used in the datastore
