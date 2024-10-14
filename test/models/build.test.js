@@ -58,6 +58,22 @@ describe('model build', () => {
         it('fails the get', () => {
             assert.isNotNull(validate('empty.yaml', models.build.get).error);
         });
+
+        // valid status message types
+        models.build.allStatusMessageTypes.forEach(messageType => {
+            it('validates the valid message types', () => {
+                assert.isNull(validate('build.get.yaml', models.build.get, { statusMessageType: messageType }).error);
+            });
+        });
+
+        // invalid status message types
+        ['', 'error', 'warn', 'info', 'some_invalid_message_type'].forEach(messageType => {
+            it('validates the invalid message types', () => {
+                assert.isNotNull(
+                    validate('build.get.yaml', models.build.get, { statusMessageType: messageType }).error
+                );
+            });
+        });
     });
 
     describe('steps', () => {
