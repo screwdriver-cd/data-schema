@@ -1,6 +1,7 @@
 # Build Update Example
 status: FAILURE
 statusMessage: 'Build failed to start due to infrastructure error'
+statusMessageType: 'ERROR'
 meta:
     yes: no
 stats:
