@@ -51,9 +51,9 @@
     "npx": "^3.0.0",
     "nyc": "^15.1.0",
     "pg": "^7.18.2",
-    "sequelize": "^6.25.8",
-    "sequelize-cli": "^6.5.2",
-    "sqlite3": "^5.1.2"
+    "sequelize": "^6.37.5",
+    "sequelize-cli": "^6.6.2",
+    "sqlite3": "^5.1.7"
   },
   "dependencies": {
     "cron-parser": "^4.7.0",

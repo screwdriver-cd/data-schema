@@ -1,2 +1,5 @@
 # Banner Create Example
 message: "Test banner example"
+type: "info"
+isActive: true
+scope: "GLOBAL"

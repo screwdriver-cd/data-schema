@@ -3,6 +3,8 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 
+const SCOPES = ['GLOBAL', 'PIPELINE', 'BUILD'];
+
 const MODEL = {
     id: Joi.number().integer().positive(),
 
@@ -21,7 +23,20 @@ const MODEL = {
 
     createdBy: Joi.string().max(128).description('Username of user creating the banner').example('batman123'),
 
-    type: Joi.string().valid('info', 'warn').max(32).description('Type/Severity of the banner message').example('info')
+    type: Joi.string().valid('info', 'warn').max(32).description('Type/Severity of the banner message').example('info'),
+
+    scope: Joi.string()
+        .valid(...SCOPES)
+        .description('Scope of the banner')
+        .example('GLOBAL'),
+
+    scopeId: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier to pipelineId for PIPELINE, buildId for BUILD, or null for GLOBAL')
+        .optional()
+        .allow(null)
+        .example(1234)
 };
 
 module.exports = {
@@ -47,9 +62,9 @@ module.exports = {
      * @property get
      * @type {Joi}
      */
-    get: Joi.object(mutate(MODEL, ['id', 'message', 'type', 'isActive', 'createdBy', 'createTime'], [])).label(
-        'Get Banner'
-    ),
+    get: Joi.object(
+        mutate(MODEL, ['id', 'message', 'type', 'isActive', 'scope', 'scopeId', 'createdBy', 'createTime'], [])
+    ).label('Get Banner'),
 
     /**
      * Properties for Banners that will be passed during a CREATE request
@@ -57,7 +72,7 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(mutate(MODEL, ['message'], ['type', 'isActive'])).label('Create Banner'),
+    create: Joi.object(mutate(MODEL, ['message'], ['type', 'isActive', 'scope', 'scopeId'])).label('Create Banner'),
 
     /**
      * Properties for Banners that will be passed during a UPDATE request
@@ -65,14 +80,18 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(MODEL, [], ['message', 'type', 'isActive'])).label('Update Banner'),
+    update: Joi.object(mutate(MODEL, [], ['message', 'type', 'isActive', 'scope', 'scopeId'])).label('Update Banner'),
 
     /**
      * Properties for Banners that will come back during a LIST request.
      * The LIST request will list all banners
      */
     list: Joi.array()
-        .items(Joi.object(mutate(MODEL, ['id', 'message', 'type', 'isActive', 'createdBy', 'createTime'], [])))
+        .items(
+            Joi.object(
+                mutate(MODEL, ['id', 'message', 'type', 'isActive', 'scope', 'scopeId', 'createdBy', 'createTime'], [])
+            )
+        )
         .label('List Banners'),
 
     /**
