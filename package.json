@@ -57,6 +57,6 @@
   },
   "dependencies": {
     "cron-parser": "^4.7.0",
-    "joi": "^17.7.0"
+    "joi": "^17.13.3"
   }
 }
