@@ -28,7 +28,9 @@ const MODEL = {
     scope: Joi.string()
         .valid(...SCOPES)
         .description('Scope of the banner')
-        .example('GLOBAL'),
+        .example('GLOBAL')
+        .default('GLOBAL')
+        .required(),
 
     scopeId: Joi.number()
         .integer()
