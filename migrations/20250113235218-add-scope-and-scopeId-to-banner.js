@@ -12,7 +12,9 @@ module.exports = {
                 table,
                 'scope',
                 {
-                    type: Sequelize.STRING(15)
+                    type: Sequelize.STRING(15),
+                    defaultValue: 'GLOBAL',
+                    allowNull: false
                 },
                 { transaction }
             );
