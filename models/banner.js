@@ -102,7 +102,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['message', 'type', 'createTime'],
+    keys: ['message', 'type', 'createTime', 'scope', 'scopeId'],
 
     /**
      * List of all fields in the model
