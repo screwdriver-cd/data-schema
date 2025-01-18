@@ -82,7 +82,7 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(MODEL, [], ['message', 'type', 'isActive', 'scope', 'scopeId'])).label('Update Banner'),
+    update: Joi.object(mutate(MODEL, [], ['message', 'type', 'isActive'])).label('Update Banner'),
 
     /**
      * Properties for Banners that will come back during a LIST request.
