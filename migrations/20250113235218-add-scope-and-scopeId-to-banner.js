@@ -26,6 +26,11 @@ module.exports = {
                 },
                 { transaction }
             );
+            await queryInterface.addIndex(table, {
+                name: `${table}_scope_and_scopeId`,
+                fields: ['scope', 'scopeId'],
+                transaction
+            });
         });
     }
 };
