@@ -36,8 +36,11 @@ const MODEL = {
         .integer()
         .positive()
         .description('Identifier to pipelineId for PIPELINE, buildId for BUILD, or null for GLOBAL')
-        .optional()
-        .allow(null)
+        .when('scope', {
+            is: Joi.valid('PIPELINE', 'BUILD'),
+            then: Joi.required(),
+            otherwise: Joi.allow(null).optional() // Explicitly states optional for other cases
+        })
         .example(1234)
 };
 
