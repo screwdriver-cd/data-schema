@@ -1,2 +1,3 @@
 # Banner Example
 message: "Test banner example"
+scope: "GLOBAL"

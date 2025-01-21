@@ -3,6 +3,8 @@
 const Joi = require('joi');
 const mutate = require('../lib/mutate');
 
+const SCOPES = ['GLOBAL', 'PIPELINE', 'BUILD'];
+
 const MODEL = {
     id: Joi.number().integer().positive(),
 
@@ -21,7 +23,26 @@ const MODEL = {
 
     createdBy: Joi.string().max(128).description('Username of user creating the banner').example('batman123'),
 
-    type: Joi.string().valid('info', 'warn').max(32).description('Type/Severity of the banner message').example('info')
+    type: Joi.string().valid('info', 'warn').max(32).description('Type/Severity of the banner message').example('info'),
+
+    scope: Joi.string()
+        .max(16)
+        .valid(...SCOPES)
+        .description('Scope of the banner')
+        .example('GLOBAL')
+        .default('GLOBAL')
+        .required(),
+
+    scopeId: Joi.number()
+        .integer()
+        .positive()
+        .description('Identifier to pipelineId for PIPELINE, buildId for BUILD, or null for GLOBAL')
+        .when('scope', {
+            is: Joi.valid('GLOBAL'),
+            then: Joi.allow(null).optional(),
+            otherwise: Joi.required()
+        })
+        .example(1234)
 };
 
 module.exports = {
@@ -47,9 +68,9 @@ module.exports = {
      * @property get
      * @type {Joi}
      */
-    get: Joi.object(mutate(MODEL, ['id', 'message', 'type', 'isActive', 'createdBy', 'createTime'], [])).label(
-        'Get Banner'
-    ),
+    get: Joi.object(
+        mutate(MODEL, ['id', 'message', 'type', 'isActive', 'scope', 'scopeId', 'createdBy', 'createTime'], [])
+    ).label('Get Banner'),
 
     /**
      * Properties for Banners that will be passed during a CREATE request
@@ -57,7 +78,7 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(mutate(MODEL, ['message'], ['type', 'isActive'])).label('Create Banner'),
+    create: Joi.object(mutate(MODEL, ['message'], ['type', 'isActive', 'scope', 'scopeId'])).label('Create Banner'),
 
     /**
      * Properties for Banners that will be passed during a UPDATE request
@@ -72,7 +93,11 @@ module.exports = {
      * The LIST request will list all banners
      */
     list: Joi.array()
-        .items(Joi.object(mutate(MODEL, ['id', 'message', 'type', 'isActive', 'createdBy', 'createTime'], [])))
+        .items(
+            Joi.object(
+                mutate(MODEL, ['id', 'message', 'type', 'isActive', 'scope', 'scopeId', 'createdBy', 'createTime'], [])
+            )
+        )
         .label('List Banners'),
 
     /**
@@ -81,7 +106,7 @@ module.exports = {
      * @property keys
      * @type {Array}
      */
-    keys: ['message', 'type', 'createTime'],
+    keys: ['message', 'type', 'createTime', 'scope', 'scopeId'],
 
     /**
      * List of all fields in the model
@@ -104,5 +129,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: [{ fields: ['isActive'] }]
+    indexes: [{ fields: ['isActive'] }, { fields: ['scope', 'scopeId'] }]
 };

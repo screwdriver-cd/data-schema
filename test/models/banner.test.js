@@ -19,6 +19,10 @@ describe('banner create', () => {
         it('fails the create', () => {
             assert.isNotNull(validate('empty.yaml', models.banner.create).error);
         });
+
+        it('fails the create with invalid scope', () => {
+            assert.isNotNull(validate('banner.create.invalid.yaml', models.banner.create).error);
+        });
     });
     describe('get', () => {
         it('validates the get', () => {
@@ -45,6 +49,10 @@ describe('banner create', () => {
 
         it('fails the update', () => {
             assert.isNotNull(validate('empty.yaml', models.banner.update).error);
+        });
+
+        it('fails the update with invalid config', () => {
+            assert.isNotNull(validate('banner.update.invalid.yaml', models.banner.update).error);
         });
     });
 });
