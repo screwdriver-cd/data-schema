@@ -26,6 +26,7 @@ const MODEL = {
     type: Joi.string().valid('info', 'warn').max(32).description('Type/Severity of the banner message').example('info'),
 
     scope: Joi.string()
+        .max(16)
         .valid(...SCOPES)
         .description('Scope of the banner')
         .example('GLOBAL')
