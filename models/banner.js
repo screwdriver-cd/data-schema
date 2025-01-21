@@ -128,5 +128,5 @@ module.exports = {
      * @property indexes
      * @type {Array}
      */
-    indexes: [{ fields: ['isActive'] }]
+    indexes: [{ fields: ['isActive'] }, { fields: ['scope', 'scopeId'] }]
 };
