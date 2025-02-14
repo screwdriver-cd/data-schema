@@ -9,6 +9,7 @@ const Scm = require('../core/scm');
 const WorkflowGraph = require('../config/workflowGraph');
 const Parameters = require('../config/parameters');
 const mutate = require('../lib/mutate');
+const annotations = require('../config/annotations');
 
 const STATES = ['ACTIVE', 'INACTIVE'];
 const BADGE = Joi.object({
@@ -67,7 +68,7 @@ const MODEL = {
 
     workflowGraph: WorkflowGraph.workflowGraph.description('Graph representation of the workflow'),
 
-    annotations: Annotations.annotations.description('Pipeline-level annotations'),
+    annotations: Annotations.annotations.description('Pipeline-level annotations'), 
 
     lastEventId: Joi.number().integer().positive().description('Identifier of last event').example(123345),
 
@@ -123,7 +124,7 @@ const MODEL = {
         .allow(null)
 };
 
-const UPDATE_MODEL = { ...CREATE_MODEL, settings: MODEL.settings, badges: MODEL.badges };
+const UPDATE_MODEL = { ...CREATE_MODEL, settings: MODEL.settings, badges: MODEL.badges, annotations: MODEL.annotations };
 
 module.exports = {
     /**
@@ -187,7 +188,7 @@ module.exports = {
      * @type {Joi}
      */
     update: Joi.object(
-        mutate(UPDATE_MODEL, [], ['checkoutUrl', 'rootDir', 'autoKeysGeneration', 'settings', 'badges'])
+        mutate(UPDATE_MODEL, [], ['checkoutUrl', 'rootDir', 'autoKeysGeneration', 'settings', 'badges', 'annotations'])
     ).label('Update Pipeline'),
 
     /**
