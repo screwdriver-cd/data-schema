@@ -27,7 +27,8 @@ const RESERVED_JOB_ANNOTATIONS = [
     'screwdriver.cd/blockedBySameJob',
     'screwdriver.cd/blockedBySameJobWaitTime',
     'screwdriver.cd/jobDisabledByDefault',
-    'screwdriver.cd/virtualJob'
+    'screwdriver.cd/virtualJob',
+    'screwdriver.cd/sdAdminBuildClusterOverride'
 ];
 const RESERVED_PIPELINE_ANNOTATIONS = [
     'screwdriver.cd/buildCluster',
