@@ -3,6 +3,8 @@ canary:
         - first
         - second
     description: "Canary jobs for testing"
+    sourcePaths:
+        - src/
 prod:
     jobs:
         - deploy-west
