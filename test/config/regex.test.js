@@ -549,4 +549,53 @@ describe('config regex', () => {
             });
         });
     });
+
+    describe.only('extract downstream job name', () => {
+        const externalTriggerRegex = config.regex.EXTERNAL_TRIGGER_ALL;
+
+        it('matches valid external jobs', () => {
+            ['sd@26:hello', '~sd@26:hello', 'sd@26:stage@alpha:setup', '~sd@26:stage@alpha:setup'].forEach(trigger => {
+                assert.isTrue(externalTriggerRegex.test(trigger));
+            });
+        });
+
+        it('does not match invalid downstream job name', () => {
+            [
+                'sd@26',
+                '~sd@26',
+                'sd@26:stage@alpha',
+                'sd@26:stage@alpha:deploy',
+                '~sd@26:stage@alpha:deploy',
+                'sd@26:stage@alpha:teardown',
+                '~sd@26:stage@alpha:teardown'
+            ].forEach(trigger => {
+                assert.isFalse(externalTriggerRegex.test(trigger));
+            });
+        });
+
+        it('consistently extracts downstream job name', () => {
+            [
+                {
+                    externalTrigger: 'sd@26:hello',
+                    expectedJobName: 'hello'
+                },
+                {
+                    externalTrigger: '~sd@26:hello',
+                    expectedJobName: 'hello'
+                },
+                {
+                    externalTrigger: 'sd@26:stage@alpha:setup',
+                    expectedJobName: 'stage@alpha:setup'
+                },
+                {
+                    externalTrigger: '~sd@26:stage@alpha:setup',
+                    expectedJobName: 'stage@alpha:setup'
+                }
+            ].forEach(e => {
+                const [, , actualJobName] = externalTriggerRegex.exec(e.externalTrigger);
+
+                assert.equal(actualJobName, e.expectedJobName);
+            });
+        });
+    });
 });

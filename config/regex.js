@@ -67,7 +67,7 @@ module.exports = {
     EXTERNAL_TRIGGER_AND: /^sd@(\d+):(?:([\w-]+)|(stage@([\w-]+):setup))$/,
     // External trigger (OR and AND case)
     // Can be ~sd@123:component or sd@123:component
-    EXTERNAL_TRIGGER_ALL: /^~?sd@(\d+):(?:([\w-]+)|(stage@([\w-]+):setup))$/,
+    EXTERNAL_TRIGGER_ALL: /^~?sd@(\d+):(([\w-]+)|(stage@([\w-]+):setup))$/,
 
     // Can be ~pr, ~commit, ~release, ~tag or ~commit:branchName, or ~sd@123:component
     // Note: if you modify this regex, you must modify `sdJoi` definition in the `config/job.js`
