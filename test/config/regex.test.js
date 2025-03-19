@@ -550,7 +550,7 @@ describe('config regex', () => {
         });
     });
 
-    describe.only('extract downstream job name', () => {
+    describe('extract downstream job name', () => {
         const externalTriggerRegex = config.regex.EXTERNAL_TRIGGER_ALL;
 
         it('matches valid external jobs', () => {
