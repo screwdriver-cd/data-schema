@@ -11,6 +11,7 @@ pipelines:
       createTime: "2019-07-14"
       admins:
         username: true
+      adminUserIds: [11]
       scmRepo:
         name: screwdriver-cd/screwdriver
         branch: master
@@ -28,6 +29,7 @@ pipelines:
       createTime: "2017-07-14"
       admins:
         username: true
+      adminUserIds: [11]
       scmRepo:
         name: screwdriver-cd/config-parser
         branch: master
