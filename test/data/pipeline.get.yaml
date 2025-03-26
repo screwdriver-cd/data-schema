@@ -6,6 +6,7 @@ scmContext: github:github.com
 createTime: "2017-04-11"
 admins:
     username: true
+adminUserIds: [11, 23, 33, 45]
 scmRepo:
     name: screwdriver-cd/screwdriver
     branch: master

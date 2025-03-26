@@ -63,7 +63,16 @@ const MODEL = {
 
     createTime: Joi.string().isoDate().description('When this pipeline was created'),
 
+    // This holds the SCM usernames belonging to the pipeline SCM context who have admin privileges.
+    // This should eventually be completely replaced by adminUserIds. Keeping this for now for backward compatibility.
     admins: Joi.object().description('Admins of this Pipeline').example({ myself: true }),
+
+    // Besides users from the pipeline SCM context, this can hold users outside pipeline SCM context who have admin privileges for this pipeline.
+    adminUserIds: Joi.array()
+        .items(Joi.number().integer().positive().description('Identifier of the user').example(12345))
+        .description('IDs of the users who have admin privileges for this pipeline')
+        .default([])
+        .required(),
 
     workflowGraph: WorkflowGraph.workflowGraph.description('Graph representation of the workflow'),
 
@@ -151,7 +160,7 @@ module.exports = {
     get: Joi.object(
         mutate(
             MODEL,
-            ['id', 'scmUri', 'scmContext', 'createTime', 'admins', 'state'],
+            ['id', 'scmUri', 'scmContext', 'createTime', 'admins', 'adminUserIds', 'state'],
             [
                 'workflowGraph',
                 'scmRepo',

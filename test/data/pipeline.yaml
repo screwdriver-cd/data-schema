@@ -7,11 +7,11 @@ scmRepo:
     name: screwdriver-cd/screwdriver
     branch: master
     url: https://github.com/screwdriver-cd/screwdriver/tree/master
+adminUserIds: []
 state: ACTIVE
-badges: 
-    sonar: 
+badges:
+    sonar:
         name: my-screwdriver-cd/screwdriver
         uri:  https://beta.sonar.screwdriver.cd/dashboard?id=123123
         defaultName: screwdriver-cd/screwdriver
         defaultUri:  https://sonar.screwdriver.cd/dashboard?id=123123
-        
