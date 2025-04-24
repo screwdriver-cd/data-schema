@@ -185,7 +185,9 @@ const SCHEMA_HOOK = Joi.object()
 
         modifiedFiles: Joi.array().items(Joi.string().allow('')).optional().label('Modified files of head commit'),
 
-        removedFiles: Joi.array().items(Joi.string().allow('')).optional().label('Removed files of head commit')
+        removedFiles: Joi.array().items(Joi.string().allow('')).optional().label('Removed files of head commit'),
+
+        prMerged: Joi.boolean().optional().label('Whether the pull request is merged').example(true).default(false)
     })
     .label('SCM Hook');
 
