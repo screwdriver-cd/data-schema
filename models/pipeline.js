@@ -71,8 +71,8 @@ const MODEL = {
     adminUserIds: Joi.array()
         .items(Joi.number().integer().positive().description('Identifier of the user').example(12345))
         .description('IDs of the users who have admin privileges for this pipeline')
-        .default([])
-        .required(),
+        .example('[12345, 6789]')
+        .default([]),
 
     workflowGraph: WorkflowGraph.workflowGraph.description('Graph representation of the workflow'),
 
@@ -160,7 +160,7 @@ module.exports = {
     get: Joi.object(
         mutate(
             MODEL,
-            ['id', 'scmUri', 'scmContext', 'createTime', 'admins', 'adminUserIds', 'state'],
+            ['id', 'scmUri', 'scmContext', 'createTime', 'admins', 'state'],
             [
                 'workflowGraph',
                 'scmRepo',
@@ -174,7 +174,8 @@ module.exports = {
                 'subscribedScmUrlsWithActions',
                 'settings',
                 'badges',
-                'templateVersionId'
+                'templateVersionId',
+                'adminUserIds'
             ]
         )
     ).label('Get Pipeline'),
