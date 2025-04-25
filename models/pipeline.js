@@ -10,7 +10,7 @@ const WorkflowGraph = require('../config/workflowGraph');
 const Parameters = require('../config/parameters');
 const mutate = require('../lib/mutate');
 
-const STATES = ['ACTIVE', 'INACTIVE'];
+const STATES = ['ACTIVE', 'INACTIVE', 'DELETING'];
 const BADGE = Joi.object({
     defaultName: Joi.string()
         .max(128)
