@@ -79,6 +79,22 @@ describe('model event', () => {
         it('fails the get', () => {
             assert.isNotNull(validate('empty.yaml', models.event.get).error);
         });
+
+        describe('test status', () => {
+            // valid statuses
+            models.event.allStatuses.forEach(validStatus => {
+                it('validates the valid statuses', () => {
+                    assert.isNull(validate('event.get.yaml', models.event.get, { status: validStatus }).error);
+                });
+            });
+
+            // invalid statuses
+            [null, '', 'some_invalid_state', 'success'].forEach(validState => {
+                it('validates the invalid statuses', () => {
+                    assert.isNotNull(validate('event.get.yaml', models.event.get, { status: validState }).error);
+                });
+            });
+        });
     });
 
     describe('keys', () => {
@@ -110,7 +126,7 @@ describe('model event', () => {
     describe('indexes', () => {
         it('defines the correct indexes', () => {
             const expected = [
-                { fields: ['createTime', 'pipelineId'] },
+                { fields: ['createTime', 'pipelineId', 'status'] },
                 { fields: ['pipelineId'] },
                 { fields: ['type'] },
                 { fields: ['groupEventId'] },

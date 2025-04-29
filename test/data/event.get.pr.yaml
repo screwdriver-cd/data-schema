@@ -21,3 +21,4 @@ pr:
     url: https://github.com/scredriver-cd/screwdriver/pull/25
     title: pr_test
 prNum: 25
+status: SUCCESS

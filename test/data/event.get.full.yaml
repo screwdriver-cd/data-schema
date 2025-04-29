@@ -32,3 +32,4 @@ workflowGraph:
           dest: main
         - src: main
           dest: publish
+status: SUCCESS

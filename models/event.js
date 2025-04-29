@@ -11,6 +11,14 @@ const parentBuilds = require('./build').get.extract('parentBuilds');
 const buildId = require('./build').get.extract('id');
 const prNum = Scm.hook.extract('prNum');
 const { QUALIFIED_STAGE_NAME } = require('../config/regex');
+const STATUSES = [
+    'UNKNOWN',
+    'ABORTED', // when one or more builds associated with the event is aborted
+    'CREATED', // when the event is created but none of the builds are created
+    'FAILURE',
+    'IN_PROGRESS', // when one or more incomplete (being executed or awaiting execution) builds exists
+    'SUCCESS'
+];
 
 const MODEL = {
     id: Joi.number().integer().positive().description('Identifier of this event').example(123345),
@@ -62,7 +70,14 @@ const MODEL = {
     }),
     pr: Scm.pr.description('Pull request object that holds information about the pull request'),
     prNum: prNum.description('Pull request number if it is a PR event'),
-    baseBranch: Joi.string().description('build base branch').example('develop')
+    baseBranch: Joi.string().description('build base branch').example('develop'),
+    status: Joi.string()
+        .valid(...STATUSES)
+        .max(10)
+        .description('Current status of the event')
+        .example('SUCCESS')
+        .default('UNKNOWN')
+        .required()
 };
 
 const CREATE_MODEL = { ...MODEL, buildId, parentBuildId, parentBuilds, prNum };
@@ -84,6 +99,14 @@ module.exports = {
     base: Joi.object(MODEL).label('Event'),
 
     /**
+     * All the available statuses of Build
+     *
+     * @property statuses
+     * @type {Array}
+     */
+    allStatuses: STATUSES,
+
+    /**
      * All the available properties of Event
      *
      * @property fields
@@ -100,7 +123,7 @@ module.exports = {
     get: Joi.object(
         mutate(
             MODEL,
-            ['id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'type'],
+            ['id', 'commit', 'createTime', 'creator', 'pipelineId', 'sha', 'type', 'status'],
             [
                 'causeMessage',
                 'meta',
@@ -177,7 +200,7 @@ module.exports = {
      * @type {Array}
      */
     indexes: [
-        { fields: ['createTime', 'pipelineId'] },
+        { fields: ['createTime', 'pipelineId', 'status'] },
         { fields: ['pipelineId'] },
         { fields: ['type'] },
         { fields: ['groupEventId'] },
