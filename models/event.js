@@ -73,7 +73,7 @@ const MODEL = {
     baseBranch: Joi.string().description('build base branch').example('develop'),
     status: Joi.string()
         .valid(...STATUSES)
-        .max(10)
+        .max(15)
         .description('Current status of the event')
         .example('SUCCESS')
         .default('UNKNOWN')
