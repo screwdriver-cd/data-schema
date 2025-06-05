@@ -44,7 +44,14 @@ const MODEL = {
 
     archived: Joi.boolean().description('Flag if the job is archived').example(true).default(false),
 
-    templateId: Joi.number().integer().positive().description("Identifier for this job's template").example(123345)
+    templateId: Joi.number().integer().positive().description("Identifier for this job's template").example(123345),
+
+    sha: Joi.string()
+        .hex()
+        .length(40)
+        .optional()
+        .description('SHA this job was built on')
+        .example('ccc49349d3cffbd12ea9e3d41521480b4aa5de5f')
 };
 
 const EXTENDED_MODEL = {
@@ -98,7 +105,8 @@ module.exports = {
                 'title',
                 'createTime',
                 'url',
-                'userProfile'
+                'userProfile',
+                'sha'
             ]
         )
     ).label('Get Job'),
