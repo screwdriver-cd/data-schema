@@ -69,7 +69,8 @@ describe('model job', () => {
                 'stateChanger',
                 'stateChangeTime',
                 'stateChangeMessage',
-                'archived'
+                'archived',
+                'sha'
             ];
 
             expectedKeys.forEach(keyName => {
