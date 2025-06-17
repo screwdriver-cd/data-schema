@@ -276,8 +276,11 @@ describe('config regex', () => {
             assert.isTrue(config.regex.PR_JOB_NAME.test('PR-1'));
             assert.isTrue(config.regex.PR_JOB_NAME.test('PR-1:main'));
             assert.isTrue(config.regex.PR_JOB_NAME.test('PR-1:main-job'));
+            assert.isTrue(config.regex.PR_JOB_NAME.test('PR-1:stage@foo:setup'));
             assert.deepEqual('PR-1:main-job'.match(config.regex.PR_JOB_NAME)[1], 'PR-1');
             assert.deepEqual('PR-1:main-job'.match(config.regex.PR_JOB_NAME)[2], 'main-job');
+            assert.deepEqual('PR-1:stage@foo:setup'.match(config.regex.PR_JOB_NAME)[1], 'PR-1');
+            assert.deepEqual('PR-1:stage@foo:setup'.match(config.regex.PR_JOB_NAME)[2], 'stage@foo:setup');
         });
 
         it('checks all possible job names', () => {
@@ -513,15 +516,37 @@ describe('config regex', () => {
         const stageSetupRegex = config.regex.STAGE_SETUP_PATTERN;
 
         it('matches valid stage setup jobs', () => {
-            ['stage@alpha:setup'].forEach(trigger => {
+            ['stage@alpha:setup', 'PR-1:stage@alpha:setup'].forEach(trigger => {
                 assert.isTrue(stageSetupRegex.test(trigger));
+                assert.deepEqual(trigger.match(stageSetupRegex)[1], 'alpha');
             });
         });
 
         it('does not match invalid stage setup jobs', () => {
-            ['stage@alpha:teardown', 'alpha-deploy', 'alpha:setup', 'stage@setup'].forEach(trigger => {
-                assert.isFalse(stageSetupRegex.test(trigger));
+            ['stage@alpha:teardown', 'alpha-deploy', 'alpha:setup', 'stage@setup', 'PR-1:stage@alpha:teardown'].forEach(
+                trigger => {
+                    assert.isFalse(stageSetupRegex.test(trigger));
+                }
+            );
+        });
+    });
+
+    describe('stageTeardown', () => {
+        const stageTeardownRegex = config.regex.STAGE_TEARDOWN_PATTERN;
+
+        it('matches valid stage teardown jobs', () => {
+            ['stage@alpha:teardown', 'PR-1:stage@alpha:teardown'].forEach(trigger => {
+                assert.isTrue(stageTeardownRegex.test(trigger));
+                assert.deepEqual(trigger.match(stageTeardownRegex)[1], 'alpha');
             });
+        });
+
+        it('does not match invalid stage teardown jobs', () => {
+            ['stage@alpha:setup', 'alpha-deploy', 'alpha:setup', 'stage@setup', 'PR-1:stage@alpha:setup'].forEach(
+                trigger => {
+                    assert.isFalse(stageTeardownRegex.test(trigger));
+                }
+            );
         });
     });
 
@@ -531,13 +556,16 @@ describe('config regex', () => {
         it('matches valid stage setup or teardown jobs', () => {
             ['stage@alpha:setup', 'stage@alpha:teardown'].forEach(trigger => {
                 assert.isTrue(stageSetupTeardownRegex.test(trigger));
+                assert.isTrue(stageSetupTeardownRegex.test(`PR-1:${trigger}`));
             });
         });
 
         it('does not match invalid stage setup or teardown jobs', () => {
             [
                 'stage@alpha',
+                'PR-1:stage@alpha',
                 'alpha-deploy',
+                'PR-1:alpha-deploy',
                 'alpha:setup',
                 'stage@setup',
                 'stage@alpha:deploy',
@@ -596,6 +624,41 @@ describe('config regex', () => {
 
                 assert.equal(actualJobName, e.expectedJobName);
             });
+        });
+    });
+
+    describe('stage name', () => {
+        const stageNameRegex = config.regex.QUALIFIED_STAGE_NAME;
+        const prStageNameRegex = config.regex.PR_STAGE_NAME;
+
+        it('fails on bad stage names', () => {
+            assert.isFalse(stageNameRegex.test('foo'));
+            assert.isFalse(stageNameRegex.test('run all the things'));
+            assert.isFalse(stageNameRegex.test('stage@integration:deploy'));
+            assert.isFalse(stageNameRegex.test('PR-1:stage@integration:deploy'));
+        });
+
+        it('checks good stage names', () => {
+            assert.isTrue(stageNameRegex.test('stage@foo'));
+            assert.isTrue(stageNameRegex.test('stage@foo-bar'));
+            assert.isTrue(stageNameRegex.test('PR-1:stage@foo'));
+            assert.deepEqual('stage@foo'.match(stageNameRegex)[1], 'foo');
+            assert.deepEqual('PR-1:stage@foo'.match(stageNameRegex)[1], 'foo');
+        });
+
+        it('fails on bad PR stage names', () => {
+            assert.isFalse(prStageNameRegex.test('foo'));
+            assert.isFalse(prStageNameRegex.test('run all the things'));
+            assert.isFalse(prStageNameRegex.test('stage@integration:deploy'));
+            assert.isFalse(prStageNameRegex.test('PR-1:stage@integration:deploy'));
+            assert.isFalse(prStageNameRegex.test('PR-1:integration:deploy'));
+        });
+
+        it('checks good PR stage names', () => {
+            assert.isTrue(prStageNameRegex.test('PR-1:foo'));
+            assert.isTrue(prStageNameRegex.test('PR-1:foo-bar'));
+            assert.deepEqual('PR-1:foo'.match(prStageNameRegex)[1], 'PR-1');
+            assert.deepEqual('PR-1:foo'.match(prStageNameRegex)[2], 'foo');
         });
     });
 });
