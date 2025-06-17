@@ -44,17 +44,19 @@ module.exports = {
     // Also allow stage setup/teardown like stage@stage-name:setup
     JOB_NAME: /^(([\w-]+)|(?:stage@([\w-]+):(setup|teardown)))$/,
     // PR JOB Name can only be PR-1 or PR-1:main, group1: PR-prNum, group2: jobName
-    PR_JOB_NAME: /^(PR-\d+)(?::([\w-]+))?$/,
+    PR_JOB_NAME: /^(PR-\d+)(?::([\w-]+|stage@[\w-]+:[\w-]+))?$/,
     // Stage setup or teardown job name. Can be stage@stage-name:setup or stage@stage-name:teardown
-    STAGE_SETUP_TEARDOWN_JOB_NAME: /^stage@([\w-]+):(setup|teardown)$/,
+    STAGE_SETUP_TEARDOWN_JOB_NAME: /^(?:PR-\d+:)?stage@([\w-]+):(setup|teardown)$/,
     // Match all possible job name
     ALL_JOB_NAME: /^(PR-[0-9]+:)?[\w-@:]+$/,
     // Internal trigger like ~component or ~main
     INTERNAL_TRIGGER: /^~([\w-]+)$/,
     // Stages can only be named with A-Z,a-z,0-9,-,_
     STAGE_NAME: /^[\w-]+$/,
+    // Stages can only be named with A-Z,a-z,0-9,-,_
+    PR_STAGE_NAME: /^(PR-\d+):([\w-]+)$/,
     // Stage name prefixed with @stage. Ex: stage@prod
-    QUALIFIED_STAGE_NAME: /^stage@([\w-]+)$/,
+    QUALIFIED_STAGE_NAME: /^(?:PR-\d+:)?stage@([\w-]+)$/,
     // Stage trigger like ~stage@deploy or ~stage@stageName:jobName or stage@deploy or stage@stageName:jobName
     STAGE_TRIGGER: /^~?stage@([\w-]+)(?::([\w-]+))?$/,
     // External Stage trigger like ~sd@26:stage@alpha:setup
@@ -124,5 +126,7 @@ module.exports = {
     // Provider Role. Can be arn:aws:iam::xxxxxx:role/some-role
     ROLE_ARN: /^arn:aws:iam::\d{12}:role\/.+/,
     // Stage setup pattern. Can be stage@stage-name:setup
-    STAGE_SETUP_PATTERN: /^stage@([\w-]+):setup$/
+    STAGE_SETUP_PATTERN: /^(?:PR-\d+:)?stage@([\w-]+):setup$/,
+    // Stage teardown pattern. Can be stage@stage-name:teardown
+    STAGE_TEARDOWN_PATTERN: /^(?:PR-\d+:)?stage@([\w-]+):teardown$/
 };
