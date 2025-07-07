@@ -69,7 +69,8 @@ const ALLOWED_JOB_FIELDS_WITH_PIPELINE_TEMPLATE = Joi.object().keys({
     image: Job.image,
     environment: Job.environment,
     settings: Job.settings,
-    requires: Job.requires
+    requires: Job.requires,
+    sourcePaths: Job.sourcePaths
 });
 
 const SCHEMA_CONFIG_PRE_TEMPLATE_MERGE = Joi.object()

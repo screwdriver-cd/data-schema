@@ -56,7 +56,7 @@ describe('config base', () => {
             );
         });
 
-        it('if template is provided then allow user yaml to customize image, settings, environment, and requires', () => {
+        it('if template is provided then allow user yaml to customize image, settings, environment, requires, and sourcePaths', () => {
             assert.isNull(
                 validate('config.base.pipelineTemplate-customized.yaml', config.base.configBeforeMergingTemplate).error
             );
