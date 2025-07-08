@@ -6,6 +6,7 @@ shared:
     settings:
         email: foo@example.com
     requires: ~commit
+    sourcePaths: [shared]
 
 jobs:
     main:
@@ -16,6 +17,7 @@ jobs:
         environment:
             VAR3: "three"
             VAR1: "empty"
+        sourcePaths: [job]
     anewjob:
         requires: [main]
         steps:
