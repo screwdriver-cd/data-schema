@@ -22,7 +22,17 @@ const SCHEMA_QUERY = Joi.object()
         type: Joi.string()
             .valid('download', 'preview')
             .default('preview')
-            .label('Flag to trigger type either to download or preview')
+            .label('Flag to trigger type either to download or preview'),
+        timestamp: Joi.boolean().optional().default(false).description('Enable timestamp in logs'),
+        timestampFormat: Joi.string()
+            .valid('full-time', 'simple-time', 'elapsed-build', 'elapsed-step')
+            .optional()
+            .default('full-time')
+            .description('Timestamp format at the head of the log'),
+        timezone: Joi.string()
+            .optional()
+            .default('UTC')
+            .description('Timezone of timestamp in logs')
     })
     .label('Query Parameters');
 
