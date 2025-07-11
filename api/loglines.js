@@ -29,10 +29,7 @@ const SCHEMA_QUERY = Joi.object()
             .optional()
             .default('full-time')
             .description('Timestamp format at the head of the log'),
-        timezone: Joi.string()
-            .optional()
-            .default('UTC')
-            .description('Timezone of timestamp in logs')
+        timezone: Joi.string().optional().default('UTC').description('Timezone of timestamp in logs')
     })
     .label('Query Parameters');
 
