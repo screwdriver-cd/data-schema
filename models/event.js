@@ -19,12 +19,7 @@ const STATUSES = [
     'IN_PROGRESS', // when one or more incomplete (being executed or awaiting execution) builds exists
     'SUCCESS'
 ];
-const ACTIVE_STATUSES = [
-    'ABORTED',
-    'FAILURE',
-    'IN_PROGRESS',
-    'SUCCESS'
-]
+const ACTIVE_STATUSES = ['ABORTED', 'FAILURE', 'IN_PROGRESS', 'SUCCESS'];
 
 const MODEL = {
     id: Joi.number().integer().positive().description('Identifier of this event').example(123345),
