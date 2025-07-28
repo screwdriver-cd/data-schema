@@ -19,6 +19,12 @@ const STATUSES = [
     'IN_PROGRESS', // when one or more incomplete (being executed or awaiting execution) builds exists
     'SUCCESS'
 ];
+const ACTIVE_STATUSES = [
+    'ABORTED',
+    'FAILURE',
+    'IN_PROGRESS',
+    'SUCCESS'
+]
 
 const MODEL = {
     id: Joi.number().integer().positive().description('Identifier of this event').example(123345),
@@ -105,6 +111,15 @@ module.exports = {
      * @type {Array}
      */
     allStatuses: STATUSES,
+
+    /**
+     * Subset of event statuses that represent builds which have been started.
+     * This includes any event that is in progress, has succeeded, failed, or was aborted.
+     *
+     * @property statuses
+     * @type {Array}
+     */
+    activeStatuses: ACTIVE_STATUSES,
 
     /**
      * All the available properties of Event
