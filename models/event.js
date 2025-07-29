@@ -204,6 +204,7 @@ module.exports = {
         { fields: ['pipelineId'] },
         { fields: ['type'] },
         { fields: ['groupEventId'] },
-        { fields: ['parentEventId'] }
+        { fields: ['parentEventId'] },
+        { fields: ['pipelineId', 'createTime'] }
     ]
 };
