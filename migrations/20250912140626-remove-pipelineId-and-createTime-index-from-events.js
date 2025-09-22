@@ -9,7 +9,11 @@ module.exports = {
     // eslint-disable-next-line no-unused-vars
     up: async (queryInterface, Sequelize) => {
         await queryInterface.sequelize.transaction(async transaction => {
-            await queryInterface.removeIndex(table, `${table}_pipeline_id_create_time`, { transaction });
+            await queryInterface.removeIndex(table, {
+                name: `${table}_pipeline_id_create_time`,
+                fields: ['pipelineId', 'createTime'],
+                transaction
+            });
         });
     }
 };
