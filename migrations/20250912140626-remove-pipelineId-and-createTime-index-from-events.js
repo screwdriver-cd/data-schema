@@ -11,7 +11,6 @@ module.exports = {
         await queryInterface.sequelize.transaction(async transaction => {
             await queryInterface.removeIndex(table, {
                 name: `${table}_pipeline_id_create_time`,
-                fields: ['pipelineId', 'createTime'],
                 transaction
             });
         });
