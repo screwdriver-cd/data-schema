@@ -130,8 +130,7 @@ describe('model event', () => {
                 { fields: ['pipelineId'] },
                 { fields: ['type'] },
                 { fields: ['groupEventId'] },
-                { fields: ['parentEventId'] },
-                { fields: ['pipelineId', 'createTime'] }
+                { fields: ['parentEventId'] }
             ];
             const { indexes } = models.event;
 
