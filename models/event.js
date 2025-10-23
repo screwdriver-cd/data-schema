@@ -162,7 +162,8 @@ module.exports = {
                 'prNum',
                 'creator',
                 'baseBranch',
-                'parentBuilds'
+                'parentBuilds',
+                'sha'
             ]
         )
     ).label('Create Event'),
