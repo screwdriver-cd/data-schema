@@ -29,6 +29,10 @@ describe('model user', () => {
         it('fails the get', () => {
             assert.isNotNull(validate('empty.yaml', models.user.get).error);
         });
+
+        it('fails the get when there are unknow fields in the user settings', () => {
+            assert.isNotNull(validate('user.get.invalid-settings.yaml', models.user.get).error);
+        });
     });
 
     describe('update', () => {

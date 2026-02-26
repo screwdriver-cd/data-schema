@@ -50,13 +50,12 @@ const SCHEMA_USER_SETTINGS = Joi.object()
             showPRJobs: Joi.boolean()
         })
     )
-    .unknown();
-
-SCHEMA_USER_SETTINGS.append({
-    displayJobNameLength: SCHEMA_DISPLAY_JOB_NAME_LENGTH,
-    timestampFormat: SCHEMA_TIMESTAMP_FORMAT,
-    allowNotification: SCHEMA_ALLOW_NOTIFICATION
-});
+    .keys({
+        displayJobNameLength: SCHEMA_DISPLAY_JOB_NAME_LENGTH,
+        timestampFormat: SCHEMA_TIMESTAMP_FORMAT,
+        allowNotification: SCHEMA_ALLOW_NOTIFICATION
+    })
+    .unknown(false);
 
 module.exports = {
     pipelineSettings: SCHEMA_PIPELINE_SETTINGS,

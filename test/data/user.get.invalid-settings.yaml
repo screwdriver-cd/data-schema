@@ -7,3 +7,5 @@ settings:
         showPRJobs: false
     displayJobNameLength: 50
     timestampFormat: 'LOCAL_TIMEZONE'
+    hello: world
+    this: is-allowed
