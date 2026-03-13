@@ -60,9 +60,71 @@ describe('model pipeline', () => {
             assert.isNotNull(validate('empty.yaml', models.pipeline.update).error);
         });
 
-        it('validates that state is not allowed', () => {
+        it('validates state change fields', () => {
+            assert.isNull(
+                validate('pipeline.update.yaml', models.pipeline.update, {
+                    state: 'DISABLED',
+                    stateChangeMessage: 'Disabling for maintenance'
+                }).error
+            );
+        });
+
+        it('rejects invalid stateChangeMessage that is too long', () => {
             assert.isNotNull(
-                validate('pipeline.update.yaml', models.pipeline.update, { state: models.pipeline.allStates[0] }).error
+                validate('pipeline.update.yaml', models.pipeline.update, {
+                    stateChangeMessage: 'x'.repeat(513)
+                }).error
+            );
+        });
+
+        it('rejects INACTIVE and DELETING states in update', () => {
+            assert.isNotNull(validate('pipeline.update.yaml', models.pipeline.update, { state: 'INACTIVE' }).error);
+            assert.isNotNull(validate('pipeline.update.yaml', models.pipeline.update, { state: 'DELETING' }).error);
+        });
+    });
+
+    describe('allStates', () => {
+        it('includes DISABLED state', () => {
+            assert.include(models.pipeline.allStates, 'DISABLED');
+        });
+
+        it('includes all expected states', () => {
+            assert.deepEqual(models.pipeline.allStates, ['ACTIVE', 'INACTIVE', 'DELETING', 'DISABLED']);
+        });
+    });
+
+    describe('stateChanger fields', () => {
+        it('validates get with stateChanger fields', () => {
+            assert.isNull(
+                validate('pipeline.get.yaml', models.pipeline.get, {
+                    stateChanger: 'username',
+                    stateChangeTime: '2026-03-12T00:00:00.000Z',
+                    stateChangeMessage: 'Disabling for maintenance'
+                }).error
+            );
+        });
+
+        it('validates get with DISABLED state', () => {
+            assert.isNull(
+                validate('pipeline.get.yaml', models.pipeline.get, {
+                    state: 'DISABLED'
+                }).error
+            );
+        });
+
+        it('rejects stateChanger longer than 128 characters', () => {
+            assert.isNotNull(
+                validate('pipeline.get.yaml', models.pipeline.get, {
+                    stateChanger: 'x'.repeat(129)
+                }).error
+            );
+        });
+
+        it('rejects stateChangeMessage longer than 512 characters', () => {
+            assert.isNotNull(
+                validate('pipeline.get.yaml', models.pipeline.get, {
+                    stateChangeMessage: 'x'.repeat(513)
+                }).error
             );
         });
     });
