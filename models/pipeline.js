@@ -10,7 +10,8 @@ const WorkflowGraph = require('../config/workflowGraph');
 const Parameters = require('../config/parameters');
 const mutate = require('../lib/mutate');
 
-const STATES = ['ACTIVE', 'INACTIVE', 'DELETING'];
+const STATES = ['ACTIVE', 'INACTIVE', 'DELETING', 'DISABLED'];
+const VALID_STATES_FOR_UPDATE = ['ACTIVE', 'DISABLED'];
 const BADGE = Joi.object({
     defaultName: Joi.string()
         .max(128)
@@ -107,6 +108,15 @@ const MODEL = {
         .default('ACTIVE')
         .required(),
 
+    stateChanger: Joi.string().max(128).description('Username for who changed the state'),
+
+    stateChangeTime: Joi.string().isoDate().description('When the state of the pipeline was changed'),
+
+    stateChangeMessage: Joi.string()
+        .max(512)
+        .description('Reason why disabling or enabling pipeline')
+        .example('Disabling pipeline for maintenance'),
+
     subscribedScmUrlsWithActions: Joi.array()
         .items(
             Joi.object().keys({
@@ -132,7 +142,18 @@ const MODEL = {
         .allow(null)
 };
 
-const UPDATE_MODEL = { ...CREATE_MODEL, settings: MODEL.settings, badges: MODEL.badges };
+const UPDATE_MODEL = {
+    ...CREATE_MODEL,
+    settings: MODEL.settings,
+    badges: MODEL.badges,
+    state: Joi.string()
+        .valid(...VALID_STATES_FOR_UPDATE)
+        .max(10)
+        .description('New state of the pipeline')
+        .example('ACTIVE')
+        .optional(),
+    stateChangeMessage: MODEL.stateChangeMessage
+};
 
 module.exports = {
     /**
@@ -175,7 +196,10 @@ module.exports = {
                 'settings',
                 'badges',
                 'templateVersionId',
-                'adminUserIds'
+                'adminUserIds',
+                'stateChanger',
+                'stateChangeTime',
+                'stateChangeMessage'
             ]
         )
     ).label('Get Pipeline'),
@@ -197,7 +221,11 @@ module.exports = {
      * @type {Joi}
      */
     update: Joi.object(
-        mutate(UPDATE_MODEL, [], ['checkoutUrl', 'rootDir', 'autoKeysGeneration', 'settings', 'badges'])
+        mutate(
+            UPDATE_MODEL,
+            [],
+            ['checkoutUrl', 'rootDir', 'autoKeysGeneration', 'settings', 'badges', 'state', 'stateChangeMessage']
+        )
     ).label('Update Pipeline'),
 
     /**
