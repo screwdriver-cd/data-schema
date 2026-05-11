@@ -1,5 +1,6 @@
 # Event Create Example
 startFrom: main
+startAction: "START_FROM_LATEST_COMMIT"
 parentBuildId: 123
 parentEventId: 123456
 groupEventId: 123456

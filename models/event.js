@@ -20,6 +20,21 @@ const STATUSES = [
     'SUCCESS'
 ];
 
+const START_ACTIONS = [
+    'START_FROM_LATEST_COMMIT', // Start a new event from latest commit (e.g., Start from "~commit", Start by buildPeriodically annotation)
+    // Case of using parentEventId (e.g., v2 UI workflow graph tooltip)
+    'START_FROM_EVENT', // Start a new event from specific parent event
+    'RESTART_FROM_EVENT', // Restart a new event from specific parent event
+    // Case of using buildId (e.g., Job list view, v1 UI workflow graph tooltip, and build log page)
+    'RESTART_FROM_BUILD' // Restart a new event from specific parent build
+];
+
+const startAction = Joi.string()
+    .valid(...START_ACTIONS)
+    .max(24)
+    .description('Start method of the event')
+    .example('START_FROM_PARENT_EVENT');
+
 const MODEL = {
     id: Joi.number().integer().positive().description('Identifier of this event').example(123345),
     parentEventId: Joi.number()
@@ -80,7 +95,7 @@ const MODEL = {
         .required()
 };
 
-const CREATE_MODEL = { ...MODEL, buildId, parentBuildId, parentBuilds, prNum };
+const CREATE_MODEL = { ...MODEL, startAction, buildId, parentBuildId, parentBuilds, prNum };
 
 module.exports = {
     /**
@@ -152,6 +167,7 @@ module.exports = {
             [
                 'pipelineId',
                 'startFrom',
+                'startAction',
                 'buildId',
                 'causeMessage',
                 'parentBuildId',
