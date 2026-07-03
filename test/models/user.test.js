@@ -43,5 +43,33 @@ describe('model user', () => {
         it('fails the update', () => {
             assert.isNotNull(validate('empty.yaml', models.user.update).error);
         });
+
+        it('fails the update with displayJobLength=null', () => {
+            assert.isNotNull(validate('user.update.displayJobLength-null.yaml', models.user.update).error);
+        });
+
+        it('fails the update with displayJobLength=19', () => {
+            assert.isNotNull(validate('user.update.displayJobLength-19.yaml', models.user.update).error);
+        });
+
+        it('validates the update with displayJobLength=20', () => {
+            assert.isNotNull(validate('user.update.displayJobLength-20.yaml', models.user.update).error);
+        });
+
+        it('validates the update with displayJobLength=99', () => {
+            assert.isNotNull(validate('user.update.displayJobLength-99.yaml', models.user.update).error);
+        });
+
+        it('fails the update with displayJobLength=100', () => {
+            assert.isNotNull(validate('user.update.displayJobLength-100.yaml', models.user.update).error);
+        });
+
+        it('fails the update with invalid timestampFormat', () => {
+            assert.isNotNull(validate('user.update.invalidTimestampFormat.yaml', models.user.update).error);
+        });
+
+        it('fails the update with invalid allowNotification', () => {
+            assert.isNotNull(validate('user.update.invalidAllowNotification.yaml', models.user.update).error);
+        });
     });
 });
