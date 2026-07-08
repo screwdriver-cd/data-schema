@@ -53,11 +53,11 @@ describe('model user', () => {
         });
 
         it('validates the update with displayJobLength=20', () => {
-            assert.isNotNull(validate('user.update.displayJobLength-20.yaml', models.user.update).error);
+            assert.isNull(validate('user.update.displayJobLength-20.yaml', models.user.update).error);
         });
 
         it('validates the update with displayJobLength=99', () => {
-            assert.isNotNull(validate('user.update.displayJobLength-99.yaml', models.user.update).error);
+            assert.isNull(validate('user.update.displayJobLength-99.yaml', models.user.update).error);
         });
 
         it('fails the update with displayJobLength=100', () => {

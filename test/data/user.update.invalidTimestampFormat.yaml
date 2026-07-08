@@ -1,6 +1,2 @@
-# User Example
-id: 123
-username: batman
-scmContext: github:github.com
 settings:
     timestampFormat: 'invalid'
