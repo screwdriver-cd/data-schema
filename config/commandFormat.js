@@ -19,7 +19,11 @@ const SCHEMA_HABITAT = Joi.object().keys({
 
 const DOCKER_IMAGE = Joi.string().description('Image of the Docker command').example('chefdk:1.2.3');
 
-const DOCKER_COMMAND = Joi.string().description('Executable of the Docker command').default('').example('knife');
+const DOCKER_COMMAND = Joi.string()
+    .allow('')
+    .description('Executable of the Docker command')
+    .default('')
+    .example('knife');
 
 const SCHEMA_DOCKER = Joi.object().keys({
     image: DOCKER_IMAGE.required(),

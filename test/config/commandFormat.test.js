@@ -24,6 +24,12 @@ describe('config commandFormat', () => {
             assert.isNull(validate('config.commandFormat.docker.yaml', config.commandFormat.docker).error);
         });
 
+        it('validates safely with empty command', () => {
+            assert.isNull(
+                validate('config.commandFormat.docker-empty-command.yaml', config.commandFormat.docker).error
+            );
+        });
+
         it('returns error when invalid key in docker format', () => {
             assert.isNotNull(validate('config.commandFormat.docker.bad.yaml', config.commandFormat.docker).error);
         });
