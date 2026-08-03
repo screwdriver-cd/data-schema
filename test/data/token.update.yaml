@@ -1,3 +1,11 @@
 # Token UPDATE Example
 name: 'A new token name'
 description: ''
+expiresAt: '2038-01-19T03:14:08.131Z'
+options:
+  permission: 'read'
+  resources:
+    pipelines: [123, 456]
+    privatePipeline: false
+    organizations: ['org1', 'org2']
+    jobs: [11, 22, 33]

@@ -1,10 +1,6 @@
-# Token GET Example
-id: 999
+# Token CREATE Example with a description
 name: 'Auth token'
-description: 'A token for authentication'
-lastUsed: '2038-01-19T03:14:08.131Z'
-expiresAt: '2038-01-19T03:14:08.131Z'
-issuerId: 999
+description: 'This is a description!'
 options:
   permission: 'read'
   resources:

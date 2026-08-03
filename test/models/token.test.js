@@ -9,6 +9,18 @@ describe('token template', () => {
         it('validates the user token', () => {
             assert.isNull(validate('token.yaml', models.token.base).error);
         });
+
+        it('validates the user token with options', () => {
+            assert.isNull(validate('token.options.yaml', models.token.base).error);
+        });
+
+        it('validates the user token with expires at', () => {
+            assert.isNull(validate('token.expiresAt.yaml', models.token.base).error);
+        });
+
+        it('validates the user token with a issuer id', () => {
+            assert.isNull(validate('token.issuerId.yaml', models.token.base).error);
+        });
     });
 
     describe('pipeline token', () => {
@@ -21,10 +33,27 @@ describe('token template', () => {
         it('validates the token which have both userId and pipelineId', () => {
             assert.isNotNull(validate('token.invalid.yaml', models.token.base).error);
         });
+
+        it('validates the token which have invalid options', () => {
+            assert.isNotNull(validate('token.invalid-permission.yaml', models.token.base).error);
+            assert.isNotNull(validate('token.invalid-resources-pipelines.yaml', models.token.base).error);
+            assert.isNotNull(validate('token.invalid-resources-organizations.yaml', models.token.base).error);
+            assert.isNotNull(validate('token.invalid-resources-privatePipeline.yaml', models.token.base).error);
+            assert.isNotNull(validate('token.invalid-resources-jobs.yaml', models.token.base).error);
+        });
+
+        it('validates the token which have invalid expires at', () => {
+            assert.isNotNull(validate('token.invalid-expiresAt.yaml', models.token.base).error);
+        });
+
+        it('validates the token which have invalid issuer id', () => {
+            assert.isNotNull(validate('token.invalid-issuerId.yaml', models.token.base).error);
+        });
     });
 
     describe('get', () => {
         it('validates the get', () => {
+            assert.isNull(validate('token.get-minimum.yaml', models.token.get).error);
             assert.isNull(validate('token.get.yaml', models.token.get).error);
         });
 
@@ -40,6 +69,14 @@ describe('token template', () => {
 
         it('validates the create with a description', () => {
             assert.isNull(validate('token.createWithDescription.yaml', models.token.create).error);
+        });
+
+        it('validates the create with options', () => {
+            assert.isNull(validate('token.createWithOptions.yaml', models.token.create).error);
+        });
+
+        it('validates the create with expiresAt', () => {
+            assert.isNull(validate('token.createWithExpiresAt.yaml', models.token.create).error);
         });
 
         it('fails the create', () => {

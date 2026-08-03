@@ -1,0 +1,4 @@
+# Token CREATE Example with a description
+name: 'Auth token'
+description: 'This is a description!'
+issuerId: 123

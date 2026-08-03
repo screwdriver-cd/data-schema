@@ -1,0 +1,4 @@
+# Token CREATE Example with a description
+name: 'Auth token'
+description: 'This is a description!'
+expiresAt: '2038-01-19T03:14:08.131Z'
