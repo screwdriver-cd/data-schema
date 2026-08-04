@@ -8,6 +8,28 @@ const HASH_LENGTH = 512;
 // Each base64 character represents 6 bits of data
 const HASH_BASE64_LENGTH = Math.ceil(HASH_LENGTH / 6);
 
+const SCHEMA_TOKEN_PERMISSION = Joi.string()
+    .valid('read', 'execute', 'write', 'all')
+    .max(16)
+    .description('Token permission');
+
+const SCHEMA_TOKEN_RESOURCES = Joi.object()
+    .default({})
+    .keys({
+        pipelines: Joi.array().items(Joi.number().integer().positive()),
+        privatePipeline: Joi.boolean(),
+        organizations: Joi.array().items(Joi.string()),
+        jobs: Joi.array().items(Joi.number().integer().positive())
+    });
+
+const SCHEMA_TOKEN_OPTIONS = Joi.object()
+    .default({})
+    .keys({
+        permission: SCHEMA_TOKEN_PERMISSION,
+        resources: SCHEMA_TOKEN_RESOURCES
+    })
+    .unknown(false);
+
 const MODEL = {
     id: Joi.number().integer().positive(),
 
@@ -29,7 +51,13 @@ const MODEL = {
         .description('Token description')
         .example('Used to authenticate the mobile app'),
 
-    lastUsed: Joi.string().isoDate().allow('').description('Last used')
+    lastUsed: Joi.string().isoDate().allow('').description('Last used'),
+
+    issuerId: Joi.number().integer().positive().allow(null).description('Issuer ID'),
+
+    expiresAt: Joi.string().isoDate().allow('').description('Expires Date').example('2030-01-30T09:15:40.000Z'),
+
+    options: SCHEMA_TOKEN_OPTIONS
 };
 
 module.exports = {
@@ -55,7 +83,9 @@ module.exports = {
      * @property get
      * @type {Joi}
      */
-    get: Joi.object(mutate(MODEL, ['id', 'name', 'lastUsed'], ['description'])).label('Get tokens'),
+    get: Joi.object(
+        mutate(MODEL, ['id', 'name', 'lastUsed'], ['description', 'issuerId', 'expiresAt', 'options'])
+    ).label('Get tokens'),
 
     /**
      * Properties for Token that will be passed during a CREATE request
@@ -63,7 +93,7 @@ module.exports = {
      * @property create
      * @type {Joi}
      */
-    create: Joi.object(mutate(MODEL, ['name'], ['description'])).label('Create token'),
+    create: Joi.object(mutate(MODEL, ['name'], ['description', 'expiresAt', 'options'])).label('Create token'),
 
     /**
      * Properties for token that will be passed during a UPDATE requeste
@@ -71,7 +101,9 @@ module.exports = {
      * @property update
      * @type {Joi}
      */
-    update: Joi.object(mutate(MODEL, [], ['name', 'description'])).label('Update token metadata'),
+    update: Joi.object(mutate(MODEL, [], ['name', 'description', 'expiresAt', 'options'])).label(
+        'Update token metadata'
+    ),
 
     /**
      * List of fields that determine a unique row
