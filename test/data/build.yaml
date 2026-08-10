@@ -20,4 +20,4 @@ status: FAILURE
 parentBuilds: {
     111: { eventId: 2, jobs: { jobA: 333, jobB: 444 } },
     222: { eventId: 3, jobs: { jobC: 555 } }
-}
+    }
