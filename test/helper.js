@@ -17,7 +17,9 @@ module.exports = {
      */
     validate: (filename, schema, extend) => {
         const exampleFile = path.join(DATA_DIR, filename);
-        const example = yaml.load(fs.readFileSync(exampleFile).toString());
+        const source = fs.readFileSync(exampleFile).toString();
+        const documents = yaml.loadAll(source);
+        const example = documents.length === 0 ? null : documents[0];
 
         if (extend !== undefined) {
             Object.assign(example, extend);
