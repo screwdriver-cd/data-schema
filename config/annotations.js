@@ -40,6 +40,7 @@ const RESERVED_PIPELINE_ANNOTATIONS = [
     'screwdriver.cd/pipelineDescription',
     'screwdriver.cd/useDeployKey'
 ];
+const RESERVED_STAGE_ANNOTATIONS = ['screwdriver.cd/manualStartEnabled'];
 
 /**
  * The definition of the annotations pieces
@@ -48,5 +49,6 @@ const RESERVED_PIPELINE_ANNOTATIONS = [
 module.exports = {
     annotations: SCHEMA_ANNOTATIONS,
     reservedJobAnnotations: RESERVED_JOB_ANNOTATIONS,
-    reservedPipelineAnnotations: RESERVED_PIPELINE_ANNOTATIONS
+    reservedPipelineAnnotations: RESERVED_PIPELINE_ANNOTATIONS,
+    reservedStageAnnotations: RESERVED_STAGE_ANNOTATIONS
 };
