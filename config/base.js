@@ -46,7 +46,8 @@ const SCHEMA_STAGE = Joi.object()
         setup: SCHEMA_SETUP_JOB,
         teardown: SCHEMA_TEARDOWN_JOB,
         requires: Job.requires,
-        sourcePaths: Job.sourcePaths
+        sourcePaths: Job.sourcePaths,
+        annotations: Annotations.annotations
     })
     .unknown(false);
 

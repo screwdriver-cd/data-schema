@@ -5,6 +5,9 @@ canary:
     description: "Canary jobs for testing"
     sourcePaths:
         - src/
+    annotations:
+        scrwedriver.cd/manualStartEnabled: false
+        foo: bar
 prod:
     jobs:
         - deploy-west
